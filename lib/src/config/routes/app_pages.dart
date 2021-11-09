@@ -1,5 +1,5 @@
-import 'package:asadamatic/lib/src/config/routes/routes.dart';
-import 'package:asadamatic/lib/src/mvc/views/home.dart';
+import 'package:asadamatic/src/config/routes/routes.dart';
+import 'package:asadamatic/src/mvc/views/home.dart';
 import 'package:get/get.dart';
 
 class AppPages {

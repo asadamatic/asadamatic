@@ -3,11 +3,11 @@ import 'package:asadamatic/src/mvc/views/home.dart';
 import 'package:get/get.dart';
 
 class AppPages {
-  static const INITIAL = Routes.HOME;
+  static const initial = Routes.home;
 
   static final routes = [
     GetPage(
-      name: Routes.HOME,
+      name: Routes.home,
       page: () => Home(),
     ),
   ];

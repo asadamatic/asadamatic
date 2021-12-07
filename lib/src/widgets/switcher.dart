@@ -8,7 +8,7 @@ class Switcher extends StatelessWidget {
 
   final Axis? direction;
 
-  OsController _osController = Get.put(OsController());
+  final OsController _osController = Get.put(OsController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +22,7 @@ class Switcher extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 5,
                 blurRadius: 7,
-                offset: Offset(0, 3), // changes position of shadow
+                offset: const Offset(0, 3), // changes position of shadow
               ),
             ]),
         child: GetBuilder<OsController>(builder: (_controller) {
@@ -45,7 +45,7 @@ class Switcher extends StatelessWidget {
                                         color: Colors.grey.withOpacity(0.5),
                                         spreadRadius: 5,
                                         blurRadius: 7,
-                                        offset: Offset(
+                                        offset: const Offset(
                                             0, 3), // changes position of shadow
                                       ),
                                     ]
@@ -54,7 +54,7 @@ class Switcher extends StatelessWidget {
                             onTap: () {
                               _controller.onOsChanged(os.indexOf(e));
                             },
-                            child: FlutterLogo(),
+                            child: const FlutterLogo(),
                           ),
                         )),
                       )
@@ -78,7 +78,7 @@ class Switcher extends StatelessWidget {
                                         color: Colors.grey.withOpacity(0.5),
                                         spreadRadius: 5,
                                         blurRadius: 7,
-                                        offset: Offset(
+                                        offset: const Offset(
                                             0, 3), // changes position of shadow
                                       ),
                                     ]
@@ -87,7 +87,8 @@ class Switcher extends StatelessWidget {
                             onTap: () {
                               _controller.onOsChanged(os.indexOf(e));
                             },
-                            child: FlutterLogo(),
+
+                            child: OsIcon(asset: os.indexOf(e) == 0 ? 'assets/apple.png' : 'assets/android.png'),
                           ),
                         )),
                       )
@@ -96,3 +97,15 @@ class Switcher extends StatelessWidget {
         }));
   }
 }
+
+
+class OsIcon extends StatelessWidget {
+  const OsIcon({this.asset, Key? key}) : super(key: key);
+
+  final String? asset;
+  @override
+  Widget build(BuildContext context) {
+    return Transform.scale(scale: 0.7, child: Image(image: AssetImage(asset ?? 'assets/android.png'),),);
+  }
+}
+

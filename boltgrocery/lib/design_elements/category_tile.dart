@@ -1,5 +1,5 @@
 import 'package:boltgrocery/data_models/category.dart';
-import 'package:boltgrocery/Screens/category_screen.dart';
+import 'package:boltgrocery/screens/category_screen.dart';
 import 'package:flutter/material.dart';
 
 class CategoryTile extends StatefulWidget {

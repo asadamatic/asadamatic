@@ -2,7 +2,7 @@ import 'package:boltgrocery/data_models/category.dart';
 import 'package:boltgrocery/data_models/grocery_item.dart';
 import 'package:boltgrocery/design_elements/bottom_app_button.dart';
 import 'package:boltgrocery/design_elements/grocery_item_card.dart';
-import 'package:boltgrocery/Screens/editing_screen.dart';
+import 'package:boltgrocery/screens/editing_screen.dart';
 import 'package:boltgrocery/controllers/groceries_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

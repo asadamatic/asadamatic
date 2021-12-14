@@ -1,12 +1,9 @@
-import 'package:asadamatic/main.dart';
 import 'package:boltgrocery/design_elements/category_tile.dart';
 import 'package:boltgrocery/controllers/groceries_controller.dart';
 import 'package:boltgrocery/values.dart';
-import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class BoltGroceryHomeScreen extends StatelessWidget {
   BoltGroceryHomeScreen({

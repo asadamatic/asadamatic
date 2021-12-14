@@ -1,6 +1,4 @@
 import 'package:asadamatic/main.dart';
-import 'package:boltgrocery/Screens/home_screen.dart';
-import 'package:boltgrocery/controllers/groceries_controller.dart';
 import 'package:boltgrocery/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

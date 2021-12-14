@@ -1,7 +1,6 @@
 import 'package:boltgrocery/data_models/category.dart';
 import 'package:boltgrocery/Screens/category_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CategoryTile extends StatefulWidget {
   final Category? category;

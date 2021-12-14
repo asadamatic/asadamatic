@@ -6,7 +6,6 @@ import 'package:boltgrocery/controllers/editing_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:boltgrocery/controllers/groceries_controller.dart';
 
 class EditingScreen extends StatelessWidget {
   EditingScreen({GroceryItem? groceryItem, Category? category}) {

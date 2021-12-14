@@ -3,7 +3,6 @@ import 'package:asadamatic/src/mvc/controllers/os_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/slider_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:boltgrocery/main.dart';
-import 'package:dailytodo/main.dart';
 import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,7 +37,7 @@ class DeviceView extends StatelessWidget {
                         onPageChanged: _sliderController.onPageChanged,
                         itemCount: 2,
                         itemBuilder: (context, index) {
-                          return index == 0 ? BoltGroceryApp() : DailyTodo();
+                          return index == 0 ? BoltGroceryApp() : Container();
                         },
                       ),
                     );

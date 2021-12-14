@@ -1,38 +1,39 @@
+import 'package:asadamatic/src/mvc/controllers/drawer_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController with SingleGetTickerProviderMixin {
   AnimationController? animationController;
   Rx<bool> isShowingDrawer = false.obs;
   Animation<RelativeRect>? animation, iconButtonAnimation;
+
+  final InfoDrawerController _drawerController =
+      Get.put(InfoDrawerController());
   @override
   void onInit() {
     super.onInit();
-
-    animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 2));
+    animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 600));
     animation = RelativeRectTween(
-      begin: RelativeRect.fromLTRB(0, 0, 0, 0),
-      end: RelativeRect.fromLTRB(300, 0, -300, 0),
+      begin: const RelativeRect.fromLTRB(0, 0, 0, 0),
+      end: const RelativeRect.fromLTRB(300, 0, -300, 0),
     ).animate(CurvedAnimation(
       parent: animationController!,
       curve: Curves.easeIn,
     ));
-  //   iconButtonAnimation = RelativeRectTween(
-  //     begin: RelativeRect.fromLTRB(0, 0, MediaQuery.of(context).size.width - 15, MediaQuery.of(context).size.height - 15),
-  //     end: RelativeRect.fromLTRB(300, 0, -300, 0),
-  //   ).animate(
-  //       CurvedAnimation(parent: animationController!, curve: Curves.easeIn));
   }
 
   showDrawer() {
     animationController!.forward();
+    _drawerController.animationController!.reverse();
     isShowingDrawer.value = true;
     update();
   }
 
   hideDrawer() {
     animationController!.reverse();
+    _drawerController.animationController!.forward();
     isShowingDrawer.value = false;
     update();
   }

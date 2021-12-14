@@ -1,5 +1,8 @@
 import 'package:asadamatic/src/constant/values.dart';
+import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/os_controller.dart';
+import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
+import 'package:asadamatic/src/widgets/os_logo_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,6 +11,7 @@ class Switcher extends StatelessWidget {
 
   final Axis? direction;
 
+  final ThemeController _themeController = Get.find();
   final OsController _osController = Get.put(OsController());
   @override
   Widget build(BuildContext context) {
@@ -15,12 +19,11 @@ class Switcher extends StatelessWidget {
         height: direction == Axis.horizontal ? 75.0 : 130.0,
         width: direction == Axis.horizontal ? 130.0 : 75.0,
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: _themeController.themeMode == ThemeMode.dark ? Colors.black87 : Colors.white,
             borderRadius: BorderRadius.circular(55.0),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 5,
                 blurRadius: 7,
                 offset: const Offset(0, 3), // changes position of shadow
               ),
@@ -37,13 +40,14 @@ class Switcher extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.white,
+                              color: _themeController.themeMode == ThemeMode.dark
+                                  ? Colors.black87
+                                  : Colors.white,
                               boxShadow: _controller.index.value ==
                                       os.indexOf(e)
                                   ? [
                                       BoxShadow(
                                         color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 5,
                                         blurRadius: 7,
                                         offset: const Offset(
                                             0, 3), // changes position of shadow
@@ -70,16 +74,17 @@ class Switcher extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.white,
+                              color: _themeController.themeMode == ThemeMode.dark
+                                  ? Colors.black87
+                                  : Colors.white,
                               boxShadow: _controller.index.value ==
                                       os.indexOf(e)
                                   ? [
                                       BoxShadow(
                                         color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 5,
                                         blurRadius: 7,
                                         offset: const Offset(
-                                            0, 3), // changes position of shadow
+                                            0, 0), // changes position of shadow
                                       ),
                                     ]
                                   : []),
@@ -87,8 +92,23 @@ class Switcher extends StatelessWidget {
                             onTap: () {
                               _controller.onOsChanged(os.indexOf(e));
                             },
-
-                            child: OsIcon(asset: os.indexOf(e) == 0 ? 'assets/apple.png' : 'assets/android.png'),
+                            onHover: (value) {
+                              _osController.onHover(value, os.indexOf(e));
+                            },
+                            child: AnimatedScale(
+                              scale: _osController.hover.value
+                                  ? _osController.hoverIndex.value ==
+                                          os.indexOf(e)
+                                      ? 1.3
+                                      : 1.0
+                                  : 1.0,
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeIn,
+                              child: OsLogoIcon(
+                                  asset: os.indexOf(e) == 0
+                                      ? 'assets/apple.png'
+                                      : 'assets/android.png'),
+                            ),
                           ),
                         )),
                       )
@@ -98,14 +118,4 @@ class Switcher extends StatelessWidget {
   }
 }
 
-
-class OsIcon extends StatelessWidget {
-  const OsIcon({this.asset, Key? key}) : super(key: key);
-
-  final String? asset;
-  @override
-  Widget build(BuildContext context) {
-    return Transform.scale(scale: 0.7, child: Image(image: AssetImage(asset ?? 'assets/android.png'),),);
-  }
-}
 

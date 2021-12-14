@@ -1,5 +1,5 @@
-import 'package:boltgrocery/Screens/home_screen.dart';
-import 'package:boltgrocery/Screens/welcome_screen.dart';
+import 'package:boltgrocery/screens/home_screen.dart';
+import 'package:boltgrocery/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

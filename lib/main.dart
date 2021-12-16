@@ -20,7 +20,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       getPages: AppPages.routes,
       initialRoute: Routes.home,
-      title: 'Flutter Demo',
+      title: 'Asad Hameed',
       themeMode: ThemeMode.system,
       darkTheme: ThemeData(
         brightness: Brightness.dark,

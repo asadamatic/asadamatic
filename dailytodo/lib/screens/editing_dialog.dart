@@ -2,7 +2,6 @@ import 'package:asadamatic/main.dart';
 import 'package:dailytodo/controllers/home_controller.dart';
 import 'package:dailytodo/data_model/task_data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 

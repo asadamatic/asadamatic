@@ -50,7 +50,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 },
                 child: Image(
                   image: AssetImage(
-                    'Assets/calendar.png', package: 'dailytodo'
+                    'Assets/icon.png', package: 'dailytodo'
                   ),
                   height: 110,
                 ),

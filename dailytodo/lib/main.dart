@@ -8,7 +8,6 @@ void main() {
 }
 
 class DailyTodoApp extends StatelessWidget {
-
   final ThemeController _themeController = Get.find();
   @override
   Widget build(BuildContext context) {
@@ -28,8 +27,7 @@ class DailyTodoApp extends StatelessWidget {
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
               elevation: MaterialStateProperty.all(4.0),
-              backgroundColor:
-                  MaterialStateProperty.all(Colors.blue),
+              backgroundColor: MaterialStateProperty.all(Colors.blue),
               foregroundColor: MaterialStateProperty.all(Colors.white),
               shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   side: BorderSide(color: Colors.blue),
@@ -52,7 +50,7 @@ class DailyTodoApp extends StatelessWidget {
           ),
           textButtonTheme: TextButtonThemeData(
               style: ButtonStyle(
-                elevation: MaterialStateProperty.all(4.0),
+                  elevation: MaterialStateProperty.all(4.0),
                   backgroundColor: MaterialStateProperty.all(Colors.grey[700]),
                   foregroundColor: MaterialStateProperty.all(Colors.white),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(

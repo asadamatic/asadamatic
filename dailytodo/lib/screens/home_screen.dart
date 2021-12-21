@@ -4,7 +4,6 @@ import 'package:dailytodo/design_elements/CustomCheckBox.dart';
 import 'package:dailytodo/design_elements/date_display.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'editing_dialog.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -16,6 +15,7 @@ class HomeScreen extends StatelessWidget {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(100.0),
           child: Material(
+            color: Theme.of(context).primaryColor,
             elevation: 2.0,
             child: Container(
               decoration: BoxDecoration(

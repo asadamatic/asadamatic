@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:legacyweather/home_wrapper.dart';
-import 'package:legacyweather/Screens/welcome_screen.dart';
+import 'package:legacyweather/screens/welcome_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Wrapper extends StatefulWidget {

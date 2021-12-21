@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:legacyweather/constants/api_key.dart';
 import 'package:legacyweather/data_models/city.dart';
 import 'dart:convert';
 import 'package:legacyweather/data_models/weather.dart';

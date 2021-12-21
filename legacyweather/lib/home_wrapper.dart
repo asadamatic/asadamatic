@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:legacyweather/Screens/home_screen.dart';
-import 'package:legacyweather/Screens/location_selector.dart';
+import 'package:legacyweather/screens/home_screen.dart';
+import 'package:legacyweather/screens/location_selector.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeWrapper extends StatefulWidget {

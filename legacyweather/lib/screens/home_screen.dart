@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:legacyweather/constants/values.dart';
 import 'package:legacyweather/controllers/weather_controller.dart';
 import 'package:legacyweather/screens/location_selector.dart';
-import 'package:legacyweather/Widgets/weather_display.dart';
+import 'package:legacyweather/widgets/weather_display.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

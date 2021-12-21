@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:legacyweather/data_models/city.dart';
 import 'package:legacyweather/data_models/weather.dart';
-import 'package:legacyweather/weather_service/weather_repo.dart';
+import 'package:legacyweather/weather_service/weather_service.dart';
 
 class WeatherController extends GetxController {
   List<Weather> weatherData = [];

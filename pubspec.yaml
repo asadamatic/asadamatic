@@ -35,6 +35,8 @@ dependencies:
     path: ./boltgrocery
   dailytodo:
     path: ./dailytodo
+  legacyweather:
+    path: ./legacyweather
   url_launcher: ^6.0.17
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

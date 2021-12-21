@@ -1,7 +1,7 @@
 import 'package:asadamatic/src/mvc/controllers/drawer_controller.dart';
 import 'package:asadamatic/src/widgets/os_logo_icon.dart';
 import 'package:asadamatic/src/widgets/social_logo_icon.dart';
-import 'package:asadamatic/src/widgets/social_palette.dart';
+import 'package:asadamatic/src/widgets/icon_palettes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

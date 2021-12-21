@@ -1,6 +1,6 @@
 import 'package:dailytodo/controllers/home_controller.dart';
 import 'package:dailytodo/data_model/task_data.dart';
-import 'package:dailytodo/Screens/editing_dialog.dart';
+import 'package:dailytodo/screens/editing_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

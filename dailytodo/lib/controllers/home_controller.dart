@@ -19,7 +19,6 @@ class TodoHomeController extends GetxController {
     await updateDataForGraph();
     themeMode =
         brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
-
     update();
     super.onInit();
   }

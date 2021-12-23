@@ -5,7 +5,7 @@ import 'package:asadamatic/src/widgets/os_logo_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Switcher extends StatelessWidget {
+class Switcher extends StatelessWidget{
   Switcher({this.direction, Key? key}) : super(key: key);
 
   final Axis? direction;

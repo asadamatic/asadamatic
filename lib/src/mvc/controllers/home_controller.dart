@@ -1,14 +1,13 @@
-import 'package:asadamatic/src/mvc/controllers/drawer_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/state_manager.dart';
 
-class HomeController extends GetxController with GetSingleTickerProviderStateMixin {
+class HomeController extends GetxController with GetTickerProviderStateMixin {
   AnimationController? animationController;
+  AnimationController? nameAnimationController;
   Rx<bool> isShowingDrawer = false.obs;
   Animation<RelativeRect>? animation, iconButtonAnimation;
 
-  final InfoDrawerController _drawerController =
-      Get.put(InfoDrawerController());
   @override
   void onInit() {
     super.onInit();
@@ -21,25 +20,32 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
       parent: animationController!,
       curve: Curves.easeIn,
     ));
+    nameAnimationController = AnimationController(
+        vsync: this,
+        duration: const Duration(seconds: 3),
+        animationBehavior: AnimationBehavior.preserve);
+    nameAnimationController!.forward();
   }
 
   showDrawer() {
     animationController!.forward();
-    _drawerController.animationController!.reverse();
+    nameAnimationController!.reverse();
     isShowingDrawer.value = true;
     update();
   }
 
   hideDrawer() {
     animationController!.reverse();
-    _drawerController.animationController!.forward();
+    nameAnimationController!.forward();
     isShowingDrawer.value = false;
     update();
   }
 
+
   @override
   void dispose() {
     animationController!.dispose();
+    nameAnimationController!.dispose();
     super.dispose();
   }
 }

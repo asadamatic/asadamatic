@@ -1,4 +1,4 @@
-import 'package:asadamatic/src/mvc/controllers/drawer_controller.dart';
+import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/widgets/icon_palettes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class InfoDrawer extends StatelessWidget {
   InfoDrawer({Key? key}) : super(key: key);
 
-  final InfoDrawerController _drawerController =
+  final HomeController _homeController =
       Get.find();
   @override
   Widget build(BuildContext context) {
@@ -26,13 +26,13 @@ class InfoDrawer extends StatelessWidget {
                   left: 0.0,
                   top: -20.0,
                   child: AnimatedBuilder(
-                      animation: _drawerController.animationController!,
+                      animation: _homeController.animationController!,
                       builder: (BuildContext tweenContext, Widget? child) {
                         return Text(
                           'Asad',
                           style: TextStyle(
                               letterSpacing:
-                                  _drawerController.animationController!.value *
+                              _homeController.animationController!.value *
                                       50,
                               fontSize: Theme.of(context)
                                   .textTheme
@@ -54,14 +54,14 @@ class InfoDrawer extends StatelessWidget {
                   right: 30.0,
                   bottom: 30.0,
                   child: AnimatedBuilder(
-                      animation: _drawerController.animationController!,
+                      animation: _homeController.animationController!,
                       builder: (BuildContext tweenContext, Widget? child) {
                         return Text(
                           'Hameed',
                           style: TextStyle(
                               textBaseline: TextBaseline.alphabetic,
                               letterSpacing:
-                                  _drawerController.animationController!.value *
+                              _homeController.animationController!.value *
                                       50,
                               fontSize: Theme.of(context)
                                   .textTheme

@@ -1,19 +1,16 @@
 import 'package:asadamatic/src/config/routes/app_pages.dart';
 import 'package:asadamatic/src/config/routes/routes.dart';
-import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 export 'package:asadamatic/src/mvc/controllers/theme_controller.dart'
     show ThemeController;
 
 void main() {
-  runApp(App());
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
-  //
-  // final ThemeController _themeController = Get.put(ThemeController());
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

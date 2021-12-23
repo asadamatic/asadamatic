@@ -1,11 +1,12 @@
 import 'package:asadamatic/main.dart';
 import 'package:asadamatic/src/constant/values.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SocialLogoIcon extends StatefulWidget {
-  SocialLogoIcon({this.asset, this.index, this.url, Key? key})
+  const SocialLogoIcon({this.asset, this.index, this.url, Key? key})
       : super(key: key);
   final int? index;
   final String? asset;
@@ -15,7 +16,7 @@ class SocialLogoIcon extends StatefulWidget {
 }
 
 class _SocialLogoIconState extends State<SocialLogoIcon> {
-  final ThemeController _themeController = Get.find();
+
 
   double height = 25.0;
   double increasedHeight = 0.0;
@@ -53,14 +54,18 @@ class _SocialLogoIconState extends State<SocialLogoIcon> {
             }
           }
         },
-        child: Image(
-          height: height,
-          color: widget.asset == 'assets/github.png'
-              ? _themeController.themeMode == ThemeMode.dark
-                  ? Colors.white
-                  : null
-              : null,
-          image: AssetImage(widget.asset ?? 'assets/stack-overflow.png'),
+        child: GetBuilder<ThemeController>(
+          builder: (_themeController) {
+            return Image(
+              height: height,
+              color: widget.asset == 'assets/github.png'
+                  ? _themeController.themeMode == ThemeMode.dark
+                      ? Colors.white
+                      : null
+                  : null,
+              image: AssetImage(widget.asset ?? 'assets/stack-overflow.png'),
+            );
+          }
         ),
       ),
     );

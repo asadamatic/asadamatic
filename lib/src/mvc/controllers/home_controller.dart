@@ -1,9 +1,8 @@
 import 'package:asadamatic/src/mvc/controllers/drawer_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController with SingleGetTickerProviderMixin {
+class HomeController extends GetxController with GetSingleTickerProviderStateMixin {
   AnimationController? animationController;
   Rx<bool> isShowingDrawer = false.obs;
   Animation<RelativeRect>? animation, iconButtonAnimation;
@@ -40,7 +39,6 @@ class HomeController extends GetxController with SingleGetTickerProviderMixin {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     animationController!.dispose();
     super.dispose();
   }

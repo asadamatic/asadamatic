@@ -1,5 +1,4 @@
 import 'package:asadamatic/src/constant/values.dart';
-import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/os_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:asadamatic/src/widgets/os_logo_icon.dart';
@@ -19,7 +18,9 @@ class Switcher extends StatelessWidget {
         height: direction == Axis.horizontal ? 75.0 : 130.0,
         width: direction == Axis.horizontal ? 130.0 : 75.0,
         decoration: BoxDecoration(
-            color: _themeController.themeMode == ThemeMode.dark ? Colors.black87 : Colors.white,
+            color: _themeController.themeMode == ThemeMode.dark
+                ? Colors.black87
+                : Colors.white,
             borderRadius: BorderRadius.circular(55.0),
             boxShadow: [
               BoxShadow(
@@ -40,9 +41,10 @@ class Switcher extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: _themeController.themeMode == ThemeMode.dark
-                                  ? Colors.black87
-                                  : Colors.white,
+                              color:
+                                  _themeController.themeMode == ThemeMode.dark
+                                      ? Colors.black87
+                                      : Colors.white,
                               boxShadow: _controller.index.value ==
                                       os.indexOf(e)
                                   ? [
@@ -74,9 +76,10 @@ class Switcher extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: _themeController.themeMode == ThemeMode.dark
-                                  ? Colors.black87
-                                  : Colors.white,
+                              color:
+                                  _themeController.themeMode == ThemeMode.dark
+                                      ? Colors.black87
+                                      : Colors.white,
                               boxShadow: _controller.index.value ==
                                       os.indexOf(e)
                                   ? [
@@ -117,5 +120,3 @@ class Switcher extends StatelessWidget {
         }));
   }
 }
-
-

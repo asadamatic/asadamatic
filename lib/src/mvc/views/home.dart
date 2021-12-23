@@ -39,7 +39,7 @@ class Home extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Expanded(flex: 4, child: DeviceView()),
+                    const Expanded(flex: 4, child: DeviceView()),
                     const SizedBox(
                       width: 100.0,
                     ),
@@ -71,7 +71,7 @@ class Home extends StatelessWidget {
                         child: Switcher(),
                       ),
                     ),
-                    Flexible(flex: 1, child: DeviceView()),
+                    const Flexible(flex: 1, child: DeviceView()),
                     Expanded(
                         flex: 2,
                         child: Obx(() => Transform.scale(
@@ -98,7 +98,7 @@ class Home extends StatelessWidget {
                         child: Switcher(),
                       ),
                     ),
-                    Flexible(flex: 1, child: DeviceView()),
+                    const Flexible(flex: 1, child: DeviceView()),
                     // SizedBox(
                     //   width: MediaQuery.of(context).size.width * 0.006,
                     // ),
@@ -172,7 +172,7 @@ class Home extends StatelessWidget {
             )),
         Align(
           alignment: Alignment.topRight,
-          child: GetBuilder<HomeController>(builder: (_homeController) {
+          child: GetBuilder<ThemeController>(builder: (_themeController) {
             return Switch(
                 value: _themeController.themeMode == ThemeMode.dark,
                 onChanged: _themeController.toggleTheme);

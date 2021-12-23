@@ -14,8 +14,8 @@ class OsLogoIcon extends StatelessWidget {
       child: Image(
         color: _themeController.themeMode == ThemeMode.dark
             ? asset == 'assets/apple.png'
-            ? Colors.white
-            : null
+                ? Colors.white
+                : null
             : null,
         image: AssetImage(asset ?? 'assets/android.png'),
       ),

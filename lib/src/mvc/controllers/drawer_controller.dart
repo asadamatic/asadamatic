@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class InfoDrawerController extends GetxController
-    with SingleGetTickerProviderMixin {
+    with GetSingleTickerProviderStateMixin {
   AnimationController? animationController;
   Animation<RelativeRect>? animation, iconButtonAnimation;
   @override

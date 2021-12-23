@@ -21,8 +21,6 @@ class SocialPalette extends StatelessWidget {
   }
 }
 
-
-
 class AppIconPalette extends StatelessWidget {
   const AppIconPalette({Key? key}) : super(key: key);
 
@@ -32,10 +30,10 @@ class AppIconPalette extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: appLogoIcons
           .map((appLogoIcon) => AppLogoIcon(
-        asset: appLogoIcon[0],
-        index: appLogoIcons.indexOf(appLogoIcon),
-        package: appLogoIcon[1],
-      ))
+                asset: appLogoIcon[0],
+                index: appLogoIcons.indexOf(appLogoIcon),
+                package: appLogoIcon[1],
+              ))
           .toList(),
     );
   }

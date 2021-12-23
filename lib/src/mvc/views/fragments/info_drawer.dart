@@ -1,6 +1,4 @@
 import 'package:asadamatic/src/mvc/controllers/drawer_controller.dart';
-import 'package:asadamatic/src/widgets/os_logo_icon.dart';
-import 'package:asadamatic/src/widgets/social_logo_icon.dart';
 import 'package:asadamatic/src/widgets/icon_palettes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +7,7 @@ class InfoDrawer extends StatelessWidget {
   InfoDrawer({Key? key}) : super(key: key);
 
   final InfoDrawerController _drawerController =
-      Get.put(InfoDrawerController());
+      Get.find();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -74,7 +72,7 @@ class InfoDrawer extends StatelessWidget {
                 ),
               ],
             ),
-            SocialPalette(),
+            const SocialPalette(),
             // Row(
             //   children: [
             //     // Icon(Icons.location_on),

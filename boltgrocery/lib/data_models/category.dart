@@ -1,6 +1,4 @@
-
-class Category{
-
+class Category {
   String? name, slug, image;
   List<String>? nameOptions;
 

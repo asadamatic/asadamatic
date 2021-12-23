@@ -14,7 +14,7 @@ class EditingScreen extends StatelessWidget {
     }
     _editingController!.category = category;
   }
-  EditingController? _editingController = Get.put(EditingController());
+  final EditingController? _editingController = Get.put(EditingController());
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class EditingScreen extends StatelessWidget {
 }
 
 class EditingForm extends StatelessWidget {
-  EditingController? _editingController = Get.find();
+  final EditingController? _editingController = Get.find();
 
   @override
   Widget build(BuildContext context) {

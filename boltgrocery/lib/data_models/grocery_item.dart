@@ -1,16 +1,22 @@
-class GroceryItem{
-
+class GroceryItem {
   int? id;
   String? name, quantity, unit, category;
   bool? status;
   DateTime? time;
 
-  GroceryItem({this.id, this.time, this.name, this.quantity, this.unit, this.category, this.status});
+  GroceryItem(
+      {this.id,
+      this.time,
+      this.name,
+      this.quantity,
+      this.unit,
+      this.category,
+      this.status});
 
-  int getStatus(){
-
+  int getStatus() {
     return status! ? 1 : 0;
   }
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,

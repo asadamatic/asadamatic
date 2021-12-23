@@ -5,46 +5,15 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class BoltGroceryApp extends StatelessWidget {
-  BoltGroceryApp({Key? key}) : super(key: key);
-
-  ThemeController _themeController = Get.find();
+  final ThemeController _themeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
-      darkTheme: ThemeData(
-        textSelectionTheme: TextSelectionThemeData(
-          selectionColor: Colors.green[400],
-          cursorColor: Colors.green[400],
-          selectionHandleColor: Colors.green[400],
-        ),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        brightness: Brightness.dark,
-        appBarTheme: AppBarTheme(
-          color: Colors.grey[900],
-          systemOverlayStyle: SystemUiOverlayStyle.light,
-        ),
-        scaffoldBackgroundColor: Colors.grey[900],
-        textTheme: const TextTheme(
-            headline6: TextStyle(
-              color: Colors.white,
-              letterSpacing: 0.8,
-              fontSize: 20.0,
-              fontWeight: FontWeight.w500,
-            ),
-            subtitle2: TextStyle(
-              color: Colors.white,
-              letterSpacing: 0.8,
-              fontSize: 18.0,
-              fontWeight: FontWeight.w400,
-            )),
-        bottomAppBarColor: Colors.grey[900],
-      ),
       themeMode: _themeController.themeMode,
       debugShowCheckedModeBanner: false,
       color: Colors.white,
-      title: 'Bolt Grocery',
+      title: 'Asad Hameed',
       theme: ThemeData(
           primaryColor: Colors.green[400],
           textSelectionTheme: TextSelectionThemeData(
@@ -77,6 +46,34 @@ class BoltGroceryApp extends StatelessWidget {
           ),
           colorScheme:
               ColorScheme.fromSwatch().copyWith(secondary: Colors.greenAccent)),
+      darkTheme: ThemeData(
+        textSelectionTheme: TextSelectionThemeData(
+          selectionColor: Colors.green[400],
+          cursorColor: Colors.green[400],
+          selectionHandleColor: Colors.green[400],
+        ),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        brightness: Brightness.dark,
+        appBarTheme: AppBarTheme(
+          color: Colors.grey[900],
+          systemOverlayStyle: SystemUiOverlayStyle.light,
+        ),
+        scaffoldBackgroundColor: Colors.grey[900],
+        textTheme: const TextTheme(
+            headline6: TextStyle(
+              color: Colors.white,
+              letterSpacing: 0.8,
+              fontSize: 20.0,
+              fontWeight: FontWeight.w500,
+            ),
+            subtitle2: TextStyle(
+              color: Colors.white,
+              letterSpacing: 0.8,
+              fontSize: 18.0,
+              fontWeight: FontWeight.w400,
+            )),
+        bottomAppBarColor: Colors.grey[900],
+      ),
       home: Wrapper(),
     );
   }

@@ -51,6 +51,7 @@ class EditingController extends GetxController {
       }
     }
   }
+
   String? textFieldValidator(String? value) {
     if (value!.isEmpty) {
       print('Empty Check');

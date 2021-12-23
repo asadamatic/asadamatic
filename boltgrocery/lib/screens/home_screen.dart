@@ -10,7 +10,8 @@ class BoltGroceryHomeScreen extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final GroceriesController _groceriesController = Get.put(GroceriesController());
+  final GroceriesController _groceriesController =
+      Get.put(GroceriesController());
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -26,9 +27,10 @@ class BoltGroceryHomeScreen extends StatelessWidget {
               Container(
                 height: 200.0,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: const BorderRadius.only(bottomRight: Radius.circular(10.0), bottomLeft: Radius.circular(10.0))
-                ),
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: const BorderRadius.only(
+                        bottomRight: Radius.circular(10.0),
+                        bottomLeft: Radius.circular(10.0))),
               ),
               Align(
                   alignment: Alignment.topCenter,
@@ -36,7 +38,7 @@ class BoltGroceryHomeScreen extends StatelessWidget {
                     margin: EdgeInsets.only(top: 70.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const<Widget>[
+                      children: const <Widget>[
                         Text(
                           'Grocery List',
                           style: TextStyle(
@@ -49,7 +51,8 @@ class BoltGroceryHomeScreen extends StatelessWidget {
                         ),
                         Image(
                           height: 55.0,
-                          image: AssetImage('Assets/homeicon.png', package: 'boltgrocery'),
+                          image: AssetImage('Assets/homeicon.png',
+                              package: 'boltgrocery'),
                         ),
                       ],
                     ),

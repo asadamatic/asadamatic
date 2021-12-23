@@ -4,12 +4,11 @@ import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 
 class GroceriesController extends GetxController
-    with SingleGetTickerProviderMixin {
+    with GetSingleTickerProviderStateMixin {
   RxList<GroceryItem> groceries = <GroceryItem>[].obs;
 
   AnimationController? _animationController;
   Animation<RelativeRect>? animation;
-  Brightness brightness = SchedulerBinding.instance!.window.platformBrightness;
 
   @override
   void onInit() async {
@@ -25,20 +24,22 @@ class GroceriesController extends GetxController
     super.onInit();
   }
 
-  addNewItem(GroceryItem groceryItem) async{
+  addNewItem(GroceryItem groceryItem) async {
     groceries.add(groceryItem);
     update();
   }
-  updateItem(GroceryItem groceryItem) async{
-    groceries[groceries.indexWhere((oldGroceryItem) => oldGroceryItem.id == groceryItem.id)] = groceryItem;
+
+  updateItem(GroceryItem groceryItem) async {
+    groceries[groceries.indexWhere(
+        (oldGroceryItem) => oldGroceryItem.id == groceryItem.id)] = groceryItem;
     update();
   }
 
-  deleteItem(GroceryItem? groceryItem) async{
-    groceries.removeWhere((oldGroceryItem) => oldGroceryItem.id == groceryItem!.id);
+  deleteItem(GroceryItem? groceryItem) async {
+    groceries
+        .removeWhere((oldGroceryItem) => oldGroceryItem.id == groceryItem!.id);
     update();
   }
-
 
   List<GroceryItem> groceriesList(String? category) {
     return groceries

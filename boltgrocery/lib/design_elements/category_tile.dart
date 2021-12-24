@@ -13,7 +13,8 @@ class CategoryTile extends StatefulWidget {
 class _CategoryTileState extends State<CategoryTile> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      hoverColor: Colors.transparent,
       child: Card(
         margin: EdgeInsets.fromLTRB(16.5, 10.0, 10.0, 16.5),
         elevation: 5.0,
@@ -33,13 +34,10 @@ class _CategoryTileState extends State<CategoryTile> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Hero(
-                tag: '${widget.category!.name!}Title',
-                child: Text(
-                  '${widget.category!.name}',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16.0),
-                ),
+              child: Text(
+                '${widget.category!.name}',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16.0),
               ),
             )
           ],

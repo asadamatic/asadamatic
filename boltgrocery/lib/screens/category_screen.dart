@@ -73,15 +73,12 @@ class CategoryScreen extends StatelessWidget {
                           Flexible(child: BackButton()),
                           Flexible(
                             flex: 4,
-                            child: Hero(
-                              tag: '${category!.name!}Title',
-                              child: Text(
-                                category!.name!,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 24.0,
-                                  color: Colors.white,
-                                ),
+                            child: Text(
+                              category!.name!,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 24.0,
+                                color: Colors.white,
                               ),
                             ),
                           ),

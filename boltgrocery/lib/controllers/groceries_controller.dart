@@ -1,6 +1,5 @@
 import 'package:boltgrocery/data_models/grocery_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 
 class GroceriesController extends GetxController

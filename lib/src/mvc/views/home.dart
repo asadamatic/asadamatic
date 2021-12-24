@@ -1,6 +1,5 @@
 import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
-import 'package:asadamatic/src/mvc/controllers/slider_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:asadamatic/src/mvc/views/device_view.dart';
 import 'package:asadamatic/src/mvc/views/fragments/info_drawer.dart';
@@ -12,7 +11,6 @@ class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
   final HomeController _homeController = Get.put(HomeController());
   final ThemeController _themeController = Get.put(ThemeController());
-  final SliderController _sliderController = Get.put(SliderController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +46,7 @@ class Home extends StatelessWidget {
                         child: Obx(() => Transform.scale(
                               scale: MediaQuery.of(context).size.width * 0.0010,
                               child: Text(
-                                descriptions[_sliderController.index.value],
+                                descriptions[_homeController.sliderIndex.value],
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: Theme.of(context)
@@ -77,7 +75,7 @@ class Home extends StatelessWidget {
                         child: Obx(() => Transform.scale(
                               scale: MediaQuery.of(context).size.width * 0.0005,
                               child: Text(
-                                descriptions[_sliderController.index.value],
+                                descriptions[_homeController.sliderIndex.value],
                                 style: TextStyle(
                                     fontSize: Theme.of(context)
                                         .textTheme
@@ -107,7 +105,7 @@ class Home extends StatelessWidget {
                         child: Obx(() => Transform.scale(
                               scale: MediaQuery.of(context).size.width * 0.0005,
                               child: Text(
-                                descriptions[_sliderController.index.value],
+                                descriptions[_homeController.sliderIndex.value],
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                     fontSize: Theme.of(context)
@@ -160,11 +158,12 @@ class Home extends StatelessWidget {
                 turns: Tween(begin: 0.0, end: 0.5)
                     .animate(_homeController.animationController!),
                 child: GetBuilder<HomeController>(
-                    builder: (_homeControllerNewNew) {
+                  id: 'drawerUpdate',
+                    builder: (_homeController) {
                   return IconButton(
-                    onPressed: _homeControllerNewNew.isShowingDrawer.value
-                        ? _homeControllerNewNew.hideDrawer
-                        : _homeControllerNewNew.showDrawer,
+                    onPressed: _homeController.isShowingDrawer.value
+                        ? _homeController.hideDrawer
+                        : _homeController.showDrawer,
                     icon: const Icon(Icons.navigate_next_outlined),
                   );
                 }),

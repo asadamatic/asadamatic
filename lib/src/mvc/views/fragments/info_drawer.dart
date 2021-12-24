@@ -26,14 +26,13 @@ class InfoDrawer extends StatelessWidget {
                   left: 0.0,
                   top: -20.0,
                   child: AnimatedBuilder(
-                      animation: _homeController.animationController!,
+                      animation: _homeController.nameAnimationController!,
                       builder: (BuildContext tweenContext, Widget? child) {
                         return Text(
                           'Asad',
                           style: TextStyle(
                               letterSpacing:
-                              _homeController.animationController!.value *
-                                      50,
+                              1 / _homeController.nameAnimationController!.value,
                               fontSize: Theme.of(context)
                                   .textTheme
                                   .headline1!
@@ -54,15 +53,14 @@ class InfoDrawer extends StatelessWidget {
                   right: 30.0,
                   bottom: 30.0,
                   child: AnimatedBuilder(
-                      animation: _homeController.animationController!,
+                      animation: _homeController.nameAnimationController!,
                       builder: (BuildContext tweenContext, Widget? child) {
                         return Text(
                           'Hameed',
                           style: TextStyle(
                               textBaseline: TextBaseline.alphabetic,
                               letterSpacing:
-                              _homeController.animationController!.value *
-                                      50,
+                              1 / _homeController.nameAnimationController!.value,
                               fontSize: Theme.of(context)
                                   .textTheme
                                   .headline2!

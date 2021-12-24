@@ -1,5 +1,4 @@
-import 'package:asadamatic/src/mvc/controllers/os_controller.dart';
-import 'package:asadamatic/src/mvc/controllers/slider_controller.dart';
+import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:asadamatic/src/widgets/icon_palettes.dart';
 import 'package:device_frame/device_frame.dart';
@@ -19,20 +18,21 @@ class DeviceView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (constraints.maxWidth > 780) const Spacer(),
-            GetBuilder<OsController>(
-              builder: (_osController) => Flexible(
+            GetBuilder<HomeController>(
+              id: 'osHoverUpdate',
+              builder: (_homeController) => Flexible(
                 flex: 3,
-                child: GetBuilder<SliderController>(
-                    id: 'pageview',
-                    builder: (_sliderController) {
+                child: GetBuilder<HomeController>(
+                    id: 'sliderIndexUpdate',
+                    builder: (_homeController) {
                       return GetBuilder<ThemeController>(
                           builder: (_themeController) {
                         return DeviceFrame(
-                            device: _osController.index.value == 0
+                            device: _homeController.osIndex.value == 0
                                 ? Devices.ios.iPhone12
                                 : Devices.android.samsungGalaxyS20,
                             isFrameVisible: true,
-                            screen: _sliderController.getApp());
+                            screen: _homeController.getSliderApp());
                       });
                     }),
               ),

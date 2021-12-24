@@ -1,17 +1,16 @@
 import 'package:asadamatic/src/constant/values.dart';
-import 'package:asadamatic/src/mvc/controllers/os_controller.dart';
+import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:asadamatic/src/widgets/os_logo_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Switcher extends StatelessWidget{
+class Switcher extends StatelessWidget {
   Switcher({this.direction, Key? key}) : super(key: key);
 
   final Axis? direction;
 
   final ThemeController _themeController = Get.find();
-  final OsController _osController = Get.put(OsController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +28,7 @@ class Switcher extends StatelessWidget{
                 offset: const Offset(0, 3), // changes position of shadow
               ),
             ]),
-        child: GetBuilder<OsController>(builder: (_controller) {
+        child: GetBuilder<HomeController>(id: 'osIndexUpdate',builder: (_homeController) {
           return direction == Axis.horizontal
               ? Row(
                   children: os
@@ -45,7 +44,7 @@ class Switcher extends StatelessWidget{
                                   _themeController.themeMode == ThemeMode.dark
                                       ? Colors.black87
                                       : Colors.white,
-                              boxShadow: _controller.index.value ==
+                              boxShadow: _homeController.osIndex.value ==
                                       os.indexOf(e)
                                   ? [
                                       BoxShadow(
@@ -58,7 +57,7 @@ class Switcher extends StatelessWidget{
                                   : []),
                           child: InkWell(
                             onTap: () {
-                              _controller.onOsChanged(os.indexOf(e));
+                              _homeController.onOsChanged(os.indexOf(e));
                             },
                             child: const FlutterLogo(),
                           ),
@@ -80,7 +79,7 @@ class Switcher extends StatelessWidget{
                                   _themeController.themeMode == ThemeMode.dark
                                       ? Colors.black87
                                       : Colors.white,
-                              boxShadow: _controller.index.value ==
+                              boxShadow: _homeController.osIndex.value ==
                                       os.indexOf(e)
                                   ? [
                                       BoxShadow(
@@ -93,14 +92,14 @@ class Switcher extends StatelessWidget{
                                   : []),
                           child: InkWell(
                             onTap: () {
-                              _controller.onOsChanged(os.indexOf(e));
+                              _homeController.onOsChanged(os.indexOf(e));
                             },
                             onHover: (value) {
-                              _osController.onHover(value, os.indexOf(e));
+                              _homeController.osOnHover(value, os.indexOf(e));
                             },
                             child: AnimatedScale(
-                              scale: _osController.hover.value
-                                  ? _osController.hoverIndex.value ==
+                              scale: _homeController.osHover.value
+                                  ? _homeController.osHoverIndex.value ==
                                           os.indexOf(e)
                                       ? 1.3
                                       : 1.0

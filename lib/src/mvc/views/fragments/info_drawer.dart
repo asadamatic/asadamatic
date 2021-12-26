@@ -32,7 +32,7 @@ class InfoDrawer extends StatelessWidget {
                           'Asad',
                           style: TextStyle(
                               letterSpacing:
-                              1 / _homeController.nameAnimationController!.value,
+                              50 * _homeController.nameAnimationController!.value,
                               fontSize: Theme.of(context)
                                   .textTheme
                                   .headline1!
@@ -43,8 +43,8 @@ class InfoDrawer extends StatelessWidget {
                 const Align(
                   alignment: Alignment.center,
                   child: Image(
-                    image: NetworkImage(
-                        'https://avatars.githubusercontent.com/u/37589169?v=4'),
+                    image: AssetImage(
+                        'assets/me.png'),
                     height: 150.0,
                     width: 150.0,
                   ),
@@ -60,7 +60,7 @@ class InfoDrawer extends StatelessWidget {
                           style: TextStyle(
                               textBaseline: TextBaseline.alphabetic,
                               letterSpacing:
-                              1 / _homeController.nameAnimationController!.value,
+                              50 * _homeController.nameAnimationController!.value,
                               fontSize: Theme.of(context)
                                   .textTheme
                                   .headline2!

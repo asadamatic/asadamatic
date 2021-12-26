@@ -34,18 +34,19 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         duration: const Duration(seconds: 3),
         value: 0.002,
         animationBehavior: AnimationBehavior.preserve);
+    nameAnimationController!.forward();
   }
 
   showDrawer() {
     animationController!.forward();
-    nameAnimationController!.forward();
+    nameAnimationController!.reverse();
     isShowingDrawer.value = true;
     update(['drawerUpdate']);
   }
 
   hideDrawer() {
     animationController!.reverse();
-    nameAnimationController!.reverse();
+    nameAnimationController!.forward();
     isShowingDrawer.value = false;
     update(['drawerUpdate']);
   }

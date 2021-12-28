@@ -1,4 +1,3 @@
-List<String> images = ['assets/test.png', 'assets/test2.png'];
 List<String> descriptions = [
   'Bolt Grocery',
   'Productivity Simplified with daily todo app!',
@@ -13,8 +12,8 @@ List<List<String>> socialIcons = [
   ],
   ['assets/linkedin.png', 'https://www.linkedin.com/in/asadamatic']
 ];
-List<List<String>> appLogoIcons = [
-  ['Assets/icon.png', 'boltgrocery'],
-  ['Assets/icon.png', 'dailytodo'],
-  ['Assets/icon.png', 'legacyweather']
+List<String> appLogoIcons = [
+  'assets/boltgrocery/icon.png',
+  'assets/dailytodo/icon.png',
+  'assets/legacyweather/icon.png'
 ];

@@ -30,9 +30,9 @@ class AppIconPalette extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: appLogoIcons
           .map((appLogoIcon) => AppLogoIcon(
-                asset: appLogoIcon[0],
+                asset: appLogoIcon,
                 index: appLogoIcons.indexOf(appLogoIcon),
-                package: appLogoIcon[1],
+                app: appLogoIcon.split('/')[1],
               ))
           .toList(),
     );

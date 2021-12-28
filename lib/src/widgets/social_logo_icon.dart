@@ -15,8 +15,6 @@ class SocialLogoIcon extends StatefulWidget {
 }
 
 class _SocialLogoIconState extends State<SocialLogoIcon> {
-
-
   double height = 25.0;
   double increasedHeight = 0.0;
   onHover() {
@@ -53,19 +51,17 @@ class _SocialLogoIconState extends State<SocialLogoIcon> {
             }
           }
         },
-        child: GetBuilder<ThemeController>(
-          builder: (_themeController) {
-            return Image(
-              height: height,
-              color: widget.asset == 'assets/github.png'
-                  ? _themeController.themeMode == ThemeMode.dark
-                      ? Colors.white
-                      : null
-                  : null,
-              image: AssetImage(widget.asset ?? 'assets/stack-overflow.png'),
-            );
-          }
-        ),
+        child: GetBuilder<ThemeController>(builder: (_themeController) {
+          return Image(
+            height: height,
+            color: widget.asset == 'assets/github.png'
+                ? _themeController.themeMode == ThemeMode.dark
+                    ? Colors.white
+                    : null
+                : null,
+            image: AssetImage(widget.asset ?? 'assets/stack-overflow.png'),
+          );
+        }),
       ),
     );
   }

@@ -6,8 +6,7 @@ import 'package:get/get.dart';
 class InfoDrawer extends StatelessWidget {
   InfoDrawer({Key? key}) : super(key: key);
 
-  final HomeController _homeController =
-      Get.find();
+  final HomeController _homeController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -31,8 +30,9 @@ class InfoDrawer extends StatelessWidget {
                         return Text(
                           'Asad',
                           style: TextStyle(
-                              letterSpacing:
-                              50 * _homeController.nameAnimationController!.value,
+                              letterSpacing: 50 *
+                                  _homeController
+                                      .nameAnimationController!.value,
                               fontSize: Theme.of(context)
                                   .textTheme
                                   .headline1!
@@ -43,8 +43,7 @@ class InfoDrawer extends StatelessWidget {
                 const Align(
                   alignment: Alignment.center,
                   child: Image(
-                    image: AssetImage(
-                        'assets/me.png'),
+                    image: AssetImage('assets/me.png'),
                     height: 150.0,
                     width: 150.0,
                   ),
@@ -59,8 +58,9 @@ class InfoDrawer extends StatelessWidget {
                           'Hameed',
                           style: TextStyle(
                               textBaseline: TextBaseline.alphabetic,
-                              letterSpacing:
-                              50 * _homeController.nameAnimationController!.value,
+                              letterSpacing: 50 *
+                                  _homeController
+                                      .nameAnimationController!.value,
                               fontSize: Theme.of(context)
                                   .textTheme
                                   .headline2!

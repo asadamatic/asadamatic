@@ -158,15 +158,15 @@ class Home extends StatelessWidget {
                 turns: Tween(begin: 0.0, end: 0.5)
                     .animate(_homeController.animationController!),
                 child: GetBuilder<HomeController>(
-                  id: 'drawerUpdate',
+                    id: 'drawerUpdate',
                     builder: (_homeController) {
-                  return IconButton(
-                    onPressed: _homeController.isShowingDrawer.value
-                        ? _homeController.hideDrawer
-                        : _homeController.showDrawer,
-                    icon: const Icon(Icons.navigate_next_outlined),
-                  );
-                }),
+                      return IconButton(
+                        onPressed: _homeController.isShowingDrawer.value
+                            ? _homeController.hideDrawer
+                            : _homeController.showDrawer,
+                        icon: const Icon(Icons.navigate_next_outlined),
+                      );
+                    }),
               ),
             )),
         Align(

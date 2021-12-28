@@ -1,9 +1,9 @@
-import 'package:boltgrocery/main.dart';
-import 'package:dailytodo/main.dart';
+import 'package:asadamatic/src/mvc/views/boltgrocery/main.dart';
+import 'package:asadamatic/src/mvc/views/dailytodo/main.dart';
+import 'package:asadamatic/src/mvc/views/legacyweather/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
-import 'package:legacyweather/main.dart';
 
 class HomeController extends GetxController with GetTickerProviderStateMixin {
   AnimationController? animationController;
@@ -71,17 +71,17 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     update(['osIndexUpdate']);
   }
 
-
   onPageChanged(newIndex) {
     sliderIndex.value = newIndex;
     update(['boltgrocery', 'dailytodo', 'legacyweather', 'sliderIndexUpdate']);
   }
+
   getSliderApp() {
     return sliderIndex.value == 0
         ? BoltGroceryApp()
         : sliderIndex.value == 1
-        ? DailyTodoApp()
-        : LegacyWeatherApp();
+            ?  DailyTodoApp()
+            : LegacyWeatherApp();
   }
 
   onHover(package) {
@@ -95,6 +95,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     iconIncreasedHeight = 0.0;
     update([package]);
   }
+
   @override
   void dispose() {
     animationController!.dispose();

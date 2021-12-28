@@ -37,7 +37,9 @@ class DeviceView extends StatelessWidget {
                     }),
               ),
             ),
-            const SizedBox(height: 20.0,),
+            const SizedBox(
+              height: 20.0,
+            ),
             const AppIconPalette(),
             if (constraints.maxWidth > 780) const Spacer(),
           ],

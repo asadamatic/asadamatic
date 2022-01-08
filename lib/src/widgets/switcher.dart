@@ -61,7 +61,10 @@ class Switcher extends StatelessWidget {
                                 onTap: () {
                                   _homeController.onOsChanged(os.indexOf(e));
                                 },
-                                child: const FlutterLogo(),
+                                child: OsLogoIcon(
+                                    asset: os.indexOf(e) == 0
+                                        ? 'assets/apple.png'
+                                        : 'assets/android.png'),
                               ),
                             )),
                           )

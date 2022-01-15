@@ -24,7 +24,7 @@ class _WrapperState extends State<Wrapper> {
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data == true) {
-            return  HomeScreen();
+            return HomeScreen();
           } else {
             return WelcomeScreen(
               selectScreen: selectScreen,

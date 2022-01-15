@@ -1,4 +1,5 @@
 import 'package:asadamatic/main.dart';
+import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/views/dailytodo/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,7 @@ class DailyTodoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Asad Hameed',
+      title: appTitle,
       debugShowCheckedModeBanner: false,
       color: Colors.white,
       themeMode: _themeController.themeMode,

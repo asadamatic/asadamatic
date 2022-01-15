@@ -10,7 +10,6 @@ class WeatherController extends GetxController {
 
   final WeatherNetwork _weatherNetwork = WeatherNetwork();
 
-
   addCity(City city) async {
     cities.add(city);
     weatherData.add(await _weatherNetwork.getWeather(city));

@@ -1,5 +1,6 @@
 import 'package:asadamatic/src/config/routes/app_pages.dart';
 import 'package:asadamatic/src/config/routes/routes.dart';
+import 'package:asadamatic/src/constant/values.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 export 'package:asadamatic/src/mvc/controllers/theme_controller.dart'
@@ -17,7 +18,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       getPages: AppPages.routes,
       initialRoute: Routes.home,
-      title: 'Asad Hameed',
+      title: appTitle,
       themeMode: ThemeMode.system,
       darkTheme: ThemeData(
         brightness: Brightness.dark,

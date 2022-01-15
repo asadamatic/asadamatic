@@ -34,12 +34,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             controller: pageController,
             children: <Widget>[
               const Page(
-                asset: 'Assets/raining.png',
+                asset: 'assets/legacyweather/raining.png',
                 title: 'WEATHER UPDATES',
                 message: 'See current temperature & humidity',
               ),
               const Page(
-                asset: 'Assets/cold.png',
+                asset: 'assets/legacyweather/cold.png',
                 title: 'WEATHER FORECAST',
                 message: 'Weather forecast for up to 5 days coming soon',
               ),
@@ -91,43 +91,43 @@ class ThirdPage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-    const Image(
-      image: AssetImage('assets/legacyweather/sunny.png'),
-      height: 350.0,
-      fit: BoxFit.contain,
-    ),
-    Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: <Widget>[
-        Text(
-          'MULTIPLE LOCATIONS',
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headline5,
+        const Image(
+          image: AssetImage('assets/legacyweather/sunny.png'),
+          height: 350.0,
+          fit: BoxFit.contain,
         ),
-        Container(
-          width: MediaQuery.of(context).size.width * 0.6,
-          margin: const EdgeInsets.only(right: 25.0, left: 25.0, top: 15.0),
-          child: ElevatedButton(
-            style: ButtonStyle(
-              padding: MaterialStateProperty.all(const EdgeInsets.symmetric(
-                vertical: 18.0,
-              )),
-              shape: MaterialStateProperty.all(
-                ContinuousRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Text(
+              'MULTIPLE LOCATIONS',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headline5,
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.6,
+              margin: const EdgeInsets.only(right: 25.0, left: 25.0, top: 15.0),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(const EdgeInsets.symmetric(
+                    vertical: 18.0,
+                  )),
+                  shape: MaterialStateProperty.all(
+                    ContinuousRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                  ),
                 ),
+                child: const Text(
+                  "Choose Location",
+                ),
+                onPressed: () {
+                  widget.selectScreen!();
+                },
               ),
             ),
-            child: const Text(
-              "Choose Location",
-            ),
-            onPressed: () {
-              widget.selectScreen!();
-            },
-          ),
-        ),
-      ],
-    )
+          ],
+        )
       ],
     );
   }
@@ -145,26 +145,26 @@ class Page extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-    Image(
-      image: AssetImage(asset!),
-      height: 350.0,
-    ),
-    Container(
-      margin: const EdgeInsets.symmetric(horizontal: 18.0),
-      child: Column(
-        children: <Widget>[
-          Text(title!,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline5),
-          const SizedBox(
-            height: 8.0,
+        Image(
+          image: AssetImage(asset!),
+          height: 350.0,
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 18.0),
+          child: Column(
+            children: <Widget>[
+              Text(title!,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headline5),
+              const SizedBox(
+                height: 8.0,
+              ),
+              Text(message!,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headline6),
+            ],
           ),
-          Text(message!,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline6),
-        ],
-      ),
-    )
+        )
       ],
     );
   }
@@ -212,7 +212,8 @@ class PageIndicator extends StatelessWidget {
 
 class Indicator extends StatelessWidget {
   final int? positionIndex, currentPage;
-  const Indicator({Key? key, this.currentPage, this.positionIndex}) : super(key: key);
+  const Indicator({Key? key, this.currentPage, this.positionIndex})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ThemeController>(builder: (_themeController) {

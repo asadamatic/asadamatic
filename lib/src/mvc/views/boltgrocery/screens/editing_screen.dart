@@ -8,7 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class EditingScreen extends StatelessWidget {
-  EditingScreen({Key? key, GroceryItem? groceryItem, Category? category}) : super(key: key) {
+  EditingScreen({Key? key, GroceryItem? groceryItem, Category? category})
+      : super(key: key) {
     if (groceryItem != null) {
       _editingController!.groceryItem = groceryItem;
     }

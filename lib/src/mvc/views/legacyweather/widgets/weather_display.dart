@@ -40,10 +40,12 @@ class WeatherDisplay extends StatelessWidget {
                     radius: 80.0,
                     lineWidth: 5.0,
                     backgroundColor: Colors.white24,
-                    percent: double.parse((weather!.humidity! / 100).toString()),
+                    percent:
+                        double.parse((weather!.humidity! / 100).toString()),
                     center: Text(
                       "${weather!.humidity?.round()}%",
-                      style: const TextStyle(color: Colors.white, fontSize: 22.0),
+                      style:
+                          const TextStyle(color: Colors.white, fontSize: 22.0),
                     ),
                     progressColor: Colors.white,
                   ),
@@ -85,7 +87,9 @@ class DescriptionImage extends StatelessWidget {
           ),
         ),
         Image(
-          image: AssetImage('assets/legacyweather/$icon.png',),
+          image: AssetImage(
+            'assets/legacyweather/$icon.png',
+          ),
         ),
       ],
     );
@@ -198,7 +202,8 @@ class SunTimeWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+              margin:
+                  const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
@@ -274,7 +279,8 @@ class TemperatureIndicator extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         weather!.getMaxTemp!.round().toString() + "\u00B0C",
-                        style: const TextStyle(color: Colors.white, fontSize: 30),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 30),
                       ),
                     ),
                     const Padding(

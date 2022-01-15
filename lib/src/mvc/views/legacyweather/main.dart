@@ -1,4 +1,5 @@
 import 'package:asadamatic/main.dart';
+import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/views/legacyweather/wrapper.dart';
 import 'package:asadamatic/src/mvc/views/legacyweather/constants/values.dart';
 import 'package:asadamatic/src/mvc/views/legacyweather/controllers/weather_controller.dart';
@@ -13,7 +14,7 @@ class LegacyWeatherApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Asad Hameed',
+      title: appTitle,
       debugShowCheckedModeBanner: false,
       color: Colors.white,
       theme: ThemeData(
@@ -28,14 +29,14 @@ class LegacyWeatherApp extends StatelessWidget {
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.transparent),
                 foregroundColor: MaterialStateProperty.all(primaryColor),
-                textStyle:
-                    MaterialStateProperty.all(const TextStyle(fontSize: 22.0)))),
+                textStyle: MaterialStateProperty.all(
+                    const TextStyle(fontSize: 22.0)))),
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(primaryColor),
                 foregroundColor: MaterialStateProperty.all(Colors.white),
-                textStyle:
-                    MaterialStateProperty.all(const TextStyle(fontSize: 22.0)))),
+                textStyle: MaterialStateProperty.all(
+                    const TextStyle(fontSize: 22.0)))),
         colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white),
       ),
       darkTheme: ThemeData(
@@ -50,14 +51,14 @@ class LegacyWeatherApp extends StatelessWidget {
                   backgroundColor:
                       MaterialStateProperty.all(Colors.transparent),
                   foregroundColor: MaterialStateProperty.all(Colors.white),
-                  textStyle:
-                      MaterialStateProperty.all(const TextStyle(fontSize: 22.0)))),
+                  textStyle: MaterialStateProperty.all(
+                      const TextStyle(fontSize: 22.0)))),
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.amber),
                   foregroundColor: MaterialStateProperty.all(primaryColor),
-                  textStyle:
-                      MaterialStateProperty.all(const TextStyle(fontSize: 22.0))))),
+                  textStyle: MaterialStateProperty.all(
+                      const TextStyle(fontSize: 22.0))))),
       themeMode: _themeController.themeMode,
       home: const Wrapper(),
     );

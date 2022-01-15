@@ -27,8 +27,7 @@ class _CategoryTileState extends State<CategoryTile> {
             Image(
               height: MediaQuery.of(context).size.height * .1,
               width: MediaQuery.of(context).size.width * .2,
-              image:
-                  AssetImage(widget.category!.image!),
+              image: AssetImage(widget.category!.image!),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),

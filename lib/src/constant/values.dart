@@ -1,7 +1,22 @@
+import 'package:flutter/material.dart';
+
+const port = '8000';
+const localHost = '127.0.0.1';
+const remoteHost = 'https://g77mwi.deta.dev/';
+const localHostAndroid = '10.0.2.2';
+const localHostUrl = 'http://$localHost:$port/';
+const remoteHostUrl = 'http://$remoteHost:$port/';
+const localHostUrlAndroid = 'http://$localHostAndroid:$port/';
+const localHostWebSocketUrl = 'ws://$localHost:$port/';
+const remoteHosWebSocketUrl = 'ws://$remoteHost:$port';
+const localHostWebSocketUrlAndroid = 'ws://$localHostAndroid:$port/';
+
+String appTitle = 'Asad Hameed - Flutter Developer';
+
 List<String> descriptions = [
-  'Bolt Grocery',
+  "Bolt Grocery lets you create grocery lists, so you never forget an item! ",
   'Productivity Simplified with daily todo app!',
-  'Weather by Legacy'
+  'Keep up to date with weather conditions with Weather by Legacy'
 ];
 List<String> os = ['Android', 'Ios'];
 List<List<String>> socialIcons = [
@@ -17,3 +32,10 @@ List<String> appLogoIcons = [
   'assets/dailytodo/icon.png',
   'assets/legacyweather/icon.png'
 ];
+
+List<String> packages = ['firestore_search', 'file_case', 'dialogs'];
+
+Color shimmerBaseColor = Colors.grey[200]!;
+Color shimmerHighlightColor = Colors.grey[400]!;
+
+// Color packageNameColor = const Color(0xFF1967d2);

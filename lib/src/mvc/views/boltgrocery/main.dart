@@ -1,4 +1,5 @@
 import 'package:asadamatic/main.dart';
+import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/views/boltgrocery/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,7 +16,7 @@ class BoltGroceryApp extends StatelessWidget {
       themeMode: _themeController.themeMode,
       debugShowCheckedModeBanner: false,
       color: Colors.white,
-      title: 'Asad Hameed',
+      title: appTitle,
       theme: ThemeData(
           primaryColor: Colors.green[400],
           textSelectionTheme: TextSelectionThemeData(

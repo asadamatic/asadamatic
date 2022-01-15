@@ -83,7 +83,7 @@ class _LocationSelectorState extends State<LocationSelector> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: const [
                   Text(
-                    'Daily Todo',
+                    'Choose a Location',
                     style: TextStyle(
                       fontSize: 24.0,
                       color: Colors.white,
@@ -104,7 +104,8 @@ class _LocationSelectorState extends State<LocationSelector> {
                       margin: const EdgeInsets.all(10.0),
                       elevation: 10.0,
                       child: Container(
-                        padding: const EdgeInsets.fromLTRB(10.0, 4.0, 12.0, 4.0),
+                        padding:
+                            const EdgeInsets.fromLTRB(10.0, 4.0, 12.0, 4.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[

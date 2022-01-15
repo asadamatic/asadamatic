@@ -20,8 +20,8 @@ class DateDisplay extends StatelessWidget {
             borderRadius: BorderRadius.circular(20.0)),
         margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
         child: Container(
-          padding:
-              const EdgeInsets.only(right: 12.0, left: 16.0, top: 12.0, bottom: 12.0),
+          padding: const EdgeInsets.only(
+              right: 12.0, left: 16.0, top: 12.0, bottom: 12.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[

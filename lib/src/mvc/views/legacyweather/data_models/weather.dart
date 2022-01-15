@@ -1,4 +1,3 @@
-
 class Weather {
   final double? temp;
   final double? pressure;

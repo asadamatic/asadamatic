@@ -1,0 +1,294 @@
+import 'package:asadamatic/src/constant/values.dart';
+import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
+import 'package:asadamatic/src/mvc/models/package.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
+
+class PackagesSection extends StatelessWidget {
+  const PackagesSection({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<HomeController>(
+        id: 'updatePackagesData',
+        builder: (_controller) {
+          return LayoutBuilder(builder:
+              (BuildContext layoutBuilderContext, BoxConstraints constraints) {
+            return Column(
+              children: [
+                Text(
+                  'Contribution to Flutter',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+                const SizedBox(
+                  height: 40.0,
+                ),
+                constraints.maxWidth < 720
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: _controller.packagesDataLoaded
+                            ? _controller.packagesData
+                                .map((packageData) => PackageCard(
+                                      package: packageData,
+                                    ))
+                                .toList()
+                            : const [
+                                PackageShimmer(),
+                                PackageShimmer(),
+                                PackageShimmer()
+                              ])
+                    : constraints.maxWidth < 1080
+                        ? Column(
+                            children: [
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: _controller.packagesDataLoaded
+                                      ? [
+                                          PackageCard(
+                                            package:
+                                                _controller.packagesData[0],
+                                          ),
+                                          PackageCard(
+                                            package:
+                                                _controller.packagesData[1],
+                                          ),
+                                        ]
+                                      : [
+                                          PackageCard(
+                                            package:
+                                                _controller.packagesData[0],
+                                          ),
+                                          PackageCard(
+                                            package:
+                                                _controller.packagesData[1],
+                                          ),
+                                        ]),
+                              _controller.packagesDataLoaded
+                                  ? PackageCard(
+                                      package: _controller.packagesData[2],
+                                    )
+                                  : const PackageShimmer()
+                            ],
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: _controller.packagesDataLoaded
+                                ? _controller.packagesData
+                                    .map((packageData) => PackageCard(
+                                          package: packageData,
+                                        ))
+                                    .toList()
+                                : const [
+                                    PackageShimmer(),
+                                    PackageShimmer(),
+                                    PackageShimmer()
+                                  ],
+                          ),
+              ],
+            );
+          });
+        });
+  }
+}
+
+class PackageCard extends StatelessWidget {
+  const PackageCard({Key? key, this.package}) : super(key: key);
+  final Package? package;
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 10.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+      margin: const EdgeInsets.all(15.0),
+      child: Container(
+          width: 330.0,
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    package!.name!,
+                    style: TextStyle(
+                        fontSize:
+                            Theme.of(context).textTheme.headline6!.fontSize),
+                  ),
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.copy))
+                ],
+              ),
+              const SizedBox(height: 20.0),
+              Row(
+                children: [
+                  const SizedBox(
+                    width: 50.0,
+                  ),
+                  Table(
+                    columnWidths: const <int, TableColumnWidth>{
+                      0: IntrinsicColumnWidth(),
+                      1: IntrinsicColumnWidth(),
+                      2: IntrinsicColumnWidth(),
+                    },
+                    children: [
+                      TableRow(children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 8.0, right: 8.0, left: 8.0),
+                          child: Text(
+                            package!.likes!,
+                            style: Theme.of(context).textTheme.subtitle2,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 8.0, right: 8.0, left: 8.0),
+                          child: Text(package!.pubPoints!,
+                              style: Theme.of(context).textTheme.subtitle2),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 8.0, right: 8.0, left: 8.0),
+                          child: Text(package!.popularity!,
+                              style: Theme.of(context).textTheme.subtitle2),
+                        )
+                      ]),
+                      TableRow(
+                          children: ['Likes', 'Pub Points', 'Popularity']
+                              .map((label) => Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(label,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle1),
+                                  ))
+                              .toList())
+                    ],
+                  ),
+                ],
+              )
+            ],
+          )),
+    );
+  }
+}
+
+class PackageShimmer extends StatelessWidget {
+  const PackageShimmer({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+        elevation: 10.0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+        margin: const EdgeInsets.all(15.0),
+        child: Container(
+            width: 330.0,
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Shimmer.fromColors(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4.0),
+                          color: Colors.grey[200]!,
+                        ),
+                        height: 20.0,
+                        width: 160.0,
+                      ),
+                      baseColor: shimmerBaseColor,
+                      highlightColor: shimmerHighlightColor,
+                    ),
+                    IconButton(onPressed: () {}, icon: const Icon(Icons.copy))
+                  ],
+                ),
+                const SizedBox(height: 20.0),
+                Row(
+                  children: [
+                    const SizedBox(
+                      width: 50.0,
+                    ),
+                    Table(
+                      columnWidths: const <int, TableColumnWidth>{
+                        0: IntrinsicColumnWidth(),
+                        1: IntrinsicColumnWidth(),
+                        2: IntrinsicColumnWidth(),
+                      },
+                      children: [
+                        TableRow(children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 8.0, right: 8.0, left: 8.0),
+                            child: Shimmer.fromColors(
+                              child: Container(
+                                height: 14.0,
+                                width: 20.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4.0),
+                                  color: Colors.grey[200]!,
+                                ),
+                              ),
+                              baseColor: shimmerBaseColor,
+                              highlightColor: shimmerHighlightColor,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 8.0, right: 8.0, left: 8.0),
+                            child: Shimmer.fromColors(
+                              child: Container(
+                                height: 14.0,
+                                width: 20.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4.0),
+                                  color: Colors.grey[200]!,
+                                ),
+                              ),
+                              baseColor: shimmerBaseColor,
+                              highlightColor: shimmerHighlightColor,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 8.0, right: 8.0, left: 8.0),
+                            child: Shimmer.fromColors(
+                              child: Container(
+                                height: 14.0,
+                                width: 20.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4.0),
+                                  color: Colors.grey[200]!,
+                                ),
+                              ),
+                              baseColor: shimmerBaseColor,
+                              highlightColor: shimmerHighlightColor,
+                            ),
+                          )
+                        ]),
+                        TableRow(
+                            children: ['Likes', 'Pub Points', 'Popularity']
+                                .map((label) => Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(label,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1),
+                                    ))
+                                .toList())
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            )));
+  }
+}

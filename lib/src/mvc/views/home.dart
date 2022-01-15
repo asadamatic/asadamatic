@@ -2,7 +2,9 @@ import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:asadamatic/src/mvc/views/device_view.dart';
+import 'package:asadamatic/src/mvc/views/fragments/footer.dart';
 import 'package:asadamatic/src/mvc/views/fragments/info_drawer.dart';
+import 'package:asadamatic/src/mvc/views/fragments/packages_section.dart';
 import 'package:asadamatic/src/widgets/switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,95 +28,132 @@ class Home extends StatelessWidget {
             child: LayoutBuilder(builder: (BuildContext layoutBuilderContext,
                 BoxConstraints constraints) {
               if (constraints.maxWidth < 780) {
-                return Column(
+                return ListView(
                   children: [
-                    const Spacer(),
-                    Flexible(
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(vertical: 5.0),
-                        child: Switcher(
-                          direction: Axis.horizontal,
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Flexible(
+                          fit: FlexFit.loose,
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 5.0),
+                            child: Switcher(
+                              direction: Axis.horizontal,
+                            ),
+                          ),
                         ),
-                      ),
+                        const Flexible(
+                            fit: FlexFit.loose,
+                            child: SizedBox(width: 250.0, child: DeviceView())),
+                        const SizedBox(
+                          height: 30.0,
+                        ),
+                        Flexible(
+                            fit: FlexFit.loose,
+                            flex: 2,
+                            child: Obx(() => Transform.scale(
+                                  scale: MediaQuery.of(context).size.width *
+                                      0.0010,
+                                  child: Text(
+                                    descriptions[
+                                        _homeController.sliderIndex.value],
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: Theme.of(context)
+                                            .textTheme
+                                            .headline3!
+                                            .fontSize),
+                                  ),
+                                )))
+                      ],
                     ),
-                    const Expanded(flex: 4, child: DeviceView()),
                     const SizedBox(
-                      width: 100.0,
+                      height: 50.0,
                     ),
-                    Expanded(
-                        flex: 2,
-                        child: Obx(() => Transform.scale(
-                              scale: MediaQuery.of(context).size.width * 0.0010,
-                              child: Text(
-                                descriptions[_homeController.sliderIndex.value],
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: Theme.of(context)
-                                        .textTheme
-                                        .headline3!
-                                        .fontSize),
-                              ),
-                            )))
+                    const PackagesSection(),
                   ],
                 );
               } else if (constraints.maxWidth > 780 &&
                   constraints.maxWidth < 1024) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                return ListView(
                   children: [
-                    Flexible(
-                      flex: 1,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Switcher(),
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: Container(
+                            margin:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Switcher(),
+                          ),
+                        ),
+                        const Flexible(flex: 1, child: DeviceView()),
+                        const SizedBox(
+                          width: 80.0,
+                        ),
+                        Expanded(
+                            flex: 2,
+                            child: Obx(() => Transform.scale(
+                                  scale: MediaQuery.of(context).size.width *
+                                      0.0005,
+                                  child: Text(
+                                    descriptions[
+                                        _homeController.sliderIndex.value],
+                                    style: TextStyle(
+                                        fontSize: Theme.of(context)
+                                            .textTheme
+                                            .headline3!
+                                            .fontSize),
+                                  ),
+                                ))),
+                      ],
                     ),
-                    const Flexible(flex: 1, child: DeviceView()),
-                    Expanded(
-                        flex: 2,
-                        child: Obx(() => Transform.scale(
-                              scale: MediaQuery.of(context).size.width * 0.0005,
-                              child: Text(
-                                descriptions[_homeController.sliderIndex.value],
-                                style: TextStyle(
-                                    fontSize: Theme.of(context)
-                                        .textTheme
-                                        .headline3!
-                                        .fontSize),
-                              ),
-                            ))),
+                    const PackagesSection(),
                   ],
                 );
               } else {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                return ListView(
                   children: [
-                    Flexible(
-                      flex: 1,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Switcher(),
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: Container(
+                            margin:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Switcher(),
+                          ),
+                        ),
+                        const Flexible(flex: 1, child: DeviceView()),
+                        // SizedBox(
+                        //   width: MediaQuery.of(context).size.width * 0.006,
+                        // ),
+                        Expanded(
+                            flex: 3,
+                            child: Obx(() => Transform.scale(
+                                  scale: MediaQuery.of(context).size.width *
+                                      0.0005,
+                                  child: Text(
+                                    descriptions[
+                                        _homeController.sliderIndex.value],
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        fontSize: Theme.of(context)
+                                            .textTheme
+                                            .headline3!
+                                            .fontSize),
+                                  ),
+                                ))),
+                        const Spacer(),
+                      ],
                     ),
-                    const Flexible(flex: 1, child: DeviceView()),
-                    // SizedBox(
-                    //   width: MediaQuery.of(context).size.width * 0.006,
-                    // ),
-                    Expanded(
-                        flex: 3,
-                        child: Obx(() => Transform.scale(
-                              scale: MediaQuery.of(context).size.width * 0.0005,
-                              child: Text(
-                                descriptions[_homeController.sliderIndex.value],
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontSize: Theme.of(context)
-                                        .textTheme
-                                        .headline3!
-                                        .fontSize),
-                              ),
-                            ))),
-                    const Spacer(),
+                    const PackagesSection(),
+                    const SizedBox(
+                      height: 80.0,
+                    ),
+                    const Footer(),
                   ],
                 );
               }

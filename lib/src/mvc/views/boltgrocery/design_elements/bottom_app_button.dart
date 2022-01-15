@@ -34,7 +34,8 @@ class BottomAppButton extends StatelessWidget {
                   foregroundColor: MaterialStateProperty.all(Colors.white)),
               label: Text(
                 _label ?? 'Button Label',
-                style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
               onPressed: () async {
                 _onPressed!();

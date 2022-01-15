@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppLogoIcon extends StatelessWidget {
-  const AppLogoIcon({this.asset, this.index, this.app, Key? key}) : super(key: key);
+  const AppLogoIcon({this.asset, this.index, this.app, Key? key})
+      : super(key: key);
   final int? index;
   final String? asset;
   final String? app;
@@ -39,8 +40,7 @@ class AppLogoIcon extends StatelessWidget {
                   children: [
                     Image(
                       height: _homeController.iconHeight,
-                      image:
-                          AssetImage(asset!),
+                      image: AssetImage(asset!),
                     ),
                     GetBuilder<ThemeController>(builder: (_themeController) {
                       final darkTheme =

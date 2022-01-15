@@ -11,7 +11,8 @@ import 'package:get/get.dart';
 class CategoryScreen extends StatelessWidget {
   final GroceryItem? groceryItem;
   final Category? category;
-  const CategoryScreen({Key? key, this.groceryItem, this.category}) : super(key: key);
+  const CategoryScreen({Key? key, this.groceryItem, this.category})
+      : super(key: key);
 
   //String to bool conversion
   bool getStatus(String value) {

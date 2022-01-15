@@ -8,7 +8,8 @@ import 'package:get/get.dart';
 class GroceryItemCard extends StatefulWidget {
   final GroceryItem? groceryItem;
   final Category? category;
-  const GroceryItemCard({Key? key, this.groceryItem, this.category}) : super(key: key);
+  const GroceryItemCard({Key? key, this.groceryItem, this.category})
+      : super(key: key);
 
   @override
   State createState() {

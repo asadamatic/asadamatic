@@ -31,13 +31,8 @@ dependencies:
     sdk: flutter
   get: ^4.6.1
   device_frame: ^1.0.0
-#  boltgrocery:
-#    path: ./boltgrocery
-#  dailytodo:
-#    path: ./dailytodo
-#  legacyweather:
-#    path: ./legacyweather
   url_launcher: ^6.0.17
+  shimmer: ^2.0.0
   charts_flutter: ^0.12.0
   shared_preferences:
   flare_flutter: ^3.0.2

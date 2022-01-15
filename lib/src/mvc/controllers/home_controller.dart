@@ -1,6 +1,9 @@
+import 'package:asadamatic/src/constant/values.dart';
+import 'package:asadamatic/src/mvc/models/package.dart';
 import 'package:asadamatic/src/mvc/views/boltgrocery/main.dart';
 import 'package:asadamatic/src/mvc/views/dailytodo/main.dart';
 import 'package:asadamatic/src/mvc/views/legacyweather/main.dart';
+import 'package:asadamatic/src/services/network.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
@@ -16,10 +19,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final sliderIndex = 0.obs;
   double iconHeight = 30.0;
   double iconIncreasedHeight = 2.5;
-
+  List<Package> packagesData = [];
+  final NetworkService _networkService = NetworkService();
+  bool packagesDataLoaded = false;
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    update(['updatePackagesData']);
     animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 600));
     animation = RelativeRectTween(
@@ -35,6 +41,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         value: 0.002,
         animationBehavior: AnimationBehavior.preserve);
     nameAnimationController!.forward();
+    packagesData = await Future.wait(packages
+        .map((package) async => await _networkService.getPackageData(package))
+        .toList());
+    packagesDataLoaded = true;
+    update(['updatePackagesData']);
   }
 
   showDrawer() {
@@ -80,7 +91,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     return sliderIndex.value == 0
         ? BoltGroceryApp()
         : sliderIndex.value == 1
-            ?  DailyTodoApp()
+            ? DailyTodoApp()
             : LegacyWeatherApp();
   }
 

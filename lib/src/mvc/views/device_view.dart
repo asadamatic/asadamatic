@@ -16,6 +16,7 @@ class DeviceView extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             if (constraints.maxWidth > 780) const Spacer(),
             GetBuilder<HomeController>(

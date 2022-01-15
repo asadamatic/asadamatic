@@ -4,6 +4,7 @@ import 'package:asadamatic/src/mvc/views/boltgrocery/main.dart';
 import 'package:asadamatic/src/mvc/views/dailytodo/main.dart';
 import 'package:asadamatic/src/mvc/views/legacyweather/main.dart';
 import 'package:asadamatic/src/services/network.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
@@ -25,7 +26,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   @override
   void onInit() async {
     super.onInit();
-    update(['updatePackagesData']);
     animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 600));
     animation = RelativeRectTween(
@@ -105,6 +105,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     iconHeight = 25.0;
     iconIncreasedHeight = 0.0;
     update([package]);
+  }
+
+  copyPackageVersion(String package) {
+    FlutterClipboard.copy(package.replaceFirst(" ", ": ^"));
   }
 
   @override

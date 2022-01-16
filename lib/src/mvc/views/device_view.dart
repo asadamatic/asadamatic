@@ -20,7 +20,7 @@ class DeviceView extends StatelessWidget {
           children: [
             if (constraints.maxWidth > 780) const Spacer(),
             GetBuilder<HomeController>(
-              id: 'osHoverUpdate',
+              id: 'osIndexUpdate',
               builder: (_homeController) => Flexible(
                 flex: 3,
                 child: GetBuilder<HomeController>(

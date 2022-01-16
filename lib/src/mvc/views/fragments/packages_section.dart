@@ -25,7 +25,7 @@ class PackagesSection extends StatelessWidget {
                 const SizedBox(
                   height: 40.0,
                 ),
-                constraints.maxWidth < 720
+                constraints.maxWidth < 780
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: _controller.packagesDataLoaded
@@ -39,7 +39,7 @@ class PackagesSection extends StatelessWidget {
                                 PackageShimmer(),
                                 PackageShimmer()
                               ])
-                    : constraints.maxWidth < 1080
+                    : constraints.maxWidth < 1170
                         ? Column(
                             children: [
                               Row(
@@ -104,8 +104,9 @@ class PackageCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       margin: const EdgeInsets.all(15.0),
       child: Container(
-          width: 330.0,
-          padding: const EdgeInsets.all(16.0),
+          width: 360.0,
+          height: 320.0,
+          padding: const EdgeInsets.all(28.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,6 +127,19 @@ class PackageCard extends StatelessWidget {
                       },
                       icon: const Icon(Icons.copy))
                 ],
+              ),
+              SizedBox(
+                width: 290.0,
+                height: 120.0,
+                child: Text(
+                  package!.description!,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 5,
+                  style: TextStyle(
+                    height: 1.5,
+                      fontSize:
+                      Theme.of(context).textTheme.subtitle1!.fontSize),
+                ),
               ),
               const SizedBox(height: 20.0),
               Row(

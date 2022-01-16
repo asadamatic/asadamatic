@@ -7,6 +7,7 @@ import 'package:asadamatic/src/mvc/views/fragments/info_drawer.dart';
 import 'package:asadamatic/src/mvc/views/fragments/packages_section.dart';
 import 'package:asadamatic/src/widgets/switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
@@ -75,13 +76,12 @@ class Home extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Flexible(
-                          flex: 1,
-                          child: Container(
-                            margin:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            child: Switcher(),
-                          ),
+                        const SizedBox(
+                          width: 30.0,
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Switcher(),
                         ),
                         const SizedBox(width: 250.0, child: DeviceView()),
                         const SizedBox(
@@ -89,8 +89,8 @@ class Home extends StatelessWidget {
                         ),
                         Flexible(
                           flex: 3,
-                          child: Padding(
-                            padding:
+                          child: Container(
+                            margin:
                                 const EdgeInsets.symmetric(horizontal: 24.0),
                             child: SizedBox(
                                 width: 500.0,
@@ -106,6 +106,9 @@ class Home extends StatelessWidget {
                                     ))),
                           ),
                         ),
+                        constraints.maxWidth >= 1028
+                            ? SizedBox(width: constraints.maxWidth - 1028)
+                            : const SizedBox()
                       ],
                     ),
                     const PackagesSection(),
@@ -118,13 +121,12 @@ class Home extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Flexible(
-                          flex: 1,
-                          child: Container(
-                            margin:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            child: Switcher(),
-                          ),
+                        const SizedBox(
+                          width: 20.0,
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Switcher(),
                         ),
                         const SizedBox(width: 250.0, child: DeviceView()),
                         const SizedBox(
@@ -144,6 +146,9 @@ class Home extends StatelessWidget {
                                               .headline5!
                                               .fontSize),
                                     )))),
+                        SizedBox(
+                          width: constraints.maxWidth - 970,
+                        )
                       ],
                     ),
                     const PackagesSection(),

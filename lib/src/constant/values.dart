@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const port = '8000';
 const localHost = '127.0.0.1';
-const remoteHost = 'https://g77mwi.deta.dev/';
+const remoteHost = 'g77mwi.deta.dev/';
 const localHostAndroid = '10.0.2.2';
 const localHostUrl = 'http://$localHost:$port/';
 const remoteHostUrl = 'http://$remoteHost:$port/';
@@ -39,3 +39,22 @@ Color shimmerBaseColor = Colors.grey[200]!;
 Color shimmerHighlightColor = Colors.grey[400]!;
 
 // Color packageNameColor = const Color(0xFF1967d2);
+
+List<String> tools = [
+  'Flutter',
+  'FastAPI',
+  'Python',
+  'Java',
+  'JavaFx',
+  'SQLite',
+  'MySQL',
+  'Firebase',
+  'Android',
+  'C++',
+  'Selenium',
+];
+
+
+
+
+

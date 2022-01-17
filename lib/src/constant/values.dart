@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 
 const port = '8000';
 const localHost = '127.0.0.1';
-const remoteHost = 'g77mwi.deta.dev/';
+const remoteHostUrl = 'https://g77mwi.deta.dev/';
 const localHostAndroid = '10.0.2.2';
 const localHostUrl = 'http://$localHost:$port/';
-const remoteHostUrl = 'http://$remoteHost:$port/';
 const localHostUrlAndroid = 'http://$localHostAndroid:$port/';
 const localHostWebSocketUrl = 'ws://$localHost:$port/';
-const remoteHosWebSocketUrl = 'ws://$remoteHost:$port';
+const remoteHosWebSocketUrl = 'ws://g77mwi.deta.dev/';
 const localHostWebSocketUrlAndroid = 'ws://$localHostAndroid:$port/';
 
 String appTitle = 'Asad Hameed - Flutter Developer';

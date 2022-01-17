@@ -17,162 +17,180 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-      fit: StackFit.loose,
-      children: [
-        Container(),
-        InfoDrawer(),
-        PositionedTransition(
-          rect: _homeController.animation!,
-          child: Material(
-            elevation: 8.0,
-            child: LayoutBuilder(builder: (BuildContext layoutBuilderContext,
-                BoxConstraints constraints) {
-              if (constraints.maxWidth < 780) {
-                return ListView(
-                  children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Flexible(
-                          fit: FlexFit.loose,
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(vertical: 5.0),
-                            child: Switcher(
-                              direction: Axis.horizontal,
+      body: Stack(
+        fit: StackFit.loose,
+        children: [
+          Container(),
+          InfoDrawer(),
+          PositionedTransition(
+            rect: _homeController.animation!,
+            child: Material(
+              elevation: 8.0,
+              child: LayoutBuilder(builder: (BuildContext layoutBuilderContext,
+                  BoxConstraints constraints) {
+                if (constraints.maxWidth < 780) {
+                  return ListView(
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Flexible(
+                            fit: FlexFit.loose,
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(vertical: 5.0),
+                              child: Switcher(
+                                direction: Axis.horizontal,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 250.0, child: DeviceView()),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 50.0, vertical: 8.0),
-                            child: Obx(() => Text(
-                                  descriptions[
-                                      _homeController.sliderIndex.value],
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: Theme.of(context)
-                                          .textTheme
-                                          .headline5!
-                                          .fontSize),
-                                )))
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 50.0,
-                    ),
-                    const PackagesSection(),
-                    const Footer(),
-                  ],
-                );
-              } else if (constraints.maxWidth > 780 &&
-                  constraints.maxWidth < 1024) {
-                return ListView(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        const SizedBox(
-                          width: 30.0,
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: Switcher(),
-                        ),
-                        const SizedBox(width: 250.0, child: DeviceView()),
-                        const SizedBox(
-                          width: 30.0,
-                        ),
-                        Flexible(
-                          flex: 3,
-                          child: Container(
-                            margin:
-                                const EdgeInsets.symmetric(horizontal: 24.0),
-                            child: SizedBox(
-                                width: 500.0,
-                                child: Obx(() => Text(
-                                      descriptions[
-                                          _homeController.sliderIndex.value],
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                          fontSize: Theme.of(context)
-                                              .textTheme
-                                              .headline5!
-                                              .fontSize),
-                                    ))),
+                          const SizedBox(width: 250.0, child: DeviceView()),
+                          const SizedBox(
+                            height: 10.0,
                           ),
-                        ),
-                        constraints.maxWidth >= 1028
-                            ? SizedBox(width: constraints.maxWidth - 1028)
-                            : const SizedBox()
-                      ],
-                    ),
-                    const PackagesSection(),
-                    const Footer(),
-                  ],
-                );
-              } else {
-                return ListView(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const SizedBox(
-                          width: 20.0,
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: Switcher(),
-                        ),
-                        const SizedBox(width: 250.0, child: DeviceView()),
-                        const SizedBox(
-                          width: 30.0,
-                        ),
-                        Flexible(
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 50.0, vertical: 8.0),
+                              child: Obx(() => Text(
+                                    descriptions[
+                                        _homeController.sliderIndex.value],
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: Theme.of(context)
+                                            .textTheme
+                                            .headline5!
+                                            .fontSize),
+                                  )))
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 50.0,
+                      ),
+                      const PackagesSection(),
+                      const Footer(),
+                    ],
+                  );
+                } else if (constraints.maxWidth > 780 &&
+                    constraints.maxWidth < 1024) {
+                  return ListView(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          const SizedBox(
+                            width: 30.0,
+                          ),
+                          Container(
+                            margin:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Switcher(),
+                          ),
+                          const SizedBox(width: 250.0, child: DeviceView()),
+                          const SizedBox(
+                            width: 30.0,
+                          ),
+                          Flexible(
                             flex: 3,
-                            child: SizedBox(
-                                width: 500.0,
-                                child: Obx(() => Text(
-                                      descriptions[
-                                          _homeController.sliderIndex.value],
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                          fontSize: Theme.of(context)
-                                              .textTheme
-                                              .headline5!
-                                              .fontSize),
-                                    )))),
-                        SizedBox(
-                          width: constraints.maxWidth - 970,
-                        )
-                      ],
-                    ),
-                    const PackagesSection(),
-                    const SizedBox(
-                      height: 80.0,
-                    ),
-                    const Footer(),
-                  ],
-                );
-              }
+                            child: Container(
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 24.0),
+                              child: SizedBox(
+                                  width: 500.0,
+                                  child: Obx(() => Text(
+                                        descriptions[
+                                            _homeController.sliderIndex.value],
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                            fontSize: Theme.of(context)
+                                                .textTheme
+                                                .headline5!
+                                                .fontSize),
+                                      ))),
+                            ),
+                          ),
+                          constraints.maxWidth >= 1028
+                              ? SizedBox(width: constraints.maxWidth - 1028)
+                              : const SizedBox()
+                        ],
+                      ),
+                      const PackagesSection(),
+                      const Footer(),
+                    ],
+                  );
+                } else {
+                  return ListView(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          const SizedBox(
+                            width: 20.0,
+                          ),
+                          Container(
+                            margin:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Switcher(),
+                          ),
+                          const SizedBox(width: 250.0, child: DeviceView()),
+                          const SizedBox(
+                            width: 30.0,
+                          ),
+                          Flexible(
+                              flex: 3,
+                              child: SizedBox(
+                                  width: 500.0,
+                                  child: Obx(() => Text(
+                                        descriptions[
+                                            _homeController.sliderIndex.value],
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                            fontSize: Theme.of(context)
+                                                .textTheme
+                                                .headline5!
+                                                .fontSize),
+                                      )))),
+                          SizedBox(
+                            width: constraints.maxWidth - 970,
+                          )
+                        ],
+                      ),
+                      const PackagesSection(),
+                      const SizedBox(
+                        height: 80.0,
+                      ),
+                      const Footer(),
+                    ],
+                  );
+                }
+              }),
+            ),
+          ),
+          DrawerToggle(),
+          Align(
+            alignment: Alignment.topRight,
+            child: GetBuilder<ThemeController>(builder: (_themeController) {
+              return Switch(
+                  value: _themeController.themeMode == ThemeMode.dark,
+                  onChanged: _themeController.toggleTheme);
             }),
           ),
+          Positioned(
+              right: 72.0,
+              bottom: 30.0,
+              child: AnimatedContainer(
+                color: Colors.red,
+                width: 50.0,
+                height: 50.0,
+                duration: Duration(milliseconds: 600),
+              ))
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(
+          Icons.chat,
         ),
-        DrawerToggle(),
-        Align(
-          alignment: Alignment.topRight,
-          child: GetBuilder<ThemeController>(builder: (_themeController) {
-            return Switch(
-                value: _themeController.themeMode == ThemeMode.dark,
-                onChanged: _themeController.toggleTheme);
-          }),
-        )
-      ],
-    ));
+      ),
+    );
   }
 }
 

@@ -22,6 +22,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   double iconIncreasedHeight = 2.5;
   List<Package> packagesData = [];
   final NetworkService _networkService = NetworkService();
+  double chatRoomHeight = 10.0;
+  double chatRoomWidth = 10.0;
   bool packagesDataLoaded = false;
   @override
   void onInit() async {

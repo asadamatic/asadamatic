@@ -136,9 +136,9 @@ class PackageCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 5,
                   style: TextStyle(
-                    height: 1.5,
+                      height: 1.5,
                       fontSize:
-                      Theme.of(context).textTheme.subtitle1!.fontSize),
+                          Theme.of(context).textTheme.subtitle1!.fontSize),
                 ),
               ),
               const SizedBox(height: 20.0),
@@ -206,8 +206,9 @@ class PackageShimmer extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
         margin: const EdgeInsets.all(15.0),
         child: Container(
-            width: 330.0,
-            padding: const EdgeInsets.all(16.0),
+            width: 360.0,
+            height: 320.0,
+            padding: const EdgeInsets.all(28.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -230,6 +231,57 @@ class PackageShimmer extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(
+                    width: 290.0,
+                    height: 120.0,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Shimmer.fromColors(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4.0),
+                              color: Colors.grey[200]!,
+                            ),
+                            height: 16.0,
+                            width: 270.0,
+                          ),
+                          baseColor: shimmerBaseColor,
+                          highlightColor: shimmerHighlightColor,
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        Shimmer.fromColors(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4.0),
+                              color: Colors.grey[200]!,
+                            ),
+                            height: 16.0,
+                            width: 270.0,
+                          ),
+                          baseColor: shimmerBaseColor,
+                          highlightColor: shimmerHighlightColor,
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        Shimmer.fromColors(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4.0),
+                              color: Colors.grey[200]!,
+                            ),
+                            height: 16.0,
+                            width: 270.0,
+                          ),
+                          baseColor: shimmerBaseColor,
+                          highlightColor: shimmerHighlightColor,
+                        ),
+                      ],
+                    )),
                 const SizedBox(height: 20.0),
                 Row(
                   children: [

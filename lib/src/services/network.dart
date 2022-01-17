@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class NetworkService extends GetConnect {
-  final url = remoteHostUrl;
+  final url = kDebugMode ? localHostUrl : remoteHostUrl;
   final packageData = 'packages/';
 
   Future<Package> getPackageData(String package) async {

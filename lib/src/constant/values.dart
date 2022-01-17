@@ -12,6 +12,9 @@ const localHostWebSocketUrlAndroid = 'ws://$localHostAndroid:$port/';
 
 String appTitle = 'Asad Hameed - Flutter Developer';
 
+RegExp emailRegExp = RegExp(
+    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
 List<String> descriptions = [
   "Bolt Grocery lets you create grocery lists, so you never forget an item! ",
   'Productivity Simplified with daily todo app!',

@@ -1,6 +1,7 @@
 import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/main.dart';
 import 'package:asadamatic/src/mvc/views/device_view.dart';
 import 'package:asadamatic/src/mvc/views/fragments/footer.dart';
 import 'package:asadamatic/src/mvc/views/fragments/info_drawer.dart';
@@ -173,24 +174,40 @@ class Home extends StatelessWidget {
                   onChanged: _themeController.toggleTheme);
             }),
           ),
-          Positioned(
-              right: 72.0,
-              bottom: 30.0,
-              child: AnimatedContainer(
-                color: Colors.red,
-                width: 50.0,
-                height: 50.0,
-                duration: Duration(milliseconds: 600),
-              ))
+          Positioned(right: 55.0, bottom: 35.0, child: ChatRoomContainer())
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: _homeController.toggleChatRoom,
         child: Icon(
           Icons.chat,
         ),
       ),
     );
+  }
+
+}
+
+class ChatRoomContainer extends StatelessWidget {
+  const ChatRoomContainer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<HomeController>(
+        id: 'updateChatRoomContainer',
+        builder: (_controller) {
+          return AnimatedContainer(
+            curve: Curves.fastOutSlowIn,
+            width: _controller.chatRoomWidth,
+            height: _controller.chatRoomHeight,
+            duration: const Duration(milliseconds: 600),
+            child: GetBuilder<ThemeController>(
+                builder: (context) {
+                  return ChatRoom();
+                }
+            ),
+          );
+        });
   }
 }
 

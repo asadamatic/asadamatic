@@ -10,16 +10,31 @@ class ChatRoomWelcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Container(
+        margin: const EdgeInsets.all(15.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text('Please provide your email to continue!'),
-            Form(
-                child: TextFormField(
-              validator: _chatController.emailValidator,
-              controller: _chatController.emailEditingController,
-              decoration: InputDecoration(hintText: 'example@gmail.com'),
-            )),
+            Text(
+              'Please provide your email to continue!',
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
+            GetBuilder<ChatController>(
+              id: 'updateEmailForm',
+              builder: (_chatController) {
+                return Form(
+                    key: _chatController.emailFormKey,
+                    child: TextFormField(
+                      validator: _chatController.emailValidator,
+                      controller: _chatController.emailEditingController,
+                      onChanged: _chatController.onEmailChanged,
+                      decoration: InputDecoration(
+                        errorText: _chatController.emailErrorText,
+                          border: OutlineInputBorder(),
+                          hintText: 'example@gmail.com'),
+                    ));
+              }
+            ),
             ElevatedButton(
                 onPressed: _chatController.processEmail, child: Text('Proceed'))
           ],

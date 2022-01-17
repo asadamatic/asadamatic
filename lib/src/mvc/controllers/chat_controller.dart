@@ -1,11 +1,15 @@
+import 'package:asadamatic/src/constant/values.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ChatController extends GetxController {
   bool? emailLoaded = false;
   String? email = '';
+  String? emailErrorText;
   final TextEditingController emailEditingController = TextEditingController();
+  final GlobalKey<FormState> emailFormKey = GlobalKey<FormState>();
   @override
   void onInit() async {
     super.onInit();
@@ -15,15 +19,18 @@ class ChatController extends GetxController {
   }
 
   String? emailValidator(String? email) {
-    return RegExp(
-                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-            .hasMatch(email!)
-        ? ''
-        : 'Invalid email address';
+    return emailRegExp.hasMatch(email!) ? null : 'Invalid email address';
   }
 
-  processEmail(){
+  processEmail() {
 
+    if (emailFormKey.currentState!.validate()) {}
+  }
+
+  onEmailChanged(String? email) {
+    if (emailRegExp.hasMatch(email!)){
+      emailFormKey.currentState!.validate();
+    }
   }
 
   Future<String> getVisitingValue() async {

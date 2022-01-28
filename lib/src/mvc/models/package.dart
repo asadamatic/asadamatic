@@ -5,7 +5,12 @@ class Package {
   final String? pubPoints;
   final String? popularity;
 
-  Package({this.name, this.description, this.likes, this.pubPoints, this.popularity});
+  Package(
+      {this.name,
+      this.description,
+      this.likes,
+      this.pubPoints,
+      this.popularity});
 
   factory Package.fromJson(json) {
     return Package(

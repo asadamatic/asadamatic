@@ -8,7 +8,6 @@ import 'package:asadamatic/src/mvc/views/fragments/info_drawer.dart';
 import 'package:asadamatic/src/mvc/views/fragments/packages_section.dart';
 import 'package:asadamatic/src/widgets/switcher.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
@@ -174,18 +173,17 @@ class Home extends StatelessWidget {
                   onChanged: _themeController.toggleTheme);
             }),
           ),
-          Positioned(right: 55.0, bottom: 35.0, child: ChatRoomContainer())
+          const Positioned(right: 55.0, bottom: 35.0, child: ChatRoomContainer())
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _homeController.toggleChatRoom,
-        child: Icon(
+        child: const Icon(
           Icons.chat,
         ),
       ),
     );
   }
-
 }
 
 class ChatRoomContainer extends StatelessWidget {
@@ -201,11 +199,9 @@ class ChatRoomContainer extends StatelessWidget {
             width: _controller.chatRoomWidth,
             height: _controller.chatRoomHeight,
             duration: const Duration(milliseconds: 600),
-            child: GetBuilder<ThemeController>(
-                builder: (context) {
-                  return ChatRoom();
-                }
-            ),
+            child: GetBuilder<ThemeController>(builder: (context) {
+              return ChatRoom();
+            }),
           );
         });
   }

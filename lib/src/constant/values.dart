@@ -1,4 +1,6 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 const port = '8000';
 const localHost = '127.0.0.1';
@@ -56,7 +58,17 @@ List<String> tools = [
   'Selenium',
 ];
 
-
-
-
-
+DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+getDeviceName() async {
+  if (GetPlatform.isAndroid) {
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    return androidInfo.model; // e.g. "Moto G (4)"
+  } else if (GetPlatform.isIOS) {
+    IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+    return iosInfo.utsname.machine;
+  } // e.g. "iPod7,1"
+  else if (GetPlatform.isWeb) {
+    WebBrowserInfo webBrowserInfo = await deviceInfo.webBrowserInfo;
+    return webBrowserInfo.platform;
+  }
+}

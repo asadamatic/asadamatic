@@ -24,7 +24,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final NetworkService _networkService = NetworkService();
   double chatRoomHeight = 0.0;
   double chatRoomWidth = 0.0;
-  bool chatRoomOpen =false;
+  bool chatRoomOpen = false;
 
   bool packagesDataLoaded = false;
   @override
@@ -65,6 +65,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     isShowingDrawer.value = false;
     update(['drawerUpdate']);
   }
+
   osOnHover(bool value, int newIndex) {
     if (value) {
       if (newIndex != osIndex.value) {
@@ -114,11 +115,11 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     FlutterClipboard.copy(package.replaceFirst(" ", ": ^"));
   }
 
-  toggleChatRoom(){
-    if (chatRoomOpen){
+  toggleChatRoom() {
+    if (chatRoomOpen) {
       chatRoomHeight = 0.0;
       chatRoomWidth = 0.0;
-    }else{
+    } else {
       chatRoomHeight = 400.0;
       chatRoomWidth = 325.0;
     }

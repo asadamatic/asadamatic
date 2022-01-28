@@ -250,7 +250,7 @@ class PackageShimmer extends StatelessWidget {
                           baseColor: shimmerBaseColor,
                           highlightColor: shimmerHighlightColor,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 8.0,
                         ),
                         Shimmer.fromColors(
@@ -265,7 +265,7 @@ class PackageShimmer extends StatelessWidget {
                           baseColor: shimmerBaseColor,
                           highlightColor: shimmerHighlightColor,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 8.0,
                         ),
                         Shimmer.fromColors(

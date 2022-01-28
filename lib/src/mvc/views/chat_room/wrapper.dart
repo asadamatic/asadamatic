@@ -3,7 +3,6 @@ import 'package:asadamatic/src/mvc/views/chat_room/intermidiate_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Wrapper extends StatelessWidget {
   const Wrapper({Key? key}) : super(key: key);
@@ -13,8 +12,8 @@ class Wrapper extends StatelessWidget {
     return GetBuilder<ChatController>(
       id: 'updateChatWrapper',
       builder: (_controller) {
-        if (_controller.emailLoaded!) {
-          if (_controller.email!.isNotEmpty) {
+        if (_controller.sessionIdLoaded!) {
+          if (_controller.sessionId!.isNotEmpty) {
             return IntermediateScreen();
           } else {
             return ChatRoomWelcome();

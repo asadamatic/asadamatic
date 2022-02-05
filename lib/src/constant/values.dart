@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 const port = '8000';
 const localHost = '127.0.0.1';
-const remoteHostUrl = 'https://asadamatic.heroku.com/';
+const remoteHostUrl = 'https://asadamatic.herokuapp.com/';
 const localHostAndroid = '10.0.2.2';
 const localHostUrl = 'http://$localHost:$port/';
 const localHostUrlAndroid = 'http://$localHostAndroid:$port/';

@@ -196,6 +196,10 @@ class ChatController extends GetxController {
         context, MaterialPageRoute(builder: (_) => const ChatScreen()));
   }
 
+  changeScreen(){
+    sessionId = "";
+    update(['updateChatWrapper']);
+  }
   Future<String> getSessionId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('sessionId') ?? '';

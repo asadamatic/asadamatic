@@ -57,7 +57,6 @@ class ConfirmationScreen extends StatelessWidget {
     final ChatController _chatController = Get.find();
     final textTheme = Theme.of(context).textTheme;
     return Container(
-      alignment: Alignment.center,
       margin: const EdgeInsets.all(15.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -77,20 +76,32 @@ class ConfirmationScreen extends StatelessWidget {
               ),
             ],
           ),
-          Container(
-            width: 200.0,
-            height: 50.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100.0),
-            ),
-            child: ElevatedButton(
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100.0))),
-                    textStyle: MaterialStateProperty.all(textTheme.subtitle1)),
-                onPressed: _chatController.switchToNextPage,
-                child: const Text('Proceed')),
-          )
+          Column(
+            children: [
+              Container(
+                width: 200.0,
+                height: 50.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100.0),
+                ),
+                child: ElevatedButton(
+                    style: ButtonStyle(
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100.0))),
+                        textStyle:
+                            MaterialStateProperty.all(textTheme.subtitle1)),
+                    onPressed: _chatController.switchToNextPage,
+                    child: const Text('Proceed')),
+              ),
+              SizedBox(
+                height: 15.0,
+              ),
+              InkWell(
+                child: Text(' Use a different email address!'),
+                onTap: _chatController.changeScreen,
+              )
+            ],
+          ),
         ],
       ),
     );

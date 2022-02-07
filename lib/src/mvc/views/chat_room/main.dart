@@ -19,7 +19,7 @@ class ChatRoom extends StatelessWidget {
           themeMode: _themeController.themeMode!,
           darkTheme: ThemeData(brightness: Brightness.dark),
           debugShowCheckedModeBanner: false,
-          home:  ChatRoomWelcome()),
+          home: Wrapper()),
     );
   }
 }

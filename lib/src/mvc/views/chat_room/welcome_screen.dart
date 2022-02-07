@@ -13,10 +13,13 @@ class ChatRoomWelcome extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          const Align(
+          Align(
             alignment: Alignment.topCenter,
-            child: PageIndexIndicator(
-              pageCount: 3,
+            child: GetBuilder<ChatController>(
+                id: 'changeVerificationScreen',
+                builder: (_chatController) => PageIndexIndicator(
+                  pageCount: _chatController.userExists! ? 2 : 4,
+                )
             ),
           ),
           Form(

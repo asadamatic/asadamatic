@@ -151,7 +151,7 @@ class ChatController extends GetxController {
       isLoading = true;
       update(['updateLoadingWidget']);
 
-      final response = await _networkService.updateUser(User(
+      final response = await _networkService.updateData(User(
           email: verificationCode!.email,
           name: nameEditingController.text,
           pin: pin));

@@ -50,8 +50,10 @@ class NetworkService extends GetConnect {
     return response;
   }
 
-  Future<Response> updateUser(User? user) async {
-    final response = await post(url + settingPin, jsonEncode(user!.toJson()));
+  Future<Response> updateData(User? user) async {
+
+    final deviceName = await getDeviceName();
+    final response = await post(url + settingPin, jsonEncode({'user' : user!.toJson(), 'device_name': deviceName}));
     return response;
   }
 

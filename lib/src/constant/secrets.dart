@@ -1,5 +1,3 @@
-
-
 const port = '8000';
 const localHost = '127.0.0.1';
 const remoteHostUrl = 'https://asadamatic.herokuapp.com/';

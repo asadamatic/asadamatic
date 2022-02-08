@@ -35,8 +35,13 @@ class ChatController extends GetxController {
     print('$sessionId session');
     if (sessionId!.isNotEmpty) {
       final response = await _networkService.loadSession(sessionId);
-      session = Session.fromJson(response.body);
+      if (response.statusCode == 200) {
+        session = Session.fromJson(response.body);
+      } else {
+        sessionId = "";
+      }
     }
+
     sessionIdLoaded = true;
     update(['updateChatWrapper']);
   }
@@ -166,9 +171,7 @@ class ChatController extends GetxController {
     }
   }
 
-  resetPin(){
-
-  }
+  resetPin() {}
   getTime() {
     timeDisplay!.value =
         (timeLeft!.inSeconds / 60).toString()[0].padLeft(2, '0') +
@@ -196,10 +199,11 @@ class ChatController extends GetxController {
         context, MaterialPageRoute(builder: (_) => const ChatScreen()));
   }
 
-  changeScreen(){
+  changeScreen() {
     sessionId = "";
     update(['updateChatWrapper']);
   }
+
   Future<String> getSessionId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('sessionId') ?? '';

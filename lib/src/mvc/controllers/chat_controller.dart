@@ -203,6 +203,21 @@ class ChatController extends GetxController {
     update(['updateChatWrapper']);
   }
 
+  logout() async {
+    isLoading = true;
+    update(['updateLoadingWidget']);
+
+    final response =
+        await _networkService.logoutFromSession(session!.sessionId);
+    if (response.statusCode == 200) {
+      session!.isActive = false;
+      update(['updateChatWrapper']);
+    } else {}
+    isLoading = false;
+
+    update(['updateLoadingWidget']);
+  }
+
   Future<String> getSessionId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('sessionId') ?? '';

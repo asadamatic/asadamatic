@@ -19,6 +19,7 @@ class NetworkService extends GetConnect {
   final settingPin = 'set-pin';
   final verificationPin = 'verify-pin';
   final session = 'session/';
+  final logout = 'logout/';
   Future<Package> getPackageData(String package) async {
     final response = await get(url + packageData + package);
     return Package.fromJson(response.body);
@@ -52,14 +53,22 @@ class NetworkService extends GetConnect {
   }
 
   Future<Response> updateData(User? user) async {
-
     final deviceName = await getDeviceName();
-    final response = await post(url + settingPin, jsonEncode({'user' : user!.toJson(), 'device_name': deviceName}));
+    final response = await post(url + settingPin,
+        jsonEncode({'user': user!.toJson(), 'device_name': deviceName}));
     return response;
   }
 
   Future<Response> loadSession(String? sessionId) async {
     final response = await get(url + session + '?session_id=$sessionId');
+
+    return response;
+  }
+
+  Future<Response> logoutFromSession(String? sessionId) async {
+    final response = await get(
+      url + session + '?session_id=$sessionId',
+    );
 
     return response;
   }

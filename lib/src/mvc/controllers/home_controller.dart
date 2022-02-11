@@ -22,8 +22,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   double iconIncreasedHeight = 2.5;
   List<Package> packagesData = [];
   final NetworkService _networkService = NetworkService();
-  double chatRoomHeight = 0.0;
-  double chatRoomWidth = 0.0;
+  double chatRoomHeight = 56.0;
+  double chatRoomWidth = 56.0;
   bool chatRoomOpen = false;
 
   bool packagesDataLoaded = false;
@@ -117,14 +117,23 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   toggleChatRoom() {
     if (chatRoomOpen) {
-      chatRoomHeight = 0.0;
-      chatRoomWidth = 0.0;
+      chatRoomHeight = 56.0;
+      chatRoomWidth = 56.0;
+      chatRoomOpen = !chatRoomOpen;
+      update(['updateChatRoomContainer']);
     } else {
       chatRoomHeight = 400.0;
       chatRoomWidth = 325.0;
+      update(['updateChatRoomContainer']);
+      Future.delayed(const Duration(milliseconds: 600)).then((value) {
+        chatRoomOpen = !chatRoomOpen;
+        update(['updateChatRoomContainer']);
+      });
     }
-    chatRoomOpen = !chatRoomOpen;
-    update(['updateChatRoomContainer']);
+
+
+
+
   }
 
   @override

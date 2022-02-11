@@ -62,3 +62,9 @@ getDeviceName() async {
     return webBrowserInfo.platform;
   }
 }
+
+
+class ChatRoomValues{
+  static const double actionSize = 18.0;
+  static const double actionIconSize = 12.0;
+}

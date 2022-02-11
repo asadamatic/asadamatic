@@ -4,19 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class IntermediateScreen extends StatelessWidget {
-  IntermediateScreen({Key? key}) : super(key: key);
+  const IntermediateScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final ChatController _chatController = Get.find();
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           const Align(
             alignment: Alignment.topCenter,
             child: PageIndexIndicator(
-              pageCount: 3,
+              pageCount: 2,
             ),
           ),
           Form(
@@ -93,11 +94,11 @@ class ConfirmationScreen extends StatelessWidget {
                     onPressed: _chatController.switchToNextPage,
                     child: const Text('Proceed')),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15.0,
               ),
               InkWell(
-                child: Text(' Use a different email address!'),
+                child: const Text(' Use a different email address!'),
                 onTap: _chatController.changeScreen,
               )
             ],

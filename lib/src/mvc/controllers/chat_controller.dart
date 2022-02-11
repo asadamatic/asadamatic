@@ -32,7 +32,6 @@ class ChatController extends GetxController {
   void onInit() async {
     super.onInit();
     sessionId = await getSessionId();
-    print('$sessionId session');
     if (sessionId!.isNotEmpty) {
       final response = await _networkService.loadSession(sessionId);
       if (response.statusCode == 200) {

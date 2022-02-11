@@ -1,7 +1,6 @@
 import 'package:asadamatic/src/mvc/controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:collection';
 
 import 'package:get/get.dart';
 
@@ -56,6 +55,7 @@ class PinCodeField extends StatelessWidget {
               child: TextFormField(
                 controller: value,
                 maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                keyboardType: TextInputType.number,
                 validator: (value) => value!.isEmpty ? '' : null,
                 onChanged: (value) {
                   if (_noOfFields == 6) {

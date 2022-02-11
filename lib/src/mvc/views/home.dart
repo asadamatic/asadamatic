@@ -29,6 +29,8 @@ class Home extends StatelessWidget {
               child: LayoutBuilder(builder: (BuildContext layoutBuilderContext,
                   BoxConstraints constraints) {
                 if (constraints.maxWidth < 780) {
+                  print('Less than 780');
+                  print('Height ${constraints.maxHeight}');
                   return ListView(
                     children: [
                       Column(
@@ -173,15 +175,10 @@ class Home extends StatelessWidget {
                   onChanged: _themeController.toggleTheme);
             }),
           ),
-          const Positioned(right: 55.0, bottom: 35.0, child: ChatRoomContainer())
+          // const Positioned(right: 55.0, bottom: 35.0, child: ChatRoomContainer())
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _homeController.toggleChatRoom,
-        child: const Icon(
-          Icons.chat,
-        ),
-      ),
+      floatingActionButton: ChatRoomContainer(),
     );
   }
 }
@@ -191,19 +188,72 @@ class ChatRoomContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(
-        id: 'updateChatRoomContainer',
-        builder: (_controller) {
-          return AnimatedContainer(
-            curve: Curves.fastOutSlowIn,
-            width: _controller.chatRoomWidth,
-            height: _controller.chatRoomHeight,
-            duration: const Duration(milliseconds: 600),
-            child: GetBuilder<ThemeController>(builder: (context) {
-              return ChatRoom();
-            }),
-          );
-        });
+    return Card(
+      elevation: 10.0,
+      child: GetBuilder<HomeController>(
+          id: 'updateChatRoomContainer',
+          builder: (_controller) {
+            return AnimatedContainer(
+              curve: Curves.fastOutSlowIn,
+              width: _controller.chatRoomWidth,
+              height: _controller.chatRoomHeight,
+              duration: const Duration(milliseconds: 600),
+              child: GetBuilder<ThemeController>(builder: (_themeController) {
+                return _controller.chatRoomOpen
+                    ? Stack(
+                          children: [
+                            ChatRoom(),
+                            ChatRoomActions(_controller)
+                          ],
+                    )
+                    : IconButton(
+                        onPressed: _controller.toggleChatRoom,
+                        icon: const Icon(
+                          Icons.chat,
+                        ),
+                      );
+              }),
+            );
+          }),
+    );
+  }
+
+  Row ChatRoomActions(HomeController _controller) {
+    return Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: _controller.toggleChatRoom,
+                              child: Container(
+                                  margin: const EdgeInsets.all(6.0),
+                                  alignment: Alignment.center,
+                                  height: ChatRoomValues.actionSize,
+                                  width: ChatRoomValues.actionSize,
+                                  decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(
+                                        ChatRoomValues.actionSize),
+                                  ),
+                                  child: const Icon(
+                                    Icons.close,
+                                    size: ChatRoomValues.actionIconSize,
+                                  )),
+                            ),
+                            Container(
+                                alignment: Alignment.center,
+                                height: ChatRoomValues.actionSize,
+                                width: ChatRoomValues.actionSize,
+                                decoration: BoxDecoration(
+                                  color: Colors.yellow,
+                                  borderRadius: BorderRadius.circular(
+                                      ChatRoomValues.actionSize),
+                                ),
+                                child: const Icon(
+                                  Icons.fullscreen,
+                                  size: ChatRoomValues.actionIconSize,
+                                )),
+                          ],
+                        );
   }
 }
 

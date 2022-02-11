@@ -11,6 +11,7 @@ class ChatRoomWelcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Align(
@@ -18,9 +19,8 @@ class ChatRoomWelcome extends StatelessWidget {
             child: GetBuilder<ChatController>(
                 id: 'changeVerificationScreen',
                 builder: (_chatController) => PageIndexIndicator(
-                  pageCount: _chatController.userExists! ? 2 : 4,
-                )
-            ),
+                      pageCount: _chatController.userExists! ? 2 : 4,
+                    )),
           ),
           Form(
             key: _chatController.visitorFormKey,
@@ -68,33 +68,37 @@ class PageIndexIndicator extends StatelessWidget {
   final int? _pageCount;
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: _pageCount,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) => Align(
-              alignment: Alignment.topCenter,
-              child: GetBuilder<ChatController>(
-                  id: 'updatePageIndexDisplay',
-                  builder: (_chatController) {
-                    final currentPage =
-                        _chatController.welcomePageIndex == index;
-                    return Card(
-                      elevation: currentPage ? 5.0 : 0.0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0)),
-                      margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 600),
-                        alignment: Alignment.center,
-                        width: currentPage ? 50.0 : 45.0,
-                        height: currentPage ? 50.0 : 45.0,
-                        child: Text((index + 1).toString()),
-                      ),
-                    );
-                  }),
-            ));
+    return Container(
+      margin: const EdgeInsets.only(top: 8.0),
+      child: ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: _pageCount,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) => Align(
+                alignment: Alignment.topCenter,
+                child: GetBuilder<ChatController>(
+                    id: 'updatePageIndexDisplay',
+                    builder: (_chatController) {
+                      final currentPage =
+                          _chatController.welcomePageIndex == index;
+                      return Card(
+                        elevation: currentPage ? 5.0 : 0.0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0)),
+                        margin: const EdgeInsets.only(
+                            left: 8.0, right: 8.0, top: 12.0),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 600),
+                          alignment: Alignment.center,
+                          width: currentPage ? 50.0 : 45.0,
+                          height: currentPage ? 50.0 : 45.0,
+                          child: Text((index + 1).toString()),
+                        ),
+                      );
+                    }),
+              )),
+    );
   }
 }
 
@@ -170,6 +174,7 @@ class EmailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Container(
+      height: 300.0,
       margin: const EdgeInsets.all(15.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -178,6 +183,7 @@ class EmailScreen extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              //height: 24.0
               Text(
                 "What's Your Email ?",
                 style: textTheme.headline5,
@@ -185,6 +191,7 @@ class EmailScreen extends StatelessWidget {
               const SizedBox(
                 height: 15.0,
               ),
+              //height: 16.0
               Text(
                 'We need to verify your identity.',
                 style: Theme.of(context).textTheme.subtitle1,
@@ -192,10 +199,14 @@ class EmailScreen extends StatelessWidget {
               const SizedBox(
                 height: 15.0,
               ),
+              //height: 60.0
               TextFormField(
                 validator: _chatController.emailValidator,
                 controller: _chatController.emailEditingController,
                 onChanged: _chatController.onEmailChanged,
+                inputFormatters: [
+                  FilteringTextInputFormatter.deny(RegExp('[ ]')),
+                ],
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'example@gmail.com'),
@@ -253,7 +264,6 @@ class VerificationCodeScreen extends StatelessWidget {
                       _chatController.timeDisplay!.value,
                       style: textTheme.headline6,
                     )),
-
               ],
             ),
             Column(

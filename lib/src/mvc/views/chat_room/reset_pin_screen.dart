@@ -2,7 +2,6 @@ import 'package:asadamatic/src/mvc/controllers/chat_controller.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/welcome_screen.dart';
 import 'package:asadamatic/src/widgets/pic_code_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class ChatRoomWelcome extends StatelessWidget {
@@ -12,6 +11,7 @@ class ChatRoomWelcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           const Align(

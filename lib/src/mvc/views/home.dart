@@ -1,4 +1,5 @@
 import 'package:asadamatic/src/constant/values.dart';
+import 'package:asadamatic/src/mvc/controllers/chat_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/main.dart';
@@ -188,72 +189,77 @@ class ChatRoomContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 10.0,
-      child: GetBuilder<HomeController>(
-          id: 'updateChatRoomContainer',
-          builder: (_controller) {
-            return AnimatedContainer(
-              curve: Curves.fastOutSlowIn,
-              width: _controller.chatRoomWidth,
-              height: _controller.chatRoomHeight,
-              duration: const Duration(milliseconds: 600),
-              child: GetBuilder<ThemeController>(builder: (_themeController) {
-                return _controller.chatRoomOpen
-                    ? Stack(
-                          children: [
-                            ChatRoom(),
-                            ChatRoomActions(_controller)
-                          ],
-                    )
-                    : IconButton(
-                        onPressed: _controller.toggleChatRoom,
-                        icon: const Icon(
-                          Icons.chat,
-                        ),
-                      );
-              }),
-            );
-          }),
-    );
+    return GetBuilder<HomeController>(
+        id: 'updateChatRoomContainer',
+        builder: (_controller) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0)),
+                child: AnimatedContainer(
+                  curve: Curves.fastOutSlowIn,
+                  width: _controller.chatRoomWidth,
+                  height: _controller.chatRoomHeight,
+                  duration: const Duration(milliseconds: 600),
+                  child:
+                      GetBuilder<ThemeController>(builder: (_themeController) {
+                    return Offstage(
+                      offstage: !_controller.chatRoomOpen,
+                      child: Stack(
+                        children: [ChatRoom(), const ChatRoomActions()],
+                      ),
+                    );
+                  }),
+                ),
+              ),
+              FloatingActionButton(
+                onPressed: _controller.toggleChatRoom,
+                child: Icon(_controller.chatRoomOpen
+                    ? Icons.keyboard_arrow_down
+                    : Icons.chat),
+              )
+            ],
+          );
+        });
   }
+}
 
-  Row ChatRoomActions(HomeController _controller) {
+class ChatRoomActions extends StatelessWidget {
+  const ChatRoomActions({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final HomeController _homeController = Get.find();
     return Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              onTap: _controller.toggleChatRoom,
-                              child: Container(
-                                  margin: const EdgeInsets.all(6.0),
-                                  alignment: Alignment.center,
-                                  height: ChatRoomValues.actionSize,
-                                  width: ChatRoomValues.actionSize,
-                                  decoration: BoxDecoration(
-                                    color: Colors.red,
-                                    borderRadius: BorderRadius.circular(
-                                        ChatRoomValues.actionSize),
-                                  ),
-                                  child: const Icon(
-                                    Icons.close,
-                                    size: ChatRoomValues.actionIconSize,
-                                  )),
-                            ),
-                            Container(
-                                alignment: Alignment.center,
-                                height: ChatRoomValues.actionSize,
-                                width: ChatRoomValues.actionSize,
-                                decoration: BoxDecoration(
-                                  color: Colors.yellow,
-                                  borderRadius: BorderRadius.circular(
-                                      ChatRoomValues.actionSize),
-                                ),
-                                child: const Icon(
-                                  Icons.fullscreen,
-                                  size: ChatRoomValues.actionIconSize,
-                                )),
-                          ],
-                        );
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: ChatRoomValues.chatRoomActions
+            .map(
+              (chatRoomAction) => InkWell(
+                onTap: () => chatRoomAction == ChatRoomValues.resizeIcon
+                    ? _homeController.changeChatRoomSize(
+                        maxHeight: MediaQuery.of(context).size.height,
+                        maxWidth: MediaQuery.of(context).size.width)
+                    : _homeController.toggleChatRoom(),
+                child: Container(
+                    margin: const EdgeInsets.all(8.0),
+                    alignment: Alignment.center,
+                    height: ChatRoomValues.actionSize,
+                    width: ChatRoomValues.actionSize,
+                    decoration: BoxDecoration(
+                      borderRadius:
+                          BorderRadius.circular(ChatRoomValues.actionSize),
+                    ),
+                    child: chatRoomAction),
+              ),
+            )
+            .toList());
   }
 }
 

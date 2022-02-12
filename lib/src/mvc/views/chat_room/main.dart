@@ -14,7 +14,6 @@ class ChatRoom extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(12.0),
       child: MaterialApp(
-        key: GlobalKey(),
           themeMode: _themeController.themeMode!,
           darkTheme: ThemeData(brightness: Brightness.dark),
           debugShowCheckedModeBanner: false,

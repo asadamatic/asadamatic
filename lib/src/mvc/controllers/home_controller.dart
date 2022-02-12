@@ -22,10 +22,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   double iconIncreasedHeight = 2.5;
   List<Package> packagesData = [];
   final NetworkService _networkService = NetworkService();
-  double chatRoomHeight = 56.0;
-  double chatRoomWidth = 56.0;
+  double chatRoomHeight = ChatRoomValues.chatRoomHeightClosed;
+  double chatRoomWidth = ChatRoomValues.chatRoomHeightClosed;
   bool chatRoomOpen = false;
-
+  bool chatRoomMax = false;
   bool packagesDataLoaded = false;
   @override
   void onInit() async {
@@ -117,23 +117,33 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   toggleChatRoom() {
     if (chatRoomOpen) {
-      chatRoomHeight = 56.0;
-      chatRoomWidth = 56.0;
+      chatRoomHeight = ChatRoomValues.chatRoomHeightClosed;
+      chatRoomWidth = ChatRoomValues.chatRoomWidthClosed;
       chatRoomOpen = !chatRoomOpen;
       update(['updateChatRoomContainer']);
     } else {
-      chatRoomHeight = 400.0;
-      chatRoomWidth = 325.0;
+      chatRoomHeight = ChatRoomValues.chatRoomHeightMin;
+      chatRoomWidth = ChatRoomValues.chatRoomWidthMin;
       update(['updateChatRoomContainer']);
       Future.delayed(const Duration(milliseconds: 600)).then((value) {
         chatRoomOpen = !chatRoomOpen;
         update(['updateChatRoomContainer']);
       });
     }
+  }
 
+  changeChatRoomSize({double? maxHeight, double? maxWidth}) {
+    if (chatRoomMax) {
+      chatRoomHeight = ChatRoomValues.chatRoomHeightMin;
+      chatRoomWidth = ChatRoomValues.chatRoomWidthMin;
+      chatRoomMax = false;
+    } else {
 
-
-
+      chatRoomHeight = ChatRoomValues.chatRoomHeightMax;
+      chatRoomWidth = ChatRoomValues.chatRoomWidthMax;
+      chatRoomMax = true;
+    }
+    update(['updateChatRoomContainer']);
   }
 
   @override

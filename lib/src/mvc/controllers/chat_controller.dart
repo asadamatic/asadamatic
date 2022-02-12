@@ -31,8 +31,11 @@ class ChatController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    print('Gettting session id');
     sessionId = await getSessionId();
     if (sessionId!.isNotEmpty) {
+      print('Gettting session');
+
       final response = await _networkService.loadSession(sessionId);
       if (response.statusCode == 200) {
         session = Session.fromJson(response.body);
@@ -133,16 +136,26 @@ class ChatController extends GetxController {
     if (visitorFormKey.currentState!.validate()) {
       isLoading = true;
       update(['updateLoadingWidget']);
-
-      final response = await _networkService.verifyPin(User(
-          email: emailEditingController.text.isEmpty
-              ? session!.email
-              : emailEditingController.text,
-          pin: pin));
+      final response = await _networkService.verifyPin(
+          User(
+              email: emailEditingController.text.isEmpty
+                  ? session?.email
+                  : emailEditingController.text,
+              pin: pin),
+          sessionId: session?.sessionId ?? '');
+      print('----');
+      print(session?.sessionId ?? '');
       if (response.statusCode == 200) {
-        session = Session.fromJson(response.body);
-        setSessionId(session!.sessionId!);
-        openChatScreen(context);
+        
+        if (session == null) {
+          session = Session.fromJson(response.body);
+          setSessionId(session!.sessionId!);
+          sessionId = session!.sessionId!;
+        } else {
+          session!.isActive = true;
+        }
+
+        update(['updateChatWrapper']);
       } else if (response.statusCode == 404) {}
       isLoading = false;
 
@@ -158,17 +171,18 @@ class ChatController extends GetxController {
       final response = await _networkService.updateData(User(
           email: verificationCode!.email,
           name: nameEditingController.text,
-          pin: pin));
+          pin: pin), sessionId: session?.sessionId ?? '');
       if (response.statusCode == 200) {
         session = Session.fromJson(response.body);
         setSessionId(session!.sessionId!);
-        openChatScreen(context);
+        update(['updateChatWrapper']);
       } else {}
       isLoading = false;
 
       update(['updateLoadingWidget']);
     }
   }
+
 
   resetPin() {}
   getTime() {
@@ -194,25 +208,36 @@ class ChatController extends GetxController {
   }
 
   openChatScreen(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (_) => const ChatScreen()));
+    Navigator.push(context, MaterialPageRoute(builder: (_) => ChatScreen()));
   }
 
-  changeScreen() {
-    sessionId = "";
-    update(['updateChatWrapper']);
+  differentEmail() async{
+    final response = await _networkService.removeOldSession(sessionId);
+    if (response.statusCode == 200){
+      sessionId = "";
+      session = null;
+
+      update(['updateChatWrapper']);
+    }
+    
   }
 
   logout() async {
+    print('Logout');
     isLoading = true;
     update(['updateLoadingWidget']);
-
+    print('Starting req');
     final response =
         await _networkService.logoutFromSession(session!.sessionId);
+
+    print('Logged Out');
     if (response.statusCode == 200) {
       session!.isActive = false;
+      print(session!.isActive);
       update(['updateChatWrapper']);
-    } else {}
+    } else {
+      print('Did not log out');
+    }
     isLoading = false;
 
     update(['updateLoadingWidget']);

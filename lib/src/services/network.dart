@@ -20,6 +20,7 @@ class NetworkService extends GetConnect {
   final verificationPin = 'verify-pin';
   final session = 'session/';
   final logout = 'logout/';
+  final removeSession = 'remove-session/';
   Future<Package> getPackageData(String package) async {
     final response = await get(url + packageData + package);
     return Package.fromJson(response.body);
@@ -41,21 +42,22 @@ class NetworkService extends GetConnect {
     return response;
   }
 
-  Future<Response> verifyPin(User? user) async {
+  Future<Response> verifyPin(User? user, {String? sessionId}) async {
     final deviceName = await getDeviceName();
     final response = await post(
         url + verificationPin,
         jsonEncode({
           'user': {'email': user!.email, 'pin': user.pin},
+          'session_id': sessionId,
           'device_name': deviceName
         }));
     return response;
   }
 
-  Future<Response> updateData(User? user) async {
+  Future<Response> updateData(User? user, {String? sessionId}) async {
     final deviceName = await getDeviceName();
     final response = await post(url + settingPin,
-        jsonEncode({'user': user!.toJson(), 'device_name': deviceName}));
+        jsonEncode({'user': user!.toJson(), 'session_id': sessionId,'device_name': deviceName}));
     return response;
   }
 
@@ -67,9 +69,16 @@ class NetworkService extends GetConnect {
 
   Future<Response> logoutFromSession(String? sessionId) async {
     final response = await get(
-      url + session + '?session_id=$sessionId',
+      url + logout + '?session_id=$sessionId',
     );
-
     return response;
   }
+
+  Future<Response> removeOldSession(String? sessionId) async{
+    final response = await get(
+      url + removeSession + '?session_id=$sessionId',
+    );
+    return response;
+  }
+
 }

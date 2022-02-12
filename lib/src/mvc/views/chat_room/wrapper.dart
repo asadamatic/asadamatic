@@ -17,8 +17,10 @@ class Wrapper extends StatelessWidget {
         if (_controller.sessionIdLoaded!) {
           if (_controller.sessionId!.isNotEmpty) {
             if (_controller.session!.isActive!) {
-              return const ChatScreen();
+              print(_controller.session!.isActive!);
+              return ChatScreen();
             }
+            print('Hi Asad');
             return const IntermediateScreen();
           } else {
             return ChatRoomWelcome();

@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ChatScreen extends StatelessWidget {
-  const ChatScreen({Key? key}) : super(key: key);
-
+  ChatScreen({Key? key}) : super(key: key);
+  final ChatController _chatController = Get.find();
   @override
   Widget build(BuildContext context) {
-    final ChatController _chatController = Get.find();
+
     return Scaffold(
       body: Stack(
         children: [
@@ -28,6 +28,16 @@ class ChatScreen extends StatelessWidget {
           ],
         ),
       ),
+          GetBuilder<ChatController>(
+              id: 'updateLoadingWidget',
+              builder: (_chatController) => Container(
+                  color: Colors.white54,
+                  child: _chatController.isLoading!
+                      ? const Align(
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator(),
+                  )
+                      : const SizedBox()))
         ],
       ),
     );

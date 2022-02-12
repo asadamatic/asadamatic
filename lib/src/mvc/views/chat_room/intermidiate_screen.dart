@@ -99,7 +99,7 @@ class ConfirmationScreen extends StatelessWidget {
               ),
               InkWell(
                 child: const Text(' Use a different email address!'),
-                onTap: _chatController.changeScreen,
+                onTap: _chatController.differentEmail,
               )
             ],
           ),

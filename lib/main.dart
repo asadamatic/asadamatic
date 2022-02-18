@@ -18,7 +18,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       getPages: AppPages.routes,
       initialRoute: Routes.home,
-      title: appTitle,
+      title: AppConstants.appTitle,
       themeMode: ThemeMode.system,
       darkTheme: ThemeData(
         brightness: Brightness.dark,

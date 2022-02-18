@@ -2,6 +2,7 @@ import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_cont
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/auth_type.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/fragments/confirmation_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/fragments/pin_code_screen.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/welcome_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/page_index_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,6 +22,7 @@ class IntermediateScreen extends StatelessWidget {
             alignment: Alignment.topCenter,
             child: PageIndexIndicator(
               pageCount: 2,
+              authType: AuthType.signUp,
             ),
           ),
           Form(
@@ -37,16 +39,7 @@ class IntermediateScreen extends StatelessWidget {
               ],
             ),
           ),
-          GetBuilder<ChatController>(
-              id: 'updateLoadingWidget',
-              builder: (_chatController) => Container(
-                  color: Colors.white54,
-                  child: _chatController.isLoading!
-                      ? const Align(
-                          alignment: Alignment.center,
-                          child: CircularProgressIndicator(),
-                        )
-                      : const SizedBox()))
+          const LoadingWidget()
         ],
       ),
     );

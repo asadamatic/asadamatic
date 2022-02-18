@@ -1,5 +1,5 @@
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_controller.dart';
-import 'package:asadamatic/src/mvc/views/chat_room/src/chat_screen.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/chat_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/intermidiate_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/welcome_screen.dart';
 import 'package:flutter/material.dart';

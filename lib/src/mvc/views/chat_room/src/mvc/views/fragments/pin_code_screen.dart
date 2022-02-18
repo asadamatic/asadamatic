@@ -4,7 +4,6 @@ import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/pic_code_field.da
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class PinCodeScreen extends StatelessWidget {
   const PinCodeScreen({Key? key, AuthType? authType})
       : _authType = authType,
@@ -35,9 +34,9 @@ class PinCodeScreen extends StatelessWidget {
                 ),
                 signingUp
                     ? Text(
-                  'To avoid verification next time.',
-                  style: textTheme.subtitle1,
-                )
+                        'To avoid verification next time.',
+                        style: textTheme.subtitle1,
+                      )
                     : const SizedBox(),
                 const SizedBox(
                   height: 15.0,
@@ -67,7 +66,7 @@ class PinCodeScreen extends StatelessWidget {
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100.0))),
                       textStyle:
-                      MaterialStateProperty.all(textTheme.subtitle1)),
+                          MaterialStateProperty.all(textTheme.subtitle1)),
                   onPressed: () => signingUp
                       ? _chatController.switchToNextPageOnAnyScreen()
                       : _chatController.verifyPin(context),

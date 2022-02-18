@@ -2,7 +2,6 @@ import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_cont
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class ConfirmationScreen extends StatelessWidget {
   const ConfirmationScreen({Key? key}) : super(key: key);
 
@@ -43,7 +42,7 @@ class ConfirmationScreen extends StatelessWidget {
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(100.0))),
                         textStyle:
-                        MaterialStateProperty.all(textTheme.subtitle1)),
+                            MaterialStateProperty.all(textTheme.subtitle1)),
                     onPressed: _chatController.switchToNextPageOnAnyScreen,
                     child: const Text('Proceed')),
               ),

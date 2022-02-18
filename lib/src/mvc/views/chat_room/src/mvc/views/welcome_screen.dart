@@ -13,7 +13,6 @@ class ChatRoomWelcome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final ChatController _chatController = Get.find();
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -25,6 +24,7 @@ class ChatRoomWelcome extends StatelessWidget {
                 id: 'changeVerificationScreen',
                 builder: (_chatController) => PageIndexIndicator(
                       pageCount: _chatController.userExists! ? 2 : 4,
+                      authType: AuthType.signUp,
                     )),
           ),
           Form(
@@ -34,7 +34,9 @@ class ChatRoomWelcome extends StatelessWidget {
               controller: _chatController.welcomePageController,
               onPageChanged: _chatController.onWelcomePageChange,
               children: [
-                const EmailScreen(),
+                const EmailScreen(
+                  authType: AuthType.signUp,
+                ),
                 GetBuilder<ChatController>(
                     id: 'changeVerificationScreen',
                     builder: (_chatController) => _chatController.userExists!
@@ -49,18 +51,29 @@ class ChatRoomWelcome extends StatelessWidget {
               ],
             ),
           ),
-          GetBuilder<ChatController>(
-              id: 'updateLoadingWidget',
-              builder: (_chatController) => Container(
-                  color: Colors.white54,
-                  child: _chatController.isLoading!
-                      ? const Align(
-                          alignment: Alignment.center,
-                          child: CircularProgressIndicator(),
-                        )
-                      : const SizedBox()))
+          const LoadingWidget()
         ],
       ),
     );
+  }
+}
+
+class LoadingWidget extends StatelessWidget {
+  const LoadingWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<ChatController>(
+        id: 'updateLoadingWidget',
+        builder: (_chatController) => Container(
+            color: Colors.white54,
+            child: _chatController.isLoading!
+                ? const Align(
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator(),
+                  )
+                : const SizedBox()));
   }
 }

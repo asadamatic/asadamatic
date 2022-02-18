@@ -3,6 +3,7 @@ import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/auth_type.dart
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/fragments/email_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/fragments/pin_code_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/fragments/verification_code_screen.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/welcome_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/page_index_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +13,6 @@ class ResetPinScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final ChatController _chatController = Get.find();
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -22,6 +22,7 @@ class ResetPinScreen extends StatelessWidget {
             alignment: Alignment.topCenter,
             child: PageIndexIndicator(
               pageCount: 3,
+              authType: AuthType.resetPin,
             ),
           ),
           Form(
@@ -30,7 +31,9 @@ class ResetPinScreen extends StatelessWidget {
               controller: _chatController.resetPinPageController,
               onPageChanged: _chatController.onWelcomePageChange,
               children: const [
-                EmailScreen(),
+                EmailScreen(
+                  authType: AuthType.resetPin,
+                ),
                 VerificationCodeScreen(),
                 PinCodeScreen(
                   authType: AuthType.resetPin,
@@ -38,16 +41,7 @@ class ResetPinScreen extends StatelessWidget {
               ],
             ),
           ),
-          GetBuilder<ChatController>(
-              id: 'updateLoadingWidget',
-              builder: (_chatController) => Container(
-                  color: Colors.white54,
-                  child: _chatController.isLoading!
-                      ? const Align(
-                          alignment: Alignment.center,
-                          child: CircularProgressIndicator(),
-                        )
-                      : const SizedBox()))
+          const LoadingWidget()
         ],
       ),
     );

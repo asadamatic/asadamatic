@@ -42,7 +42,7 @@ class _SocialLogoIconState extends State<SocialLogoIcon> {
         },
         onHover: (value) {
           if (widget.index ==
-              socialIcons
+              AppConstants.socialIcons
                   .indexWhere((socialIcon) => socialIcon[0] == widget.asset!)) {
             if (value) {
               onHover();

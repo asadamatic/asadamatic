@@ -2,8 +2,6 @@ import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_cont
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
-
 class UserNameScreen extends StatelessWidget {
   const UserNameScreen({
     Key? key,
@@ -11,7 +9,6 @@ class UserNameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final ChatController _chatController = Get.find();
     final textTheme = Theme.of(context).textTheme;
     return Container(
@@ -65,7 +62,3 @@ class UserNameScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-

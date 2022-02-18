@@ -27,7 +27,7 @@ class AppLogoIcon extends StatelessWidget {
                 onHover: (value) {
                   if (!isCurrentSelected &&
                       index ==
-                          appLogoIcons.indexWhere(
+                          AppConstants.appLogoIcons.indexWhere(
                               (appLogoIcon) => appLogoIcon[1] == app!)) {
                     if (value) {
                       _homeController.onHover(app);

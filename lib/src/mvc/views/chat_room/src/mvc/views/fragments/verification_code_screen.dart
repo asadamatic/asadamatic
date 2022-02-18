@@ -3,15 +3,11 @@ import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/pic_code_field.da
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
-
-
 class VerificationCodeScreen extends StatelessWidget {
   const VerificationCodeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     final ChatController _chatController = Get.find();
     final textTheme = Theme.of(context).textTheme;
     return Container(
@@ -35,9 +31,9 @@ class VerificationCodeScreen extends StatelessWidget {
                   width: 15.0,
                 ),
                 Obx(() => Text(
-                  _chatController.timeDisplay!.value,
-                  style: textTheme.headline6,
-                )),
+                      _chatController.timeDisplay!.value,
+                      style: textTheme.headline6,
+                    )),
               ],
             ),
             Column(
@@ -51,17 +47,17 @@ class VerificationCodeScreen extends StatelessWidget {
                 GetBuilder<ChatController>(
                     id: 'updateResendButton',
                     builder: (_chatController) =>
-                    _chatController.timeLeft == Duration.zero
-                        ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: InkWell(
-                        child: const Text('Resend code'),
-                        onTap: () {},
-                      ),
-                    )
-                        : const SizedBox(
-                      height: 16.0,
-                    ))
+                        _chatController.timeLeft == Duration.zero
+                            ? Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: InkWell(
+                                  child: const Text('Resend code'),
+                                  onTap: () {},
+                                ),
+                              )
+                            : const SizedBox(
+                                height: 16.0,
+                              ))
               ],
             ),
             Container(
@@ -75,7 +71,7 @@ class VerificationCodeScreen extends StatelessWidget {
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100.0))),
                       textStyle:
-                      MaterialStateProperty.all(textTheme.subtitle1)),
+                          MaterialStateProperty.all(textTheme.subtitle1)),
                   onPressed: _chatController.verifyCode,
                   child: const Text('Submit')),
             )

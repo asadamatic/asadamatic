@@ -11,7 +11,7 @@ class DailyTodoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: appTitle,
+      title: AppConstants.appTitle,
       debugShowCheckedModeBanner: false,
       color: Colors.white,
       themeMode: _themeController.themeMode,

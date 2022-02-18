@@ -1,6 +1,6 @@
-import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/models/package.dart';
+import 'package:asadamatic/src/style/values.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
@@ -55,15 +55,9 @@ class PackagesSection extends StatelessWidget {
                                                 _controller.packagesData[1],
                                           ),
                                         ]
-                                      : [
-                                          PackageCard(
-                                            package:
-                                                _controller.packagesData[0],
-                                          ),
-                                          PackageCard(
-                                            package:
-                                                _controller.packagesData[1],
-                                          ),
+                                      : const [
+                                          PackageShimmer(),
+                                          PackageShimmer()
                                         ]),
                               _controller.packagesDataLoaded
                                   ? PackageCard(
@@ -226,8 +220,8 @@ class PackageShimmer extends StatelessWidget {
                         height: 20.0,
                         width: 160.0,
                       ),
-                      baseColor: shimmerBaseColor,
-                      highlightColor: shimmerHighlightColor,
+                      baseColor: AppStyles.shimmerBaseColor,
+                      highlightColor: AppStyles.shimmerHighlightColor,
                     ),
                   ],
                 ),
@@ -247,8 +241,8 @@ class PackageShimmer extends StatelessWidget {
                             height: 16.0,
                             width: 270.0,
                           ),
-                          baseColor: shimmerBaseColor,
-                          highlightColor: shimmerHighlightColor,
+                          baseColor: AppStyles.shimmerBaseColor,
+                          highlightColor: AppStyles.shimmerHighlightColor,
                         ),
                         const SizedBox(
                           height: 8.0,
@@ -262,8 +256,8 @@ class PackageShimmer extends StatelessWidget {
                             height: 16.0,
                             width: 270.0,
                           ),
-                          baseColor: shimmerBaseColor,
-                          highlightColor: shimmerHighlightColor,
+                          baseColor: AppStyles.shimmerBaseColor,
+                          highlightColor: AppStyles.shimmerHighlightColor,
                         ),
                         const SizedBox(
                           height: 8.0,
@@ -277,8 +271,8 @@ class PackageShimmer extends StatelessWidget {
                             height: 16.0,
                             width: 270.0,
                           ),
-                          baseColor: shimmerBaseColor,
-                          highlightColor: shimmerHighlightColor,
+                          baseColor: AppStyles.shimmerBaseColor,
+                          highlightColor: AppStyles.shimmerHighlightColor,
                         ),
                       ],
                     )),
@@ -308,8 +302,8 @@ class PackageShimmer extends StatelessWidget {
                                   color: Colors.grey[200]!,
                                 ),
                               ),
-                              baseColor: shimmerBaseColor,
-                              highlightColor: shimmerHighlightColor,
+                              baseColor: AppStyles.shimmerBaseColor,
+                              highlightColor: AppStyles.shimmerHighlightColor,
                             ),
                           ),
                           Padding(
@@ -324,8 +318,8 @@ class PackageShimmer extends StatelessWidget {
                                   color: Colors.grey[200]!,
                                 ),
                               ),
-                              baseColor: shimmerBaseColor,
-                              highlightColor: shimmerHighlightColor,
+                              baseColor: AppStyles.shimmerBaseColor,
+                              highlightColor: AppStyles.shimmerHighlightColor,
                             ),
                           ),
                           Padding(
@@ -340,8 +334,8 @@ class PackageShimmer extends StatelessWidget {
                                   color: Colors.grey[200]!,
                                 ),
                               ),
-                              baseColor: shimmerBaseColor,
-                              highlightColor: shimmerHighlightColor,
+                              baseColor: AppStyles.shimmerBaseColor,
+                              highlightColor: AppStyles.shimmerHighlightColor,
                             ),
                           )
                         ]),

@@ -1,7 +1,6 @@
 import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/models/package.dart';
 import 'package:asadamatic/src/mvc/views/boltgrocery/main.dart';
-import 'package:asadamatic/src/mvc/views/chat_room/src/constants/values.dart';
 import 'package:asadamatic/src/mvc/views/dailytodo/main.dart';
 import 'package:asadamatic/src/mvc/views/legacyweather/main.dart';
 import 'package:asadamatic/src/services/network.dart';
@@ -22,12 +21,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   double iconHeight = 30.0;
   double iconIncreasedHeight = 2.5;
   List<Package> packagesData = [];
-  final NetworkService _networkService = NetworkService();
-  double chatRoomHeight = ChatRoomValues.chatRoomHeightClosed;
-  double chatRoomWidth = ChatRoomValues.chatRoomHeightClosed;
-  bool chatRoomOpen = false;
-  bool chatRoomMax = false;
+
   bool packagesDataLoaded = false;
+  final NetworkService _networkService = NetworkService();
+
   @override
   void onInit() async {
     super.onInit();
@@ -46,7 +43,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         value: 0.002,
         animationBehavior: AnimationBehavior.preserve);
     nameAnimationController!.forward();
-    packagesData = await Future.wait(packages
+    packagesData = await Future.wait(AppConstants.packages
         .map((package) async => await _networkService.getPackageData(package))
         .toList());
     packagesDataLoaded = true;
@@ -114,36 +111,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   copyPackageVersion(String package) {
     FlutterClipboard.copy(package.replaceFirst(" ", ": ^"));
-  }
-
-  toggleChatRoom() {
-    if (chatRoomOpen) {
-      chatRoomHeight = ChatRoomValues.chatRoomHeightClosed;
-      chatRoomWidth = ChatRoomValues.chatRoomWidthClosed;
-      chatRoomOpen = !chatRoomOpen;
-      update(['updateChatRoomContainer']);
-    } else {
-      chatRoomHeight = ChatRoomValues.chatRoomHeightMin;
-      chatRoomWidth = ChatRoomValues.chatRoomWidthMin;
-      update(['updateChatRoomContainer']);
-      Future.delayed(const Duration(milliseconds: 600)).then((value) {
-        chatRoomOpen = !chatRoomOpen;
-        update(['updateChatRoomContainer']);
-      });
-    }
-  }
-
-  changeChatRoomSize({double? maxHeight, double? maxWidth}) {
-    if (chatRoomMax) {
-      chatRoomHeight = ChatRoomValues.chatRoomHeightMin;
-      chatRoomWidth = ChatRoomValues.chatRoomWidthMin;
-      chatRoomMax = false;
-    } else {
-      chatRoomHeight = ChatRoomValues.chatRoomHeightMax;
-      chatRoomWidth = ChatRoomValues.chatRoomWidthMax;
-      chatRoomMax = true;
-    }
-    update(['updateChatRoomContainer']);
   }
 
   @override

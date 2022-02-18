@@ -10,10 +10,10 @@ class SocialPalette extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: socialIcons
+      children: AppConstants.socialIcons
           .map((socialIcon) => SocialLogoIcon(
                 asset: socialIcon[0],
-                index: socialIcons.indexOf(socialIcon),
+                index: AppConstants.socialIcons.indexOf(socialIcon),
                 url: socialIcon[1],
               ))
           .toList(),
@@ -28,10 +28,10 @@ class AppIconPalette extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: appLogoIcons
+      children: AppConstants.appLogoIcons
           .map((appLogoIcon) => AppLogoIcon(
                 asset: appLogoIcon,
-                index: appLogoIcons.indexOf(appLogoIcon),
+                index: AppConstants.appLogoIcons.indexOf(appLogoIcon),
                 app: appLogoIcon.split('/')[1],
               ))
           .toList(),

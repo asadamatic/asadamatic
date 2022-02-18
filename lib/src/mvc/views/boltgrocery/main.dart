@@ -16,7 +16,7 @@ class BoltGroceryApp extends StatelessWidget {
       themeMode: _themeController.themeMode,
       debugShowCheckedModeBanner: false,
       color: Colors.white,
-      title: appTitle,
+      title: AppConstants.appTitle,
       theme: ThemeData(
           primaryColor: Colors.green[400],
           textSelectionTheme: TextSelectionThemeData(

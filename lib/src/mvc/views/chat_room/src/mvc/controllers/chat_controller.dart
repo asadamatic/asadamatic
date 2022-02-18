@@ -1,12 +1,13 @@
 import 'dart:async';
 
 import 'package:asadamatic/src/constant/values.dart';
-import 'package:asadamatic/src/mvc/models/session.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/session.dart';
 import 'package:asadamatic/src/mvc/models/user.dart';
-import 'package:asadamatic/src/mvc/models/verification_code.dart';
-import 'package:asadamatic/src/mvc/views/chat_room/src/chat_screen.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/verification_code.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/chat_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/reset_pin_screen.dart';
-import 'package:asadamatic/src/services/network.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/services/authentication.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/styles/values.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,12 +18,13 @@ class ChatController extends GetxController {
   final TextEditingController emailEditingController = TextEditingController();
   final TextEditingController nameEditingController = TextEditingController();
   final GlobalKey<FormState> welcomeFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> resetPinFormKey = GlobalKey<FormState>();
   bool? isLoading = false;
-  int? welcomePageIndex = 0;
+  int welcomePageIndex = 0;
+  int resetPinPageIndex = 0;
   final PageController welcomePageController = PageController();
-  final PageController intermediatePageController = PageController();
   final PageController resetPinPageController = PageController();
-  final NetworkService _networkService = NetworkService();
+  final Authentication _authentication = Authentication();
   DateTime? codeExpirationTime;
   Duration? timeLeft;
   RxString? timeDisplay = ''.obs;
@@ -30,13 +32,48 @@ class ChatController extends GetxController {
   VerificationCode? verificationCode;
   int? pin;
   Session? session;
+  bool isLoggedIn = false;
+  // ChatRoomContainer dimensions
+  double chatRoomHeight = ChatRoomStyles.chatRoomHeightClosed;
+  double chatRoomWidth = ChatRoomStyles.chatRoomWidthClosed;
+  bool chatRoomOpen = false;
+  bool chatRoomMax = false;
 
+
+  toggleChatRoom() {
+    if (chatRoomOpen) {
+      chatRoomHeight = ChatRoomStyles.chatRoomHeightClosed;
+      chatRoomWidth = ChatRoomStyles.chatRoomWidthClosed;
+      chatRoomOpen = !chatRoomOpen;
+      update(['updateChatRoomContainer']);
+    } else {
+      chatRoomHeight = ChatRoomStyles.chatRoomHeightMin;
+      chatRoomWidth = ChatRoomStyles.chatRoomWidthMin;
+      update(['updateChatRoomContainer']);
+      Future.delayed(const Duration(milliseconds: 600)).then((value) {
+        chatRoomOpen = !chatRoomOpen;
+        update(['updateChatRoomContainer']);
+      });
+    }
+  }
+  changeChatRoomResize({double? maxHeight, double? maxWidth}) {
+    if (chatRoomMax) {
+      chatRoomHeight = ChatRoomStyles.chatRoomHeightMin;
+      chatRoomWidth = ChatRoomStyles.chatRoomWidthMin;
+      chatRoomMax = false;
+    } else {
+      chatRoomHeight = ChatRoomStyles.chatRoomHeightMax;
+      chatRoomWidth = ChatRoomStyles.chatRoomWidthMax;
+      chatRoomMax = true;
+    }
+    update(['updateChatRoomContainer']);
+  }
   @override
   void onInit() async {
     super.onInit();
     sessionId = await getSessionId();
     if (sessionId!.isNotEmpty) {
-      final response = await _networkService.loadSession(sessionId);
+      final response = await _authentication.loadSession(sessionId);
       if (response.statusCode == 200) {
         session = Session.fromJson(response.body);
       } else {
@@ -50,11 +87,13 @@ class ChatController extends GetxController {
 
   // Email functions
   String? emailValidator(String? email) {
-    return emailRegExp.hasMatch(email!) ? null : 'Invalid email address';
+    return AppConstants.emailRegExp.hasMatch(email!)
+        ? null
+        : 'Invalid email address';
   }
 
   onEmailChanged(String? email) {
-    if (emailRegExp.hasMatch(email!)) {
+    if (AppConstants.emailRegExp.hasMatch(email!)) {
       welcomeFormKey.currentState!.validate();
     }
   }
@@ -84,7 +123,7 @@ class ChatController extends GetxController {
     if (welcomeFormKey.currentState!.validate()) {
       isLoading = true;
       update(['updateLoadingWidget']);
-      final response = await _networkService
+      final response = await _authentication
           .sendEmailForVerification(emailEditingController.text.trim());
       if (response.statusCode == 201) {
         verificationCode = VerificationCode.baseFromJson(response.body);
@@ -114,7 +153,7 @@ class ChatController extends GetxController {
     if (welcomeFormKey.currentState!.validate()) {
       isLoading = true;
       update(['updateLoadingWidget']);
-      final response = await _networkService.verifyCode(VerificationCode(
+      final response = await _authentication.verifyCode(VerificationCode(
           index: verificationCode!.index,
           email: verificationCode!.email,
           genTime: verificationCode!.genTime,
@@ -136,7 +175,7 @@ class ChatController extends GetxController {
     if (welcomeFormKey.currentState!.validate()) {
       isLoading = true;
       update(['updateLoadingWidget']);
-      final response = await _networkService.verifyPin(
+      final response = await _authentication.verifyPin(
           User(
               email: emailEditingController.text.isEmpty
                   ? session?.email
@@ -145,6 +184,7 @@ class ChatController extends GetxController {
           sessionId: session?.sessionId ?? '');
 
       if (response.statusCode == 200) {
+        isLoggedIn = true;
         if (session == null) {
           session = Session.fromJson(response.body);
           setSessionId(session!.sessionId!);
@@ -153,7 +193,7 @@ class ChatController extends GetxController {
           session!.isActive = true;
         }
 
-        update(['updateChatWrapper']);
+        update(['updateChatWrapper', 'updateChatRoomActions']);
       } else if (response.statusCode == 404) {}
       isLoading = false;
 
@@ -166,16 +206,17 @@ class ChatController extends GetxController {
       isLoading = true;
       update(['updateLoadingWidget']);
 
-      final response = await _networkService.updateData(
+      final response = await _authentication.updateData(
           User(
               email: verificationCode!.email,
               name: nameEditingController.text,
               pin: pin),
           sessionId: session?.sessionId ?? '');
       if (response.statusCode == 200) {
+        isLoggedIn = true;
         session = Session.fromJson(response.body);
         setSessionId(session!.sessionId!);
-        update(['updateChatWrapper']);
+        update(['updateChatWrapper', 'updateChatRoomActions']);
       } else {}
       isLoading = false;
 
@@ -194,8 +235,12 @@ class ChatController extends GetxController {
     }
   }
 
-  onWelcomePageChange(int? index) {
+  onWelcomePageChange(int index) {
     welcomePageIndex = index;
+    update(['updatePageIndexDisplay']);
+  }
+  onResetPinPageChange(int index){
+    resetPinPageIndex = index;
     update(['updatePageIndexDisplay']);
   }
 
@@ -214,7 +259,8 @@ class ChatController extends GetxController {
   }
 
   openChatScreen(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => const ChatScreen()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (_) => const ChatScreen()));
   }
 
   openResetPinScreen(BuildContext context) {
@@ -223,7 +269,7 @@ class ChatController extends GetxController {
   }
 
   differentEmail() async {
-    final response = await _networkService.removeOldSession(sessionId);
+    final response = await _authentication.removeOldSession(sessionId);
     if (response.statusCode == 200) {
       sessionId = "";
       session = null;
@@ -236,11 +282,12 @@ class ChatController extends GetxController {
     isLoading = true;
     update(['updateLoadingWidget']);
     final response =
-        await _networkService.logoutFromSession(session!.sessionId);
+        await _authentication.logoutFromSession(session!.sessionId);
 
     if (response.statusCode == 200) {
+      isLoggedIn = false;
       session!.isActive = false;
-      update(['updateChatWrapper']);
+      update(['updateChatWrapper', 'updateChatRoomActions']);
     } else {}
     isLoading = false;
 

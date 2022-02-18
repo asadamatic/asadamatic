@@ -4,7 +4,8 @@ import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/models/session.dart';
 import 'package:asadamatic/src/mvc/models/user.dart';
 import 'package:asadamatic/src/mvc/models/verification_code.dart';
-import 'package:asadamatic/src/mvc/views/chat_room/chat_screen.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/chat_screen.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/reset_pin_screen.dart';
 import 'package:asadamatic/src/services/network.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,11 +16,12 @@ class ChatController extends GetxController {
   String? sessionId = '';
   final TextEditingController emailEditingController = TextEditingController();
   final TextEditingController nameEditingController = TextEditingController();
-  final GlobalKey<FormState> visitorFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> welcomeFormKey = GlobalKey<FormState>();
   bool? isLoading = false;
   int? welcomePageIndex = 0;
   final PageController welcomePageController = PageController();
   final PageController intermediatePageController = PageController();
+  final PageController resetPinPageController = PageController();
   final NetworkService _networkService = NetworkService();
   DateTime? codeExpirationTime;
   Duration? timeLeft;
@@ -28,14 +30,12 @@ class ChatController extends GetxController {
   VerificationCode? verificationCode;
   int? pin;
   Session? session;
+
   @override
   void onInit() async {
     super.onInit();
-    print('Gettting session id');
     sessionId = await getSessionId();
     if (sessionId!.isNotEmpty) {
-      print('Gettting session');
-
       final response = await _networkService.loadSession(sessionId);
       if (response.statusCode == 200) {
         session = Session.fromJson(response.body);
@@ -55,7 +55,7 @@ class ChatController extends GetxController {
 
   onEmailChanged(String? email) {
     if (emailRegExp.hasMatch(email!)) {
-      visitorFormKey.currentState!.validate();
+      welcomeFormKey.currentState!.validate();
     }
   }
 
@@ -66,7 +66,7 @@ class ChatController extends GetxController {
 
   onNameChanged(String? name) {
     if (name!.isNotEmpty) {
-      visitorFormKey.currentState!.validate();
+      welcomeFormKey.currentState!.validate();
     }
   }
 
@@ -81,7 +81,7 @@ class ChatController extends GetxController {
   }
 
   processVisitorData(BuildContext context) async {
-    if (visitorFormKey.currentState!.validate()) {
+    if (welcomeFormKey.currentState!.validate()) {
       isLoading = true;
       update(['updateLoadingWidget']);
       final response = await _networkService
@@ -99,11 +99,11 @@ class ChatController extends GetxController {
           }
           getTime();
         });
-        switchToNextPage();
+        switchToNextPageOnAnyScreen();
       } else if (response.statusCode == 200) {
         userExists = true;
         update(['changeVerificationScreen']);
-        switchToNextPage();
+        switchToNextPageOnAnyScreen();
       }
       isLoading = false;
       update(['updateLoadingWidget']);
@@ -111,7 +111,7 @@ class ChatController extends GetxController {
   }
 
   verifyCode() async {
-    if (visitorFormKey.currentState!.validate()) {
+    if (welcomeFormKey.currentState!.validate()) {
       isLoading = true;
       update(['updateLoadingWidget']);
       final response = await _networkService.verifyCode(VerificationCode(
@@ -122,7 +122,7 @@ class ChatController extends GetxController {
           code: verificationCode!.code,
           usedTime: DateTime.now()));
       if (response.statusCode == 202) {
-        switchToNextPage();
+        switchToNextPageOnAnyScreen();
       } else if (response.statusCode == 204) {
       } else if (response.statusCode == 406) {
       } else if (response.statusCode == 404) {}
@@ -133,7 +133,7 @@ class ChatController extends GetxController {
   }
 
   verifyPin(BuildContext context) async {
-    if (visitorFormKey.currentState!.validate()) {
+    if (welcomeFormKey.currentState!.validate()) {
       isLoading = true;
       update(['updateLoadingWidget']);
       final response = await _networkService.verifyPin(
@@ -143,10 +143,8 @@ class ChatController extends GetxController {
                   : emailEditingController.text,
               pin: pin),
           sessionId: session?.sessionId ?? '');
-      print('----');
-      print(session?.sessionId ?? '');
+
       if (response.statusCode == 200) {
-        
         if (session == null) {
           session = Session.fromJson(response.body);
           setSessionId(session!.sessionId!);
@@ -164,14 +162,16 @@ class ChatController extends GetxController {
   }
 
   updateUserData(BuildContext context) async {
-    if (visitorFormKey.currentState!.validate()) {
+    if (welcomeFormKey.currentState!.validate()) {
       isLoading = true;
       update(['updateLoadingWidget']);
 
-      final response = await _networkService.updateData(User(
-          email: verificationCode!.email,
-          name: nameEditingController.text,
-          pin: pin), sessionId: session?.sessionId ?? '');
+      final response = await _networkService.updateData(
+          User(
+              email: verificationCode!.email,
+              name: nameEditingController.text,
+              pin: pin),
+          sessionId: session?.sessionId ?? '');
       if (response.statusCode == 200) {
         session = Session.fromJson(response.body);
         setSessionId(session!.sessionId!);
@@ -182,7 +182,6 @@ class ChatController extends GetxController {
       update(['updateLoadingWidget']);
     }
   }
-
 
   resetPin() {}
   getTime() {
@@ -200,44 +199,49 @@ class ChatController extends GetxController {
     update(['updatePageIndexDisplay']);
   }
 
-  switchToNextPage() {
-    if (visitorFormKey.currentState!.validate()) {
+  switchToNextPageOnAnyScreen() {
+    if (welcomeFormKey.currentState!.validate()) {
       welcomePageController.nextPage(
           duration: const Duration(milliseconds: 600), curve: Curves.easeIn);
     }
   }
 
-  openChatScreen(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => ChatScreen()));
+  switchToNextPageOnResetPinScreen() {
+    if (welcomeFormKey.currentState!.validate()) {
+      resetPinPageController.nextPage(
+          duration: const Duration(milliseconds: 600), curve: Curves.easeIn);
+    }
   }
 
-  differentEmail() async{
+  openChatScreen(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(builder: (_) => const ChatScreen()));
+  }
+
+  openResetPinScreen(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (_) => const ResetPinScreen()));
+  }
+
+  differentEmail() async {
     final response = await _networkService.removeOldSession(sessionId);
-    if (response.statusCode == 200){
+    if (response.statusCode == 200) {
       sessionId = "";
       session = null;
 
       update(['updateChatWrapper']);
     }
-    
   }
 
   logout() async {
-    print('Logout');
     isLoading = true;
     update(['updateLoadingWidget']);
-    print('Starting req');
     final response =
         await _networkService.logoutFromSession(session!.sessionId);
 
-    print('Logged Out');
     if (response.statusCode == 200) {
       session!.isActive = false;
-      print(session!.isActive);
       update(['updateChatWrapper']);
-    } else {
-      print('Did not log out');
-    }
+    } else {}
     isLoading = false;
 
     update(['updateLoadingWidget']);

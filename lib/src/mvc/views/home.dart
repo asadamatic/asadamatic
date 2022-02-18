@@ -1,8 +1,8 @@
 import 'package:asadamatic/src/constant/values.dart';
-import 'package:asadamatic/src/mvc/controllers/chat_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
-import 'package:asadamatic/src/mvc/views/chat_room/main.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/constants/values.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/main.dart';
 import 'package:asadamatic/src/mvc/views/device_view.dart';
 import 'package:asadamatic/src/mvc/views/fragments/footer.dart';
 import 'package:asadamatic/src/mvc/views/fragments/info_drawer.dart';
@@ -30,8 +30,6 @@ class Home extends StatelessWidget {
               child: LayoutBuilder(builder: (BuildContext layoutBuilderContext,
                   BoxConstraints constraints) {
                 if (constraints.maxWidth < 780) {
-                  print('Less than 780');
-                  print('Height ${constraints.maxHeight}');
                   return ListView(
                     children: [
                       Column(
@@ -179,7 +177,7 @@ class Home extends StatelessWidget {
           // const Positioned(right: 55.0, bottom: 35.0, child: ChatRoomContainer())
         ],
       ),
-      floatingActionButton: ChatRoomContainer(),
+      floatingActionButton: const ChatRoomContainer(),
     );
   }
 }

@@ -5,12 +5,18 @@ class VerificationCode {
   DateTime? usedTime;
   int? code;
   int? index;
-  VerificationCode({this.index, this.email, this.genTime, this.expireTime, this.usedTime, this.code});
+  VerificationCode(
+      {this.index,
+      this.email,
+      this.genTime,
+      this.expireTime,
+      this.usedTime,
+      this.code});
 
-  VerificationCode.base({this.index, this.email, this.genTime, this.expireTime});
+  VerificationCode.base(
+      {this.index, this.email, this.genTime, this.expireTime});
 
   Map<String, dynamic> toJson() {
-
     return {
       'index': index,
       'email': email,
@@ -23,7 +29,7 @@ class VerificationCode {
 
   factory VerificationCode.baseFromJson(json) {
     return VerificationCode.base(
-      index: json['index'],
+        index: json['index'],
         email: json['email'],
         genTime: DateTime.parse(json['gen_time']),
         expireTime: DateTime.parse(json['expire_time']));

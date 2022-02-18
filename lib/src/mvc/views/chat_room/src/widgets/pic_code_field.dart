@@ -1,4 +1,4 @@
-import 'package:asadamatic/src/mvc/controllers/chat_controller.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -61,9 +61,8 @@ class PinCodeField extends StatelessWidget {
                   if (_noOfFields == 6) {
                     _chatController.verificationCode!.code =
                         getCode(_codeEditingControllers);
-                  }else if (_noOfFields == 4){
-                    _chatController.pin =
-                        getCode(_codeEditingControllers);
+                  } else if (_noOfFields == 4) {
+                    _chatController.pin = getCode(_codeEditingControllers);
                   }
                   if (index == 0) {
                     if (value.isNotEmpty) {

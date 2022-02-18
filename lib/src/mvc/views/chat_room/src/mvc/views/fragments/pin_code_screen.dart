@@ -1,0 +1,79 @@
+import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_controller.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/auth_type.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/pic_code_field.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+
+class PinCodeScreen extends StatelessWidget {
+  const PinCodeScreen({Key? key, AuthType? authType})
+      : _authType = authType,
+        super(key: key);
+
+  final AuthType? _authType;
+
+  @override
+  Widget build(BuildContext context) {
+    final ChatController _chatController = Get.find();
+    final textTheme = Theme.of(context).textTheme;
+    final signingUp = _authType == AuthType.signUp;
+    return Container(
+        margin: const EdgeInsets.all(15.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  signingUp ? 'Choose a 4 digit pin!' : 'Enter your pin',
+                  style: textTheme.headline5,
+                ),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                signingUp
+                    ? Text(
+                  'To avoid verification next time.',
+                  style: textTheme.subtitle1,
+                )
+                    : const SizedBox(),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                const SizedBox(
+                    width: 200.0,
+                    child: PinCodeField(
+                      noOfFields: 4,
+                    )),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                InkWell(
+                  child: const Text('Reset Pin'),
+                  onTap: () => _chatController.openResetPinScreen(context),
+                )
+              ],
+            ),
+            Container(
+              width: 200.0,
+              height: 50.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100.0),
+              ),
+              child: ElevatedButton(
+                  style: ButtonStyle(
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(100.0))),
+                      textStyle:
+                      MaterialStateProperty.all(textTheme.subtitle1)),
+                  onPressed: () => signingUp
+                      ? _chatController.switchToNextPageOnAnyScreen()
+                      : _chatController.verifyPin(context),
+                  child: const Text('Submit')),
+            )
+          ],
+        ));
+  }
+}

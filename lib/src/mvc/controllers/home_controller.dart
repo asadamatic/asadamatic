@@ -1,6 +1,7 @@
 import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/models/package.dart';
 import 'package:asadamatic/src/mvc/views/boltgrocery/main.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/constants/values.dart';
 import 'package:asadamatic/src/mvc/views/dailytodo/main.dart';
 import 'package:asadamatic/src/mvc/views/legacyweather/main.dart';
 import 'package:asadamatic/src/services/network.dart';
@@ -138,7 +139,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       chatRoomWidth = ChatRoomValues.chatRoomWidthMin;
       chatRoomMax = false;
     } else {
-
       chatRoomHeight = ChatRoomValues.chatRoomHeightMax;
       chatRoomWidth = ChatRoomValues.chatRoomWidthMax;
       chatRoomMax = true;

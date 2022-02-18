@@ -56,8 +56,13 @@ class NetworkService extends GetConnect {
 
   Future<Response> updateData(User? user, {String? sessionId}) async {
     final deviceName = await getDeviceName();
-    final response = await post(url + settingPin,
-        jsonEncode({'user': user!.toJson(), 'session_id': sessionId,'device_name': deviceName}));
+    final response = await post(
+        url + settingPin,
+        jsonEncode({
+          'user': user!.toJson(),
+          'session_id': sessionId,
+          'device_name': deviceName
+        }));
     return response;
   }
 
@@ -74,11 +79,10 @@ class NetworkService extends GetConnect {
     return response;
   }
 
-  Future<Response> removeOldSession(String? sessionId) async{
+  Future<Response> removeOldSession(String? sessionId) async {
     final response = await get(
       url + removeSession + '?session_id=$sessionId',
     );
     return response;
   }
-
 }

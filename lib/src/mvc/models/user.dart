@@ -7,8 +7,7 @@ class User {
 
   User.name({this.email});
 
-  Map<String, dynamic> pinToJson(){
-
+  Map<String, dynamic> pinToJson() {
     return {
       'email': email,
       'pin': pin,

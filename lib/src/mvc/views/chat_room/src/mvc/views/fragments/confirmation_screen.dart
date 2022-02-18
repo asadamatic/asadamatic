@@ -1,54 +1,7 @@
-import 'package:asadamatic/src/mvc/controllers/chat_controller.dart';
-import 'package:asadamatic/src/mvc/views/chat_room/welcome_screen.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class IntermediateScreen extends StatelessWidget {
-  const IntermediateScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final ChatController _chatController = Get.find();
-    final textTheme = Theme.of(context).textTheme;
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: [
-          const Align(
-            alignment: Alignment.topCenter,
-            child: PageIndexIndicator(
-              pageCount: 2,
-            ),
-          ),
-          Form(
-            key: _chatController.visitorFormKey,
-            child: PageView(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: _chatController.welcomePageController,
-              onPageChanged: _chatController.onWelcomePageChange,
-              children: [
-                const ConfirmationScreen(),
-                PinCodeScreen(
-                  authType: AuthType.signIn,
-                ),
-              ],
-            ),
-          ),
-          GetBuilder<ChatController>(
-              id: 'updateLoadingWidget',
-              builder: (_chatController) => Container(
-                  color: Colors.white54,
-                  child: _chatController.isLoading!
-                      ? const Align(
-                          alignment: Alignment.center,
-                          child: CircularProgressIndicator(),
-                        )
-                      : const SizedBox()))
-        ],
-      ),
-    );
-  }
-}
 
 class ConfirmationScreen extends StatelessWidget {
   const ConfirmationScreen({Key? key}) : super(key: key);
@@ -90,8 +43,8 @@ class ConfirmationScreen extends StatelessWidget {
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(100.0))),
                         textStyle:
-                            MaterialStateProperty.all(textTheme.subtitle1)),
-                    onPressed: _chatController.switchToNextPage,
+                        MaterialStateProperty.all(textTheme.subtitle1)),
+                    onPressed: _chatController.switchToNextPageOnAnyScreen,
                     child: const Text('Proceed')),
               ),
               const SizedBox(

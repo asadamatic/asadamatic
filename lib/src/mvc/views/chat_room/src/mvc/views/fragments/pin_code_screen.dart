@@ -1,5 +1,6 @@
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_controller.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/auth_type.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/error_message.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/pic_code_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -52,7 +53,11 @@ class PinCodeScreen extends StatelessWidget {
                 InkWell(
                   child: const Text('Reset Pin'),
                   onTap: () => _chatController.openResetPinScreen(context),
-                )
+                ),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                ErrorMessage()
               ],
             ),
             Container(

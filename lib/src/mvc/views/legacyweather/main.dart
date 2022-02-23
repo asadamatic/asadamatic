@@ -1,5 +1,5 @@
-import 'package:asadamatic/main.dart';
 import 'package:asadamatic/src/constant/values.dart';
+import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:asadamatic/src/mvc/views/legacyweather/wrapper.dart';
 import 'package:asadamatic/src/mvc/views/legacyweather/constants/values.dart';
 import 'package:asadamatic/src/mvc/views/legacyweather/controllers/weather_controller.dart';

@@ -11,46 +11,57 @@ class ChatRoomActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ChatController _chatController = Get.find();
     return GetBuilder<ChatController>(
         id: 'updateChatRoomActions',
-        builder: (_chatController) => !_chatController.isLoggedIn
-            ? InkWell(
-                onTap: _chatController.toggleChatRoom,
-                child: Container(
-                    margin: const EdgeInsets.all(8.0),
-                    alignment: Alignment.center,
-                    height: ChatRoomStyles.actionSize,
-                    width: ChatRoomStyles.actionSize,
-                    decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(ChatRoomStyles.actionSize),
-                    ),
-                    child: ChatRoomConstants.closeIcon),
-              )
-            : Row(
+        builder: (_chatController) => Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: ChatRoomConstants.chatRoomActions
-                    .map(
-                      (chatRoomAction) => InkWell(
-                        onTap: () => chatRoomAction ==
-                                ChatRoomConstants.resizeIcon
-                            ? _chatController.changeChatRoomResize(
-                                maxHeight: MediaQuery.of(context).size.height,
-                                maxWidth: MediaQuery.of(context).size.width)
-                            : _chatController.toggleChatRoom(),
-                        child: Container(
-                            margin: const EdgeInsets.all(8.0),
-                            alignment: Alignment.center,
-                            height: ChatRoomStyles.actionSize,
-                            width: ChatRoomStyles.actionSize,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                  ChatRoomStyles.actionSize),
-                            ),
-                            child: chatRoomAction),
-                      ),
-                    )
-                    .toList()));
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  InkWell(
+                    onTap: _chatController.toggleChatRoom,
+                    child: Container(
+                        margin: const EdgeInsets.all(8.0),
+                        alignment: Alignment.center,
+                        height: ChatRoomStyles.actionSize,
+                        width: ChatRoomStyles.actionSize,
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(ChatRoomStyles.actionSize),
+                        ),
+                        child: ChatRoomConstants.closeIcon),
+                  ),
+                  if (_chatController.isLoggedIn)
+                    InkWell(
+                      onTap: () => _chatController.resizeChatRoom(
+                          maxHeight: MediaQuery.of(context).size.height,
+                          maxWidth: MediaQuery.of(context).size.width),
+                      child: Container(
+                          margin: const EdgeInsets.all(8.0),
+                          alignment: Alignment.center,
+                          height: ChatRoomStyles.actionSize,
+                          width: ChatRoomStyles.actionSize,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                                ChatRoomStyles.actionSize),
+                          ),
+                          child: ChatRoomConstants.resizeIcon),
+                    ),
+                  if (_chatController.isLoggedIn)
+                    InkWell(
+                      onTap: _chatController.logout,
+                      child: Container(
+                          margin: const EdgeInsets.all(8.0),
+                          alignment: Alignment.center,
+                          height: ChatRoomStyles.actionSize,
+                          width: ChatRoomStyles.actionSize,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                                ChatRoomStyles.actionSize),
+                          ),
+                          child: ChatRoomConstants.settingsIcon),
+                    ),
+                ]));
   }
 }

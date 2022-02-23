@@ -47,7 +47,7 @@ class Switcher extends StatelessWidget {
                                       ? Colors.black87
                                       : Colors.white,
                                   boxShadow: _homeController.osIndex.value ==
-                                      AppConstants.os.indexOf(e)
+                                          AppConstants.os.indexOf(e)
                                       ? [
                                           BoxShadow(
                                             color: Colors.grey.withOpacity(0.5),
@@ -59,7 +59,8 @@ class Switcher extends StatelessWidget {
                                       : []),
                               child: InkWell(
                                 onTap: () {
-                                  _homeController.onOsChanged(AppConstants.os.indexOf(e));
+                                  _homeController
+                                      .onOsChanged(AppConstants.os.indexOf(e));
                                 },
                                 child: OsLogoIcon(
                                     asset: AppConstants.os.indexOf(e) == 0
@@ -85,7 +86,7 @@ class Switcher extends StatelessWidget {
                                       ? Colors.black87
                                       : Colors.white,
                                   boxShadow: _homeController.osIndex.value ==
-                                      AppConstants.os.indexOf(e)
+                                          AppConstants.os.indexOf(e)
                                       ? [
                                           BoxShadow(
                                             color: Colors.grey.withOpacity(0.5),
@@ -97,7 +98,8 @@ class Switcher extends StatelessWidget {
                                       : []),
                               child: InkWell(
                                 onTap: () {
-                                  _homeController.onOsChanged(AppConstants.os.indexOf(e));
+                                  _homeController
+                                      .onOsChanged(AppConstants.os.indexOf(e));
                                 },
                                 onHover: (value) {
                                   _homeController.osOnHover(
@@ -106,7 +108,7 @@ class Switcher extends StatelessWidget {
                                 child: AnimatedScale(
                                   scale: _homeController.osHover.value
                                       ? _homeController.osHoverIndex.value ==
-                                      AppConstants.os.indexOf(e)
+                                              AppConstants.os.indexOf(e)
                                           ? 1.3
                                           : 1.0
                                       : 1.0,

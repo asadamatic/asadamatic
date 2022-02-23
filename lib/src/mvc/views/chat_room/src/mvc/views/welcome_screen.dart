@@ -30,7 +30,7 @@ class ChatRoomWelcome extends StatelessWidget {
           Form(
             key: _chatController.welcomeFormKey,
             child: PageView(
-              // physics: const NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               controller: _chatController.welcomePageController,
               onPageChanged: _chatController.onWelcomePageChange,
               children: [

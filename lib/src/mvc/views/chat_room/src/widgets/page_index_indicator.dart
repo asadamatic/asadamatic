@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PageIndexIndicator extends StatelessWidget {
-  const PageIndexIndicator({Key? key, required this.pageCount, required this.authType})
+  const PageIndexIndicator(
+      {Key? key, required this.pageCount, required this.authType})
       : super(key: key);
 
   final int? pageCount;

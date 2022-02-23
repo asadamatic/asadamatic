@@ -22,6 +22,7 @@ class PinCodeField extends StatelessWidget {
     final ChatController _chatController = Get.find();
     return SizedBox(
         width: 300.0,
+        height: 80.0,
         child: Row(
             children: _codeEditingControllers.asMap().entries.map((entry) {
           final index = entry.key;
@@ -56,6 +57,7 @@ class PinCodeField extends StatelessWidget {
                 controller: value,
                 maxLengthEnforcement: MaxLengthEnforcement.enforced,
                 keyboardType: TextInputType.number,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) => value!.isEmpty ? '' : null,
                 onChanged: (value) {
                   if (_noOfFields == 6) {
@@ -64,6 +66,7 @@ class PinCodeField extends StatelessWidget {
                   } else if (_noOfFields == 4) {
                     _chatController.pin = getCode(_codeEditingControllers);
                   }
+
                   if (index == 0) {
                     if (value.isNotEmpty) {
                       _focusNodeKeyboard[index].nextFocus();
@@ -88,6 +91,7 @@ class PinCodeField extends StatelessWidget {
                       }
                     }
                   }
+
                 },
                 onTap: () {
                   _codeEditingControllers[index].selection =
@@ -102,6 +106,7 @@ class PinCodeField extends StatelessWidget {
                 ],
                 textAlign: TextAlign.center,
                 decoration: const InputDecoration(
+                  errorStyle: TextStyle(height: 0.0, fontSize: 0.0),
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
                 ),

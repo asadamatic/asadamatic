@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 
 import 'package:asadamatic/src/constant/secrets.dart';
@@ -9,12 +7,11 @@ import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/verification_c
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
-class Authentication extends GetConnect{
-
+class Authentication extends GetConnect {
   final url = kDebugMode
       ? GetPlatform.isAndroid
-      ? localHostUrlAndroid
-      : localHostUrl
+          ? localHostUrlAndroid
+          : localHostUrl
       : remoteHostUrl;
   final emailVerification = 'verify-email';
   final codeVerification = 'verify-code';
@@ -24,10 +21,9 @@ class Authentication extends GetConnect{
   final logout = 'logout/';
   final removeSession = 'remove-session/';
 
-
   Future<Response> sendEmailForVerification(String? email) async {
     final response =
-    await post(url + emailVerification, jsonEncode({'email': email!}));
+        await post(url + emailVerification, jsonEncode({'email': email!}));
 
     return response;
   }
@@ -53,7 +49,7 @@ class Authentication extends GetConnect{
     return response;
   }
 
-  Future<Response> updateData(User? user, {String? sessionId}) async {
+  Future<Response> setUserData(User? user, {String? sessionId}) async {
     final deviceName = await AppConstants.getDeviceName();
     final response = await post(
         url + settingPin,
@@ -67,7 +63,6 @@ class Authentication extends GetConnect{
 
   Future<Response> loadSession(String? sessionId) async {
     final response = await get(url + session + '?session_id=$sessionId');
-
     return response;
   }
 

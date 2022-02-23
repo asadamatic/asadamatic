@@ -33,12 +33,12 @@ class ChatController extends GetxController {
   int? pin;
   Session? session;
   bool isLoggedIn = false;
+  RxString errorText = ''.obs;
   // ChatRoomContainer dimensions
   double chatRoomHeight = ChatRoomStyles.chatRoomHeightClosed;
   double chatRoomWidth = ChatRoomStyles.chatRoomWidthClosed;
   bool chatRoomOpen = false;
   bool chatRoomMax = false;
-
 
   toggleChatRoom() {
     if (chatRoomOpen) {
@@ -56,7 +56,8 @@ class ChatController extends GetxController {
       });
     }
   }
-  changeChatRoomResize({double? maxHeight, double? maxWidth}) {
+
+  resizeChatRoom({double? maxHeight, double? maxWidth}) {
     if (chatRoomMax) {
       chatRoomHeight = ChatRoomStyles.chatRoomHeightMin;
       chatRoomWidth = ChatRoomStyles.chatRoomWidthMin;
@@ -68,6 +69,7 @@ class ChatController extends GetxController {
     }
     update(['updateChatRoomContainer']);
   }
+
   @override
   void onInit() async {
     super.onInit();
@@ -119,17 +121,26 @@ class ChatController extends GetxController {
     return name!.isNotEmpty ? null : 'Provide a name';
   }
 
-  processVisitorData(BuildContext context) async {
+  verifyEmail(BuildContext context) async {
     if (welcomeFormKey.currentState!.validate()) {
+      // Display the loading widget while request in process
       isLoading = true;
       update(['updateLoadingWidget']);
+
+      // Calling API for email verification
       final response = await _authentication
           .sendEmailForVerification(emailEditingController.text.trim());
+
+      // Checking response for success
       if (response.statusCode == 201) {
+        errorText.value = '';
+        // Verification code is sent to the provided email address
         verificationCode = VerificationCode.baseFromJson(response.body);
 
         timeLeft = verificationCode!.expireTime!
             .difference(verificationCode!.genTime!);
+
+        // Registering a timer that ticks every 1 second and will run for [timeLeft]
         Timer.periodic(const Duration(seconds: 1), (timer) {
           if (timeLeft == Duration.zero) {
             getTime();
@@ -138,12 +149,21 @@ class ChatController extends GetxController {
           }
           getTime();
         });
+
         switchToNextPageOnAnyScreen();
       } else if (response.statusCode == 200) {
+        errorText.value = '';
+        // User already exists for the provided email, so directing user to enter [pin]
+
         userExists = true;
         update(['changeVerificationScreen']);
         switchToNextPageOnAnyScreen();
+
+      } else {
+        errorText.value = 'Some error occurred!';
       }
+
+      // Hiding the loading widget once the request is complete
       isLoading = false;
       update(['updateLoadingWidget']);
     }
@@ -151,8 +171,11 @@ class ChatController extends GetxController {
 
   verifyCode() async {
     if (welcomeFormKey.currentState!.validate()) {
+      // Display the loading widget while request in process
       isLoading = true;
       update(['updateLoadingWidget']);
+
+      // Calling API for email code verification
       final response = await _authentication.verifyCode(VerificationCode(
           index: verificationCode!.index,
           email: verificationCode!.email,
@@ -160,21 +183,34 @@ class ChatController extends GetxController {
           expireTime: verificationCode!.expireTime,
           code: verificationCode!.code,
           usedTime: DateTime.now()));
-      if (response.statusCode == 202) {
-        switchToNextPageOnAnyScreen();
-      } else if (response.statusCode == 204) {
-      } else if (response.statusCode == 406) {
-      } else if (response.statusCode == 404) {}
-      isLoading = false;
 
+      // Checking response for success
+      if (response.statusCode == 202) {
+        errorText.value = '';
+        switchToNextPageOnAnyScreen();
+      } else if (response.statusCode == 200) {
+        errorText.value = 'Verification code did not match!';
+      } else if (response.statusCode == 406) {
+        errorText.value = 'Verification code expired!';
+      } else if (response.statusCode == 404) {
+        errorText.value = 'Invalid verification code!';
+      }
+
+      // Hiding the loading widget once the request is complete
+      isLoading = false;
       update(['updateLoadingWidget']);
     }
   }
 
   verifyPin(BuildContext context) async {
     if (welcomeFormKey.currentState!.validate()) {
+      // Display the loading widget while request in process
+
       isLoading = true;
       update(['updateLoadingWidget']);
+
+      // Calling API for user pin verification
+
       final response = await _authentication.verifyPin(
           User(
               email: emailEditingController.text.isEmpty
@@ -183,7 +219,10 @@ class ChatController extends GetxController {
               pin: pin),
           sessionId: session?.sessionId ?? '');
 
+      // Checking response for success
+
       if (response.statusCode == 200) {
+        errorText.value = '';
         isLoggedIn = true;
         if (session == null) {
           session = Session.fromJson(response.body);
@@ -192,34 +231,46 @@ class ChatController extends GetxController {
         } else {
           session!.isActive = true;
         }
-
         update(['updateChatWrapper', 'updateChatRoomActions']);
-      } else if (response.statusCode == 404) {}
-      isLoading = false;
+      } else if (response.statusCode == 404) {
+        errorText.value = 'Pin did not match!';
+      } else if (response.statusCode == 500) {
+        errorText.value = 'Some error occurred!';
+      }
 
+      // Hiding the loading widget once the request is complete
+      isLoading = false;
       update(['updateLoadingWidget']);
     }
   }
 
-  updateUserData(BuildContext context) async {
+  setUserData(BuildContext context) async {
     if (welcomeFormKey.currentState!.validate()) {
+      // Display the loading widget while request in process
+
       isLoading = true;
       update(['updateLoadingWidget']);
 
-      final response = await _authentication.updateData(
+      // Calling API to set user pin and name
+
+      final response = await _authentication.setUserData(
           User(
               email: verificationCode!.email,
               name: nameEditingController.text,
               pin: pin),
           sessionId: session?.sessionId ?? '');
       if (response.statusCode == 200) {
+        errorText.value = '';
         isLoggedIn = true;
         session = Session.fromJson(response.body);
         setSessionId(session!.sessionId!);
         update(['updateChatWrapper', 'updateChatRoomActions']);
-      } else {}
-      isLoading = false;
+      } else {
+        errorText.value = 'Some error occurred!';
+      }
 
+      // Hiding the loading widget once the request is complete
+      isLoading = false;
       update(['updateLoadingWidget']);
     }
   }
@@ -239,7 +290,8 @@ class ChatController extends GetxController {
     welcomePageIndex = index;
     update(['updatePageIndexDisplay']);
   }
-  onResetPinPageChange(int index){
+
+  onResetPinPageChange(int index) {
     resetPinPageIndex = index;
     update(['updatePageIndexDisplay']);
   }

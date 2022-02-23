@@ -1,4 +1,4 @@
-import 'package:asadamatic/main.dart';
+import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:asadamatic/src/mvc/views/dailytodo/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/views/dailytodo/data_model/task_data.dart';
 import 'package:flutter/material.dart';

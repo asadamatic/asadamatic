@@ -13,7 +13,6 @@ class IntermediateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ChatController _chatController = Get.find();
-    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(

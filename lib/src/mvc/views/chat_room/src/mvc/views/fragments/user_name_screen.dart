@@ -1,4 +1,5 @@
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_controller.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/error_message.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -34,13 +35,20 @@ class UserNameScreen extends StatelessWidget {
               const SizedBox(
                 height: 15.0,
               ),
-              TextFormField(
-                validator: _chatController.nameValidator,
-                controller: _chatController.nameEditingController,
-                onChanged: _chatController.onNameChanged,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), hintText: 'Asad Hameed'),
+              SizedBox(
+                height: 80.0,
+                child: TextFormField(
+                  validator: _chatController.nameValidator,
+                  controller: _chatController.nameEditingController,
+                  onChanged: _chatController.onNameChanged,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), hintText: 'Asad Hameed'),
+                ),
               ),
+              const SizedBox(
+                height: 15.0,
+              ),
+              ErrorMessage()
             ],
           ),
           Container(
@@ -54,7 +62,7 @@ class UserNameScreen extends StatelessWidget {
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(100.0))),
                     textStyle: MaterialStateProperty.all(textTheme.subtitle1)),
-                onPressed: () => _chatController.updateUserData(context),
+                onPressed: () => _chatController.setUserData(context),
                 child: const Text('Proceed')),
           )
         ],

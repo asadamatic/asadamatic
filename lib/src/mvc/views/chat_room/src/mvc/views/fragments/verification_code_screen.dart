@@ -1,4 +1,5 @@
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_controller.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/error_message.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/pic_code_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,27 +38,34 @@ class VerificationCodeScreen extends StatelessWidget {
               ],
             ),
             Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
                     width: 300.0,
                     child: PinCodeField(
                       noOfFields: 6,
                     )),
-                GetBuilder<ChatController>(
-                    id: 'updateResendButton',
-                    builder: (_chatController) =>
-                        _chatController.timeLeft == Duration.zero
-                            ? Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: InkWell(
-                                  child: const Text('Resend code'),
-                                  onTap: () {},
-                                ),
-                              )
-                            : const SizedBox(
-                                height: 16.0,
-                              ))
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: GetBuilder<ChatController>(
+                      id: 'updateResendButton',
+                      builder: (_chatController) =>
+                          _chatController.timeLeft == Duration.zero
+                              ? Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: InkWell(
+                                    child: const Text('Resend code'),
+                                    onTap: () {},
+                                  ),
+                                )
+                              : const SizedBox(
+                                  height: 16.0,
+                                )),
+                ),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                ErrorMessage()
               ],
             ),
             Container(

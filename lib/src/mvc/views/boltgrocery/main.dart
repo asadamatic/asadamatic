@@ -1,5 +1,5 @@
-import 'package:asadamatic/main.dart';
 import 'package:asadamatic/src/constant/values.dart';
+import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:asadamatic/src/mvc/views/boltgrocery/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

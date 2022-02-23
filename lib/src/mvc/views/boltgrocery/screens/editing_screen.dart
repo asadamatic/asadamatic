@@ -1,4 +1,4 @@
-import 'package:asadamatic/main.dart';
+import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:asadamatic/src/mvc/views/boltgrocery/controllers/editing_controller.dart';
 import 'package:asadamatic/src/mvc/views/boltgrocery/data_models/category.dart';
 import 'package:asadamatic/src/mvc/views/boltgrocery/data_models/grocery_item.dart';

@@ -1,5 +1,5 @@
-import 'package:asadamatic/main.dart';
 import 'package:asadamatic/src/constant/values.dart';
+import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';

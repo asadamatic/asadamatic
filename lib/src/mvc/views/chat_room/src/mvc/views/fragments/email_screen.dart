@@ -1,5 +1,6 @@
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_controller.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/auth_type.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/error_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -38,17 +39,24 @@ class EmailScreen extends StatelessWidget {
                 height: 15.0,
               ),
               //height: 60.0
-              TextFormField(
-                validator: _chatController.emailValidator,
-                controller: _chatController.emailEditingController,
-                onChanged: _chatController.onEmailChanged,
-                inputFormatters: [
-                  FilteringTextInputFormatter.deny(RegExp('[ ]')),
-                ],
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'example@gmail.com'),
+              SizedBox(
+                height: 80.0,
+                child: TextFormField(
+                  validator: _chatController.emailValidator,
+                  controller: _chatController.emailEditingController,
+                  onChanged: _chatController.onEmailChanged,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.deny(RegExp('[ ]')),
+                  ],
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'example@gmail.com'),
+                ),
               ),
+              const SizedBox(
+                height: 15.0,
+              ),
+              ErrorMessage()
             ],
           ),
           Container(
@@ -62,7 +70,7 @@ class EmailScreen extends StatelessWidget {
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(100.0))),
                     textStyle: MaterialStateProperty.all(textTheme.subtitle1)),
-                onPressed: () => _chatController.processVisitorData(context),
+                onPressed: () => _chatController.verifyEmail(context),
                 child: const Text('Proceed')),
           )
         ],

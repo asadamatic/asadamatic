@@ -2,8 +2,6 @@ import 'package:asadamatic/src/mvc/views/chat_room/src/styles/values.dart';
 import 'package:flutter/material.dart';
 
 class ChatRoomConstants {
-
-
   static const Icon resizeIcon = Icon(
     Icons.fullscreen,
     size: ChatRoomStyles.actionIconSize,
@@ -12,5 +10,9 @@ class ChatRoomConstants {
     Icons.close,
     size: ChatRoomStyles.actionIconSize,
   );
-  static const List<Icon> chatRoomActions = [resizeIcon, closeIcon];
+  static const Icon settingsIcon = Icon(
+    Icons.settings,
+    size: ChatRoomStyles.actionIconSize,
+  );
+  // static const List<Icon> chatRoomActions = [resizeIcon, closeIcon];
 }

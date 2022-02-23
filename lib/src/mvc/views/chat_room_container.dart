@@ -1,4 +1,4 @@
-import 'package:asadamatic/main.dart';
+import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/main.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_controller.dart';
 import 'package:asadamatic/src/widgets/chat_room_actions.dart';
@@ -33,7 +33,12 @@ class ChatRoomContainer extends StatelessWidget {
                     return Offstage(
                       offstage: !_controller.chatRoomOpen,
                       child: Stack(
-                        children: const [ ChatRoom(), ChatRoomActions()],
+                        children: const [
+                          ChatRoom(),
+                          Align(
+                              alignment: Alignment.topLeft,
+                              child: ChatRoomActions())
+                        ],
                       ),
                     );
                   }),

@@ -57,7 +57,7 @@ class PinCodeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 15.0,
                 ),
-                ErrorMessage()
+                const ErrorMessage()
               ],
             ),
             Container(

@@ -10,7 +10,7 @@ class ErrorMessage extends StatelessWidget {
     final ChatController _chatController = Get.find();
     return Obx(() => Text(
           _chatController.errorText.value,
-          style: TextStyle(color: Colors.red),
+          style: const TextStyle(color: Colors.red),
         ));
   }
 }

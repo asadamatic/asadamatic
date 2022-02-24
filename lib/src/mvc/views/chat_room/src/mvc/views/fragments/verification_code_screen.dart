@@ -12,65 +12,63 @@ class VerificationCodeScreen extends StatelessWidget {
     final ChatController _chatController = Get.find();
     final textTheme = Theme.of(context).textTheme;
     return Container(
-        alignment: Alignment.center,
+        height: 300.0,
         margin: const EdgeInsets.all(15.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: Text(
-                    'Verification code expires in 3 minutes',
-                    style: textTheme.subtitle1,
-                  ),
-                ),
-                const SizedBox(
-                  width: 15.0,
-                ),
-                Obx(() => Text(
-                      _chatController.timeDisplay!.value,
-                      style: textTheme.headline6,
-                    )),
-              ],
-            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                //height: 24.0
+                Text(
+                  "Enter 6-Digit Code",
+                  style: textTheme.headline5,
+                ),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                //height: 16.0
+                Text(
+                  'Check your email for code.',
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+                const SizedBox(
+                  height: 15.0,
+                ),
                 const SizedBox(
                     width: 300.0,
                     child: PinCodeField(
                       noOfFields: 6,
                     )),
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: GetBuilder<ChatController>(
-                      id: 'updateResendButton',
-                      builder: (_chatController) =>
-                          _chatController.timeLeft == Duration.zero
-                              ? Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: InkWell(
-                                    child: const Text('Resend code'),
-                                    onTap: () {},
-                                  ),
-                                )
-                              : const SizedBox(
-                                  height: 16.0,
-                                )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    GetBuilder<ChatController>(
+                        id: 'updateResendButton',
+                        builder: (_chatController) => InkWell(
+                              child: const Text('Resend code'),
+                              onTap: _chatController.timeLeft == Duration.zero
+                                  ? () {}
+                                  : null,
+                            )),
+                    Obx(() => Text(
+                          _chatController.timeDisplay!.value,
+                          style: textTheme.headline6,
+                        )),
+                  ],
                 ),
                 const SizedBox(
                   height: 15.0,
                 ),
-                const ErrorMessage()
+                const ErrorMessage(),
               ],
             ),
             Container(
               width: 200.0,
               height: 50.0,
+              margin: const EdgeInsets.symmetric(vertical: 12.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100.0),
               ),

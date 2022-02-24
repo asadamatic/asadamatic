@@ -8,9 +8,12 @@ class ErrorMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ChatController _chatController = Get.find();
-    return Obx(() => Text(
-          _chatController.errorText.value,
-          style: const TextStyle(color: Colors.red),
-        ));
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
+      child: Obx(() => Text(
+            _chatController.errorText.value,
+            style: const TextStyle(color: Colors.red),
+          )),
+    );
   }
 }

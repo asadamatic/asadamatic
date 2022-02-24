@@ -13,6 +13,7 @@ class Wrapper extends StatelessWidget {
     return GetBuilder<ChatController>(
       id: 'updateChatWrapper',
       builder: (_controller) {
+        _controller.welcomePageIndex = 0;
         if (_controller.sessionIdLoaded!) {
           if (_controller.sessionId!.isNotEmpty) {
             if (_controller.session!.isActive!) {

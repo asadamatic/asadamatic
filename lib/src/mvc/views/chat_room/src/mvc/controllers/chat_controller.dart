@@ -33,7 +33,7 @@ class ChatController extends GetxController {
   int? pin;
   Session? session;
   bool isLoggedIn = false;
-  RxString errorText = ''.obs;
+  RxString errorText = 'afasf'.obs;
   // ChatRoomContainer dimensions
   double chatRoomHeight = ChatRoomStyles.chatRoomHeightClosed;
   double chatRoomWidth = ChatRoomStyles.chatRoomWidthClosed;
@@ -247,7 +247,8 @@ class ChatController extends GetxController {
   setUserData(BuildContext context) async {
     if (welcomeFormKey.currentState!.validate()) {
       // Display the loading widget while request in process
-
+      setSessionId('');
+      sessionId = "";
       isLoading = true;
       update(['updateLoadingWidget']);
 
@@ -325,7 +326,6 @@ class ChatController extends GetxController {
     if (response.statusCode == 200) {
       sessionId = "";
       session = null;
-
       update(['updateChatWrapper']);
     }
   }

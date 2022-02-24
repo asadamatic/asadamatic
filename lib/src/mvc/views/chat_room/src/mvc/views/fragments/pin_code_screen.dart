@@ -20,7 +20,7 @@ class PinCodeScreen extends StatelessWidget {
     return Container(
         margin: const EdgeInsets.all(15.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Column(
@@ -63,6 +63,7 @@ class PinCodeScreen extends StatelessWidget {
             Container(
               width: 200.0,
               height: 50.0,
+              margin: const EdgeInsets.symmetric(vertical: 12.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100.0),
               ),

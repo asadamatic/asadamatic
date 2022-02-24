@@ -16,10 +16,11 @@ class EmailScreen extends StatelessWidget {
       height: 300.0,
       margin: const EdgeInsets.all(15.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //height: 24.0
@@ -62,6 +63,7 @@ class EmailScreen extends StatelessWidget {
           Container(
             width: 200.0,
             height: 50.0,
+            margin: const EdgeInsets.symmetric(vertical: 12.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100.0),
             ),

@@ -19,7 +19,7 @@ class Authentication extends GetConnect {
   final verificationPin = 'verify-pin';
   final session = 'session/';
   final logout = 'logout/';
-  final removeSession = 'remove-session/';
+  final removeSession = 'remove-session';
 
   Future<Response> sendEmailForVerification(String? email) async {
     final response =

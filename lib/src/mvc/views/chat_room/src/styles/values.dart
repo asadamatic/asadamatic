@@ -44,12 +44,11 @@ class ChatRoomStyles {
         brightness: Brightness.dark,
       ),
       inputDecorationTheme: const InputDecorationTheme(
-        fillColor: Colors.red,
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: ChatRoomStyles.accentColor)),
       ),
       textSelectionTheme: TextSelectionThemeData(
-        selectionColor: ChatRoomStyles.accentColor.withOpacity(.7),
+        selectionColor: ChatRoomStyles.accentColor.withOpacity(.4),
         cursorColor: ChatRoomStyles.accentColor,
         selectionHandleColor: ChatRoomStyles.accentColor,
       ),

@@ -33,7 +33,7 @@ class ChatController extends GetxController {
   int? pin;
   Session? session;
   bool isLoggedIn = false;
-  RxString errorText = 'afasf'.obs;
+  RxString errorText = ''.obs;
   // ChatRoomContainer dimensions
   double chatRoomHeight = ChatRoomStyles.chatRoomHeightClosed;
   double chatRoomWidth = ChatRoomStyles.chatRoomWidthClosed;

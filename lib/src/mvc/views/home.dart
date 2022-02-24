@@ -34,6 +34,7 @@ class Home extends StatelessWidget {
                 if (constraints.maxWidth < AppStyles.breakPointSmallMedium) {
                   return ListView(
                     children: [
+                      const SizedBox(height: 100,),
                       Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -77,6 +78,7 @@ class Home extends StatelessWidget {
                     constraints.maxWidth < AppStyles.breakPointMediumLarge) {
                   return ListView(
                     children: [
+                      const SizedBox(height: 100,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -123,6 +125,7 @@ class Home extends StatelessWidget {
                 } else {
                   return ListView(
                     children: [
+                      const SizedBox(height: 100,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -168,7 +171,7 @@ class Home extends StatelessWidget {
               }),
             ),
           ),
-          const DrawerToggle(),
+          DrawerToggle(),
           Align(
             alignment: Alignment.topRight,
             child: GetBuilder<ThemeController>(builder: (_themeController) {

@@ -33,9 +33,9 @@ class ChatRoomContainer extends StatelessWidget {
                     return Offstage(
                       offstage: !_controller.chatRoomOpen,
                       child: Stack(
-                        children: const [
+                        children: [
                           ChatRoom(),
-                          Align(
+                          const Align(
                               alignment: Alignment.topLeft,
                               child: ChatRoomActions())
                         ],

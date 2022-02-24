@@ -5,7 +5,7 @@ class Package {
   final String? pubPoints;
   final String? popularity;
 
-  Package(
+  const Package(
       {this.name,
       this.description,
       this.likes,

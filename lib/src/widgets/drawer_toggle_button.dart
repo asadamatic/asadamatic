@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DrawerToggle extends StatelessWidget {
-  const DrawerToggle({Key? key}) : super(key: key);
+  DrawerToggle({Key? key}) : super(key: key);
+
+  final ThemeController _themeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     final HomeController _homeController = Get.find();
-    final ThemeController _themeController = Get.find();
     return PositionedTransition(
         rect: RelativeRectTween(
           begin: RelativeRect.fromLTRB(

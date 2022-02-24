@@ -19,18 +19,8 @@ class App extends StatelessWidget {
       initialRoute: Routes.home,
       title: AppConstants.appTitle,
       themeMode: ThemeMode.system,
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        iconTheme: const IconThemeData(color: Colors.white),
-        shadowColor: Colors.grey.withOpacity(0.5),
-      ),
-      theme: ThemeData(
-        primaryColor: AppStyles.primaryColor,
-        iconTheme: const IconThemeData(color: Colors.black),
-        shadowColor: Colors.grey.withOpacity(0.5),
-        colorScheme: ColorScheme.fromSwatch()
-            .copyWith(secondary: AppStyles.primaryColor),
-      ),
+      darkTheme: AppStyles.darkTheme,
+      theme: AppStyles.lightTheme,
     );
   }
 }

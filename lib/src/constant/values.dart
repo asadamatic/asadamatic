@@ -1,3 +1,4 @@
+import 'package:asadamatic/src/mvc/models/package.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:get/get.dart';
 
@@ -21,6 +22,8 @@ class AppConstants {
     ],
     ['assets/linkedin.png', 'https://www.linkedin.com/in/asadamatic']
   ];
+  static const String linkedInUrl =
+      'https://stackoverflow.com/users/10285344/asad-hameed';
   static const List<String> appLogoIcons = [
     'assets/boltgrocery/icon.png',
     'assets/dailytodo/icon.png',
@@ -33,6 +36,29 @@ class AppConstants {
     'dialogs'
   ];
 
+  static const List<Package> packagesDescription = [
+    Package(
+        name: 'firestore_search',
+        description:
+            'This package helps developers in implementation of search on Cloud FireStore. This package comes with the implementation of widgets essential  for  performing search on a database.',
+        pubPoints: '120',
+        popularity: '88',
+        likes: '47'),
+    Package(
+        name: 'file_case',
+        description:
+            'A flutter widget to showcase and process uploaded files on Web, Android, Ios, MacOs, Linux & Windows.',
+        pubPoints: '130',
+        popularity: '63',
+        likes: '4'),
+    Package(
+        name: 'dialogs',
+        description:
+            'This flutter package provides aesthetically designed dialog box with customization options.',
+        pubPoints: '110',
+        popularity: '80',
+        likes: '12'),
+  ];
   static const List<String> tools = [
     'Flutter',
     'FastAPI',

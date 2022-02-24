@@ -9,10 +9,11 @@ class NetworkService extends GetConnect {
           ? localHostUrlAndroid
           : localHostUrl
       : remoteHostUrl;
-  final packageData = 'packages/';
+  final packagesData = 'packages/';
 
-  Future<Package> getPackageData(String package) async {
-    final response = await get(url + packageData + package);
-    return Package.fromJson(response.body);
+  Future<Response> getPackagesData() async {
+    final response = await get(url + packagesData);
+
+    return response;
   }
 }

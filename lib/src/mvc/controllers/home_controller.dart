@@ -8,6 +8,7 @@ import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeController extends GetxController with GetTickerProviderStateMixin {
   AnimationController? animationController;
@@ -43,9 +44,17 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         value: 0.002,
         animationBehavior: AnimationBehavior.preserve);
     nameAnimationController!.forward();
-    packagesData = await Future.wait(AppConstants.packages
-        .map((package) async => await _networkService.getPackageData(package))
-        .toList());
+
+    final result = await _networkService.getPackagesData();
+    if (result.statusCode == 200) {
+      packagesData = [
+        Package.fromJson(result.body[0]),
+        Package.fromJson(result.body[1]),
+        Package.fromJson(result.body[2])
+      ];
+    }else{
+        packagesData = AppConstants.packagesDescription;
+    }
     packagesDataLoaded = true;
     update(['updatePackagesData']);
   }
@@ -111,6 +120,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   copyPackageVersion(String package) {
     FlutterClipboard.copy(package.replaceFirst(" ", ": ^"));
+  }
+
+  hireMe() async {
+    await launch(AppConstants.linkedInUrl);
   }
 
   @override

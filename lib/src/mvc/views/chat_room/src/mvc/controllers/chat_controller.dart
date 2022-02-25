@@ -57,13 +57,12 @@ class ChatController extends GetxController {
       });
     }
   }
-
+  
   pushPopChatRoom(BuildContext context) {
     if (chatRoomOpen) {
-      Navigator.pop(context);
+      Get.back();
     } else {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (_) =>  ChatRoom()));
+      Get.to(ChatRoom());
     }
     chatRoomOpen = !chatRoomOpen;
   }

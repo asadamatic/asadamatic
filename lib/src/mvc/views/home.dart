@@ -48,7 +48,7 @@ class Home extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(
-                              width: AppStyles.mobileWidth,
+                              width: AppStyles.deviceViewWidth,
                               child: DeviceView()),
                           const SizedBox(
                             height: 10.0,
@@ -91,7 +91,7 @@ class Home extends StatelessWidget {
                             child: Switcher(),
                           ),
                           const SizedBox(
-                              width: AppStyles.mobileWidth,
+                              width: AppStyles.deviceViewWidth,
                               child: DeviceView()),
                           const SizedBox(
                             width: 30.0,
@@ -138,7 +138,7 @@ class Home extends StatelessWidget {
                             child: Switcher(),
                           ),
                           const SizedBox(
-                              width: AppStyles.mobileWidth,
+                              width: AppStyles.deviceViewWidth,
                               child: DeviceView()),
                           const SizedBox(
                             width: 30.0,

@@ -2,6 +2,7 @@ import 'package:asadamatic/src/mvc/models/package.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:get/get.dart';
 
+import 'package:flutter/foundation.dart';
 class AppConstants {
   static const String appTitle = 'Asad Hameed - Flutter Developer';
 
@@ -85,7 +86,27 @@ class AppConstants {
     else if (GetPlatform.isWeb) {
       WebBrowserInfo webBrowserInfo = await deviceInfo.webBrowserInfo;
       return webBrowserInfo.platform;
+
     }
     return 'Device not recognized';
   }
+
+  static const appleType = "apple";
+  static const androidType = "android";
+  static const desktopType = "desktop";
+
+  static final isWebMobile = kIsWeb && (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android);
+
+  // String getSmartPhoneOrTablet() {
+  //   final userAgent = html.window.navigator.userAgent.toString().toLowerCase();
+  //   // smartphone
+  //   if( userAgent.contains("iphone"))  return appleType;
+  //   if( userAgent.contains("android"))  return androidType;
+  //
+  //   // tablet
+  //   if( userAgent.contains("ipad")) return appleType;
+  //   if( html.window.navigator.platform.toLowerCase().contains("macintel") && html.window.navigator.maxTouchPoints > 0 ) return appleType;
+  //
+  //   return desktopType;
+  // }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:asadamatic/src/constant/values.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/main.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/session.dart';
 import 'package:asadamatic/src/mvc/models/user.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/verification_code.dart';
@@ -33,7 +34,7 @@ class ChatController extends GetxController {
   int? pin;
   Session? session;
   bool isLoggedIn = false;
-  RxString errorText = 'afasf'.obs;
+  RxString errorText = ''.obs;
   // ChatRoomContainer dimensions
   double chatRoomHeight = ChatRoomStyles.chatRoomHeightClosed;
   double chatRoomWidth = ChatRoomStyles.chatRoomWidthClosed;
@@ -55,6 +56,16 @@ class ChatController extends GetxController {
         update(['updateChatRoomContainer']);
       });
     }
+  }
+
+  pushPopChatRoom(BuildContext context) {
+    if (chatRoomOpen) {
+      Navigator.pop(context);
+    } else {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (_) =>  ChatRoom()));
+    }
+    chatRoomOpen = !chatRoomOpen;
   }
 
   resizeChatRoom({double? maxHeight, double? maxWidth}) {
@@ -158,7 +169,6 @@ class ChatController extends GetxController {
         userExists = true;
         update(['changeVerificationScreen']);
         switchToNextPageOnAnyScreen();
-
       } else {
         errorText.value = 'Some error occurred!';
       }

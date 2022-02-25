@@ -10,14 +10,11 @@ class ChatRoom extends StatelessWidget {
   final ThemeController _themeController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(12.0),
-      child: MaterialApp(
-          themeMode: _themeController.themeMode!,
-          darkTheme: ChatRoomStyles.darkTheme,
-          theme: ChatRoomStyles.lightTheme,
-          debugShowCheckedModeBanner: false,
-          home: const Wrapper()),
-    );
+    return MaterialApp(
+        themeMode: _themeController.themeMode!,
+        darkTheme: ChatRoomStyles.darkTheme,
+        theme: ChatRoomStyles.lightTheme,
+        debugShowCheckedModeBanner: false,
+        home: const Wrapper());
   }
 }

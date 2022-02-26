@@ -42,17 +42,22 @@ class EmailScreen extends StatelessWidget {
               //height: 60.0
               SizedBox(
                 height: 80.0,
-                child: TextFormField(
-                  validator: _chatController.emailValidator,
-                  controller: _chatController.emailEditingController,
-                  onChanged: _chatController.onEmailChanged,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.deny(RegExp('[ ]')),
-                  ],
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'example@gmail.com'),
-                ),
+                child: GetBuilder<ChatController>(
+                    id: 'updateLoadingWidget',
+                    builder: (_chatController) {
+                      return TextFormField(
+                        enabled: !_chatController.isLoading!,
+                        validator: _chatController.emailValidator,
+                        controller: _chatController.emailEditingController,
+                        onChanged: _chatController.onEmailChanged,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.deny(RegExp('[ ]')),
+                        ],
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'example@gmail.com'),
+                      );
+                    }),
               ),
               const SizedBox(
                 height: 15.0,
@@ -72,8 +77,15 @@ class EmailScreen extends StatelessWidget {
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(100.0))),
                     textStyle: MaterialStateProperty.all(textTheme.subtitle1)),
-                onPressed: () => _chatController.verifyEmail(context),
-                child: const Text('Proceed')),
+                onPressed: _chatController.verifyEmail,
+                child: GetBuilder<ChatController>(
+                    id: 'updateLoadingWidget',
+                    builder: (_chatController) => _chatController.isLoading!
+                        ? const SizedBox(
+                            height: 25.0,
+                            width: 25.0,
+                            child: CircularProgressIndicator())
+                        : const Text('Proceed'))),
           )
         ],
       ),

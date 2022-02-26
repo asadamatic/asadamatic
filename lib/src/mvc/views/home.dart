@@ -183,7 +183,7 @@ class Home extends StatelessWidget {
           // const Positioned(right: 55.0, bottom: 35.0, child: ChatRoomContainer())
         ],
       ),
-      floatingActionButton: ChatRoomContainer(),
+      floatingActionButton: const ChatRoomContainer(),
     );
   }
 }

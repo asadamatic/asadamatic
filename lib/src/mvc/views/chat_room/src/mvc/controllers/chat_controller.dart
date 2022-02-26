@@ -57,12 +57,16 @@ class ChatController extends GetxController {
       });
     }
   }
-  
-  pushPopChatRoom(BuildContext context) {
+
+  pushPopChatRoom() {
     if (chatRoomOpen) {
       Get.back();
     } else {
-      Get.to(ChatRoom());
+      Get.to(
+        () => ChatRoom(),
+        popGesture: true,
+      )!
+          .then((value) => chatRoomOpen = false);
     }
     chatRoomOpen = !chatRoomOpen;
   }
@@ -87,6 +91,7 @@ class ChatController extends GetxController {
     if (sessionId!.isNotEmpty) {
       final response = await _authentication.loadSession(sessionId);
       if (response.statusCode == 200) {
+        isLoggedIn = true;
         session = Session.fromJson(response.body);
       } else {
         sessionId = "";
@@ -94,7 +99,7 @@ class ChatController extends GetxController {
     }
 
     sessionIdLoaded = true;
-    update(['updateChatWrapper']);
+    update(['updateChatWrapper', 'updateChatRoomActions']);
   }
 
   // Email functions
@@ -131,7 +136,7 @@ class ChatController extends GetxController {
     return name!.isNotEmpty ? null : 'Provide a name';
   }
 
-  verifyEmail(BuildContext context) async {
+  verifyEmail() async {
     if (welcomeFormKey.currentState!.validate()) {
       // Display the loading widget while request in process
       isLoading = true;

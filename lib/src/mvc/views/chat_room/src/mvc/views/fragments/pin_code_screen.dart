@@ -1,7 +1,9 @@
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_controller.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/auth_type.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/fragments/email_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/error_message.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/pic_code_field.dart';
+import 'package:asadamatic/src/mvc/views/chat_room_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -76,7 +78,14 @@ class PinCodeScreen extends StatelessWidget {
                   onPressed: () => signingUp
                       ? _chatController.switchToNextPageOnAnyScreen()
                       : _chatController.verifyPin(context),
-                  child: const Text('Submit')),
+                  child: GetBuilder<ChatController>(
+                      id: 'updateLoadingWidget',
+                      builder: (_chatController) => _chatController.isLoading!
+                          ? const SizedBox(
+                              height: 25.0,
+                              width: 25.0,
+                              child: CircularProgressIndicator())
+                          : const Text('Proceed'))),
             )
           ],
         ));

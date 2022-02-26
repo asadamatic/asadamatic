@@ -15,7 +15,7 @@ class MobileBackButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
         child: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () => _chatController.pushPopChatRoom(context),
+          onPressed: _chatController.pushPopChatRoom,
         ),
       ),
     );

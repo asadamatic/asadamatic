@@ -79,7 +79,14 @@ class VerificationCodeScreen extends StatelessWidget {
                       textStyle:
                           MaterialStateProperty.all(textTheme.subtitle1)),
                   onPressed: _chatController.verifyCode,
-                  child: const Text('Submit')),
+                  child: GetBuilder<ChatController>(
+                      id: 'updateLoadingWidget',
+                      builder: (_chatController) => _chatController.isLoading!
+                          ? const SizedBox(
+                              height: 25.0,
+                              width: 25.0,
+                              child: CircularProgressIndicator())
+                          : const Text('Proceed'))),
             )
           ],
         ));

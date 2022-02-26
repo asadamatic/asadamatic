@@ -3,7 +3,7 @@ import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_cont
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/auth_type.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/fragments/confirmation_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/fragments/pin_code_screen.dart';
-import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/welcome_screen.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/loading_widget.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/mobile_back_button.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/page_index_indicator.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +15,7 @@ class IntermediateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ChatController _chatController = Get.find();
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Stack(
+    return Stack(
         children: [
           const Align(
             alignment: Alignment.topCenter,
@@ -41,10 +39,7 @@ class IntermediateScreen extends StatelessWidget {
             ),
           ),
           const LoadingWidget(),
-          if(AppConstants.isWebMobile)
-            MobileBackButton(chatController: _chatController,)
         ],
-      ),
-    );
+      );
   }
 }

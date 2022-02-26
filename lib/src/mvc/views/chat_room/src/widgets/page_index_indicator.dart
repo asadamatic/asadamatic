@@ -12,37 +12,34 @@ class PageIndexIndicator extends StatelessWidget {
   final AuthType? authType;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 8.0),
-      child: ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: pageCount,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) => Align(
-                alignment: Alignment.topCenter,
-                child: GetBuilder<ChatController>(
-                    id: 'updatePageIndexDisplay',
-                    builder: (_chatController) {
-                      final currentPage = authType == AuthType.resetPin
-                          ? _chatController.resetPinPageIndex == index
-                          : _chatController.welcomePageIndex == index;
-                      return Card(
-                        elevation: currentPage ? 5.0 : 0.0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25.0)),
-                        margin: const EdgeInsets.only(
-                            left: 8.0, right: 8.0, top: 12.0),
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 600),
-                          alignment: Alignment.center,
-                          width: currentPage ? 50.0 : 45.0,
-                          height: currentPage ? 50.0 : 45.0,
-                          child: Text((index + 1).toString()),
-                        ),
-                      );
-                    }),
-              )),
-    );
+    return ListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: pageCount,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) => Align(
+              alignment: Alignment.topCenter,
+              child: GetBuilder<ChatController>(
+                  id: 'updatePageIndexDisplay',
+                  builder: (_chatController) {
+                    final currentPage = authType == AuthType.resetPin
+                        ? _chatController.resetPinPageIndex == index
+                        : _chatController.welcomePageIndex == index;
+                    return Card(
+                      elevation: currentPage ? 5.0 : 0.0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0)),
+                      margin: const EdgeInsets.only(
+                          left: 8.0, right: 8.0, top: 12.0),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 600),
+                        alignment: Alignment.center,
+                        width: 50.0,
+                        height: 50.0,
+                        child: Text((index + 1).toString()),
+                      ),
+                    );
+                  }),
+            ));
   }
 }

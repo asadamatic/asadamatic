@@ -38,24 +38,17 @@ class ChatRoomContainer extends StatelessWidget {
                             builder: (_themeController) {
                           return Offstage(
                             offstage: !_controller.chatRoomOpen,
-                            child: Stack(
-                              children: [
-                                ClipRRect(
-                                    borderRadius: BorderRadius.circular(12.0),
-                                    child: ChatRoom()),
-                                const Align(
-                                    alignment: Alignment.topLeft,
-                                    child: ChatRoomActions())
-                              ],
-                            ),
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12.0),
+                                child: ChatRoom()),
                           );
                         }),
                       ),
                     ),
               FloatingActionButton(
-                onPressed: () => AppConstants.isWebMobile
-                    ? _chatController.pushPopChatRoom(context)
-                    : _controller.toggleChatRoom(),
+                onPressed: AppConstants.isWebMobile
+                    ? _chatController.pushPopChatRoom
+                    : _controller.toggleChatRoom,
                 child: Icon(_controller.chatRoomOpen
                     ? Icons.keyboard_arrow_down
                     : Icons.chat),

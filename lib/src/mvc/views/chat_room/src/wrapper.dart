@@ -2,6 +2,7 @@ import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_cont
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/chat_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/intermidiate_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/welcome_screen.dart';
+import 'package:asadamatic/src/widgets/chat_room_actions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,27 +11,28 @@ class Wrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ChatController>(
-      id: 'updateChatWrapper',
-      builder: (_controller) {
-        _controller.welcomePageIndex = 0;
-        if (_controller.sessionIdLoaded!) {
-          if (_controller.sessionId!.isNotEmpty) {
-            if (_controller.session!.isActive!) {
-              return const ChatScreen();
+    return Scaffold(
+      appBar: chatRoomActionsNew(),
+      body: GetBuilder<ChatController>(
+        id: 'updateChatWrapper',
+        builder: (_controller) {
+          _controller.welcomePageIndex = 0;
+          if (_controller.sessionIdLoaded!) {
+            if (_controller.sessionId!.isNotEmpty) {
+              if (_controller.session!.isActive!) {
+                return const ChatScreen();
+              }
+              return const IntermediateScreen();
+            } else {
+              return const ChatRoomWelcome();
             }
-            return const IntermediateScreen();
           } else {
-            return const ChatRoomWelcome();
+            return const Center(
+                child: CircularProgressIndicator(),
+            );
           }
-        } else {
-          return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
-      },
+        },
+      ),
     );
   }
 }

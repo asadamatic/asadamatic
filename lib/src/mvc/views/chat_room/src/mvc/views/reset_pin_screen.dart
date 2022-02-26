@@ -3,7 +3,7 @@ import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/auth_type.dart
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/fragments/email_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/fragments/pin_code_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/fragments/verification_code_screen.dart';
-import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/welcome_screen.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/loading_widget.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/page_index_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

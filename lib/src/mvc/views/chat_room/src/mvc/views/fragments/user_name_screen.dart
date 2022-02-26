@@ -64,7 +64,14 @@ class UserNameScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(100.0))),
                     textStyle: MaterialStateProperty.all(textTheme.subtitle1)),
                 onPressed: () => _chatController.setUserData(context),
-                child: const Text('Proceed')),
+                child: GetBuilder<ChatController>(
+                    id: 'updateLoadingWidget',
+                    builder: (_chatController) => _chatController.isLoading!
+                        ? const SizedBox(
+                        height: 25.0,
+                        width: 25.0,
+                        child: CircularProgressIndicator())
+                        : const Text('Proceed'))),
           )
         ],
       ),

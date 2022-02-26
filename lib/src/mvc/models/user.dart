@@ -9,14 +9,14 @@ class User {
 
   Map<String, dynamic> pinToJson() {
     return {
-      'email': email,
+      'email': email!.toLowerCase(),
       'pin': pin,
     };
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'email': email,
+      'email': email!.toLowerCase(),
       'name': name,
       'pin': pin,
     };

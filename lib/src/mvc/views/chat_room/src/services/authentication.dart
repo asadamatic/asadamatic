@@ -23,7 +23,7 @@ class Authentication extends GetConnect {
 
   Future<Response> sendEmailForVerification(String? email) async {
     final response =
-        await post(url + emailVerification, jsonEncode({'email': email!}));
+        await post(url + emailVerification, jsonEncode({'email': email!.toLowerCase()}));
 
     return response;
   }
@@ -42,7 +42,7 @@ class Authentication extends GetConnect {
     final response = await post(
         url + verificationPin,
         jsonEncode({
-          'user': {'email': user!.email, 'pin': user.pin},
+          'user': {'email': user!.email!.toLowerCase(), 'pin': user.pin},
           'session_id': sessionId,
           'device_name': deviceName
         }));

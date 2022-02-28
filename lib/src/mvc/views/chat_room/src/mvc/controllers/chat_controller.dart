@@ -20,7 +20,7 @@ class ChatController extends GetxController {
   final TextEditingController nameEditingController = TextEditingController();
   final GlobalKey<FormState> welcomeFormKey = GlobalKey<FormState>();
   final GlobalKey<FormState> resetPinFormKey = GlobalKey<FormState>();
-  bool? isLoading = true;
+  bool? isLoading = false;
   int welcomePageIndex = 0;
   int resetPinPageIndex = 0;
   final PageController welcomePageController = PageController();

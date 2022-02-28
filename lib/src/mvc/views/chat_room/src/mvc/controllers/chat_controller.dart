@@ -92,6 +92,9 @@ class ChatController extends GetxController {
       final response = await _authentication.loadSession(sessionId);
       if (response.statusCode == 200) {
         session = Session.fromJson(response.body);
+        if (session!.isActive!) {
+          isLoggedIn = true;
+        }
       } else {
         sessionId = "";
       }

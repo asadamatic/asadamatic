@@ -54,70 +54,75 @@ class PinCodeField extends StatelessWidget {
               },
               child: SizedBox(
                 height: 80.0,
-                child: TextFormField(
-                  controller: value,
-                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                  keyboardType: TextInputType.number,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) => value!.isEmpty ? '' : null,
-                  onChanged: (value) {
-                    if (_noOfFields == 6) {
-                      _chatController.verificationCode!.code =
-                          getCode(_codeEditingControllers);
-                    } else if (_noOfFields == 4) {
-                      _chatController.pin = getCode(_codeEditingControllers);
-                    }
+                child: GetBuilder<ChatController>(
+                    id: 'updateLoadingWidget',
+                    builder: (_chatController) => TextFormField(
+                          enabled: !_chatController.isLoading!,
+                          controller: value,
+                          maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                          keyboardType: TextInputType.number,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) => value!.isEmpty ? '' : null,
+                          onChanged: (value) {
+                            if (_noOfFields == 6) {
+                              _chatController.verificationCode!.code =
+                                  getCode(_codeEditingControllers);
+                            } else if (_noOfFields == 4) {
+                              _chatController.pin =
+                                  getCode(_codeEditingControllers);
+                            }
 
-                    if (index == 0) {
-                      if (value.isNotEmpty) {
-                        _focusNodeKeyboard[index].nextFocus();
-                        _focusNode[index].nextFocus();
-                      }
-                    } else if (index == _noOfFields) {
-                      if (value.isNotEmpty) {
-                        _values[index] = value;
-                      } else {
-                        if (_values[index].isNotEmpty) {
-                          _values[index] = '';
-                        }
-                      }
-                    } else {
-                      if (value.isNotEmpty) {
-                        _focusNodeKeyboard[index].nextFocus();
-                        _focusNode[index].nextFocus();
-                        _values[index] = value;
-                      } else {
-                        if (_values[index].isNotEmpty) {
-                          _values[index] = '';
-                        }
-                      }
-                    }
-
-                  },
-                  onTap: () {
-                    _codeEditingControllers[index].selection =
-                        TextSelection.fromPosition(TextPosition(
-                            offset: _codeEditingControllers[index].text.length));
-                  },
-                  focusNode: _focusNode[index],
-                  style: Theme.of(context).textTheme.headline6,
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(1),
-                    FilteringTextInputFormatter.digitsOnly,
-                  ],
-                  textAlign: TextAlign.center,
-                  decoration: const InputDecoration(
-                    errorStyle: TextStyle(height: 0.0, fontSize: 0.0),
-                    border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 8.0),
-                  ),
-                ),
+                            if (index == 0) {
+                              if (value.isNotEmpty) {
+                                _focusNodeKeyboard[index].nextFocus();
+                                _focusNode[index].nextFocus();
+                              }
+                            } else if (index == _noOfFields) {
+                              if (value.isNotEmpty) {
+                                _values[index] = value;
+                              } else {
+                                if (_values[index].isNotEmpty) {
+                                  _values[index] = '';
+                                }
+                              }
+                            } else {
+                              if (value.isNotEmpty) {
+                                _focusNodeKeyboard[index].nextFocus();
+                                _focusNode[index].nextFocus();
+                                _values[index] = value;
+                              } else {
+                                if (_values[index].isNotEmpty) {
+                                  _values[index] = '';
+                                }
+                              }
+                            }
+                          },
+                          onTap: () {
+                            _codeEditingControllers[index].selection =
+                                TextSelection.fromPosition(TextPosition(
+                                    offset: _codeEditingControllers[index]
+                                        .text
+                                        .length));
+                          },
+                          focusNode: _focusNode[index],
+                          style: Theme.of(context).textTheme.headline6,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(1),
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          textAlign: TextAlign.center,
+                          decoration: const InputDecoration(
+                            errorStyle: TextStyle(height: 0.0, fontSize: 0.0),
+                            border: OutlineInputBorder(),
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 8.0),
+                          ),
+                        )),
               ),
             ),
           ));
         }).toList()));
   }
-
 
   getCode(List<TextEditingController> codeEditingControllers) {
     String code = '';

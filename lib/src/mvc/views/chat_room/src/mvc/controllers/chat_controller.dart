@@ -278,6 +278,7 @@ class ChatController extends GetxController {
         errorText.value = '';
         isLoggedIn = true;
         session = Session.fromJson(response.body);
+        sessionId = session!.sessionId;
         setSessionId(session!.sessionId!);
         update(['updateChatWrapper', 'updateChatRoomActions']);
       } else {

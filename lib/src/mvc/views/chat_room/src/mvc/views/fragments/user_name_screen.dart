@@ -37,12 +37,16 @@ class UserNameScreen extends StatelessWidget {
               ),
               SizedBox(
                 height: 80.0,
-                child: TextFormField(
-                  validator: _chatController.nameValidator,
-                  controller: _chatController.nameEditingController,
-                  onChanged: _chatController.onNameChanged,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), hintText: 'Asad Hameed'),
+                child: GetBuilder<ChatController>(
+                  id: 'updateLoadingWidget',
+                  builder: (_chatController) => TextFormField(
+                    enabled: !_chatController.isLoading!,
+                    validator: _chatController.nameValidator,
+                    controller: _chatController.nameEditingController,
+                    onChanged: _chatController.onNameChanged,
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(), hintText: 'Asad Hameed'),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -68,9 +72,9 @@ class UserNameScreen extends StatelessWidget {
                     id: 'updateLoadingWidget',
                     builder: (_chatController) => _chatController.isLoading!
                         ? const SizedBox(
-                        height: 25.0,
-                        width: 25.0,
-                        child: CircularProgressIndicator())
+                            height: 25.0,
+                            width: 25.0,
+                            child: CircularProgressIndicator())
                         : const Text('Proceed'))),
           )
         ],

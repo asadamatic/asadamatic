@@ -73,13 +73,11 @@ class PinCodeField extends StatelessWidget {
                             }
 
                             if (index == 0) {
-                              print('First pin');
                               if (value.isNotEmpty) {
                                 _focusNodeKeyboard[index].nextFocus();
                                 _focusNode[index].nextFocus();
                               }
                             } else if (index == _noOfFields! - 1) {
-                              print('Last Pin');
                               if (value.isNotEmpty) {
                                 _values[index] = value;
                               } else {
@@ -88,7 +86,6 @@ class PinCodeField extends StatelessWidget {
                                 }
                               }
                             } else {
-                              print('Not last pin');
                               if (value.isNotEmpty) {
                                 _focusNodeKeyboard[index].nextFocus();
                                 _focusNode[index].nextFocus();

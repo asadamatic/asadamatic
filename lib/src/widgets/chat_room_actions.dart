@@ -91,17 +91,25 @@ PreferredSizeWidget chatRoomActionsNew() {
                         onPressed: () => _chatController.resizeChatRoom(),
                       ),
                     )
-                  : SizedBox()),
+                  : const SizedBox()),
       ],
     ),
     actions: [
       GetBuilder<ChatController>(
           id: 'updateChatRoomActions',
           builder: (_chatController) => _chatController.isLoggedIn
-              ? IconButton(
-                  onPressed: _chatController.logout,
-                  icon: ChatRoomConstants.settingsIcon)
-              : SizedBox())
+              ? GetBuilder<ChatController>(
+                  id: 'updateLoadingWidget',
+                  builder: (_controller) => _controller.isLoading!
+                      ? const SizedBox(
+                          height: 25.0,
+                          width: 25.0,
+                          child: CircularProgressIndicator())
+                      : IconButton(
+                          onPressed: _chatController.logout,
+                          icon: ChatRoomConstants.settingsIcon),
+                )
+              : const SizedBox())
     ],
   );
 }

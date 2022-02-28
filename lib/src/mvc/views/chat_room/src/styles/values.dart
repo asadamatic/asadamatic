@@ -31,14 +31,14 @@ class ChatRoomStyles {
   static BorderRadius get buttonRadius => BorderRadius.circular(100.0);
 
   static ThemeData lightTheme = ThemeData(
-      progressIndicatorTheme: ProgressIndicatorThemeData(color: Colors.white),
+      progressIndicatorTheme: const ProgressIndicatorThemeData(color: Colors.white),
       primarySwatch: ChatRoomStyles.primarySwatch,
       colorScheme: ColorScheme.fromSwatch(
           primarySwatch: ChatRoomStyles.primarySwatch!,
           accentColor: ChatRoomStyles.accentColor));
 
   static ThemeData darkTheme = ThemeData(
-      progressIndicatorTheme: ProgressIndicatorThemeData(color: Colors.white),
+      progressIndicatorTheme: const ProgressIndicatorThemeData(color: Colors.white),
       primarySwatch: ChatRoomStyles.primarySwatch,
       buttonTheme: const ButtonThemeData(buttonColor: Colors.black),
       colorScheme: ColorScheme.fromSwatch(

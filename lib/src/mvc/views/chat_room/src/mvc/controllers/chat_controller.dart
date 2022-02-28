@@ -218,7 +218,7 @@ class ChatController extends GetxController {
     }
   }
 
-  verifyPin(BuildContext context) async {
+  verifyPin() async {
     if (welcomeFormKey.currentState!.validate()) {
       // Display the loading widget while request in process
 
@@ -260,7 +260,7 @@ class ChatController extends GetxController {
     }
   }
 
-  setUserData(BuildContext context) async {
+  setUserData() async {
     if (welcomeFormKey.currentState!.validate()) {
       // Display the loading widget while request in process
       setSessionId('');

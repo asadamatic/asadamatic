@@ -1,5 +1,4 @@
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
-import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_controller.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/styles/values.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/wrapper.dart';
 import 'package:flutter/material.dart';

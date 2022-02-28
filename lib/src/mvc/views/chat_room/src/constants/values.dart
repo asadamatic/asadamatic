@@ -1,5 +1,4 @@
 import 'package:asadamatic/src/constant/values.dart';
-import 'package:asadamatic/src/mvc/views/chat_room/src/styles/values.dart';
 import 'package:flutter/material.dart';
 
 class ChatRoomConstants {

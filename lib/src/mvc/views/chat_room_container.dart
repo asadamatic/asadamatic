@@ -2,7 +2,6 @@ import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/main.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_controller.dart';
-import 'package:asadamatic/src/widgets/chat_room_actions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

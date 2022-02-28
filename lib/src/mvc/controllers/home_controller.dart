@@ -29,6 +29,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   @override
   void onInit() async {
     super.onInit();
+    _networkService.initialize();
+
     animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 600));
     animation = RelativeRectTween(
@@ -52,8 +54,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         Package.fromJson(result.body[1]),
         Package.fromJson(result.body[2])
       ];
-    }else{
-        packagesData = AppConstants.packagesDescription;
+    } else {
+      packagesData = AppConstants.packagesDescription;
     }
     packagesDataLoaded = true;
     update(['updatePackagesData']);

@@ -20,7 +20,7 @@ class ChatController extends GetxController {
   final TextEditingController nameEditingController = TextEditingController();
   final GlobalKey<FormState> welcomeFormKey = GlobalKey<FormState>();
   final GlobalKey<FormState> resetPinFormKey = GlobalKey<FormState>();
-  bool? isLoading = false;
+  bool? isLoading = true;
   int welcomePageIndex = 0;
   int resetPinPageIndex = 0;
   final PageController welcomePageController = PageController();
@@ -91,7 +91,6 @@ class ChatController extends GetxController {
     if (sessionId!.isNotEmpty) {
       final response = await _authentication.loadSession(sessionId);
       if (response.statusCode == 200) {
-        isLoggedIn = true;
         session = Session.fromJson(response.body);
       } else {
         sessionId = "";

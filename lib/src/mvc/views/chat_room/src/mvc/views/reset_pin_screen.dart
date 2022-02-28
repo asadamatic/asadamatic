@@ -16,32 +16,33 @@ class ResetPinScreen extends StatelessWidget {
     final ChatController _chatController = Get.find();
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Stack(
+      body: Column(
         children: [
-          const Align(
-            alignment: Alignment.topCenter,
+          Flexible(
             child: PageIndexIndicator(
               pageCount: 3,
               authType: AuthType.resetPin,
             ),
           ),
-          Form(
-            child: PageView(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: _chatController.resetPinPageController,
-              onPageChanged: _chatController.onWelcomePageChange,
-              children: const [
-                EmailScreen(
-                  authType: AuthType.resetPin,
-                ),
-                VerificationCodeScreen(),
-                PinCodeScreen(
-                  authType: AuthType.resetPin,
-                ),
-              ],
+          Expanded(
+            flex: 5,
+            child: Form(
+              child: PageView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: _chatController.resetPinPageController,
+                onPageChanged: _chatController.onWelcomePageChange,
+                children: const [
+                  EmailScreen(
+                    authType: AuthType.resetPin,
+                  ),
+                  VerificationCodeScreen(),
+                  PinCodeScreen(
+                    authType: AuthType.resetPin,
+                  ),
+                ],
+              ),
             ),
           ),
-          const LoadingWidget()
         ],
       ),
     );

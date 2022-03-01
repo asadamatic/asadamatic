@@ -51,6 +51,9 @@ class ChatController extends GetxController {
   // final TextEditingController messageEditingController =
   //     TextEditingController();
   String? message = '';
+  final ScrollController messageScrollController =
+      ScrollController(initialScrollOffset: 300.0);
+
   toggleChatRoom() {
     if (chatRoomOpen) {
       chatRoomHeight = ChatRoomStyles.chatRoomHeightClosed;
@@ -99,7 +102,7 @@ class ChatController extends GetxController {
   loadMessages() async {
     chatMessages = [
       ChatMessage(
-          index: 0,
+          index: 4,
           chatRoomId: 'asadamatic@gmail',
           message: 'Hi there!',
           sessionId: 'dummy',
@@ -108,7 +111,7 @@ class ChatController extends GetxController {
           sentTime: DateTime.now(),
           status: 'received'),
       ChatMessage(
-          index: 1,
+          index: 5,
           chatRoomId: 'asadamatic@gmail',
           message: 'How are you?',
           sessionId: 'dummy',
@@ -117,7 +120,7 @@ class ChatController extends GetxController {
           sentTime: DateTime.now(),
           status: 'received'),
       ChatMessage(
-          index: 0,
+          index: 6,
           chatRoomId: 'asadamatic@gmail',
           message: 'Assalamualaikum!',
           sessionId: 'dummy',
@@ -126,7 +129,7 @@ class ChatController extends GetxController {
           sentTime: DateTime.now(),
           status: 'received'),
       ChatMessage(
-          index: 0,
+          index: 7,
           chatRoomId: 'asadamatic@gmail',
           message:
               'I am fine. Thank You very much brother. You are very nice. How are you?',
@@ -135,7 +138,36 @@ class ChatController extends GetxController {
           receiverEmail: 'wecreatelegacy@gmail.com',
           sentTime: DateTime.now(),
           status: 'received'),
+      ChatMessage(
+          index: 8,
+          chatRoomId: 'asadamatic@gmail',
+          message: 'I am good too.',
+          sessionId: 'dummy',
+          senderEmail: 'wecreatelegacy@gmail.com',
+          receiverEmail: 'asadamatic@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'),
+      ChatMessage(
+          index: 9,
+          chatRoomId: 'asadamatic@gmail',
+          message: 'What are you doing?',
+          sessionId: 'dummy',
+          senderEmail: 'asadamatic@gmail.com',
+          receiverEmail: 'wecreatelegacy@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'),
+      ChatMessage(
+          index: 10,
+          chatRoomId: 'asadamatic@gmail',
+          message: 'Adding chat room to my portfolio.',
+          sessionId: 'dummy',
+          senderEmail: 'wecreatelegacy@gmail.com',
+          receiverEmail: 'asadamatic@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'),
     ];
+    chatMessages.sort((a, b) => a.index!.compareTo(b.index!));
+
     //
     // final response = await _chatService.loadMessages('');
     // if (response.statusCode == 200) {
@@ -145,6 +177,49 @@ class ChatController extends GetxController {
     //       .toList;
     //   update(['updateMessages']);
     // } else {}
+  }
+
+  loadMoreMessages() {
+    chatMessages.addAll([
+      ChatMessage(
+          index: 0,
+          chatRoomId: 'asadamatic@gmail',
+          message: 'Who are you?',
+          sessionId: 'dummy',
+          senderEmail: 'asadamatic@gmail.com',
+          receiverEmail: 'wecreatelegacy@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'),
+      ChatMessage(
+          index: 1,
+          chatRoomId: 'asadamatic@gmail',
+          message: 'I am a dummy account.',
+          sessionId: 'dummy',
+          senderEmail: 'wecreatelegacy@gmail.com',
+          receiverEmail: 'asadamatic@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'),
+      ChatMessage(
+          index: 2,
+          chatRoomId: 'asadamatic@gmail',
+          message: 'Who operates you?',
+          sessionId: 'dummy',
+          senderEmail: 'asadamatic@gmail.com',
+          receiverEmail: 'wecreatelegacy@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'),
+      ChatMessage(
+          index: 3,
+          chatRoomId: 'asadamatic@gmail',
+          message: 'Asad Hamed.',
+          sessionId: 'dummy',
+          senderEmail: 'wecreatelegacy@gmail.com',
+          receiverEmail: 'asadamatic@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'),
+    ]);
+    chatMessages.sort((a, b) => a.index!.compareTo(b.index!));
+    update(['updateMessages']);
   }
 
   sendMessage() async {
@@ -237,13 +312,12 @@ class ChatController extends GetxController {
   onMessageChanged(String? value) {
     String oldMessage = message!;
     message = value!;
-    if ((oldMessage.isEmpty && value.isNotEmpty) || (oldMessage.isNotEmpty && value.isEmpty)){
-     print('Button updated');
+    if ((oldMessage.isEmpty && value.isNotEmpty) ||
+        (oldMessage.isNotEmpty && value.isEmpty)) {
+      print('Button updated');
       update(['updateMessageButton']);
-
     }
     print('Button Not updated');
-
   }
 
   verifyEmail() async {

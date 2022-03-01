@@ -14,5 +14,8 @@ class ChatRoomConstants {
     Icons.settings,
     // size: ChatRoomStyles.actionIconSize,
   );
+  static const Icon sendIcon = Icon(
+    Icons.send,
+  );
   // static const List<Icon> chatRoomActions = [resizeIcon, closeIcon];
 }

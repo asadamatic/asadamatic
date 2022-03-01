@@ -1,13 +1,16 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/main.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/chat_messages.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/session.dart';
 import 'package:asadamatic/src/mvc/models/user.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/verification_code.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/chat_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/reset_pin_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/services/authentication.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/services/chat.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/styles/values.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,6 +44,13 @@ class ChatController extends GetxController {
   bool chatRoomOpen = false;
   bool chatRoomMax = false;
 
+  // ChatScreen implementation
+  List<ChatMessage> chatMessages = [];
+  final ChatService _chatService = ChatService();
+  final GlobalKey<FormState> messageFormKey = GlobalKey<FormState>();
+  // final TextEditingController messageEditingController =
+  //     TextEditingController();
+  String? message = '';
   toggleChatRoom() {
     if (chatRoomOpen) {
       chatRoomHeight = ChatRoomStyles.chatRoomHeightClosed;
@@ -84,6 +94,82 @@ class ChatController extends GetxController {
     update(['updateChatRoomContainer']);
   }
 
+  // Chat Screen Functions
+
+  loadMessages() async {
+    chatMessages = [
+      ChatMessage(
+          index: 0,
+          chatRoomId: 'asadamatic@gmail',
+          message: 'Hi there!',
+          sessionId: 'dummy',
+          senderEmail: 'wecreatelegacy@gmail.com',
+          receiverEmail: 'asadamatic@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'),
+      ChatMessage(
+          index: 1,
+          chatRoomId: 'asadamatic@gmail',
+          message: 'How are you?',
+          sessionId: 'dummy',
+          senderEmail: 'wecreatelegacy@gmail.com',
+          receiverEmail: 'asadamatic@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'),
+      ChatMessage(
+          index: 0,
+          chatRoomId: 'asadamatic@gmail',
+          message: 'Assalamualaikum!',
+          sessionId: 'dummy',
+          senderEmail: 'asadamatic@gmail.com',
+          receiverEmail: 'wecreatelegacy@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'),
+      ChatMessage(
+          index: 0,
+          chatRoomId: 'asadamatic@gmail',
+          message:
+              'I am fine. Thank You very much brother. You are very nice. How are you?',
+          sessionId: 'dummy',
+          senderEmail: 'asadamatic@gmail.com',
+          receiverEmail: 'wecreatelegacy@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'),
+    ];
+    //
+    // final response = await _chatService.loadMessages('');
+    // if (response.statusCode == 200) {
+    //   chatMessages = json
+    //       .decode(response.body)
+    //       .map((messageJson) => ChatMessage.fromJson(messageJson))
+    //       .toList;
+    //   update(['updateMessages']);
+    // } else {}
+  }
+
+  sendMessage() async {
+    if (messageFormKey.currentState!.validate()) {
+      // final response = await _chatService.sendMessage(ChatMessage(
+      //     chatRoomId: 'asadamatic@gmail',
+      //     message: message,
+      //     sessionId: 'dummy',
+      //     senderEmail: 'asadamatic@gmail.com',
+      //     receiverEmail: 'wecreatelegacy@gmail.com',
+      //     sentTime: DateTime.now(),
+      //     status: 'received'));
+
+      chatMessages.add(ChatMessage(
+          chatRoomId: 'asadamatic@gmail',
+          message: message,
+          sessionId: 'dummy',
+          senderEmail: 'asadamatic@gmail.com',
+          receiverEmail: 'wecreatelegacy@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'));
+      update(['updateMessages']);
+    }
+  }
+
   @override
   void onInit() async {
     super.onInit();
@@ -94,6 +180,11 @@ class ChatController extends GetxController {
         session = Session.fromJson(response.body);
         if (session!.isActive!) {
           isLoggedIn = true;
+
+          // Load messages
+          await loadMessages();
+
+          // Load messages
         }
       } else {
         sessionId = "";
@@ -136,6 +227,23 @@ class ChatController extends GetxController {
   // Verification code functions
   String? verificationCodeValidator(String? name) {
     return name!.isNotEmpty ? null : 'Provide a name';
+  }
+
+  // Message functions
+  String? messageValidator(String? message) {
+    return message!.isNotEmpty ? null : '';
+  }
+
+  onMessageChanged(String? value) {
+    String oldMessage = message!;
+    message = value!;
+    if ((oldMessage.isEmpty && value.isNotEmpty) || (oldMessage.isNotEmpty && value.isEmpty)){
+     print('Button updated');
+      update(['updateMessageButton']);
+
+    }
+    print('Button Not updated');
+
   }
 
   verifyEmail() async {
@@ -247,7 +355,12 @@ class ChatController extends GetxController {
         } else {
           session!.isActive = true;
         }
-        update(['updateChatWrapper', 'updateChatRoomActions']);
+        // Load messages
+        await loadMessages();
+
+        // Load messages
+        update(
+            ['updateChatWrapper', 'updateChatRoomActions', 'updateMessages']);
       } else if (response.statusCode == 404) {
         errorText.value = 'Pin did not match!';
       } else if (response.statusCode == 500) {
@@ -282,7 +395,12 @@ class ChatController extends GetxController {
         session = Session.fromJson(response.body);
         sessionId = session!.sessionId;
         setSessionId(session!.sessionId!);
-        update(['updateChatWrapper', 'updateChatRoomActions']);
+        // Load messages
+        await loadMessages();
+
+        // Load messages
+        update(
+            ['updateChatWrapper', 'updateChatRoomActions', 'updateMessages']);
       } else {
         errorText.value = 'Some error occurred!';
       }

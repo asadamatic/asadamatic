@@ -15,13 +15,14 @@ class ChatService extends GetConnect {
   final messages = 'messages/';
   final newMessage = 'new-message';
 
-  Future<Response> loadMessages(String? email) async {
-    final response = await get(url + messages, query: {'chat_room_id': email});
+  Future<Response> getMessages(String? email) async {
+    final response = await get(url + messages + '?email=$email');
     return response;
   }
 
   Future<Response> sendMessage(ChatMessage chatMessage) async {
-    final response = await post(url + newMessage, jsonEncode(chatMessage.toMap()));
+    final response =
+        await post(url + newMessage, jsonEncode(chatMessage.toMap()));
     return response;
   }
 }

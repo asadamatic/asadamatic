@@ -1,7 +1,5 @@
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/chat_messages.dart';
-import 'package:asadamatic/src/mvc/views/chat_room/src/widgets/chat_status.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class MessageWidget extends StatelessWidget {
@@ -16,8 +14,8 @@ class MessageWidget extends StatelessWidget {
       children: [
         Container(
           width: 190.0,
-          padding: EdgeInsets.all(12.0),
-          margin: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(12.0),
+          margin: const EdgeInsets.all(8.0),
           alignment: Alignment.centerLeft,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

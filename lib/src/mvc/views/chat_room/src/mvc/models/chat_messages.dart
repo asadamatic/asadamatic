@@ -24,9 +24,9 @@ class ChatMessage {
         chatRoomId: json['chat_room_id'],
         message: json['message'],
         sessionId: json['session_id'],
-        senderEmail: json['sender_email'],
-        receiverEmail: json['receiver_email'],
-        sentTime: DateTime.parse(json['sent_time']),
+        senderEmail: json['sender'],
+        receiverEmail: json['receiver'],
+        sentTime: DateTime.parse(json['time']),
         status: json['status']);
   }
 
@@ -35,9 +35,9 @@ class ChatMessage {
       'chat_room_id': chatRoomId,
       'message': message,
       'session_id': sessionId,
-      'sender_email': senderEmail,
-      'receiver_email': receiverEmail,
-      'sent_time': sentTime,
+      'sender': senderEmail,
+      'receiver': receiverEmail,
+      'time': sentTime.toString(),
       'status': status
     };
   }

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/main.dart';
@@ -52,7 +51,8 @@ class ChatController extends GetxController {
   //     TextEditingController();
   String? message = '';
   final ScrollController messageScrollController =
-      ScrollController(initialScrollOffset: 300.0);
+      ScrollController(initialScrollOffset: 400.0);
+  bool hasMoreMessages = false;
 
   toggleChatRoom() {
     if (chatRoomOpen) {
@@ -100,73 +100,85 @@ class ChatController extends GetxController {
   // Chat Screen Functions
 
   loadMessages() async {
-    chatMessages = [
-      ChatMessage(
-          index: 4,
-          chatRoomId: 'asadamatic@gmail',
-          message: 'Hi there!',
-          sessionId: 'dummy',
-          senderEmail: 'wecreatelegacy@gmail.com',
-          receiverEmail: 'asadamatic@gmail.com',
-          sentTime: DateTime.now(),
-          status: 'received'),
-      ChatMessage(
-          index: 5,
-          chatRoomId: 'asadamatic@gmail',
-          message: 'How are you?',
-          sessionId: 'dummy',
-          senderEmail: 'wecreatelegacy@gmail.com',
-          receiverEmail: 'asadamatic@gmail.com',
-          sentTime: DateTime.now(),
-          status: 'received'),
-      ChatMessage(
-          index: 6,
-          chatRoomId: 'asadamatic@gmail',
-          message: 'Assalamualaikum!',
-          sessionId: 'dummy',
-          senderEmail: 'asadamatic@gmail.com',
-          receiverEmail: 'wecreatelegacy@gmail.com',
-          sentTime: DateTime.now(),
-          status: 'received'),
-      ChatMessage(
-          index: 7,
-          chatRoomId: 'asadamatic@gmail',
-          message:
-              'I am fine. Thank You very much brother. You are very nice. How are you?',
-          sessionId: 'dummy',
-          senderEmail: 'asadamatic@gmail.com',
-          receiverEmail: 'wecreatelegacy@gmail.com',
-          sentTime: DateTime.now(),
-          status: 'received'),
-      ChatMessage(
-          index: 8,
-          chatRoomId: 'asadamatic@gmail',
-          message: 'I am good too.',
-          sessionId: 'dummy',
-          senderEmail: 'wecreatelegacy@gmail.com',
-          receiverEmail: 'asadamatic@gmail.com',
-          sentTime: DateTime.now(),
-          status: 'received'),
-      ChatMessage(
-          index: 9,
-          chatRoomId: 'asadamatic@gmail',
-          message: 'What are you doing?',
-          sessionId: 'dummy',
-          senderEmail: 'asadamatic@gmail.com',
-          receiverEmail: 'wecreatelegacy@gmail.com',
-          sentTime: DateTime.now(),
-          status: 'received'),
-      ChatMessage(
-          index: 10,
-          chatRoomId: 'asadamatic@gmail',
-          message: 'Adding chat room to my portfolio.',
-          sessionId: 'dummy',
-          senderEmail: 'wecreatelegacy@gmail.com',
-          receiverEmail: 'asadamatic@gmail.com',
-          sentTime: DateTime.now(),
-          status: 'received'),
-    ];
-    chatMessages.sort((a, b) => a.index!.compareTo(b.index!));
+    // chatMessages = [
+    //   ChatMessage(
+    //       index: 4,
+    //       chatRoomId: 'asadamatic@gmail',
+    //       message: 'Hi there!',
+    //       sessionId: 'dummy',
+    //       senderEmail: 'wecreatelegacy@gmail.com',
+    //       receiverEmail: 'asadamatic@gmail.com',
+    //       sentTime: DateTime.now(),
+    //       status: 'received'),
+    //   ChatMessage(
+    //       index: 5,
+    //       chatRoomId: 'asadamatic@gmail',
+    //       message: 'How are you?',
+    //       sessionId: 'dummy',
+    //       senderEmail: 'wecreatelegacy@gmail.com',
+    //       receiverEmail: 'asadamatic@gmail.com',
+    //       sentTime: DateTime.now(),
+    //       status: 'received'),
+    //   ChatMessage(
+    //       index: 6,
+    //       chatRoomId: 'asadamatic@gmail',
+    //       message: 'Assalamualaikum!',
+    //       sessionId: 'dummy',
+    //       senderEmail: 'asadamatic@gmail.com',
+    //       receiverEmail: 'wecreatelegacy@gmail.com',
+    //       sentTime: DateTime.now(),
+    //       status: 'received'),
+    //   ChatMessage(
+    //       index: 7,
+    //       chatRoomId: 'asadamatic@gmail',
+    //       message:
+    //           'I am fine. Thank You very much brother. You are very nice. How are you?',
+    //       sessionId: 'dummy',
+    //       senderEmail: 'asadamatic@gmail.com',
+    //       receiverEmail: 'wecreatelegacy@gmail.com',
+    //       sentTime: DateTime.now(),
+    //       status: 'received'),
+    //   ChatMessage(
+    //       index: 8,
+    //       chatRoomId: 'asadamatic@gmail',
+    //       message: 'I am good too.',
+    //       sessionId: 'dummy',
+    //       senderEmail: 'wecreatelegacy@gmail.com',
+    //       receiverEmail: 'asadamatic@gmail.com',
+    //       sentTime: DateTime.now(),
+    //       status: 'received'),
+    //   ChatMessage(
+    //       index: 9,
+    //       chatRoomId: 'asadamatic@gmail',
+    //       message: 'What are you doing?',
+    //       sessionId: 'dummy',
+    //       senderEmail: 'asadamatic@gmail.com',
+    //       receiverEmail: 'wecreatelegacy@gmail.com',
+    //       sentTime: DateTime.now(),
+    //       status: 'received'),
+    //   ChatMessage(
+    //       index: 10,
+    //       chatRoomId: 'asadamatic@gmail',
+    //       message: 'Adding chat room to my portfolio.',
+    //       sessionId: 'dummy',
+    //       senderEmail: 'wecreatelegacy@gmail.com',
+    //       receiverEmail: 'asadamatic@gmail.com',
+    //       sentTime: DateTime.now(),
+    //       status: 'received'),
+    // ];
+    final response = await _chatService.getMessages(session!.email!);
+    if (response.statusCode == 200) {
+      // final jsonList = json.decode(response.body)['messages'];
+      // chatMessages = List<ChatMessage>.from(jsonList.map((message) => ChatMessage.fromJson(message)));
+
+      List<dynamic> data = response.body["messages"];
+      chatMessages =
+          data.map((message) => ChatMessage.fromJson(message)).toList();
+
+      hasMoreMessages = response.body['has_more'];
+
+      chatMessages.sort((a, b) => a.index!.compareTo(b.index!));
+    } else if (response.statusCode == 404) {}
 
     //
     // final response = await _chatService.loadMessages('');
@@ -224,7 +236,21 @@ class ChatController extends GetxController {
 
   sendMessage() async {
     if (messageFormKey.currentState!.validate()) {
-      // final response = await _chatService.sendMessage(ChatMessage(
+
+      final response = await _chatService.sendMessage(ChatMessage(
+          chatRoomId: session!.email,
+          message: message,
+          sessionId: 'dummy',
+          senderEmail: 'asadamatic@gmail.com',
+          receiverEmail: 'wecreatelegacy@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'));
+
+      if (response.statusCode == 201) {
+        chatMessages.add(ChatMessage.fromJson(response.body));
+        chatMessages.sort((a, b) => a.index!.compareTo(b.index!));
+      } else if (response.statusCode == 200) {}
+      // chatMessages.add(ChatMessage(
       //     chatRoomId: 'asadamatic@gmail',
       //     message: message,
       //     sessionId: 'dummy',
@@ -232,15 +258,6 @@ class ChatController extends GetxController {
       //     receiverEmail: 'wecreatelegacy@gmail.com',
       //     sentTime: DateTime.now(),
       //     status: 'received'));
-
-      chatMessages.add(ChatMessage(
-          chatRoomId: 'asadamatic@gmail',
-          message: message,
-          sessionId: 'dummy',
-          senderEmail: 'asadamatic@gmail.com',
-          receiverEmail: 'wecreatelegacy@gmail.com',
-          sentTime: DateTime.now(),
-          status: 'received'));
       update(['updateMessages']);
     }
   }
@@ -314,10 +331,8 @@ class ChatController extends GetxController {
     message = value!;
     if ((oldMessage.isEmpty && value.isNotEmpty) ||
         (oldMessage.isNotEmpty && value.isEmpty)) {
-      print('Button updated');
       update(['updateMessageButton']);
     }
-    print('Button Not updated');
   }
 
   verifyEmail() async {

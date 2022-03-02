@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LegacyWeatherApp extends StatelessWidget {
+  // ignore: unused_field
   final WeatherController _weatherController = Get.put(WeatherController());
   final ThemeController _themeController = Get.find();
 

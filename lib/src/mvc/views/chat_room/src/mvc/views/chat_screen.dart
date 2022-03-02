@@ -8,6 +8,7 @@ class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final ChatController _chatController = Get.find();
     return Stack(
       children: [
@@ -19,15 +20,7 @@ class ChatScreen extends StatelessWidget {
                   controller: _chatController.messageScrollController,
                   itemCount: _chatController.chatMessages.length,
                   itemBuilder: (context, index) {
-                    if (index == 0) {
-                      return Center(
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Text('Load more'),
-                          onTap: _chatController.loadMoreMessages,
-                        ),
-                      );
-                    }
+
                     final received = _chatController
                             .chatMessages[index].receiverEmail ==
                         _chatController.session!.email;
@@ -43,7 +36,7 @@ class ChatScreen extends StatelessWidget {
                     );
                   })),
         ),
-        Align(
+        const Align(
           alignment: Alignment.bottomCenter,
           child: MessageSender(),
         )

@@ -19,6 +19,7 @@ class PinCodeField extends StatelessWidget {
         List.generate(_noOfFields!, (index) => FocusNode());
     final List<FocusNode> _focusNodeKeyboard =
         List.generate(6, (index) => FocusNode());
+    // ignore: unused_local_variable
     final ChatController _chatController = Get.find();
     return SizedBox(
         width: 300.0,

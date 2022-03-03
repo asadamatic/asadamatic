@@ -15,6 +15,7 @@ import 'package:get/get.dart';
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
   final HomeController _homeController = Get.put(HomeController());
+  // ignore: unused_field
   final ThemeController _themeController = Get.put(ThemeController());
   @override
   Widget build(BuildContext context) {

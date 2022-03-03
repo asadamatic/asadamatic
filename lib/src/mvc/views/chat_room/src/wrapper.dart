@@ -12,6 +12,7 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: chatRoomActionsNew(),
       body: GetBuilder<ChatController>(
         id: 'updateChatWrapper',

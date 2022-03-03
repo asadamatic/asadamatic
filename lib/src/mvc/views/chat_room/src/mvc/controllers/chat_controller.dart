@@ -2,12 +2,14 @@ import 'dart:async';
 
 import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/main.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/chat_messages.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/session.dart';
 import 'package:asadamatic/src/mvc/models/user.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/verification_code.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/chat_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/views/reset_pin_screen.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/services/authentication.dart';
+import 'package:asadamatic/src/mvc/views/chat_room/src/services/chat.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/styles/values.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,6 +42,17 @@ class ChatController extends GetxController {
   double chatRoomWidth = ChatRoomStyles.chatRoomWidthClosed;
   bool chatRoomOpen = false;
   bool chatRoomMax = false;
+
+  // ChatScreen implementation
+  List<ChatMessage> chatMessages = [];
+  final ChatService _chatService = ChatService();
+  final GlobalKey<FormState> messageFormKey = GlobalKey<FormState>();
+  // final TextEditingController messageEditingController =
+  //     TextEditingController();
+  String? message = '';
+  final ScrollController messageScrollController =
+      ScrollController(initialScrollOffset: 400.0);
+  bool hasMoreMessages = false;
 
   toggleChatRoom() {
     if (chatRoomOpen) {
@@ -84,6 +97,171 @@ class ChatController extends GetxController {
     update(['updateChatRoomContainer']);
   }
 
+  // Chat Screen Functions
+
+  loadMessages() async {
+    // chatMessages = [
+    //   ChatMessage(
+    //       index: 4,
+    //       chatRoomId: 'asadamatic@gmail',
+    //       message: 'Hi there!',
+    //       sessionId: 'dummy',
+    //       senderEmail: 'wecreatelegacy@gmail.com',
+    //       receiverEmail: 'asadamatic@gmail.com',
+    //       sentTime: DateTime.now(),
+    //       status: 'received'),
+    //   ChatMessage(
+    //       index: 5,
+    //       chatRoomId: 'asadamatic@gmail',
+    //       message: 'How are you?',
+    //       sessionId: 'dummy',
+    //       senderEmail: 'wecreatelegacy@gmail.com',
+    //       receiverEmail: 'asadamatic@gmail.com',
+    //       sentTime: DateTime.now(),
+    //       status: 'received'),
+    //   ChatMessage(
+    //       index: 6,
+    //       chatRoomId: 'asadamatic@gmail',
+    //       message: 'Assalamualaikum!',
+    //       sessionId: 'dummy',
+    //       senderEmail: 'asadamatic@gmail.com',
+    //       receiverEmail: 'wecreatelegacy@gmail.com',
+    //       sentTime: DateTime.now(),
+    //       status: 'received'),
+    //   ChatMessage(
+    //       index: 7,
+    //       chatRoomId: 'asadamatic@gmail',
+    //       message:
+    //           'I am fine. Thank You very much brother. You are very nice. How are you?',
+    //       sessionId: 'dummy',
+    //       senderEmail: 'asadamatic@gmail.com',
+    //       receiverEmail: 'wecreatelegacy@gmail.com',
+    //       sentTime: DateTime.now(),
+    //       status: 'received'),
+    //   ChatMessage(
+    //       index: 8,
+    //       chatRoomId: 'asadamatic@gmail',
+    //       message: 'I am good too.',
+    //       sessionId: 'dummy',
+    //       senderEmail: 'wecreatelegacy@gmail.com',
+    //       receiverEmail: 'asadamatic@gmail.com',
+    //       sentTime: DateTime.now(),
+    //       status: 'received'),
+    //   ChatMessage(
+    //       index: 9,
+    //       chatRoomId: 'asadamatic@gmail',
+    //       message: 'What are you doing?',
+    //       sessionId: 'dummy',
+    //       senderEmail: 'asadamatic@gmail.com',
+    //       receiverEmail: 'wecreatelegacy@gmail.com',
+    //       sentTime: DateTime.now(),
+    //       status: 'received'),
+    //   ChatMessage(
+    //       index: 10,
+    //       chatRoomId: 'asadamatic@gmail',
+    //       message: 'Adding chat room to my portfolio.',
+    //       sessionId: 'dummy',
+    //       senderEmail: 'wecreatelegacy@gmail.com',
+    //       receiverEmail: 'asadamatic@gmail.com',
+    //       sentTime: DateTime.now(),
+    //       status: 'received'),
+    // ];
+    final response = await _chatService.getMessages(session!.email!);
+    if (response.statusCode == 200) {
+      // final jsonList = json.decode(response.body)['messages'];
+      // chatMessages = List<ChatMessage>.from(jsonList.map((message) => ChatMessage.fromJson(message)));
+
+      List<dynamic> data = response.body["messages"];
+      chatMessages =
+          data.map((message) => ChatMessage.fromJson(message)).toList();
+
+      hasMoreMessages = response.body['has_more'];
+
+      chatMessages.sort((a, b) => a.index!.compareTo(b.index!));
+    } else if (response.statusCode == 404) {}
+
+    //
+    // final response = await _chatService.loadMessages('');
+    // if (response.statusCode == 200) {
+    //   chatMessages = json
+    //       .decode(response.body)
+    //       .map((messageJson) => ChatMessage.fromJson(messageJson))
+    //       .toList;
+    //   update(['updateMessages']);
+    // } else {}
+  }
+
+  loadMoreMessages() {
+    chatMessages.addAll([
+      ChatMessage(
+          index: 0,
+          chatRoomId: 'asadamatic@gmail',
+          message: 'Who are you?',
+          sessionId: 'dummy',
+          senderEmail: 'asadamatic@gmail.com',
+          receiverEmail: 'wecreatelegacy@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'),
+      ChatMessage(
+          index: 1,
+          chatRoomId: 'asadamatic@gmail',
+          message: 'I am a dummy account.',
+          sessionId: 'dummy',
+          senderEmail: 'wecreatelegacy@gmail.com',
+          receiverEmail: 'asadamatic@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'),
+      ChatMessage(
+          index: 2,
+          chatRoomId: 'asadamatic@gmail',
+          message: 'Who operates you?',
+          sessionId: 'dummy',
+          senderEmail: 'asadamatic@gmail.com',
+          receiverEmail: 'wecreatelegacy@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'),
+      ChatMessage(
+          index: 3,
+          chatRoomId: 'asadamatic@gmail',
+          message: 'Asad Hamed.',
+          sessionId: 'dummy',
+          senderEmail: 'wecreatelegacy@gmail.com',
+          receiverEmail: 'asadamatic@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'),
+    ]);
+    chatMessages.sort((a, b) => a.index!.compareTo(b.index!));
+    update(['updateMessages']);
+  }
+
+  sendMessage() async {
+    if (messageFormKey.currentState!.validate()) {
+
+      final response = await _chatService.sendMessage(ChatMessage(
+          chatRoomId: session!.email,
+          message: message,
+          sessionId: 'dummy',
+          senderEmail: 'asadamatic@gmail.com',
+          receiverEmail: 'wecreatelegacy@gmail.com',
+          sentTime: DateTime.now(),
+          status: 'received'));
+
+      if (response.statusCode == 201) {
+        chatMessages.add(ChatMessage.fromJson(response.body));
+        chatMessages.sort((a, b) => a.index!.compareTo(b.index!));
+      } else if (response.statusCode == 200) {}
+      // chatMessages.add(ChatMessage(
+      //     chatRoomId: 'asadamatic@gmail',
+      //     message: message,
+      //     sessionId: 'dummy',
+      //     senderEmail: 'asadamatic@gmail.com',
+      //     receiverEmail: 'wecreatelegacy@gmail.com',
+      //     sentTime: DateTime.now(),
+      //     status: 'received'));
+      update(['updateMessages']);
+    }
+  }
+
   @override
   void onInit() async {
     super.onInit();
@@ -94,6 +272,11 @@ class ChatController extends GetxController {
         session = Session.fromJson(response.body);
         if (session!.isActive!) {
           isLoggedIn = true;
+
+          // Load messages
+          await loadMessages();
+
+          // Load messages
         }
       } else {
         sessionId = "";
@@ -136,6 +319,20 @@ class ChatController extends GetxController {
   // Verification code functions
   String? verificationCodeValidator(String? name) {
     return name!.isNotEmpty ? null : 'Provide a name';
+  }
+
+  // Message functions
+  String? messageValidator(String? message) {
+    return message!.isNotEmpty ? null : '';
+  }
+
+  onMessageChanged(String? value) {
+    String oldMessage = message!;
+    message = value!;
+    if ((oldMessage.isEmpty && value.isNotEmpty) ||
+        (oldMessage.isNotEmpty && value.isEmpty)) {
+      update(['updateMessageButton']);
+    }
   }
 
   verifyEmail() async {
@@ -247,7 +444,12 @@ class ChatController extends GetxController {
         } else {
           session!.isActive = true;
         }
-        update(['updateChatWrapper', 'updateChatRoomActions']);
+        // Load messages
+        await loadMessages();
+
+        // Load messages
+        update(
+            ['updateChatWrapper', 'updateChatRoomActions', 'updateMessages']);
       } else if (response.statusCode == 404) {
         errorText.value = 'Pin did not match!';
       } else if (response.statusCode == 500) {
@@ -282,7 +484,12 @@ class ChatController extends GetxController {
         session = Session.fromJson(response.body);
         sessionId = session!.sessionId;
         setSessionId(session!.sessionId!);
-        update(['updateChatWrapper', 'updateChatRoomActions']);
+        // Load messages
+        await loadMessages();
+
+        // Load messages
+        update(
+            ['updateChatWrapper', 'updateChatRoomActions', 'updateMessages']);
       } else {
         errorText.value = 'Some error occurred!';
       }

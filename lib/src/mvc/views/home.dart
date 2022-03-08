@@ -4,10 +4,10 @@ import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:asadamatic/src/mvc/views/chat_room_container.dart';
 import 'package:asadamatic/src/mvc/views/device_view.dart';
 import 'package:asadamatic/src/mvc/views/fragments/footer.dart';
-import 'package:asadamatic/src/mvc/views/fragments/info_drawer.dart';
 import 'package:asadamatic/src/mvc/views/fragments/packages_section.dart';
 import 'package:asadamatic/src/style/values.dart';
-import 'package:asadamatic/src/widgets/drawer_toggle_button.dart';
+import 'package:asadamatic/src/widgets/asad_hameed.dart';
+import 'package:asadamatic/src/widgets/social_icons_bar.dart';
 import 'package:asadamatic/src/widgets/switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,13 +19,13 @@ class Home extends StatelessWidget {
   final ThemeController _themeController = Get.put(ThemeController());
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
     return Scaffold(
       body: Stack(
         fit: StackFit.loose,
         children: [
           Container(),
-          InfoDrawer(),
           PositionedTransition(
             rect: _homeController.animation!,
             child: Material(
@@ -51,7 +51,7 @@ class Home extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(
-                              width: AppStyles.deviceViewWidth,
+                              width: AppStyles.deviceViewWidthLarge,
                               child: DeviceView()),
                           const SizedBox(
                             height: 10.0,
@@ -96,7 +96,7 @@ class Home extends StatelessWidget {
                             child: Switcher(),
                           ),
                           const SizedBox(
-                              width: AppStyles.deviceViewWidth,
+                              width: AppStyles.deviceViewWidthLarge,
                               child: DeviceView()),
                           const SizedBox(
                             width: 30.0,
@@ -128,46 +128,111 @@ class Home extends StatelessWidget {
                     ],
                   );
                 } else {
+                  final smallerWidthBio = (constraints.maxWidth - 1280) / 4;
+                  final largerWidthBio =
+                      constraints.maxWidth - 1280 - smallerWidthBio;
+
                   // Large screens
+                  final smallerWidthApps = (constraints.maxWidth - 1200) / 4;
+                  final largerWidthApps =
+                      constraints.maxWidth - 1200 - smallerWidthApps;
 
                   return PageView(
                     scrollDirection: Axis.vertical,
                     children: [
+                      Container(
+                        color: Colors.purpleAccent,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            SizedBox(
+                              width: largerWidthBio,
+                            ),
+                            Flexible(
+                                flex: 3,
+                                child: SizedBox(
+                                    width: 500.0,
+                                    height: 264.0,
+                                    child: TweenAnimationBuilder(
+                                        duration: const Duration(milliseconds: 1800),
+                                        tween: Tween<double>(
+                                            begin: 0,
+                                            end: AppConstants.bioWords.length
+                                                .toDouble()),
+                                        builder:
+                                            (context, double wordCount, child) {
+                                          return RichText(
+                                            text: TextSpan(
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: textTheme
+                                                      .headline2!.fontSize),
+                                              children: AppConstants.bioWords
+                                                  .take(wordCount.toInt())
+                                                  .map<InlineSpan>((word) {
+                                                if (word.length > 1) {
+                                                  return TextSpan(
+                                                      text: word[0],
+                                                      style: TextStyle(
+                                                          color: theme
+                                                              .colorScheme
+                                                              .secondary));
+                                                }
+                                                return TextSpan(
+                                                  text: word[0],
+                                                );
+                                              }).toList(),
+                                            ),
+                                          );
+                                        }))),
+                            const SizedBox(
+                              width: 230.0,
+                            ),
+                            const AsadHameed(),
+                            SizedBox(
+                              width: smallerWidthBio,
+                            ),
+                          ],
+                        ),
+                      ),
+
                       Container(
                         color: Colors.greenAccent,
                         height: constraints.maxHeight,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            const SizedBox(
-                              width: 20.0,
+                            SizedBox(
+                              width: smallerWidthApps,
                             ),
                             Container(
                               margin:
-                              const EdgeInsets.symmetric(horizontal: 20.0),
+                                  const EdgeInsets.symmetric(horizontal: 20.0),
                               child: Switcher(),
                             ),
                             const SizedBox(
-                                width: AppStyles.deviceViewWidth,
+                                width: AppStyles.deviceViewWidthLarge,
                                 child: DeviceView()),
                             const SizedBox(
-                              width: 30.0,
+                              width: 230.0,
                             ),
                             Flexible(
                                 flex: 3,
                                 child: SizedBox(
                                     width: 500.0,
                                     child: Obx(() => Text(
-                                      AppConstants.descriptions[
-                                      _homeController.sliderIndex.value],
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                          fontSize:
-                                          textTheme.headline5!.fontSize),
-                                    )))),
+                                          AppConstants.descriptions[
+                                              _homeController
+                                                  .sliderIndex.value],
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: textTheme
+                                                  .headline3!.fontSize),
+                                        )))),
                             SizedBox(
-                              width: constraints.maxWidth - 970,
-                            )
+                              width: largerWidthApps,
+                            ),
                           ],
                         ),
                       ),
@@ -194,7 +259,7 @@ class Home extends StatelessWidget {
               }),
             ),
           ),
-          DrawerToggle(),
+          Align(alignment: Alignment.centerLeft, child: SocialIconsBar()),
           Align(
             alignment: Alignment.topRight,
             child: GetBuilder<ThemeController>(builder: (_themeController) {

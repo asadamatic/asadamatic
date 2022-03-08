@@ -9,6 +9,8 @@ class AppConstants {
   static RegExp get emailRegExp => RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
+  static List<List<String>> get bioWords => [['I '] , ['develop '] , ['high '], ['performance ']  , ['cross '], ['platform '], ['android ', 'ios ', 'web ', 'desktop '] ,['apps ']];
+
   static const List<String> descriptions = [
     "Bolt Grocery lets you create grocery lists, so you never forget an item! ",
     'Productivity Simplified with daily todo app!',

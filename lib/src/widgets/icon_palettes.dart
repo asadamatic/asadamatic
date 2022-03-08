@@ -8,7 +8,7 @@ class SocialPalette extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: AppConstants.socialIcons
           .map((socialIcon) => SocialLogoIcon(

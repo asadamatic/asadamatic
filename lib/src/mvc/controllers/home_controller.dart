@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/models/package.dart';
 import 'package:asadamatic/src/mvc/views/boltgrocery/main.dart';
@@ -11,10 +13,6 @@ import 'package:get/state_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeController extends GetxController with GetTickerProviderStateMixin {
-  AnimationController? animationController;
-  AnimationController? nameAnimationController;
-  Rx<bool> isShowingDrawer = false.obs;
-  Animation<RelativeRect>? animation, iconButtonAnimation;
   final RxInt osIndex = 0.obs;
   final RxBool osHover = false.obs;
   final RxInt osHoverIndex = 0.obs;
@@ -22,6 +20,14 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   double iconHeight = 30.0;
   double iconIncreasedHeight = 2.5;
   List<Package> packagesData = [];
+  List<String> bioWords = [
+    'I ',
+    'develop ',
+    'high ',
+    'performance ',
+    'android ',
+    'apps '
+  ];
 
   bool packagesDataLoaded = false;
   final NetworkService _networkService = NetworkService();
@@ -30,23 +36,19 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   void onInit() async {
     super.onInit();
     _networkService.initialize();
+    Timer.periodic(Duration(seconds: 2), (timer) {
+      if (bioWords[4] == 'android ') {
+        bioWords[4] = 'ios ';
+      } else if (bioWords[4] == 'ios ') {
+        bioWords[4] = 'web ';
+      } else if (bioWords[4] == 'web ') {
+        bioWords[4] = 'desktop ';
+      }else if (bioWords[4] == 'desktop ') {
+        bioWords[4] = 'android ';
+      }
 
-    animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 600));
-    animation = RelativeRectTween(
-      begin: const RelativeRect.fromLTRB(0, 0, 0, 0),
-      end: const RelativeRect.fromLTRB(300, 0, -300, 0),
-    ).animate(CurvedAnimation(
-      parent: animationController!,
-      curve: Curves.easeIn,
-    ));
-    nameAnimationController = AnimationController(
-        vsync: this,
-        duration: const Duration(seconds: 3),
-        value: 0.002,
-        animationBehavior: AnimationBehavior.preserve);
-    nameAnimationController!.forward();
-
+      update(['updateBio']);
+    });
     final result = await _networkService.getPackagesData();
     if (result.statusCode == 200) {
       packagesData = [
@@ -62,16 +64,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   showDrawer() {
-    animationController!.forward();
-    nameAnimationController!.reverse();
-    isShowingDrawer.value = true;
     update(['drawerUpdate']);
   }
 
   hideDrawer() {
-    animationController!.reverse();
-    nameAnimationController!.forward();
-    isShowingDrawer.value = false;
     update(['drawerUpdate']);
   }
 
@@ -130,8 +126,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   @override
   void dispose() {
-    animationController!.dispose();
-    nameAnimationController!.dispose();
     super.dispose();
   }
 }

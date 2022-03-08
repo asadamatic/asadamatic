@@ -26,69 +26,263 @@ class Home extends StatelessWidget {
         fit: StackFit.loose,
         children: [
           Container(),
-          PositionedTransition(
-            rect: _homeController.animation!,
-            child: Material(
-              elevation: 8.0,
-              child: LayoutBuilder(builder: (BuildContext layoutBuilderContext,
-                  BoxConstraints constraints) {
-                if (constraints.maxWidth < AppStyles.breakPointSmallMedium) {
-                  return ListView(
-                    children: [
-                      const SizedBox(
-                        height: 100,
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Flexible(
-                            fit: FlexFit.loose,
-                            child: Container(
-                              margin: const EdgeInsets.symmetric(vertical: 5.0),
-                              child: Switcher(
-                                direction: Axis.horizontal,
-                              ),
+          Material(
+            elevation: 8.0,
+            child: LayoutBuilder(builder: (BuildContext layoutBuilderContext,
+                BoxConstraints constraints) {
+              if (constraints.maxWidth < AppStyles.breakPointSmallMedium) {
+                return ListView(
+                  children: [
+                    const SizedBox(
+                      height: 100,
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Flexible(
+                          fit: FlexFit.loose,
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 5.0),
+                            child: Switcher(
+                              direction: Axis.horizontal,
                             ),
                           ),
-                          const SizedBox(
-                              width: AppStyles.deviceViewWidthLarge,
-                              child: DeviceView()),
-                          const SizedBox(
-                            height: 10.0,
+                        ),
+                        const SizedBox(
+                            width: AppStyles.deviceViewWidthLarge,
+                            child: DeviceView()),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 50.0, vertical: 8.0),
+                            child: Obx(() => Text(
+                                  AppConstants.descriptions[
+                                      _homeController.sliderIndex.value],
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: textTheme.headline5!.fontSize),
+                                )))
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 50.0,
+                    ),
+                    const PackagesSection(),
+                    const Footer(),
+                  ],
+                );
+              } else if (constraints.maxWidth >
+                      AppStyles.breakPointSmallMedium &&
+                  constraints.maxWidth < AppStyles.breakPointMediumLarge) {
+                return ListView(
+                  children: [
+                    const SizedBox(
+                      height: 100,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        const SizedBox(
+                          width: 30.0,
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Switcher(),
+                        ),
+                        const SizedBox(
+                            width: AppStyles.deviceViewWidthLarge,
+                            child: DeviceView()),
+                        const SizedBox(
+                          width: 30.0,
+                        ),
+                        Flexible(
+                          flex: 3,
+                          child: Container(
+                            margin:
+                                const EdgeInsets.symmetric(horizontal: 24.0),
+                            child: SizedBox(
+                                width: 500.0,
+                                child: Obx(() => Text(
+                                      AppConstants.descriptions[
+                                          _homeController.sliderIndex.value],
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                          fontSize:
+                                              textTheme.headline5!.fontSize),
+                                    ))),
                           ),
-                          Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 50.0, vertical: 8.0),
-                              child: Obx(() => Text(
-                                    AppConstants.descriptions[
-                                        _homeController.sliderIndex.value],
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize:
-                                            textTheme.headline5!.fontSize),
-                                  )))
+                        ),
+                        constraints.maxWidth >= 1028
+                            ? SizedBox(width: constraints.maxWidth - 1028)
+                            : const SizedBox()
+                      ],
+                    ),
+                    const PackagesSection(),
+                    const Footer(),
+                  ],
+                );
+              } else {
+                final smallerWidthBio = (constraints.maxWidth - 1260) / 4;
+                final largerWidthBio =
+                    constraints.maxWidth - 1260 - smallerWidthBio;
+
+                // Large screens
+                final smallerWidthApps = (constraints.maxWidth - 1260) / 4;
+                final largerWidthApps =
+                    constraints.maxWidth - 1260 - smallerWidthApps;
+
+                final positiveConstraintsBio = constraints.maxWidth >= 1260;
+                final positiveConstraintsApps = constraints.maxWidth >= 1260;
+
+                return PageView(
+                  scrollDirection: Axis.vertical,
+                  children: [
+                    Container(
+                      child: Column(
+                        children: [
+                          SizedBox(height: 100.0,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                width: positiveConstraintsBio
+                                    ? largerWidthBio
+                                    : 0.0,
+                              ),
+                              SizedBox(
+                                width: 60.0,
+                              ),
+                              Flexible(
+                                  flex: 3,
+                                  child: Container(
+                                      width: 400.0,
+                                      height: 264.0,
+                                      child: TweenAnimationBuilder(
+                                          duration: const Duration(
+                                              milliseconds: 1800),
+                                          tween: Tween<double>(
+                                              begin: 0,
+                                              end: _homeController
+                                                  .bioWords.length
+                                                  .toDouble()),
+                                          builder: (context,
+                                              double wordCount, child) {
+                                            return GetBuilder<
+                                                    HomeController>(
+                                                id: 'updateBio',
+                                                builder: (_homeController) {
+                                                  return RichText(
+                                                    text: TextSpan(
+                                                      style: textTheme
+                                                          .headline2,
+                                                      children: _homeController
+                                                          .bioWords
+                                                          .take(wordCount
+                                                              .toInt())
+                                                          .map<InlineSpan>(
+                                                              (word) {
+                                                        if (word ==
+                                                            _homeController
+                                                                    .bioWords[
+                                                                4]) {
+                                                          return TextSpan(
+                                                              text: word,
+                                                              style: TextStyle(
+                                                                  color: theme
+                                                                      .colorScheme
+                                                                      .secondary));
+                                                        }
+                                                        return TextSpan(
+                                                          text: word,
+                                                        );
+                                                      }).toList(),
+                                                    ),
+                                                  );
+                                                });
+                                          }))),
+                              SizedBox(
+                                width: positiveConstraintsBio ? 230.0 : 100.0,
+                              ),
+                              const AsadHameed(),
+                              SizedBox(
+                                width: positiveConstraintsBio
+                                    ? smallerWidthBio
+                                    : 0.0,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 100.0,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Reputation',
+                                      style: textTheme.headline5,
+                                    ),
+                                    Text(
+                                      '1300+',
+                                      style: textTheme.headline2,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Reputation',
+                                      style: textTheme.headline5,
+                                    ),
+                                    Text(
+                                      '1300+',
+                                      style: textTheme.headline2,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Reputation',
+                                      style: textTheme.headline5,
+                                    ),
+                                    Text(
+                                      '1300+',
+                                      style: textTheme.headline2,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
-                      const SizedBox(
-                        height: 50.0,
-                      ),
-                      const PackagesSection(),
-                      const Footer(),
-                    ],
-                  );
-                } else if (constraints.maxWidth >
-                        AppStyles.breakPointSmallMedium &&
-                    constraints.maxWidth < AppStyles.breakPointMediumLarge) {
-                  return ListView(
-                    children: [
-                      const SizedBox(
-                        height: 100,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    ),
+
+                    Container(
+                      height: constraints.maxHeight,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          const SizedBox(
-                            width: 30.0,
+                          SizedBox(
+                            width: positiveConstraintsApps
+                                ? smallerWidthApps
+                                : 0.0,
+                          ),
+                          SizedBox(
+                            width: 60.0,
                           ),
                           Container(
                             margin:
@@ -98,14 +292,11 @@ class Home extends StatelessWidget {
                           const SizedBox(
                               width: AppStyles.deviceViewWidthLarge,
                               child: DeviceView()),
-                          const SizedBox(
-                            width: 30.0,
+                          SizedBox(
+                            width: positiveConstraintsApps ? 230.0 : 50.0,
                           ),
                           Flexible(
-                            flex: 3,
-                            child: Container(
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 24.0),
+                              flex: 3,
                               child: SizedBox(
                                   width: 500.0,
                                   child: Obx(() => Text(
@@ -113,154 +304,37 @@ class Home extends StatelessWidget {
                                             _homeController.sliderIndex.value],
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
+                                            fontWeight: FontWeight.bold,
                                             fontSize:
-                                                textTheme.headline5!.fontSize),
-                                      ))),
-                            ),
+                                                textTheme.headline3!.fontSize),
+                                      )))),
+                          SizedBox(
+                            width:
+                                positiveConstraintsApps ? largerWidthApps : 0.0,
                           ),
-                          constraints.maxWidth >= 1028
-                              ? SizedBox(width: constraints.maxWidth - 1028)
-                              : const SizedBox()
                         ],
                       ),
-                      const PackagesSection(),
-                      const Footer(),
-                    ],
-                  );
-                } else {
-                  final smallerWidthBio = (constraints.maxWidth - 1280) / 4;
-                  final largerWidthBio =
-                      constraints.maxWidth - 1280 - smallerWidthBio;
+                    ),
 
-                  // Large screens
-                  final smallerWidthApps = (constraints.maxWidth - 1200) / 4;
-                  final largerWidthApps =
-                      constraints.maxWidth - 1200 - smallerWidthApps;
-
-                  final positiveConstraintsBio = constraints.maxWidth >= 1280;
-                  final positiveConstraintsApps = constraints.maxWidth >= 1200;
-
-                  return PageView(
-                    scrollDirection: Axis.vertical,
-                    children: [
-                      Container(
-                        color: Colors.purpleAccent,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              width: positiveConstraintsBio ? largerWidthBio : 0.0,
-                            ),
-                            Flexible(
-                                flex: 3,
-                                child: SizedBox(
-                                    width: 500.0,
-                                    height: 264.0,
-                                    child: TweenAnimationBuilder(
-                                        duration: const Duration(milliseconds: 1800),
-                                        tween: Tween<double>(
-                                            begin: 0,
-                                            end: AppConstants.bioWords.length
-                                                .toDouble()),
-                                        builder:
-                                            (context, double wordCount, child) {
-                                          return RichText(
-                                            text: TextSpan(
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: textTheme
-                                                      .headline2!.fontSize),
-                                              children: AppConstants.bioWords
-                                                  .take(wordCount.toInt())
-                                                  .map<InlineSpan>((word) {
-                                                if (word.length > 1) {
-                                                  return TextSpan(
-                                                      text: word[0],
-                                                      style: TextStyle(
-                                                          color: theme
-                                                              .colorScheme
-                                                              .secondary));
-                                                }
-                                                return TextSpan(
-                                                  text: word[0],
-                                                );
-                                              }).toList(),
-                                            ),
-                                          );
-                                        }))),
-                            const SizedBox(
-                              width: 230.0,
-                            ),
-                            const AsadHameed(),
-                            SizedBox(
-                              width: positiveConstraintsBio ? smallerWidthBio : 0.0,
-                            ),
-                          ],
-                        ),
+                    // Box 2
+                    // Creating containers for pageview
+                    Container(
+                      height: constraints.maxHeight,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          PackagesSection(),
+                          SizedBox(
+                            height: 80.0,
+                          ),
+                          Footer(),
+                        ],
                       ),
-
-                      Container(
-                        color: Colors.greenAccent,
-                        height: constraints.maxHeight,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              width: positiveConstraintsApps ? smallerWidthApps : 0.0,
-                            ),
-                            Container(
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 20.0),
-                              child: Switcher(),
-                            ),
-                            const SizedBox(
-                                width: AppStyles.deviceViewWidthLarge,
-                                child: DeviceView()),
-                            const SizedBox(
-                              width: 230.0,
-                            ),
-                            Flexible(
-                                flex: 3,
-                                child: SizedBox(
-                                    width: 500.0,
-                                    child: Obx(() => Text(
-                                          AppConstants.descriptions[
-                                              _homeController
-                                                  .sliderIndex.value],
-                                          textAlign: TextAlign.start,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: textTheme
-                                                  .headline3!.fontSize),
-                                        )))),
-                            SizedBox(
-                              width: positiveConstraintsApps ? largerWidthApps : 0.0,
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      // Box 2
-                      // Creating containers for pageview
-                      Container(
-                        color: Colors.yellowAccent,
-                        height: constraints.maxHeight,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            PackagesSection(),
-                            SizedBox(
-                              height: 80.0,
-                            ),
-                            Footer(),
-                          ],
-                        ),
-                      )
-                    ],
-                  );
-                }
-              }),
-            ),
+                    )
+                  ],
+                );
+              }
+            }),
           ),
           Align(alignment: Alignment.centerLeft, child: SocialIconsBar()),
           Align(

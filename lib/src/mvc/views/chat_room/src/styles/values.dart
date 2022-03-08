@@ -17,6 +17,13 @@ class ChatRoomStyles {
     900: primaryColor,
   });
 
+  static const Color sentMessageColor = Colors.white;
+  static const Color receivedMessageColorDark = Colors.white;
+
+  static final Color? receivedMessageBackgroundColor = Colors.grey[300];
+  static final Color? receivedMessageBackgroundColorDark = Colors.grey[700];
+
+
   static const double actionSize = 28.0;
   static const double actionIconSize = 24.0;
   static const double chatRoomHeightMax = 657.0;

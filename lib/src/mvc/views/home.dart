@@ -137,6 +137,9 @@ class Home extends StatelessWidget {
                   final largerWidthApps =
                       constraints.maxWidth - 1200 - smallerWidthApps;
 
+                  final positiveConstraintsBio = constraints.maxWidth >= 1280;
+                  final positiveConstraintsApps = constraints.maxWidth >= 1200;
+
                   return PageView(
                     scrollDirection: Axis.vertical,
                     children: [
@@ -146,7 +149,7 @@ class Home extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             SizedBox(
-                              width: largerWidthBio,
+                              width: positiveConstraintsBio ? largerWidthBio : 0.0,
                             ),
                             Flexible(
                                 flex: 3,
@@ -190,7 +193,7 @@ class Home extends StatelessWidget {
                             ),
                             const AsadHameed(),
                             SizedBox(
-                              width: smallerWidthBio,
+                              width: positiveConstraintsBio ? smallerWidthBio : 0.0,
                             ),
                           ],
                         ),
@@ -203,7 +206,7 @@ class Home extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             SizedBox(
-                              width: smallerWidthApps,
+                              width: positiveConstraintsApps ? smallerWidthApps : 0.0,
                             ),
                             Container(
                               margin:
@@ -231,7 +234,7 @@ class Home extends StatelessWidget {
                                                   .headline3!.fontSize),
                                         )))),
                             SizedBox(
-                              width: largerWidthApps,
+                              width: positiveConstraintsApps ? largerWidthApps : 0.0,
                             ),
                           ],
                         ),

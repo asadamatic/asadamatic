@@ -35,7 +35,9 @@ class Home extends StatelessWidget {
                 if (constraints.maxWidth < AppStyles.breakPointSmallMedium) {
                   return ListView(
                     children: [
-                      const SizedBox(height: 100,),
+                      const SizedBox(
+                        height: 100,
+                      ),
                       Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -79,7 +81,9 @@ class Home extends StatelessWidget {
                     constraints.maxWidth < AppStyles.breakPointMediumLarge) {
                   return ListView(
                     children: [
-                      const SizedBox(height: 100,),
+                      const SizedBox(
+                        height: 100,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -124,48 +128,66 @@ class Home extends StatelessWidget {
                     ],
                   );
                 } else {
-                  return ListView(
+                  // Large screens
+
+                  return PageView(
+                    scrollDirection: Axis.vertical,
                     children: [
-                      const SizedBox(height: 100,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const SizedBox(
-                            width: 20.0,
-                          ),
-                          Container(
-                            margin:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            child: Switcher(),
-                          ),
-                          const SizedBox(
-                              width: AppStyles.deviceViewWidth,
-                              child: DeviceView()),
-                          const SizedBox(
-                            width: 30.0,
-                          ),
-                          Flexible(
-                              flex: 3,
-                              child: SizedBox(
-                                  width: 500.0,
-                                  child: Obx(() => Text(
-                                        AppConstants.descriptions[
-                                            _homeController.sliderIndex.value],
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                            fontSize:
-                                                textTheme.headline5!.fontSize),
-                                      )))),
-                          SizedBox(
-                            width: constraints.maxWidth - 970,
-                          )
-                        ],
+                      Container(
+                        color: Colors.greenAccent,
+                        height: constraints.maxHeight,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const SizedBox(
+                              width: 20.0,
+                            ),
+                            Container(
+                              margin:
+                              const EdgeInsets.symmetric(horizontal: 20.0),
+                              child: Switcher(),
+                            ),
+                            const SizedBox(
+                                width: AppStyles.deviceViewWidth,
+                                child: DeviceView()),
+                            const SizedBox(
+                              width: 30.0,
+                            ),
+                            Flexible(
+                                flex: 3,
+                                child: SizedBox(
+                                    width: 500.0,
+                                    child: Obx(() => Text(
+                                      AppConstants.descriptions[
+                                      _homeController.sliderIndex.value],
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                          fontSize:
+                                          textTheme.headline5!.fontSize),
+                                    )))),
+                            SizedBox(
+                              width: constraints.maxWidth - 970,
+                            )
+                          ],
+                        ),
                       ),
-                      const PackagesSection(),
-                      const SizedBox(
-                        height: 80.0,
-                      ),
-                      const Footer(),
+
+                      // Box 2
+                      // Creating containers for pageview
+                      Container(
+                        color: Colors.yellowAccent,
+                        height: constraints.maxHeight,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            PackagesSection(),
+                            SizedBox(
+                              height: 80.0,
+                            ),
+                            Footer(),
+                          ],
+                        ),
+                      )
                     ],
                   );
                 }

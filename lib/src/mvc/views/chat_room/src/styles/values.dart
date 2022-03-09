@@ -61,6 +61,7 @@ class ChatRoomStyles {
         cursorColor: ChatRoomStyles.accentColor,
         selectionHandleColor: ChatRoomStyles.accentColor,
       ),
+
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
               backgroundColor:

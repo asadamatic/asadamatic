@@ -124,154 +124,161 @@ class Home extends StatelessWidget {
                   ],
                 );
               } else {
-                final smallerWidthBio = (constraints.maxWidth - 1260) / 4;
-                final largerWidthBio =
-                    constraints.maxWidth - 1260 - smallerWidthBio;
+                // final smallerWidthBio = (constraints.maxWidth - 1310) / 4;
+                // final largerWidthBio =
+                //     constraints.maxWidth - 1310 - smallerWidthBio;
+
+                final smallerWidthBio = (constraints.maxWidth - 1250) / 2;
+                final largerWidthBio = smallerWidthBio;
 
                 // Large screens
                 final smallerWidthApps = (constraints.maxWidth - 1260) / 4;
                 final largerWidthApps =
                     constraints.maxWidth - 1260 - smallerWidthApps;
 
-                final positiveConstraintsBio = constraints.maxWidth >= 1260;
+                final positiveConstraintsBio = constraints.maxWidth >= 1250;
                 final positiveConstraintsApps = constraints.maxWidth >= 1260;
 
                 return PageView(
                   scrollDirection: Axis.vertical,
                   children: [
-                    Container(
-                      child: Column(
-                        children: [
-                          SizedBox(height: 100.0,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              SizedBox(
-                                width: positiveConstraintsBio
-                                    ? largerWidthBio
-                                    : 0.0,
-                              ),
-                              SizedBox(
-                                width: 60.0,
-                              ),
-                              Flexible(
-                                  flex: 3,
-                                  child: Container(
-                                      width: 400.0,
-                                      height: 264.0,
-                                      child: TweenAnimationBuilder(
-                                          duration: const Duration(
-                                              milliseconds: 1800),
-                                          tween: Tween<double>(
-                                              begin: 0,
-                                              end: _homeController
-                                                  .bioWords.length
-                                                  .toDouble()),
-                                          builder: (context,
-                                              double wordCount, child) {
-                                            return GetBuilder<
-                                                    HomeController>(
-                                                id: 'updateBio',
-                                                builder: (_homeController) {
-                                                  return RichText(
-                                                    text: TextSpan(
-                                                      style: textTheme
-                                                          .headline2,
-                                                      children: _homeController
-                                                          .bioWords
-                                                          .take(wordCount
-                                                              .toInt())
-                                                          .map<InlineSpan>(
-                                                              (word) {
-                                                        if (word ==
-                                                            _homeController
-                                                                    .bioWords[
-                                                                4]) {
-                                                          return TextSpan(
-                                                              text: word,
-                                                              style: TextStyle(
-                                                                  color: theme
-                                                                      .colorScheme
-                                                                      .secondary));
-                                                        }
+                    Column(
+                      children: [
+                        const Flexible(
+                            child: SizedBox(
+                          height: 200.0,
+                        )),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              color: Colors.cyanAccent,
+                              width:
+                                  positiveConstraintsBio ? largerWidthBio : 0.0,
+                            ),
+                            const SizedBox(
+                              width: 60.0,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                const SizedBox(height: 50.0),
+                                SizedBox(
+                                    width: 450.0,
+                                    height: 300.0,
+                                    child: TweenAnimationBuilder(
+                                        duration:
+                                            const Duration(milliseconds: 1800),
+                                        tween: Tween<double>(
+                                            begin: 0,
+                                            end: _homeController.bioWords.length
+                                                .toDouble()),
+                                        builder:
+                                            (context, double wordCount, child) {
+                                          return GetBuilder<HomeController>(
+                                              id: 'updateBio',
+                                              builder: (_homeController) {
+                                                return RichText(
+                                                  text: TextSpan(
+                                                    style: textTheme.headline2,
+                                                    children: _homeController
+                                                        .bioWords
+                                                        .take(wordCount.toInt())
+                                                        .map<InlineSpan>(
+                                                            (word) {
+                                                      if (word ==
+                                                          _homeController
+                                                              .bioWords[6]) {
                                                         return TextSpan(
+                                                            text: '\n$word',
+                                                            style: TextStyle(
+                                                                color: theme
+                                                                    .colorScheme
+                                                                    .secondary));
+                                                      }
+                                                      return TextSpan(
                                                           text: word,
-                                                        );
-                                                      }).toList(),
-                                                    ),
-                                                  );
-                                                });
-                                          }))),
-                              SizedBox(
+                                                          style: TextStyle(
+                                                              fontSize: textTheme
+                                                                  .headline2!
+                                                                  .fontSize));
+                                                    }).toList(),
+                                                  ),
+                                                );
+                                              });
+                                        })),
+                              ],
+                            ),
+                            Flexible(
+                              child: SizedBox(
                                 width: positiveConstraintsBio ? 230.0 : 100.0,
                               ),
-                              const AsadHameed(),
-                              SizedBox(
-                                width: positiveConstraintsBio
-                                    ? smallerWidthBio
-                                    : 0.0,
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 100.0,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Reputation',
-                                      style: textTheme.headline5,
-                                    ),
-                                    Text(
-                                      '1300+',
-                                      style: textTheme.headline2,
-                                    ),
-                                  ],
+                            ),
+                            const SizedBox(
+                                height: 400.0,
+                                width: 550.0,
+                                child: AsadHameed()),
+                            Container(
+                              color: Colors.cyanAccent,
+
+                              width: positiveConstraintsBio
+                                  ? smallerWidthBio
+                                  : 0.0,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 100.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Reputation',
+                                  style: textTheme.headline5,
                                 ),
-                              ),
-                              Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Reputation',
-                                      style: textTheme.headline5,
-                                    ),
-                                    Text(
-                                      '1300+',
-                                      style: textTheme.headline2,
-                                    ),
-                                  ],
+                                Text(
+                                  '1300+',
+                                  style: textTheme.headline2,
                                 ),
-                              ),
-                              Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Reputation',
-                                      style: textTheme.headline5,
-                                    ),
-                                    Text(
-                                      '1300+',
-                                      style: textTheme.headline2,
-                                    ),
-                                  ],
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Reputation',
+                                  style: textTheme.headline5,
                                 ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
+                                Text(
+                                  '1300+',
+                                  style: textTheme.headline2,
+                                ),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Reputation',
+                                  style: textTheme.headline5,
+                                ),
+                                Text(
+                                  '1300+',
+                                  style: textTheme.headline2,
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+                      ],
                     ),
 
-                    Container(
+                    SizedBox(
                       height: constraints.maxHeight,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -281,7 +288,7 @@ class Home extends StatelessWidget {
                                 ? smallerWidthApps
                                 : 0.0,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 60.0,
                           ),
                           Container(
@@ -318,7 +325,7 @@ class Home extends StatelessWidget {
 
                     // Box 2
                     // Creating containers for pageview
-                    Container(
+                    SizedBox(
                       height: constraints.maxHeight,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

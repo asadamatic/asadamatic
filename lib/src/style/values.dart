@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class AppStyles {
   static const breakPointSmallMedium = 780;
-  static const breakPointMediumLarge = 1050;
+  static const breakPointMediumLarge = 1060;
   static const deviceViewWidthLarge = 300.0;
   static const mobileHeight = 800.0;
   static const mobileWidth = 400.0;
@@ -28,9 +28,15 @@ class AppStyles {
 // Color packageNameColor = const Color(0xFF1967d2);
 
   static ThemeData lightTheme = ThemeData(
-      primarySwatch: ChatRoomStyles.primarySwatch,
-      colorScheme:
-          ColorScheme.fromSwatch(primarySwatch: ChatRoomStyles.primarySwatch!));
+    primarySwatch: ChatRoomStyles.primarySwatch,
+    colorScheme:
+        ColorScheme.fromSwatch(primarySwatch: ChatRoomStyles.primarySwatch!),
+    textTheme: const TextTheme(
+        headline2: TextStyle(
+      fontSize: 65.0,
+      color: Colors.black,
+    )),
+  );
 
   static ThemeData darkTheme = ThemeData(
       primarySwatch: ChatRoomStyles.primarySwatch,
@@ -49,6 +55,11 @@ class AppStyles {
         cursorColor: ChatRoomStyles.accentColor,
         selectionHandleColor: ChatRoomStyles.accentColor,
       ),
+      textTheme: const TextTheme(
+          headline2: TextStyle(
+        fontSize: 65.0,
+        color: Colors.white,
+      )),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
               backgroundColor:

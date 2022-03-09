@@ -7,7 +7,6 @@ import 'package:asadamatic/src/mvc/views/dailytodo/main.dart';
 import 'package:asadamatic/src/mvc/views/legacyweather/main.dart';
 import 'package:asadamatic/src/services/network.dart';
 import 'package:clipboard/clipboard.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,8 +24,9 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     'develop ',
     'high ',
     'performance ',
+    'apps ',
+    'for ',
     'android ',
-    'apps '
   ];
 
   bool packagesDataLoaded = false;
@@ -36,15 +36,15 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   void onInit() async {
     super.onInit();
     _networkService.initialize();
-    Timer.periodic(Duration(seconds: 2), (timer) {
-      if (bioWords[4] == 'android ') {
-        bioWords[4] = 'ios ';
-      } else if (bioWords[4] == 'ios ') {
-        bioWords[4] = 'web ';
-      } else if (bioWords[4] == 'web ') {
-        bioWords[4] = 'desktop ';
-      }else if (bioWords[4] == 'desktop ') {
-        bioWords[4] = 'android ';
+    Timer.periodic(const Duration(seconds: 2), (timer) {
+      if (bioWords[6] == 'android ') {
+        bioWords[6] = 'ios ';
+      } else if (bioWords[6] == 'ios ') {
+        bioWords[6] = 'web ';
+      } else if (bioWords[6] == 'web ') {
+        bioWords[6] = 'desktop ';
+      }else if (bioWords[6] == 'desktop ') {
+        bioWords[6] = 'android ';
       }
 
       update(['updateBio']);
@@ -124,8 +124,4 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     await launch(AppConstants.linkedInUrl);
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }

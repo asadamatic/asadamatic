@@ -1,6 +1,7 @@
 import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
+import 'package:asadamatic/src/mvc/models/value_type.dart';
 import 'package:asadamatic/src/mvc/views/chat_room_container.dart';
 import 'package:asadamatic/src/mvc/views/device_view.dart';
 import 'package:asadamatic/src/mvc/views/fragments/footer.dart';
@@ -9,6 +10,7 @@ import 'package:asadamatic/src/style/values.dart';
 import 'package:asadamatic/src/widgets/asad_hameed.dart';
 import 'package:asadamatic/src/widgets/social_icons_bar.dart';
 import 'package:asadamatic/src/widgets/switcher.dart';
+import 'package:asadamatic/src/widgets/value_ticker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -146,7 +148,7 @@ class Home extends StatelessWidget {
                       children: [
                         const Flexible(
                             child: SizedBox(
-                          height: 200.0,
+                          height: 150.0,
                         )),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -221,7 +223,6 @@ class Home extends StatelessWidget {
                                 child: AsadHameed()),
                             Container(
                               color: Colors.cyanAccent,
-
                               width: positiveConstraintsBio
                                   ? smallerWidthBio
                                   : 0.0,
@@ -229,48 +230,42 @@ class Home extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(
-                          height: 100.0,
+                          height: 120.0,
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Reputation',
-                                  style: textTheme.headline5,
-                                ),
-                                Text(
-                                  '1300+',
-                                  style: textTheme.headline2,
-                                ),
+                                ValueHeading(textTheme: textTheme, heading: 'Stackoverflow Reputation', valueType: ValueType.stackoverflow,),
+                                ValueTicker(
+                                  valueType: ValueType.stackoverflow,
+                                )
                               ],
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Reputation',
-                                  style: textTheme.headline5,
-                                ),
-                                Text(
-                                  '1300+',
-                                  style: textTheme.headline2,
-                                ),
+                                ValueHeading(textTheme: textTheme, heading: 'Github Repositories', valueType: ValueType.github,),
+
+                                ValueTicker(
+                                  valueType: ValueType.github,
+                                )
                               ],
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Reputation',
-                                  style: textTheme.headline5,
-                                ),
-                                Text(
-                                  '1300+',
-                                  style: textTheme.headline2,
-                                ),
+                                ValueHeading(textTheme: textTheme, heading: 'Commercial Projects', valueType: ValueType.commercialProjects),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: Text(
+                                    AppConstants.commercialProjects.toString(),
+                                    style: textTheme.headline3,
+                                  ),
+                                )
                               ],
                             ),
                           ],
@@ -356,6 +351,60 @@ class Home extends StatelessWidget {
         ],
       ),
       floatingActionButton: const ChatRoomContainer(),
+    );
+  }
+}
+
+class ValueHeading extends StatelessWidget {
+  const ValueHeading({
+    Key? key,
+    required this.textTheme,
+    required this.heading,
+    required this.valueType
+  }) : super(key: key);
+
+  final TextTheme textTheme;
+  final String? heading;
+  final ValueType? valueType;
+  @override
+  Widget build(BuildContext context) {
+    final ThemeController _themeController = Get.find();
+    final double width = valueType == ValueType.stackoverflow ? 190 : valueType == ValueType.github ? 150 : 160;
+    return TweenAnimationBuilder(
+      duration: Duration(milliseconds: 800),
+      tween: Tween<double>(
+        begin: 0.2,
+        end: width,
+      ),
+      builder: (context, double value, child) {
+        return Container(
+          width: width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                heading!,
+                style: TextStyle(
+                  fontSize: textTheme.titleMedium!.fontSize,
+                  height: 1.4,
+                ),
+              ),
+              AnimatedContainer(
+                alignment: Alignment.centerLeft,
+                margin: const EdgeInsets.only(top: 2.5, left: 0.0),
+                padding: const EdgeInsets.only(left: 0.0),
+                height: 4.0,
+                width: value,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: _themeController.isThemeDark ? Colors.white : Colors.black
+                ),
+                duration: Duration(milliseconds: 800),
+              ),
+            ],
+          ),
+        );
+      }
     );
   }
 }

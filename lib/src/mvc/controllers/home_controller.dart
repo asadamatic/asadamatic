@@ -28,6 +28,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     'for ',
     'android ',
   ];
+  int stackoverflowScore = AppConstants.oneBySixtyOfScore;
+  int githubRepoCount = AppConstants.oneBySixtyOfCount;
 
   bool packagesDataLoaded = false;
   final NetworkService _networkService = NetworkService();
@@ -36,6 +38,28 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   void onInit() async {
     super.onInit();
     _networkService.initialize();
+
+    Timer.periodic(Duration(milliseconds: 1), (timer) {
+      if (stackoverflowScore < AppConstants.stackoverflowScore ||
+          githubRepoCount < AppConstants.githubRepoCount) {
+        stackoverflowScore =
+            stackoverflowScore + AppConstants.oneBySixtyOfScore;
+        githubRepoCount = githubRepoCount + AppConstants.oneBySixtyOfCount;
+        if (stackoverflowScore > AppConstants.stackoverflowScore) {
+          stackoverflowScore = AppConstants.stackoverflowScore;
+        }
+        if (githubRepoCount > AppConstants.githubRepoCount) {
+          githubRepoCount = AppConstants.githubRepoCount;
+        }
+
+        update(['updateValueTicker']);
+      } else {
+        timer.cancel();
+      }
+    });
+
+    // Timer for value ticker update
+
     Timer.periodic(const Duration(seconds: 2), (timer) {
       if (bioWords[6] == 'android ') {
         bioWords[6] = 'ios ';
@@ -43,7 +67,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         bioWords[6] = 'web ';
       } else if (bioWords[6] == 'web ') {
         bioWords[6] = 'desktop ';
-      }else if (bioWords[6] == 'desktop ') {
+      } else if (bioWords[6] == 'desktop ') {
         bioWords[6] = 'android ';
       }
 
@@ -123,5 +147,4 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   hireMe() async {
     await launch(AppConstants.linkedInUrl);
   }
-
 }

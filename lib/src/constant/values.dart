@@ -10,6 +10,17 @@ class AppConstants {
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
 
+  // Scores
+  static const int stackoverflowScore = 1363;
+  static int get oneBySixtyOfScore => (stackoverflowScore/60).round();
+
+  static const int githubRepoCount = 56;
+  static int get oneBySixtyOfCount => (stackoverflowScore/60).round();
+
+
+  static const int commercialProjects = 2;
+
+
   static const List<String> descriptions = [
     "Bolt Grocery lets you create grocery lists, so you never forget an item! ",
     'Productivity Simplified with daily todo app!',

@@ -7,11 +7,16 @@ import 'package:asadamatic/src/mvc/views/dailytodo/main.dart';
 import 'package:asadamatic/src/mvc/views/legacyweather/main.dart';
 import 'package:asadamatic/src/services/network.dart';
 import 'package:clipboard/clipboard.dart';
+import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeController extends GetxController with GetTickerProviderStateMixin {
+  // App title animation
+  AnimationController? titleAnimationController;
+  Animation<double>? titleAnimation;
+
   final RxInt osIndex = 0.obs;
   final RxBool osHover = false.obs;
   final RxInt osHoverIndex = 0.obs;
@@ -39,7 +44,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     super.onInit();
     _networkService.initialize();
 
-    Timer.periodic(Duration(milliseconds: 1), (timer) {
+    titleAnimationController =
+        AnimationController(duration: const Duration(seconds: 2), vsync: this,);
+    titleAnimation =
+        Tween(begin: 90.0, end: 0.0).animate(titleAnimationController!);
+
+    titleAnimationController!.forward();
+    Timer.periodic(const Duration(milliseconds: 1), (timer) {
       if (stackoverflowScore < AppConstants.stackoverflowScore ||
           githubRepoCount < AppConstants.githubRepoCount) {
         stackoverflowScore =

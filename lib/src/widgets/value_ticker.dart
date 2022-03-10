@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/models/value_type.dart';

@@ -35,7 +35,13 @@ class AppStyles {
         headline2: TextStyle(
       fontSize: 65.0,
       color: Colors.black,
-    )),
+    ),
+        headline4: TextStyle(
+          color: Colors.black,
+        ),
+        headline3: TextStyle(
+          color: Colors.black,
+        )),
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -59,7 +65,14 @@ class AppStyles {
           headline2: TextStyle(
         fontSize: 65.0,
         color: Colors.white,
-      )),
+      ),
+          headline4: TextStyle(
+            color: Colors.white,
+          ),
+          headline3: TextStyle(
+            color: Colors.white,
+          )
+      ),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
               backgroundColor:

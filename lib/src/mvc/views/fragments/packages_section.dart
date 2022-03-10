@@ -18,12 +18,12 @@ class PackagesSection extends StatelessWidget {
             return Column(
               children: [
                 Text(
-                  'Contribution to Flutter',
+                  'Flutter Packages',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headline3,
                 ),
                 const SizedBox(
-                  height: 40.0,
+                  height: 30.0,
                 ),
                 constraints.maxWidth < 780
                     ? Column(
@@ -98,8 +98,8 @@ class PackageCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       margin: const EdgeInsets.all(15.0),
       child: Container(
-          width: 360.0,
-          height: 320.0,
+          width: 340.0,
+          height: 230.0,
           padding: const EdgeInsets.all(28.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,30 +116,33 @@ class PackageCard extends StatelessWidget {
                             Theme.of(context).textTheme.headline6!.fontSize),
                   ),
                   IconButton(
-                      onPressed: () {
-                        _homeController.copyPackageVersion(package!.name!);
-                      },
+                      onPressed: () =>
+                        _homeController.copyPackageVersion(package!.name!)
+                      ,
                       icon: const Icon(Icons.copy))
                 ],
               ),
+              SizedBox(height: 5.0,),
               SizedBox(
                 width: 290.0,
-                height: 120.0,
+                height: 60.0,
                 child: Text(
                   package!.description!,
                   overflow: TextOverflow.ellipsis,
-                  maxLines: 5,
+                  maxLines: 2,
                   style: TextStyle(
                       height: 1.5,
                       fontSize:
-                          Theme.of(context).textTheme.subtitle1!.fontSize),
+                          Theme.of(context).textTheme.bodyText1!.fontSize),
                 ),
               ),
-              const SizedBox(height: 20.0),
+              Flexible(child: const SizedBox(height: 30.0)),
               Row(
                 children: [
-                  const SizedBox(
-                    width: 50.0,
+                  Flexible(
+                    child: const SizedBox(
+                      width: 50.0,
+                    ),
                   ),
                   Table(
                     columnWidths: const <int, TableColumnWidth>{

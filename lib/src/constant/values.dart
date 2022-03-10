@@ -21,10 +21,10 @@ class AppConstants {
   static const int commercialProjects = 2;
 
 
-  static const List<String> descriptions = [
-    "Bolt Grocery lets you create grocery lists, so you never forget an item! ",
-    'Productivity Simplified with daily todo app!',
-    'Keep up to date with weather conditions with Weather by Legacy'
+  static const List<List<String>> descriptions = [
+    ["Grocery", "An app that lets You create grocery lists, so You never forget an item! "],
+    ['Todo','Productivity Simplified with daily todo app!'],
+    ['Weather', 'Stay up to date with weather conditions with Weather by Legacy']
   ];
   static const List<String> os = ['Android', 'Ios'];
   static const List<List<String>> socialIcons = [

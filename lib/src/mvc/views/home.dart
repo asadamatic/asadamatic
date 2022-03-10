@@ -1,6 +1,7 @@
 import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
+import 'package:asadamatic/src/mvc/models/screen_type.dart';
 import 'package:asadamatic/src/mvc/models/value_type.dart';
 import 'package:asadamatic/src/mvc/views/chat_room_container.dart';
 import 'package:asadamatic/src/mvc/views/device_view.dart';
@@ -78,51 +79,159 @@ class Home extends StatelessWidget {
               } else if (constraints.maxWidth >
                       AppStyles.breakPointSmallMedium &&
                   constraints.maxWidth < AppStyles.breakPointMediumLarge) {
-                return ListView(
+                final smallerWidthBio = (constraints.maxWidth - 1010) / 2;
+                final largerWidthBio = smallerWidthBio;
+
+                // Large screens
+                final smallerWidthApps = (constraints.maxWidth - 1010) / 4;
+                final largerWidthApps =
+                    constraints.maxWidth - 1010 - smallerWidthApps;
+
+                final positiveConstraintsBio = constraints.maxWidth >= 1010;
+                final positiveConstraintsApps = constraints.maxWidth >= 1010;
+
+                final screenHeight = constraints.maxHeight;
+
+                return PageView(
+                  scrollDirection: Axis.vertical,
                   children: [
-                    const SizedBox(
-                      height: 100,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        const SizedBox(
-                          width: 30.0,
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: Switcher(),
-                        ),
-                        const SizedBox(
-                            width: AppStyles.deviceViewWidthLarge,
-                            child: DeviceView()),
-                        const SizedBox(
-                          width: 30.0,
-                        ),
-                        Flexible(
-                          flex: 3,
-                          child: Container(
-                            margin:
-                                const EdgeInsets.symmetric(horizontal: 24.0),
-                            child: SizedBox(
-                                width: 500.0,
-                                child: Obx(() => Text(
-                                      AppConstants.descriptions[
-                                          _homeController.sliderIndex.value][1],
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                          fontSize:
-                                              textTheme.headline5!.fontSize),
-                                    ))),
+                    SizedBox(
+                      height: screenHeight,
+                      child: Column(
+                        children: [
+                          const Flexible(
+                              child: SizedBox(
+                                height: 150.0,
+                              )),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: positiveConstraintsBio ? largerWidthBio : 0.0,
+                              ),
+                              const SizedBox(
+                                width: 60.0,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  const SizedBox(height: 50.0),
+                                  SizedBox(
+                                      width: 350.0,
+                                      height: 300.0,
+                                      child: TweenAnimationBuilder(
+                                          duration: const Duration(milliseconds: 1800),
+                                          tween: Tween<double>(
+                                              begin: 0,
+                                              end: _homeController.bioWords.length.toDouble()),
+                                          builder: (context, double wordCount, child) {
+                                            return GetBuilder<HomeController>(
+                                                id: 'updateBio',
+                                                builder: (_homeController) {
+                                                  return RichText(
+                                                    text: TextSpan(
+                                                      style: textTheme.headline3,
+                                                      children: _homeController.bioWords
+                                                          .take(wordCount.toInt())
+                                                          .map<InlineSpan>((word) {
+                                                        if (word ==
+                                                            _homeController.bioWords[6]) {
+                                                          return TextSpan(
+                                                              text: '\n$word',
+                                                              style: TextStyle(
+                                                                  color: theme
+                                                                      .colorScheme.secondary));
+                                                        }
+                                                        return TextSpan(
+                                                            text: word,
+                                                            style: TextStyle(
+                                                                fontSize: textTheme
+                                                                    .headline3!.fontSize));
+                                                      }).toList(),
+                                                    ),
+                                                  );
+                                                });
+                                          })),
+                                ],
+                              ),
+                              Flexible(
+                                child: SizedBox(
+                                  width: positiveConstraintsBio ? 230.0 : 100.0,
+                                ),
+                              ),
+                              SizedBox(height: 350.0, width: 370.0, child: AsadHameed(screenType: Screen.medium, textTheme: textTheme,)),
+                              SizedBox(
+                                width: positiveConstraintsBio ? smallerWidthBio : 0.0,
+                              ),
+                            ],
                           ),
-                        ),
-                        constraints.maxWidth >= 1028
-                            ? SizedBox(width: constraints.maxWidth - 1028)
-                            : const SizedBox()
-                      ],
+                        ],
+                      ),
                     ),
-                    const PackagesSection(),
-                    const Footer(),
+
+
+                    SizedBox(
+                      height: screenHeight,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SizedBox(
+                            width: positiveConstraintsApps ? smallerWidthApps : 0.0,
+                          ),
+                          const SizedBox(
+                            width: 60.0,
+                          ),
+                          Switcher(),
+                          SizedBox(width: 20.0,),
+                          const SizedBox(
+                              width: AppStyles.deviceViewWidthLarge,
+                              child: DeviceView()),
+                          SizedBox(
+                            width: positiveConstraintsApps ? 100 : 50.0,
+                          ),
+                          Flexible(
+                            flex: 3,
+                            child: Obx(() => Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  AppConstants
+                                      .descriptions[_homeController.sliderIndex.value][0],
+                                  style: textTheme.headline3,
+                                ),
+                                SizedBox(height: 15.0,),
+                                SizedBox(
+                                  width: 500.0,
+                                  height: 300.0,
+                                  child: Obx(() => Text(
+                                    AppConstants.descriptions[
+                                    _homeController.sliderIndex.value][1],
+                                    textAlign: TextAlign.start,
+                                    style: textTheme.headline5!,
+                                  )),
+                                )
+                              ],
+                            ))
+                          ),
+                          SizedBox(width: 60.0,),
+                          SizedBox(
+                            width: positiveConstraintsApps ? largerWidthApps : 0.0,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: screenHeight,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const PackagesSection(),
+                          const Footer(),
+                        ],
+                      ),
+                    )
                   ],
                 );
               } else {
@@ -266,6 +375,8 @@ class AppsSection extends StatelessWidget {
                             .descriptions[_homeController.sliderIndex.value][0],
                         style: textTheme.headline3,
                       ),
+                      SizedBox(height: 15.0,),
+
                       SizedBox(
                         width: 500.0,
                         height: 300.0,
@@ -322,8 +433,7 @@ class BioContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                color: Colors.cyanAccent,
+              SizedBox(
                 width: positiveConstraintsBio ? largerWidthBio : 0.0,
               ),
               const SizedBox(
@@ -376,9 +486,8 @@ class BioContainer extends StatelessWidget {
                   width: positiveConstraintsBio ? 230.0 : 100.0,
                 ),
               ),
-              const SizedBox(height: 400.0, width: 550.0, child: AsadHameed()),
-              Container(
-                color: Colors.cyanAccent,
+              SizedBox(height: 400.0, width: 550.0, child: AsadHameed(screenType: Screen.large, textTheme: textTheme,)),
+              SizedBox(
                 width: positiveConstraintsBio ? smallerWidthBio : 0.0,
               ),
             ],

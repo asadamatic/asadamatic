@@ -1,19 +1,26 @@
+import 'package:asadamatic/src/mvc/models/screen_type.dart';
 import 'package:flutter/material.dart';
 
-class AsadHameed extends StatelessWidget {
-  const AsadHameed({Key? key}) : super(key: key);
 
+class AsadHameed extends StatelessWidget {
+  const AsadHameed({Key? key, this.screenType, this.textTheme}) : super(key: key);
+
+  final Screen? screenType;
+  final TextTheme? textTheme;
   @override
   Widget build(BuildContext context) {
+    final fontSize = screenType == Screen.large ? textTheme!.headline1!.fontSize : screenType == Screen.medium ? textTheme!.headline2!.fontSize : textTheme!.headline4!.fontSize;
+    final double imageSize = screenType == Screen.large ? 300.0 : screenType == Screen.medium ? 240 : 180;
+
     return TweenAnimationBuilder(
         duration: const Duration(milliseconds: 2000),
         tween: Tween<double>(begin: 50.0, end: 1.0),
-        child: const Align(
+        child: Align(
           alignment: Alignment.center,
           child: Image(
             image: AssetImage('assets/me.png'),
-            height: 300.0,
-            width: 300.0,
+            height: imageSize,
+            width: imageSize,
           ),
         ),
         builder: (context, double value, parentsChild) {
@@ -37,10 +44,7 @@ class AsadHameed extends StatelessWidget {
                             'Asad',
                             style: TextStyle(
                               letterSpacing: value,
-                              fontSize: Theme.of(context)
-                                  .textTheme
-                                  .headline1!
-                                  .fontSize,
+                              fontSize: fontSize,
                             ),
                           ),
                         )),
@@ -68,10 +72,7 @@ class AsadHameed extends StatelessWidget {
                                   style: TextStyle(
                                     textBaseline: TextBaseline.alphabetic,
                                     letterSpacing: value,
-                                    fontSize: Theme.of(context)
-                                        .textTheme
-                                        .headline1!
-                                        .fontSize,
+                                    fontSize: fontSize,
                                   ),
                                 ),
                               );

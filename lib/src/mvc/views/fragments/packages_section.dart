@@ -122,7 +122,7 @@ class PackageCard extends StatelessWidget {
                       icon: const Icon(Icons.copy))
                 ],
               ),
-              SizedBox(height: 5.0,),
+              const SizedBox(height: 5.0,),
               SizedBox(
                 width: 290.0,
                 height: 60.0,
@@ -136,11 +136,11 @@ class PackageCard extends StatelessWidget {
                           Theme.of(context).textTheme.bodyText1!.fontSize),
                 ),
               ),
-              Flexible(child: const SizedBox(height: 30.0)),
+              const Flexible(child: SizedBox(height: 30.0)),
               Row(
                 children: [
-                  Flexible(
-                    child: const SizedBox(
+                  const Flexible(
+                    child: SizedBox(
                       width: 50.0,
                     ),
                   ),

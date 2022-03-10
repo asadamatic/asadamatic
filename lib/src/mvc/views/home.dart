@@ -76,9 +76,9 @@ class Home extends StatelessWidget {
                     const Footer(),
                   ],
                 );
-              } else if (constraints.maxWidth >
+              } else if (constraints.maxWidth >=
                       AppStyles.breakPointSmallMedium &&
-                  constraints.maxWidth < AppStyles.breakPointMediumLarge) {
+                  constraints.maxWidth <= AppStyles.breakPointMediumLarge) {
                 final smallerWidthBio = (constraints.maxWidth - 1010) / 2;
                 final largerWidthBio = smallerWidthBio;
 
@@ -95,140 +95,32 @@ class Home extends StatelessWidget {
                 return PageView(
                   scrollDirection: Axis.vertical,
                   children: [
-                    SizedBox(
-                      height: screenHeight,
-                      child: Column(
-                        children: [
-                          const Flexible(
-                              child: SizedBox(
-                                height: 150.0,
-                              )),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: positiveConstraintsBio ? largerWidthBio : 0.0,
-                              ),
-                              const SizedBox(
-                                width: 60.0,
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  const SizedBox(height: 50.0),
-                                  SizedBox(
-                                      width: 350.0,
-                                      height: 300.0,
-                                      child: TweenAnimationBuilder(
-                                          duration: const Duration(milliseconds: 1800),
-                                          tween: Tween<double>(
-                                              begin: 0,
-                                              end: _homeController.bioWords.length.toDouble()),
-                                          builder: (context, double wordCount, child) {
-                                            return GetBuilder<HomeController>(
-                                                id: 'updateBio',
-                                                builder: (_homeController) {
-                                                  return RichText(
-                                                    text: TextSpan(
-                                                      style: textTheme.headline3,
-                                                      children: _homeController.bioWords
-                                                          .take(wordCount.toInt())
-                                                          .map<InlineSpan>((word) {
-                                                        if (word ==
-                                                            _homeController.bioWords[6]) {
-                                                          return TextSpan(
-                                                              text: '\n$word',
-                                                              style: TextStyle(
-                                                                  color: theme
-                                                                      .colorScheme.secondary));
-                                                        }
-                                                        return TextSpan(
-                                                            text: word,
-                                                            style: TextStyle(
-                                                                fontSize: textTheme
-                                                                    .headline3!.fontSize));
-                                                      }).toList(),
-                                                    ),
-                                                  );
-                                                });
-                                          })),
-                                ],
-                              ),
-                              Flexible(
-                                child: SizedBox(
-                                  width: positiveConstraintsBio ? 230.0 : 100.0,
-                                ),
-                              ),
-                              SizedBox(height: 350.0, width: 370.0, child: AsadHameed(screenType: Screen.medium, textTheme: textTheme,)),
-                              SizedBox(
-                                width: positiveConstraintsBio ? smallerWidthBio : 0.0,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                    BioContainer(
+                      screenHeight: screenHeight,
+                      positiveConstraintsBio: positiveConstraintsBio,
+                      largerWidthBio: largerWidthBio,
+                      homeController: _homeController,
+                      textTheme: textTheme,
+                      theme: theme,
+                      smallerWidthBio: smallerWidthBio,
+                      screen: Screen.medium,
                     ),
-
-
-                    SizedBox(
-                      height: screenHeight,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          SizedBox(
-                            width: positiveConstraintsApps ? smallerWidthApps : 0.0,
-                          ),
-                          const SizedBox(
-                            width: 60.0,
-                          ),
-                          Switcher(),
-                          SizedBox(width: 20.0,),
-                          const SizedBox(
-                              width: AppStyles.deviceViewWidthLarge,
-                              child: DeviceView()),
-                          SizedBox(
-                            width: positiveConstraintsApps ? 100 : 50.0,
-                          ),
-                          Flexible(
-                            flex: 3,
-                            child: Obx(() => Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  AppConstants
-                                      .descriptions[_homeController.sliderIndex.value][0],
-                                  style: textTheme.headline3,
-                                ),
-                                SizedBox(height: 15.0,),
-                                SizedBox(
-                                  width: 500.0,
-                                  height: 300.0,
-                                  child: Obx(() => Text(
-                                    AppConstants.descriptions[
-                                    _homeController.sliderIndex.value][1],
-                                    textAlign: TextAlign.start,
-                                    style: textTheme.headline5!,
-                                  )),
-                                )
-                              ],
-                            ))
-                          ),
-                          SizedBox(width: 60.0,),
-                          SizedBox(
-                            width: positiveConstraintsApps ? largerWidthApps : 0.0,
-                          ),
-                        ],
-                      ),
+                    AppsSection(
+                      screenHeight: screenHeight,
+                      positiveConstraintsApps: positiveConstraintsApps,
+                      smallerWidthApps: smallerWidthApps,
+                      homeController: _homeController,
+                      textTheme: textTheme,
+                      largerWidthApps: largerWidthApps,
+                      screen: Screen.medium,
                     ),
                     SizedBox(
                       height: screenHeight,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const PackagesSection(),
-                          const Footer(),
+                        children: const [
+                          PackagesSection(),
+                          Footer(),
                         ],
                       ),
                     )
@@ -256,22 +148,25 @@ class Home extends StatelessWidget {
                   children: [
                     // Box 1
                     BioContainer(
-                        screenHeight: screenHeight,
-                        positiveConstraintsBio: positiveConstraintsBio,
-                        largerWidthBio: largerWidthBio,
-                        homeController: _homeController,
-                        textTheme: textTheme,
-                        theme: theme,
-                        smallerWidthBio: smallerWidthBio),
-
+                      screenHeight: screenHeight,
+                      positiveConstraintsBio: positiveConstraintsBio,
+                      largerWidthBio: largerWidthBio,
+                      homeController: _homeController,
+                      textTheme: textTheme,
+                      theme: theme,
+                      smallerWidthBio: smallerWidthBio,
+                      screen: Screen.large,
+                    ),
                     // Box 2
                     AppsSection(
-                        screenHeight: screenHeight,
-                        positiveConstraintsApps: positiveConstraintsApps,
-                        smallerWidthApps: smallerWidthApps,
-                        homeController: _homeController,
-                        textTheme: textTheme,
-                        largerWidthApps: largerWidthApps),
+                      screenHeight: screenHeight,
+                      positiveConstraintsApps: positiveConstraintsApps,
+                      smallerWidthApps: smallerWidthApps,
+                      homeController: _homeController,
+                      textTheme: textTheme,
+                      largerWidthApps: largerWidthApps,
+                      screen: Screen.medium,
+                    ),
                     // Box 3
 
                     ContributionsSection(screenHeight: screenHeight),
@@ -324,15 +219,16 @@ class ContributionsSection extends StatelessWidget {
 }
 
 class AppsSection extends StatelessWidget {
-  const AppsSection({
-    Key? key,
-    required this.screenHeight,
-    required this.positiveConstraintsApps,
-    required this.smallerWidthApps,
-    required HomeController homeController,
-    required this.textTheme,
-    required this.largerWidthApps,
-  })  : _homeController = homeController,
+  const AppsSection(
+      {Key? key,
+      required this.screenHeight,
+      required this.positiveConstraintsApps,
+      required this.smallerWidthApps,
+      required HomeController homeController,
+      required this.textTheme,
+      required this.largerWidthApps,
+      required this.screen})
+      : _homeController = homeController,
         super(key: key);
 
   final double screenHeight;
@@ -341,13 +237,29 @@ class AppsSection extends StatelessWidget {
   final HomeController _homeController;
   final TextTheme textTheme;
   final double largerWidthApps;
-
+  final Screen screen;
   @override
   Widget build(BuildContext context) {
+    final descriptionFontStyle = screen == Screen.large
+        ? textTheme.headline4!
+        : screen == Screen.medium
+            ? textTheme.headline5!
+            : textTheme.headline5!;
+    final titleFontStyle = screen == Screen.small
+        ? textTheme.headline4!
+        : textTheme.headline5!; // TODO
+    final double contentSpacingNormal = screen == Screen.large
+        ? 230.0
+        : screen == Screen.medium
+            ? 100.0
+            : 100.0; // TODO
+    final double contentSpacingSmall =
+        screen == Screen.small ? 50.0 : 50.0; // TODO
+
     return SizedBox(
       height: screenHeight,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly, // TODO different
         children: [
           SizedBox(
             width: positiveConstraintsApps ? smallerWidthApps : 0.0,
@@ -355,14 +267,17 @@ class AppsSection extends StatelessWidget {
           const SizedBox(
             width: 60.0,
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Switcher(),
+          Switcher(),
+          const SizedBox(
+            width: 20.0,
           ),
           const SizedBox(
-              width: AppStyles.deviceViewWidthLarge, child: DeviceView()),
+              width: AppStyles.deviceViewWidthLarge, // TODO different
+              child: DeviceView()),
           SizedBox(
-            width: positiveConstraintsApps ? 230.0 : 50.0,
+            width: positiveConstraintsApps
+                ? contentSpacingNormal
+                : contentSpacingSmall,
           ),
           Flexible(
               flex: 3,
@@ -373,10 +288,11 @@ class AppsSection extends StatelessWidget {
                       Text(
                         AppConstants
                             .descriptions[_homeController.sliderIndex.value][0],
-                        style: textTheme.headline3,
+                        style: titleFontStyle,
                       ),
-                      SizedBox(height: 15.0,),
-
+                      const SizedBox(
+                        height: 15.0,
+                      ),
                       SizedBox(
                         width: 500.0,
                         height: 300.0,
@@ -384,11 +300,14 @@ class AppsSection extends StatelessWidget {
                               AppConstants.descriptions[
                                   _homeController.sliderIndex.value][1],
                               textAlign: TextAlign.start,
-                              style: textTheme.headline4!,
+                              style: descriptionFontStyle,
                             )),
                       )
                     ],
                   ))),
+          const SizedBox(
+            width: 60.0,
+          ),
           SizedBox(
             width: positiveConstraintsApps ? largerWidthApps : 0.0,
           ),
@@ -399,28 +318,60 @@ class AppsSection extends StatelessWidget {
 }
 
 class BioContainer extends StatelessWidget {
-  const BioContainer(
-      {Key? key,
-      required this.positiveConstraintsBio,
-      required this.largerWidthBio,
-      required HomeController homeController,
-      required this.textTheme,
-      required this.theme,
-      required this.smallerWidthBio,
-      required this.screenHeight})
-      : _homeController = homeController,
+  const BioContainer({
+    Key? key,
+    required this.screenHeight,
+    required this.positiveConstraintsBio,
+    required this.largerWidthBio,
+    required HomeController homeController,
+    required this.textTheme,
+    required this.theme,
+    required this.smallerWidthBio,
+    required this.screen,
+  })  : _homeController = homeController,
         super(key: key);
 
+  final double screenHeight;
   final bool positiveConstraintsBio;
   final double largerWidthBio;
   final HomeController _homeController;
   final TextTheme textTheme;
   final ThemeData theme;
   final double smallerWidthBio;
-  final double screenHeight;
+  final Screen screen;
 
   @override
   Widget build(BuildContext context) {
+    final descriptionFontSize = screen == Screen.large
+        ? textTheme.headline2!.fontSize
+        : screen == Screen.medium
+            ? textTheme.headline3!.fontSize
+            : textTheme.headline4!.fontSize; // TODo
+    final double asadhameedWidth = screen == Screen.large
+        ? 550
+        : screen == Screen.medium
+            ? 370.0
+            : 370.0; // TODo
+    final double asadhameedHeight = screen == Screen.large
+        ? 400
+        : screen == Screen.medium
+            ? 350
+            : 350;
+
+    final double descriptionWidth = screen == Screen.large
+        ? 450
+        : screen == Screen.medium
+        ? 350.0
+        : 350.0; // TODo
+
+    final double contentSpacingNormal = screen == Screen.large
+        ? 230.0
+        : screen == Screen.medium
+            ? 100.0
+            : 100.0; // TODO
+    final double contentSpacingSmall =
+        screen == Screen.large ? 50.0 : screen == Screen.medium ? 50.0 : 50.0; // TODO
+
     return SizedBox(
       height: screenHeight,
       child: Column(
@@ -439,12 +390,13 @@ class BioContainer extends StatelessWidget {
               const SizedBox(
                 width: 60.0,
               ),
+              // Same
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   const SizedBox(height: 50.0),
                   SizedBox(
-                      width: 450.0,
+                      width: descriptionWidth,
                       height: 300.0,
                       child: TweenAnimationBuilder(
                           duration: const Duration(milliseconds: 1800),
@@ -466,14 +418,14 @@ class BioContainer extends StatelessWidget {
                                           return TextSpan(
                                               text: '\n$word',
                                               style: TextStyle(
+                                                  fontSize: descriptionFontSize,
                                                   color: theme
                                                       .colorScheme.secondary));
                                         }
                                         return TextSpan(
                                             text: word,
                                             style: TextStyle(
-                                                fontSize: textTheme
-                                                    .headline2!.fontSize));
+                                                fontSize: descriptionFontSize));
                                       }).toList(),
                                     ),
                                   );
@@ -483,10 +435,21 @@ class BioContainer extends StatelessWidget {
               ),
               Flexible(
                 child: SizedBox(
-                  width: positiveConstraintsBio ? 230.0 : 100.0,
+                  width: positiveConstraintsBio
+                      ? contentSpacingNormal
+                      : contentSpacingSmall,
                 ),
               ),
-              SizedBox(height: 400.0, width: 550.0, child: AsadHameed(screenType: Screen.large, textTheme: textTheme,)),
+              SizedBox(
+                  width: asadhameedWidth,
+                  height: asadhameedHeight,
+                  child: AsadHameed(
+                    screen: screen,
+                    textTheme: textTheme,
+                  )),
+              const SizedBox(
+                height: 60.0,
+              ),
               SizedBox(
                 width: positiveConstraintsBio ? smallerWidthBio : 0.0,
               ),
@@ -495,6 +458,7 @@ class BioContainer extends StatelessWidget {
           const SizedBox(
             height: 120.0,
           ),
+          // Done
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

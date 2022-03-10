@@ -88,9 +88,8 @@ class PackagesSection extends StatelessWidget {
 }
 
 class PackageCard extends StatelessWidget {
-  PackageCard({Key? key, this.package}) : super(key: key);
+  const PackageCard({Key? key, this.package}) : super(key: key);
   final Package? package;
-  final HomeController _homeController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -98,8 +97,8 @@ class PackageCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       margin: const EdgeInsets.all(15.0),
       child: Container(
-          width: 340.0,
-          height: 230.0,
+          width: 300.0,
+          height: 250.0,
           padding: const EdgeInsets.all(28.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -115,11 +114,11 @@ class PackageCard extends StatelessWidget {
                         fontSize:
                             Theme.of(context).textTheme.headline6!.fontSize),
                   ),
-                  IconButton(
-                      onPressed: () =>
-                        _homeController.copyPackageVersion(package!.name!)
-                      ,
-                      icon: const Icon(Icons.copy))
+                  // IconButton(
+                  //     onPressed: () =>
+                  //       _homeController.copyPackageVersion(package!.name!)
+                  //     ,
+                  //     icon: const Icon(Icons.copy))
                 ],
               ),
               const SizedBox(height: 5.0,),
@@ -129,7 +128,7 @@ class PackageCard extends StatelessWidget {
                 child: Text(
                   package!.description!,
                   overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
+                  maxLines: 3,
                   style: TextStyle(
                       height: 1.5,
                       fontSize:

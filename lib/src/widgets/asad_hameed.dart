@@ -12,12 +12,12 @@ class AsadHameed extends StatelessWidget {
         ? textTheme!.headline1!.fontSize
         : screen == Screen.medium
             ? textTheme!.headline2!.fontSize
-            : textTheme!.headline4!.fontSize;
+            : textTheme!.headline2!.fontSize;
     final double imageSize = screen == Screen.large
         ? 300.0
         : screen == Screen.medium
             ? 240
-            : 180;
+            : 210;
 
     return TweenAnimationBuilder(
         duration: const Duration(milliseconds: 2000),

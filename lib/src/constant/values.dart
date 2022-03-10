@@ -3,28 +3,37 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter/foundation.dart';
+
 class AppConstants {
   static const String appTitle = 'Asad Hameed - Flutter Developer';
 
   static RegExp get emailRegExp => RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
-
+  static Map<String, dynamic> scores = {
+    "Stackoverflow Reputation": 1363,
+    "Github Repositories": 56,
+    "Commercial Projects": 2,
+  };
   // Scores
   static const int stackoverflowScore = 1363;
-  static int get oneBySixtyOfScore => (stackoverflowScore/60).round();
+  static int get oneBySixtyOfScore => (stackoverflowScore / 60).round();
 
   static const int githubRepoCount = 56;
-  static int get oneBySixtyOfCount => (stackoverflowScore/60).round();
-
+  static int get oneBySixtyOfCount => (stackoverflowScore / 60).round();
 
   static const int commercialProjects = 2;
 
-
   static const List<List<String>> descriptions = [
-    ["Grocery", "An app that lets You create grocery lists, so You never forget an item! "],
-    ['Todo','Productivity Simplified with daily todo app!'],
-    ['Weather', 'Stay up to date with weather conditions with Weather by Legacy']
+    [
+      "Grocery",
+      "An app that lets You create grocery lists, so You never forget an item! "
+    ],
+    ['Todo', 'Productivity Simplified with daily todo app!'],
+    [
+      'Weather',
+      'Stay up to date with weather conditions with Weather by Legacy'
+    ]
   ];
   static const List<String> os = ['Android', 'Ios'];
   static const List<List<String>> socialIcons = [
@@ -98,7 +107,6 @@ class AppConstants {
     else if (GetPlatform.isWeb) {
       WebBrowserInfo webBrowserInfo = await deviceInfo.webBrowserInfo;
       return webBrowserInfo.platform;
-
     }
     return 'Device not recognized';
   }
@@ -107,7 +115,9 @@ class AppConstants {
   static const androidType = "android";
   static const desktopType = "desktop";
 
-  static final isWebMobile = kIsWeb && (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android);
+  static final isWebMobile = kIsWeb &&
+      (defaultTargetPlatform == TargetPlatform.iOS ||
+          defaultTargetPlatform == TargetPlatform.android);
 
   // String getSmartPhoneOrTablet() {
   //   final userAgent = html.window.navigator.userAgent.toString().toLowerCase();

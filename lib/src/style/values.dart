@@ -5,6 +5,7 @@ class AppStyles {
   static const breakPointSmallMedium = 780;
   static const breakPointMediumLarge = 1060;
   static const deviceViewWidthLarge = 300.0;
+  static const deviceViewWidthSmall = 250.0;
   static const mobileHeight = 800.0;
   static const mobileWidth = 400.0;
 

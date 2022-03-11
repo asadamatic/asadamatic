@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/models/package.dart';
+import 'package:asadamatic/src/mvc/models/value_type.dart';
 import 'package:asadamatic/src/mvc/views/boltgrocery/main.dart';
 import 'package:asadamatic/src/mvc/views/dailytodo/main.dart';
 import 'package:asadamatic/src/mvc/views/legacyweather/main.dart';
@@ -34,7 +35,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     'android ',
   ];
   int stackoverflowScore = AppConstants.oneBySixtyOfScore;
-  int githubRepoCount = AppConstants.oneBySixtyOfCount;
+  int githubRepoCount = AppConstants.oneBySixOfCount;
+
+  List<List<dynamic>> scores = [
+    ["Stackoverflow Reputation", ValueType.stackoverflow],
+    ["Github Repositories", ValueType.github],
+    ["Commercial Projects", ValueType.commercialProjects]
+  ];
 
   bool packagesDataLoaded = false;
   final NetworkService _networkService = NetworkService();
@@ -44,23 +51,22 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     super.onInit();
     _networkService.initialize();
 
-    titleAnimationController =
-        AnimationController(duration: const Duration(seconds: 2), vsync: this,);
+    titleAnimationController = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    );
     titleAnimation =
         Tween(begin: 90.0, end: 0.0).animate(titleAnimationController!);
 
     titleAnimationController!.forward();
+
+    // Timer for stackvoerflow score
     Timer.periodic(const Duration(milliseconds: 1), (timer) {
-      if (stackoverflowScore < AppConstants.stackoverflowScore ||
-          githubRepoCount < AppConstants.githubRepoCount) {
+      if (stackoverflowScore < AppConstants.stackoverflowScore) {
         stackoverflowScore =
             stackoverflowScore + AppConstants.oneBySixtyOfScore;
-        githubRepoCount = githubRepoCount + AppConstants.oneBySixtyOfCount;
         if (stackoverflowScore > AppConstants.stackoverflowScore) {
           stackoverflowScore = AppConstants.stackoverflowScore;
-        }
-        if (githubRepoCount > AppConstants.githubRepoCount) {
-          githubRepoCount = AppConstants.githubRepoCount;
         }
 
         update(['updateValueTicker']);
@@ -69,6 +75,20 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       }
     });
 
+
+    // Timer for github score
+    Timer.periodic(const Duration(milliseconds: 10), (timer) {
+      if (githubRepoCount < AppConstants.githubRepoCount) {
+        githubRepoCount =
+            githubRepoCount + AppConstants.oneBySixOfCount;
+        if (githubRepoCount > AppConstants.githubRepoCount) {
+          githubRepoCount = AppConstants.githubRepoCount;
+        }
+        update(['updateValueTicker']);
+      } else {
+        timer.cancel();
+      }
+    });
     // Timer for value ticker update
 
     Timer.periodic(const Duration(seconds: 2), (timer) {

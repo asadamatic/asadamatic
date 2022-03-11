@@ -10,17 +10,12 @@ class AppConstants {
   static RegExp get emailRegExp => RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
-  static Map<String, dynamic> scores = {
-    "Stackoverflow Reputation": 1363,
-    "Github Repositories": 56,
-    "Commercial Projects": 2,
-  };
   // Scores
   static const int stackoverflowScore = 1363;
   static int get oneBySixtyOfScore => (stackoverflowScore / 60).round();
 
   static const int githubRepoCount = 56;
-  static int get oneBySixtyOfCount => (stackoverflowScore / 60).round();
+  static int get oneBySixOfCount => (stackoverflowScore / 600).round();
 
   static const int commercialProjects = 2;
 

@@ -1,13 +1,9 @@
-import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/models/screen_type.dart';
-import 'package:asadamatic/src/mvc/models/value_type.dart';
-import 'package:asadamatic/src/mvc/views/home.dart';
 import 'package:asadamatic/src/widgets/asad_hameed.dart';
-import 'package:asadamatic/src/widgets/value_ticker.dart';
+import 'package:asadamatic/src/widgets/score.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 class BioContainer extends StatelessWidget {
   const BioContainer({
@@ -37,32 +33,35 @@ class BioContainer extends StatelessWidget {
     final descriptionFontSize = screen == Screen.large
         ? textTheme.headline2!.fontSize
         : screen == Screen.medium
-        ? textTheme.headline3!.fontSize
-        : textTheme.headline4!.fontSize; // TODo
+            ? textTheme.headline3!.fontSize
+            : textTheme.headline4!.fontSize; // TODo
     final double asadhameedWidth = screen == Screen.large
         ? 550
         : screen == Screen.medium
-        ? 370.0
-        : 370.0; // TODo
+            ? 370.0
+            : 370.0; // TODo
     final double asadhameedHeight = screen == Screen.large
         ? 400
         : screen == Screen.medium
-        ? 350
-        : 350;
+            ? 350
+            : 350;
 
     final double descriptionWidth = screen == Screen.large
         ? 450
         : screen == Screen.medium
-        ? 350.0
-        : 350.0; // TODo
+            ? 350.0
+            : 350.0; // TODo
 
     final double contentSpacingNormal = screen == Screen.large
         ? 230.0
         : screen == Screen.medium
-        ? 100.0
-        : 100.0; // TODO
-    final double contentSpacingSmall =
-    screen == Screen.large ? 50.0 : screen == Screen.medium ? 50.0 : 50.0; // TODO
+            ? 100.0
+            : 100.0; // TODO
+    final double contentSpacingSmall = screen == Screen.large
+        ? 50.0
+        : screen == Screen.medium
+            ? 50.0
+            : 50.0; // TODO
 
     return SizedBox(
       height: screenHeight,
@@ -70,8 +69,8 @@ class BioContainer extends StatelessWidget {
         children: [
           const Flexible(
               child: SizedBox(
-                height: 150.0,
-              )),
+            height: 150.0,
+          )),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -153,50 +152,9 @@ class BioContainer extends StatelessWidget {
           // Done
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ValueHeading(
-                    textTheme: textTheme,
-                    heading: 'Stackoverflow Reputation',
-                    valueType: ValueType.stackoverflow,
-                  ),
-                  const ValueTicker(
-                    valueType: ValueType.stackoverflow,
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ValueHeading(
-                    textTheme: textTheme,
-                    heading: 'Github Repositories',
-                    valueType: ValueType.github,
-                  ),
-                  const ValueTicker(
-                    valueType: ValueType.github,
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ValueHeading(
-                      textTheme: textTheme,
-                      heading: 'Commercial Projects',
-                      valueType: ValueType.commercialProjects),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(
-                      AppConstants.commercialProjects.toString(),
-                      style: textTheme.headline3,
-                    ),
-                  )
-                ],
-              ),
-            ],
+            children: _homeController.scores.map((score) {
+              return Score(score: score, textTheme: textTheme, screen: Screen.medium,);
+            }).toList(),
           )
         ],
       ),

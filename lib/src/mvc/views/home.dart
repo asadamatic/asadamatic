@@ -1,8 +1,8 @@
+
 import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:asadamatic/src/mvc/models/screen_type.dart';
-import 'package:asadamatic/src/mvc/models/value_type.dart';
 import 'package:asadamatic/src/mvc/views/chat_room_container.dart';
 import 'package:asadamatic/src/mvc/views/device_view.dart';
 import 'package:asadamatic/src/mvc/views/fragments/footer.dart';
@@ -10,9 +10,9 @@ import 'package:asadamatic/src/mvc/views/fragments/packages_section.dart';
 import 'package:asadamatic/src/style/values.dart';
 import 'package:asadamatic/src/widgets/asad_hameed.dart';
 import 'package:asadamatic/src/widgets/bio_contianer.dart';
+import 'package:asadamatic/src/widgets/score.dart';
 import 'package:asadamatic/src/widgets/social_icons_bar.dart';
 import 'package:asadamatic/src/widgets/switcher.dart';
-import 'package:asadamatic/src/widgets/value_ticker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -86,8 +86,7 @@ class Home extends StatelessWidget {
                                               }
                                               return TextSpan(
                                                   text: word,
-                                                  style: textTheme
-                                                          .headline4!);
+                                                  style: textTheme.headline4!);
                                             }).toList(),
                                           ),
                                         );
@@ -97,60 +96,14 @@ class Home extends StatelessWidget {
                           height: 50.0,
                         ),
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ValueHeading(
-                                  textTheme: textTheme,
-                                  heading: 'Stackoverflow Reputation',
-                                  valueType: ValueType.stackoverflow,
-                                ),
-                                const ValueTicker(
-                                  valueType: ValueType.stackoverflow,
-                                )
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 20.0,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ValueHeading(
-                                  textTheme: textTheme,
-                                  heading: 'Github Repositories',
-                                  valueType: ValueType.github,
-                                ),
-                                const ValueTicker(
-                                  valueType: ValueType.github,
-                                )
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 20.0,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ValueHeading(
-                                    textTheme: textTheme,
-                                    heading: 'Commercial Projects',
-                                    valueType: ValueType.commercialProjects),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Text(
-                                    AppConstants.commercialProjects.toString(),
-                                    style: textTheme.headline3,
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: _homeController.scores.map((score) {
+                              return Score(
+                                score: score,
+                                textTheme: textTheme,
+                                screen: Screen.small,
+                              );
+                            }).toList()),
                         const SizedBox(
                           height: 50.0,
                         ),
@@ -442,63 +395,5 @@ class AppsSection extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-class ValueHeading extends StatelessWidget {
-  const ValueHeading(
-      {Key? key,
-      required this.textTheme,
-      required this.heading,
-      required this.valueType})
-      : super(key: key);
-
-  final TextTheme textTheme;
-  final String? heading;
-  final ValueType? valueType;
-  @override
-  Widget build(BuildContext context) {
-    final ThemeController _themeController = Get.find();
-    final double width = valueType == ValueType.stackoverflow
-        ? 190
-        : valueType == ValueType.github
-            ? 150
-            : 160;
-    return TweenAnimationBuilder(
-        duration: const Duration(milliseconds: 800),
-        tween: Tween<double>(
-          begin: 0.2,
-          end: width,
-        ),
-        builder: (context, double value, child) {
-          return SizedBox(
-            width: width,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  heading!,
-                  style: TextStyle(
-                    fontSize: textTheme.titleMedium!.fontSize,
-                    height: 1.4,
-                  ),
-                ),
-                AnimatedContainer(
-                  alignment: Alignment.centerLeft,
-                  margin: const EdgeInsets.only(top: 2.5, left: 0.0),
-                  padding: const EdgeInsets.only(left: 0.0),
-                  height: 4.0,
-                  width: value,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      color: _themeController.isThemeDark
-                          ? Colors.white
-                          : Colors.black),
-                  duration: const Duration(milliseconds: 800),
-                ),
-              ],
-            ),
-          );
-        });
   }
 }

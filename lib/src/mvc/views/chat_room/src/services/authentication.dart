@@ -22,8 +22,8 @@ class Authentication extends GetConnect {
   final removeSession = 'remove-session';
 
   Future<Response> sendEmailForVerification(String? email) async {
-    final response =
-        await post(url + emailVerification, jsonEncode({'email': email!.toLowerCase()}));
+    final response = await post(
+        url + emailVerification, jsonEncode({'email': email!.toLowerCase()}));
 
     return response;
   }

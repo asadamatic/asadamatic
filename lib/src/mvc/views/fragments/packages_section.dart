@@ -121,7 +121,9 @@ class PackageCard extends StatelessWidget {
                   //     icon: const Icon(Icons.copy))
                 ],
               ),
-              const SizedBox(height: 5.0,),
+              const SizedBox(
+                height: 5.0,
+              ),
               SizedBox(
                 width: 290.0,
                 height: 60.0,

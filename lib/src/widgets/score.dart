@@ -5,10 +5,7 @@ import 'package:asadamatic/src/widgets/value_ticker.dart';
 import 'package:flutter/material.dart';
 
 class Score extends StatelessWidget {
-  const Score(
-      {Key? key,
-      required this.textTheme,
-      required this.screen})
+  const Score({Key? key, required this.textTheme, required this.screen})
       : super(key: key);
 
   final TextTheme textTheme;

@@ -9,6 +9,10 @@ class AppStyles {
   static const mobileHeight = 800.0;
   static const mobileWidth = 400.0;
 
+  // Small screen sizes
+  static const double containerContentSpacing = 45.0;
+  static const double containerSpacing = 70.0;
+
   static Color shimmerBaseColor = Colors.grey[200]!;
   static Color shimmerHighlightColor = Colors.grey[400]!;
   static const int primaryColorValue = 0xff003d73;
@@ -34,9 +38,9 @@ class AppStyles {
         ColorScheme.fromSwatch(primarySwatch: ChatRoomStyles.primarySwatch!),
     textTheme: const TextTheme(
         headline2: TextStyle(
-      fontSize: 65.0,
-      color: Colors.black,
-    ),
+          fontSize: 65.0,
+          color: Colors.black,
+        ),
         headline4: TextStyle(
           color: Colors.black,
         ),
@@ -64,16 +68,15 @@ class AppStyles {
       ),
       textTheme: const TextTheme(
           headline2: TextStyle(
-        fontSize: 65.0,
-        color: Colors.white,
-      ),
+            fontSize: 65.0,
+            color: Colors.white,
+          ),
           headline4: TextStyle(
             color: Colors.white,
           ),
           headline3: TextStyle(
             color: Colors.white,
-          )
-      ),
+          )),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
               backgroundColor:

@@ -9,6 +9,7 @@ import 'package:asadamatic/src/style/values.dart';
 import 'package:asadamatic/src/widgets/apps_section.dart';
 import 'package:asadamatic/src/widgets/asad_hameed.dart';
 import 'package:asadamatic/src/widgets/bio_contianer.dart';
+import 'package:asadamatic/src/widgets/my_description.dart';
 import 'package:asadamatic/src/widgets/score.dart';
 import 'package:asadamatic/src/widgets/social_icons_bar.dart';
 import 'package:asadamatic/src/widgets/switcher.dart';
@@ -51,55 +52,22 @@ class Home extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(
-                          height: 50.0,
+                          height: AppStyles.containerContentSpacing,
                         ),
-                        SizedBox(
-                            width: 270.0,
-                            height: 200.0,
-                            child: TweenAnimationBuilder(
-                                duration: const Duration(milliseconds: 1800),
-                                tween: Tween<double>(
-                                    begin: 0,
-                                    end: _homeController.bioWords.length
-                                        .toDouble()),
-                                builder: (context, double wordCount, child) {
-                                  return GetBuilder<HomeController>(
-                                      id: 'updateBio',
-                                      builder: (_homeController) {
-                                        return RichText(
-                                          textAlign: TextAlign.center,
-                                          text: TextSpan(
-                                            children: _homeController.bioWords
-                                                .take(wordCount.toInt())
-                                                .map<InlineSpan>((word) {
-                                              if (word ==
-                                                  _homeController.bioWords[6]) {
-                                                return TextSpan(
-                                                    text: '\n$word',
-                                                    style: TextStyle(
-                                                        fontSize: textTheme
-                                                            .headline4!
-                                                            .fontSize,
-                                                        color: theme.colorScheme
-                                                            .secondary));
-                                              }
-                                              return TextSpan(
-                                                  text: word,
-                                                  style: textTheme.headline4!);
-                                            }).toList(),
-                                          ),
-                                        );
-                                      });
-                                })),
+                        MyDescription(
+                            screen: Screen.small,
+                            homeController: _homeController,
+                            textTheme: textTheme,
+                            theme: theme),
                         const SizedBox(
-                          height: 50.0,
+                          height: AppStyles.containerContentSpacing,
                         ),
                         Score(
                           textTheme: textTheme,
                           screen: Screen.small,
                         ),
                         const SizedBox(
-                          height: 50.0,
+                          height: AppStyles.containerSpacing,
                         ),
                         Flexible(
                           fit: FlexFit.loose,
@@ -114,7 +82,7 @@ class Home extends StatelessWidget {
                             width: AppStyles.deviceViewWidthSmall,
                             child: DeviceView()),
                         const SizedBox(
-                          height: 10.0,
+                          height: AppStyles.containerContentSpacing,
                         ),
                         Padding(
                             padding: const EdgeInsets.symmetric(
@@ -126,7 +94,7 @@ class Home extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(
-                      height: 100.0,
+                      height: AppStyles.containerSpacing,
                     ),
                     const PackagesSection(),
                     const Footer(),

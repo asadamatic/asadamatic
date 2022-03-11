@@ -1,5 +1,1 @@
-enum ValueType {
-  stackoverflow,
-  github,
-  commercialProjects
-}
+enum ValueType { stackoverflow, github, commercialProjects }

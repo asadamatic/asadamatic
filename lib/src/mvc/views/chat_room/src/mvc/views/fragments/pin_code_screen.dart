@@ -73,9 +73,11 @@ class PinCodeScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(100.0))),
                       textStyle:
                           MaterialStateProperty.all(textTheme.subtitle1)),
-                  onPressed: ()=> _chatController.isLoading! ? null : signingUp
-                      ? _chatController.switchToNextPageOnAnyScreen()
-                      : _chatController.verifyPin(),
+                  onPressed: () => _chatController.isLoading!
+                      ? null
+                      : signingUp
+                          ? _chatController.switchToNextPageOnAnyScreen()
+                          : _chatController.verifyPin(),
                   child: GetBuilder<ChatController>(
                       id: 'updateLoadingWidget',
                       builder: (_chatController) => _chatController.isLoading!

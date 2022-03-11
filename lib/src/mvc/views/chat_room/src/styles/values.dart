@@ -23,7 +23,6 @@ class ChatRoomStyles {
   static final Color? receivedMessageBackgroundColor = Colors.grey[300];
   static final Color? receivedMessageBackgroundColorDark = Colors.grey[700];
 
-
   static const double actionSize = 28.0;
   static const double actionIconSize = 24.0;
   static const double chatRoomHeightMax = 657.0;
@@ -38,14 +37,16 @@ class ChatRoomStyles {
   static BorderRadius get buttonRadius => BorderRadius.circular(100.0);
 
   static ThemeData lightTheme = ThemeData(
-      progressIndicatorTheme: const ProgressIndicatorThemeData(color: Colors.white),
+      progressIndicatorTheme:
+          const ProgressIndicatorThemeData(color: Colors.white),
       primarySwatch: ChatRoomStyles.primarySwatch,
       colorScheme: ColorScheme.fromSwatch(
           primarySwatch: ChatRoomStyles.primarySwatch!,
           accentColor: ChatRoomStyles.accentColor));
 
   static ThemeData darkTheme = ThemeData(
-      progressIndicatorTheme: const ProgressIndicatorThemeData(color: Colors.white),
+      progressIndicatorTheme:
+          const ProgressIndicatorThemeData(color: Colors.white),
       primarySwatch: ChatRoomStyles.primarySwatch,
       buttonTheme: const ButtonThemeData(buttonColor: Colors.black),
       colorScheme: ColorScheme.fromSwatch(
@@ -61,7 +62,6 @@ class ChatRoomStyles {
         cursorColor: ChatRoomStyles.accentColor,
         selectionHandleColor: ChatRoomStyles.accentColor,
       ),
-
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
               backgroundColor:

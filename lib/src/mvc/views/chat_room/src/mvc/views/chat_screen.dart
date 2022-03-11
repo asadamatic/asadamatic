@@ -17,21 +17,20 @@ class ChatScreen extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          margin: const EdgeInsets.only(bottom: 45.0, top: 20.0, right: 10.0, left: 10.0),
+          margin: const EdgeInsets.only(
+              bottom: 45.0, top: 20.0, right: 10.0, left: 10.0),
           child: GetBuilder<ChatController>(
               id: 'updateMessages',
               builder: (_chatController) => ListView.builder(
-                reverse: true,
+                  reverse: true,
                   controller: _chatController.messageScrollController,
                   itemCount: _chatController.chatMessages.length,
                   itemBuilder: (context, index) {
+                    final received =
+                        _chatController.chatMessages[index].receiverEmail ==
+                            _chatController.session!.email;
 
-                    final received = _chatController
-                            .chatMessages[index].receiverEmail ==
-                        _chatController.session!.email;
-
-                    final receivedBackgroundColor = _themeController
-                        .isThemeDark
+                    final receivedBackgroundColor = _themeController.isThemeDark
                         ? ChatRoomStyles.receivedMessageBackgroundColorDark
                         : ChatRoomStyles.receivedMessageBackgroundColor;
 

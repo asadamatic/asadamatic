@@ -1,9 +1,9 @@
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/models/screen_type.dart';
 import 'package:asadamatic/src/widgets/asad_hameed.dart';
+import 'package:asadamatic/src/widgets/my_description.dart';
 import 'package:asadamatic/src/widgets/score.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class BioContainer extends StatelessWidget {
   const BioContainer({
@@ -30,11 +30,6 @@ class BioContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final descriptionFontSize = screen == Screen.large
-        ? textTheme.headline2!.fontSize
-        : screen == Screen.medium
-            ? textTheme.headline3!.fontSize
-            : textTheme.headline4!.fontSize; // TODo
     final double asadhameedWidth = screen == Screen.large
         ? 550
         : screen == Screen.medium
@@ -45,12 +40,6 @@ class BioContainer extends StatelessWidget {
         : screen == Screen.medium
             ? 350
             : 350;
-
-    final double descriptionWidth = screen == Screen.large
-        ? 450
-        : screen == Screen.medium
-            ? 350.0
-            : 350.0; // TODo
 
     final double contentSpacingNormal = screen == Screen.large
         ? 230.0
@@ -85,43 +74,12 @@ class BioContainer extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                   SizedBox(height:  mediumScreen ? 100.0 : 50.0),
-                  SizedBox(
-                      width: descriptionWidth,
-                      height: 300.0,
-                      child: TweenAnimationBuilder(
-                          duration: const Duration(milliseconds: 1800),
-                          tween: Tween<double>(
-                              begin: 0,
-                              end: _homeController.bioWords.length.toDouble()),
-                          builder: (context, double wordCount, child) {
-                            return GetBuilder<HomeController>(
-                                id: 'updateBio',
-                                builder: (_homeController) {
-                                  return RichText(
-                                    text: TextSpan(
-                                      style: textTheme.headline2,
-                                      children: _homeController.bioWords
-                                          .take(wordCount.toInt())
-                                          .map<InlineSpan>((word) {
-                                        if (word ==
-                                            _homeController.bioWords[6]) {
-                                          return TextSpan(
-                                              text: '\n$word',
-                                              style: TextStyle(
-                                                  fontSize: descriptionFontSize,
-                                                  color: theme
-                                                      .colorScheme.secondary));
-                                        }
-                                        return TextSpan(
-                                            text: word,
-                                            style: TextStyle(
-                                                fontSize: descriptionFontSize));
-                                      }).toList(),
-                                    ),
-                                  );
-                                });
-                          })),
+                  SizedBox(height: mediumScreen ? 100.0 : 50.0),
+                  MyDescription(
+                      screen: screen,
+                      homeController: _homeController,
+                      textTheme: textTheme,
+                      theme: theme),
                 ],
               ),
               Flexible(

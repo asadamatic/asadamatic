@@ -20,6 +20,5 @@ class ChatRoomConstants {
   );
   static final DateFormat messageTimeFormatter = DateFormat.jm();
 
-
 // static const List<Icon> chatRoomActions = [resizeIcon, closeIcon];
 }

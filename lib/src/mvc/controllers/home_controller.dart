@@ -36,7 +36,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   int stackoverflowScore = AppConstants.oneBySixtyOfScore;
   int githubRepoCount = AppConstants.oneBySixOfCount;
 
-
   bool packagesDataLoaded = false;
   final NetworkService _networkService = NetworkService();
 
@@ -69,12 +68,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       }
     });
 
-
     // Timer for github score
     Timer.periodic(const Duration(milliseconds: 10), (timer) {
       if (githubRepoCount < AppConstants.githubRepoCount) {
-        githubRepoCount =
-            githubRepoCount + AppConstants.oneBySixOfCount;
+        githubRepoCount = githubRepoCount + AppConstants.oneBySixOfCount;
         if (githubRepoCount > AppConstants.githubRepoCount) {
           githubRepoCount = AppConstants.githubRepoCount;
         }

@@ -54,7 +54,6 @@ class ChatController extends GetxController {
       ScrollController(initialScrollOffset: 400.0);
   bool hasMoreMessages = false;
 
-
   toggleChatRoom() {
     if (chatRoomOpen) {
       chatRoomHeight = ChatRoomStyles.chatRoomHeightClosed;
@@ -418,8 +417,7 @@ class ChatController extends GetxController {
   }
 
   openChatScreen(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (_) =>  ChatScreen()));
+    Navigator.push(context, MaterialPageRoute(builder: (_) => ChatScreen()));
   }
 
   openResetPinScreen(BuildContext context) {

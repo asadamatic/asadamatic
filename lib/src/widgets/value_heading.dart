@@ -4,14 +4,13 @@ import 'package:asadamatic/src/mvc/models/value_type.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class ValueHeading extends StatelessWidget {
   const ValueHeading(
       {Key? key,
-        required this.textTheme,
-        required this.heading,
-        required this.valueType,
-        required this.screen})
+      required this.textTheme,
+      required this.heading,
+      required this.valueType,
+      required this.screen})
       : super(key: key);
 
   final TextTheme textTheme;
@@ -24,10 +23,10 @@ class ValueHeading extends StatelessWidget {
     final double width = screen == Screen.small
         ? 190.0
         : valueType == ValueType.stackoverflow
-        ? 190
-        : valueType == ValueType.github
-        ? 150
-        : 160;
+            ? 190
+            : valueType == ValueType.github
+                ? 150
+                : 160;
     return TweenAnimationBuilder(
         duration: const Duration(milliseconds: 800),
         tween: Tween<double>(

@@ -2,8 +2,6 @@ import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/controllers/chat_cont
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
-
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({
     Key? key,
@@ -17,9 +15,9 @@ class LoadingWidget extends StatelessWidget {
             color: Colors.white54,
             child: _chatController.isLoading!
                 ? const Align(
-              alignment: Alignment.center,
-              child: CircularProgressIndicator(),
-            )
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator(),
+                  )
                 : const SizedBox()));
   }
 }

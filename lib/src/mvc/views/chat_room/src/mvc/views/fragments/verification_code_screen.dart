@@ -78,7 +78,9 @@ class VerificationCodeScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(100.0))),
                       textStyle:
                           MaterialStateProperty.all(textTheme.subtitle1)),
-                  onPressed: () => _chatController.isLoading! ? null : _chatController.verifyCode(),
+                  onPressed: () => _chatController.isLoading!
+                      ? null
+                      : _chatController.verifyCode(),
                   child: GetBuilder<ChatController>(
                       id: 'updateLoadingWidget',
                       builder: (_chatController) => _chatController.isLoading!

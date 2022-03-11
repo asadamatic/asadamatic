@@ -2,8 +2,6 @@ import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
-
 class HireMeSection extends StatelessWidget {
   const HireMeSection({Key? key}) : super(key: key);
 

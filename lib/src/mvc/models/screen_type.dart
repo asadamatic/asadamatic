@@ -1,5 +1,1 @@
-enum Screen {
-  small,
-  medium,
-  large
-}
+enum Screen { small, medium, large }

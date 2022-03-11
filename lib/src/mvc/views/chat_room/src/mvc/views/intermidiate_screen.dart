@@ -13,31 +13,31 @@ class IntermediateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ChatController _chatController = Get.find();
     return Column(
-        children: [
-          const Flexible(
-            child: PageIndexIndicator(
-                pageCount: 2,
-                authType: AuthType.signUp,
-              ),
+      children: [
+        const Flexible(
+          child: PageIndexIndicator(
+            pageCount: 2,
+            authType: AuthType.signUp,
           ),
-          Expanded(
-            flex: 5,
-            child: Form(
-              key: _chatController.welcomeFormKey,
-              child: PageView(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: _chatController.welcomePageController,
-                onPageChanged: _chatController.onWelcomePageChange,
-                children: const [
-                  ConfirmationScreen(),
-                  PinCodeScreen(
-                    authType: AuthType.signIn,
-                  ),
-                ],
-              ),
+        ),
+        Expanded(
+          flex: 5,
+          child: Form(
+            key: _chatController.welcomeFormKey,
+            child: PageView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: _chatController.welcomePageController,
+              onPageChanged: _chatController.onWelcomePageChange,
+              children: const [
+                ConfirmationScreen(),
+                PinCodeScreen(
+                  authType: AuthType.signIn,
+                ),
+              ],
             ),
           ),
-        ],
-      );
+        ),
+      ],
+    );
   }
 }

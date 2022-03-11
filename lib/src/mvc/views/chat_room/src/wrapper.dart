@@ -21,7 +21,7 @@ class Wrapper extends StatelessWidget {
           if (_controller.sessionIdLoaded!) {
             if (_controller.sessionId!.isNotEmpty) {
               if (_controller.session!.isActive!) {
-                return  ChatScreen();
+                return ChatScreen();
               }
               return const IntermediateScreen();
             } else {
@@ -29,7 +29,7 @@ class Wrapper extends StatelessWidget {
             }
           } else {
             return const Center(
-                child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(),
             );
           }
         },

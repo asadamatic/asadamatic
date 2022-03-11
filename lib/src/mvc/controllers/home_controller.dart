@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/models/package.dart';
-import 'package:asadamatic/src/mvc/models/value_type.dart';
 import 'package:asadamatic/src/mvc/views/boltgrocery/main.dart';
 import 'package:asadamatic/src/mvc/views/dailytodo/main.dart';
 import 'package:asadamatic/src/mvc/views/legacyweather/main.dart';
@@ -37,11 +36,6 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   int stackoverflowScore = AppConstants.oneBySixtyOfScore;
   int githubRepoCount = AppConstants.oneBySixOfCount;
 
-  List<List<dynamic>> scores = [
-    ["Stackoverflow Reputation", ValueType.stackoverflow],
-    ["Github Repositories", ValueType.github],
-    ["Commercial Projects", ValueType.commercialProjects]
-  ];
 
   bool packagesDataLoaded = false;
   final NetworkService _networkService = NetworkService();

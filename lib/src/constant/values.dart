@@ -1,4 +1,5 @@
 import 'package:asadamatic/src/mvc/models/package.dart';
+import 'package:asadamatic/src/mvc/models/value_type.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +12,13 @@ class AppConstants {
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
   // Scores
+
+  static const List<List<dynamic>> scores = [
+    ["Stackoverflow Reputation", ValueType.stackoverflow],
+    ["Github Repositories", ValueType.github],
+    ["Commercial Projects", ValueType.commercialProjects]
+  ];
+
   static const int stackoverflowScore = 1363;
   static int get oneBySixtyOfScore => (stackoverflowScore / 60).round();
 

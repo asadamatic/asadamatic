@@ -16,8 +16,8 @@ class AsadHameed extends StatelessWidget {
     final double imageSize = screen == Screen.large
         ? 300.0
         : screen == Screen.medium
-            ? 240
-            : 210;
+            ? 260
+            : 220;
 
     return TweenAnimationBuilder(
         duration: const Duration(milliseconds: 2000),

@@ -43,8 +43,8 @@ class Home extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(
-                          width: 310.0,
-                          height: 300.0,
+                          width: 330.0,
+                          height: 320.0,
                           child: AsadHameed(
                             screen: Screen.small,
                             textTheme: textTheme,
@@ -94,15 +94,10 @@ class Home extends StatelessWidget {
                         const SizedBox(
                           height: 50.0,
                         ),
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: _homeController.scores.map((score) {
-                              return Score(
-                                score: score,
-                                textTheme: textTheme,
-                                screen: Screen.small,
-                              );
-                            }).toList()),
+                        Score(
+                          textTheme: textTheme,
+                          screen: Screen.small,
+                        ),
                         const SizedBox(
                           height: 50.0,
                         ),

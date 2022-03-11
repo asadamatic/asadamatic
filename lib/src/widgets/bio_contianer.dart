@@ -38,7 +38,7 @@ class BioContainer extends StatelessWidget {
     final double asadhameedWidth = screen == Screen.large
         ? 550
         : screen == Screen.medium
-            ? 370.0
+            ? 360.0
             : 370.0; // TODo
     final double asadhameedHeight = screen == Screen.large
         ? 400
@@ -62,7 +62,7 @@ class BioContainer extends StatelessWidget {
         : screen == Screen.medium
             ? 50.0
             : 50.0; // TODO
-
+    final mediumScreen = screen == Screen.medium;
     return SizedBox(
       height: screenHeight,
       child: Column(
@@ -85,7 +85,7 @@ class BioContainer extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const SizedBox(height: 50.0),
+                   SizedBox(height:  mediumScreen ? 100.0 : 50.0),
                   SizedBox(
                       width: descriptionWidth,
                       height: 300.0,
@@ -150,12 +150,7 @@ class BioContainer extends StatelessWidget {
             height: 120.0,
           ),
           // Done
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: _homeController.scores.map((score) {
-              return Score(score: score, textTheme: textTheme, screen: Screen.medium,);
-            }).toList(),
-          )
+          Score(textTheme: textTheme, screen: screen)
         ],
       ),
     );

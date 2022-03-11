@@ -1,5 +1,3 @@
-
-import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:asadamatic/src/mvc/models/screen_type.dart';
@@ -8,6 +6,7 @@ import 'package:asadamatic/src/mvc/views/device_view.dart';
 import 'package:asadamatic/src/mvc/views/fragments/footer.dart';
 import 'package:asadamatic/src/mvc/views/fragments/packages_section.dart';
 import 'package:asadamatic/src/style/values.dart';
+import 'package:asadamatic/src/widgets/apps_section.dart';
 import 'package:asadamatic/src/widgets/asad_hameed.dart';
 import 'package:asadamatic/src/widgets/bio_contianer.dart';
 import 'package:asadamatic/src/widgets/score.dart';
@@ -125,29 +124,10 @@ class Home extends StatelessWidget {
                         Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 60.0, vertical: 8.0),
-                            child: Obx(() => Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      AppConstants.descriptions[
-                                          _homeController.sliderIndex.value][0],
-                                      style: textTheme.headline4,
-                                    ),
-                                    const SizedBox(
-                                      height: 15.0,
-                                    ),
-                                    SizedBox(
-                                      child: Obx(() => Text(
-                                            AppConstants.descriptions[
-                                                _homeController
-                                                    .sliderIndex.value][1],
-                                            textAlign: TextAlign.center,
-                                            style: textTheme.headline5,
-                                          )),
-                                    )
-                                  ],
-                                )))
+                            child: AppDescription(
+                                screen: Screen.small,
+                                homeController: _homeController,
+                                textTheme: textTheme))
                       ],
                     ),
                     const SizedBox(
@@ -293,105 +273,6 @@ class ContributionsSection extends StatelessWidget {
             height: 80.0,
           ),
           Footer(),
-        ],
-      ),
-    );
-  }
-}
-
-class AppsSection extends StatelessWidget {
-  const AppsSection(
-      {Key? key,
-      required this.screenHeight,
-      required this.positiveConstraintsApps,
-      required this.smallerWidthApps,
-      required HomeController homeController,
-      required this.textTheme,
-      required this.largerWidthApps,
-      required this.screen})
-      : _homeController = homeController,
-        super(key: key);
-
-  final double screenHeight;
-  final bool positiveConstraintsApps;
-  final double smallerWidthApps;
-  final HomeController _homeController;
-  final TextTheme textTheme;
-  final double largerWidthApps;
-  final Screen screen;
-  @override
-  Widget build(BuildContext context) {
-    final descriptionFontStyle = screen == Screen.large
-        ? textTheme.headline4!
-        : screen == Screen.medium
-            ? textTheme.headline5!
-            : textTheme.headline5!;
-    final titleFontStyle = screen == Screen.small
-        ? textTheme.headline5!
-        : textTheme.headline4!; // TODO
-    final double contentSpacingNormal = screen == Screen.large
-        ? 230.0
-        : screen == Screen.medium
-            ? 100.0
-            : 100.0; // TODO
-    final double contentSpacingSmall =
-        screen == Screen.small ? 50.0 : 50.0; // TODO
-
-    return SizedBox(
-      height: screenHeight,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly, // TODO different
-        children: [
-          SizedBox(
-            width: positiveConstraintsApps ? smallerWidthApps : 0.0,
-          ),
-          const SizedBox(
-            width: 60.0,
-          ),
-          Switcher(),
-          const SizedBox(
-            width: 20.0,
-          ),
-          const SizedBox(
-              width: AppStyles.deviceViewWidthLarge, // TODO different
-              child: DeviceView()),
-          SizedBox(
-            width: positiveConstraintsApps
-                ? contentSpacingNormal
-                : contentSpacingSmall,
-          ),
-          Flexible(
-              flex: 3,
-              child: Obx(() => Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppConstants
-                            .descriptions[_homeController.sliderIndex.value][0],
-                        style: titleFontStyle,
-                      ),
-                      const SizedBox(
-                        height: 15.0,
-                      ),
-                      SizedBox(
-                        width: 500.0,
-                        height: 300.0,
-                        child: Obx(() => Text(
-                              AppConstants.descriptions[
-                                  _homeController.sliderIndex.value][1],
-                              textAlign: TextAlign.start,
-                              style: descriptionFontStyle,
-                            )),
-                      )
-                    ],
-                  ))),
-          const SizedBox(
-            width: 60.0,
-          ),
-          SizedBox(
-            width: positiveConstraintsApps ? largerWidthApps : 0.0,
-          ),
         ],
       ),
     );

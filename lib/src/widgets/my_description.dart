@@ -31,6 +31,7 @@ class MyDescription extends StatelessWidget {
         : screen == Screen.medium
             ? textTheme.headline3!.fontSize
             : textTheme.headline4!.fontSize;
+    final smallScreen = screen == Screen.small;
     return SizedBox(
         width: descriptionWidth,
         height: descriptionHeight,
@@ -43,6 +44,7 @@ class MyDescription extends StatelessWidget {
                   id: 'updateBio',
                   builder: (_homeController) {
                     return RichText(
+                      textAlign: smallScreen ? TextAlign.center : TextAlign.start,
                       text: TextSpan(
                         style: textTheme.headline2,
                         children: _homeController.bioWords

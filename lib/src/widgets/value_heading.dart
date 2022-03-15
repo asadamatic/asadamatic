@@ -20,13 +20,15 @@ class ValueHeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeController _themeController = Get.find();
-    final double width = screen == Screen.small
-        ? 190.0
-        : valueType == ValueType.stackoverflow
-            ? 190
-            : valueType == ValueType.github
-                ? 150
-                : 160;
+    // final double width = screen == Screen.small
+    //     ? 190.0
+    //     : valueType == ValueType.stackoverflow
+    //         ? 190
+    //         : valueType == ValueType.github
+    //             ? 150
+    //             : 160;
+    final double width = 190;
+
     return TweenAnimationBuilder(
         duration: const Duration(milliseconds: 800),
         tween: Tween<double>(

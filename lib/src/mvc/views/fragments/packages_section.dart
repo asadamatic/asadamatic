@@ -105,27 +105,16 @@ class PackageCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    package!.name!,
-                    style: TextStyle(
-                        fontSize:
-                            Theme.of(context).textTheme.headline6!.fontSize),
-                  ),
-                  // IconButton(
-                  //     onPressed: () =>
-                  //       _homeController.copyPackageVersion(package!.name!)
-                  //     ,
-                  //     icon: const Icon(Icons.copy))
-                ],
+              Text(
+                package!.name!,
+                style: TextStyle(
+                    fontSize: Theme.of(context).textTheme.headline6!.fontSize),
               ),
               const SizedBox(
                 height: 5.0,
               ),
               SizedBox(
-                width: 290.0,
+                width: 270.0,
                 height: 60.0,
                 child: Text(
                   package!.description!,
@@ -165,13 +154,13 @@ class PackageCard extends StatelessWidget {
                           padding: const EdgeInsets.only(
                               top: 8.0, right: 8.0, left: 8.0),
                           child: Text(package!.pubPoints!,
-                              style: Theme.of(context).textTheme.subtitle2),
+                              style: Theme.of(context).textTheme.bodyText2),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
                               top: 8.0, right: 8.0, left: 8.0),
                           child: Text(package!.popularity!,
-                              style: Theme.of(context).textTheme.subtitle2),
+                              style: Theme.of(context).textTheme.bodyText2),
                         )
                       ]),
                       TableRow(
@@ -181,7 +170,7 @@ class PackageCard extends StatelessWidget {
                                     child: Text(label,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .subtitle1),
+                                            .bodyText2),
                                   ))
                               .toList())
                     ],
@@ -200,91 +189,111 @@ class PackageShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        elevation: 10.0,
+        elevation: 2.0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
         margin: const EdgeInsets.all(15.0),
         child: Container(
-            width: 360.0,
-            height: 320.0,
+            width: 300.0,
+            height: 250.0,
             padding: const EdgeInsets.all(28.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Shimmer.fromColors(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4.0),
-                          color: Colors.grey[200]!,
-                        ),
-                        height: 20.0,
-                        width: 160.0,
-                      ),
-                      baseColor: AppStyles.shimmerBaseColor,
-                      highlightColor: AppStyles.shimmerHighlightColor,
+                Shimmer.fromColors(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4.0),
+                      color: Colors.grey[200]!,
                     ),
-                  ],
+                    height: 20.0,
+                    width: 160.0,
+                  ),
+                  baseColor: AppStyles.shimmerBaseColor,
+                  highlightColor: AppStyles.shimmerHighlightColor,
+                ),
+                const SizedBox(
+                  height: 5.0,
                 ),
                 SizedBox(
-                    width: 290.0,
-                    height: 120.0,
+                    width: 270.0,
+                    height: 60.0,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Shimmer.fromColors(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4.0),
-                              color: Colors.grey[200]!,
-                            ),
-                            height: 16.0,
-                            width: 270.0,
-                          ),
-                          baseColor: AppStyles.shimmerBaseColor,
-                          highlightColor: AppStyles.shimmerHighlightColor,
-                        ),
-                        const SizedBox(
-                          height: 8.0,
-                        ),
-                        Shimmer.fromColors(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4.0),
-                              color: Colors.grey[200]!,
-                            ),
-                            height: 16.0,
-                            width: 270.0,
-                          ),
-                          baseColor: AppStyles.shimmerBaseColor,
-                          highlightColor: AppStyles.shimmerHighlightColor,
-                        ),
-                        const SizedBox(
-                          height: 8.0,
-                        ),
-                        Shimmer.fromColors(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4.0),
-                              color: Colors.grey[200]!,
-                            ),
-                            height: 16.0,
-                            width: 270.0,
-                          ),
-                          baseColor: AppStyles.shimmerBaseColor,
-                          highlightColor: AppStyles.shimmerHighlightColor,
-                        ),
-                      ],
-                    )),
-                const SizedBox(height: 20.0),
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [1, 2, 3, 4, 5]
+                            .map((index) => index % 2 == 0
+                                ? const SizedBox(
+                                    height: 6.0,
+                                  )
+                                : Shimmer.fromColors(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(4.0),
+                                        color: Colors.grey[200]!,
+                                      ),
+                                      height: 14.0,
+                                      width: 270.0,
+                                    ),
+                                    baseColor: AppStyles.shimmerBaseColor,
+                                    highlightColor:
+                                        AppStyles.shimmerHighlightColor,
+                                  ))
+                            .toList()
+                        // [
+                        //   Shimmer.fromColors(
+                        //     child: Container(
+                        //       decoration: BoxDecoration(
+                        //         borderRadius: BorderRadius.circular(4.0),
+                        //         color: Colors.grey[200]!,
+                        //       ),
+                        //       height: 14.0,
+                        //       width: 270.0,
+                        //     ),
+                        //     baseColor: AppStyles.shimmerBaseColor,
+                        //     highlightColor: AppStyles.shimmerHighlightColor,
+                        //   ),
+                        //   const SizedBox(
+                        //     height: 6.0,
+                        //   ),
+                        //   Shimmer.fromColors(
+                        //     child: Container(
+                        //       decoration: BoxDecoration(
+                        //         borderRadius: BorderRadius.circular(4.0),
+                        //         color: Colors.grey[200]!,
+                        //       ),
+                        //       height: 14.0,
+                        //       width: 270.0,
+                        //     ),
+                        //     baseColor: AppStyles.shimmerBaseColor,
+                        //     highlightColor: AppStyles.shimmerHighlightColor,
+                        //   ),
+                        //   const SizedBox(
+                        //     height: 6.0,
+                        //   ),
+                        //   Shimmer.fromColors(
+                        //     child: Container(
+                        //       decoration: BoxDecoration(
+                        //         borderRadius: BorderRadius.circular(4.0),
+                        //         color: Colors.grey[200]!,
+                        //       ),
+                        //       height: 14.0,
+                        //       width: 270.0,
+                        //     ),
+                        //     baseColor: AppStyles.shimmerBaseColor,
+                        //     highlightColor: AppStyles.shimmerHighlightColor,
+                        //   ),
+                        // ],
+                        )),
+                const Flexible(child: SizedBox(height: 30.0)),
                 Row(
                   children: [
-                    const SizedBox(
-                      width: 50.0,
+                    const Flexible(
+                      child: SizedBox(
+                        width: 50.0,
+                      ),
                     ),
                     Table(
                       columnWidths: const <int, TableColumnWidth>{
@@ -350,7 +359,7 @@ class PackageShimmer extends StatelessWidget {
                                       child: Text(label,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .subtitle1),
+                                              .bodyText2),
                                     ))
                                 .toList())
                       ],

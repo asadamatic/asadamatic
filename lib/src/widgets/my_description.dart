@@ -44,7 +44,8 @@ class MyDescription extends StatelessWidget {
                   id: 'updateBio',
                   builder: (_homeController) {
                     return RichText(
-                      textAlign: smallScreen ? TextAlign.center : TextAlign.start,
+                      textAlign:
+                          smallScreen ? TextAlign.center : TextAlign.start,
                       text: TextSpan(
                         style: textTheme.headline2,
                         children: _homeController.bioWords

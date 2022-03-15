@@ -9,6 +9,7 @@ import 'package:asadamatic/src/style/values.dart';
 import 'package:asadamatic/src/widgets/apps_section.dart';
 import 'package:asadamatic/src/widgets/asad_hameed.dart';
 import 'package:asadamatic/src/widgets/bio_contianer.dart';
+import 'package:asadamatic/src/widgets/home_page_indicator.dart';
 import 'package:asadamatic/src/widgets/my_description.dart';
 import 'package:asadamatic/src/widgets/score.dart';
 import 'package:asadamatic/src/widgets/social_icons_bar.dart';
@@ -29,7 +30,6 @@ class Home extends StatelessWidget {
       body: Stack(
         fit: StackFit.loose,
         children: [
-          Container(),
           Material(
             elevation: 8.0,
             child: LayoutBuilder(builder: (BuildContext layoutBuilderContext,
@@ -117,6 +117,8 @@ class Home extends StatelessWidget {
                 final screenHeight = constraints.maxHeight;
 
                 return PageView(
+                  controller: _homeController.homePageController,
+                  onPageChanged: _homeController.onHomePageChanged,
                   scrollDirection: Axis.vertical,
                   children: [
                     BioContainer(
@@ -143,7 +145,7 @@ class Home extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
-                          PackagesSection(),
+                          Flexible(child: PackagesSection()),
                           Footer(),
                         ],
                       ),
@@ -168,6 +170,8 @@ class Home extends StatelessWidget {
 
                 final screenHeight = constraints.maxHeight;
                 return PageView(
+                  controller: _homeController.homePageController,
+                  onPageChanged: _homeController.onHomePageChanged,
                   scrollDirection: Axis.vertical,
                   children: [
                     // Box 1
@@ -200,6 +204,13 @@ class Home extends StatelessWidget {
             }),
           ),
           Align(alignment: Alignment.centerLeft, child: SocialIconsBar()),
+          LayoutBuilder(
+              builder: (context, constranints) =>
+                  constranints.maxWidth > AppStyles.breakPointSmallMedium
+                      ? const Align(
+                          alignment: Alignment.centerRight,
+                          child: HomePageIndicator())
+                      : const SizedBox()),
           Align(
             alignment: Alignment.topRight,
             child: GetBuilder<ThemeController>(builder: (_themeController) {
@@ -231,7 +242,7 @@ class ContributionsSection extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: const [
-          PackagesSection(),
+          Flexible(child: PackagesSection()),
           SizedBox(
             height: 80.0,
           ),

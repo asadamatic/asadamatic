@@ -6,8 +6,7 @@ import 'package:asadamatic/src/mvc/views/boltgrocery/main.dart';
 import 'package:asadamatic/src/mvc/views/dailytodo/main.dart';
 import 'package:asadamatic/src/mvc/views/legacyweather/main.dart';
 import 'package:asadamatic/src/services/network.dart';
-import 'package:clipboard/clipboard.dart';
-import 'package:flutter/animation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -21,6 +20,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   final RxBool osHover = false.obs;
   final RxInt osHoverIndex = 0.obs;
   final sliderIndex = 0.obs;
+  int homePageIndex = 0;
+  PageController homePageController = PageController();
   double iconHeight = 30.0;
   double iconIncreasedHeight = 2.5;
   List<Package> packagesData = [];
@@ -162,11 +163,22 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     update([package]);
   }
 
-  copyPackageVersion(String package) {
-    FlutterClipboard.copy(package.replaceFirst(" ", ": ^"));
-  }
+  // copyPackageVersion(String package) {
+  //   FlutterClipboard.copy(package.replaceFirst(" ", ": ^"));
+  // }
 
   hireMe() async {
     await launch(AppConstants.linkedInUrl);
+  }
+
+  onHomePageChanged(int newIndex) {
+    homePageIndex = newIndex;
+    update(['updateHomePageView']);
+  }
+
+  changeHomePage(int newIndex) {
+    homePageIndex = newIndex;
+    homePageController.jumpToPage(newIndex);
+    update(['updateHomePageView']);
   }
 }

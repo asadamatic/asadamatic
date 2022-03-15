@@ -17,10 +17,14 @@ class PackagesSection extends StatelessWidget {
               (BuildContext layoutBuilderContext, BoxConstraints constraints) {
             return Column(
               children: [
+                const Flexible(
+                    child: SizedBox(
+                  height: 100.0,
+                )),
                 Text(
-                  'Flutter Packages',
+                  'Contributions to Flutter',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline3,
+                  style: Theme.of(context).textTheme.headline4,
                 ),
                 const SizedBox(
                   height: 30.0,
@@ -141,28 +145,23 @@ class PackageCard extends StatelessWidget {
                       2: IntrinsicColumnWidth(),
                     },
                     children: [
-                      TableRow(children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 8.0, right: 8.0, left: 8.0),
-                          child: Text(
-                            package!.likes!,
-                            style: Theme.of(context).textTheme.subtitle2,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 8.0, right: 8.0, left: 8.0),
-                          child: Text(package!.pubPoints!,
-                              style: Theme.of(context).textTheme.bodyText2),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 8.0, right: 8.0, left: 8.0),
-                          child: Text(package!.popularity!,
-                              style: Theme.of(context).textTheme.bodyText2),
-                        )
-                      ]),
+                      TableRow(
+                          children: [
+                        package!.likes!,
+                        package!.pubPoints!,
+                        package!.popularity!
+                      ]
+                              .map(
+                                (value) => Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 8.0, right: 8.0, left: 8.0),
+                                  child: Text(value,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText2),
+                                ),
+                              )
+                              .toList()),
                       TableRow(
                           children: ['Likes', 'Pub Points', 'Popularity']
                               .map((label) => Padding(
@@ -241,52 +240,7 @@ class PackageShimmer extends StatelessWidget {
                                     highlightColor:
                                         AppStyles.shimmerHighlightColor,
                                   ))
-                            .toList()
-                        // [
-                        //   Shimmer.fromColors(
-                        //     child: Container(
-                        //       decoration: BoxDecoration(
-                        //         borderRadius: BorderRadius.circular(4.0),
-                        //         color: Colors.grey[200]!,
-                        //       ),
-                        //       height: 14.0,
-                        //       width: 270.0,
-                        //     ),
-                        //     baseColor: AppStyles.shimmerBaseColor,
-                        //     highlightColor: AppStyles.shimmerHighlightColor,
-                        //   ),
-                        //   const SizedBox(
-                        //     height: 6.0,
-                        //   ),
-                        //   Shimmer.fromColors(
-                        //     child: Container(
-                        //       decoration: BoxDecoration(
-                        //         borderRadius: BorderRadius.circular(4.0),
-                        //         color: Colors.grey[200]!,
-                        //       ),
-                        //       height: 14.0,
-                        //       width: 270.0,
-                        //     ),
-                        //     baseColor: AppStyles.shimmerBaseColor,
-                        //     highlightColor: AppStyles.shimmerHighlightColor,
-                        //   ),
-                        //   const SizedBox(
-                        //     height: 6.0,
-                        //   ),
-                        //   Shimmer.fromColors(
-                        //     child: Container(
-                        //       decoration: BoxDecoration(
-                        //         borderRadius: BorderRadius.circular(4.0),
-                        //         color: Colors.grey[200]!,
-                        //       ),
-                        //       height: 14.0,
-                        //       width: 270.0,
-                        //     ),
-                        //     baseColor: AppStyles.shimmerBaseColor,
-                        //     highlightColor: AppStyles.shimmerHighlightColor,
-                        //   ),
-                        // ],
-                        )),
+                            .toList())),
                 const Flexible(child: SizedBox(height: 30.0)),
                 Row(
                   children: [
@@ -302,56 +256,27 @@ class PackageShimmer extends StatelessWidget {
                         2: IntrinsicColumnWidth(),
                       },
                       children: [
-                        TableRow(children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 8.0, right: 8.0, left: 8.0),
-                            child: Shimmer.fromColors(
-                              child: Container(
-                                height: 14.0,
-                                width: 20.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4.0),
-                                  color: Colors.grey[200]!,
-                                ),
-                              ),
-                              baseColor: AppStyles.shimmerBaseColor,
-                              highlightColor: AppStyles.shimmerHighlightColor,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 8.0, right: 8.0, left: 8.0),
-                            child: Shimmer.fromColors(
-                              child: Container(
-                                height: 14.0,
-                                width: 20.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4.0),
-                                  color: Colors.grey[200]!,
-                                ),
-                              ),
-                              baseColor: AppStyles.shimmerBaseColor,
-                              highlightColor: AppStyles.shimmerHighlightColor,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 8.0, right: 8.0, left: 8.0),
-                            child: Shimmer.fromColors(
-                              child: Container(
-                                height: 14.0,
-                                width: 20.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4.0),
-                                  color: Colors.grey[200]!,
-                                ),
-                              ),
-                              baseColor: AppStyles.shimmerBaseColor,
-                              highlightColor: AppStyles.shimmerHighlightColor,
-                            ),
-                          )
-                        ]),
+                        TableRow(
+                            children: [1, 2, 3]
+                                .map((index) => Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 8.0, right: 8.0, left: 8.0),
+                                      child: Shimmer.fromColors(
+                                        child: Container(
+                                          height: 14.0,
+                                          width: 20.0,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(4.0),
+                                            color: Colors.grey[200]!,
+                                          ),
+                                        ),
+                                        baseColor: AppStyles.shimmerBaseColor,
+                                        highlightColor:
+                                            AppStyles.shimmerHighlightColor,
+                                      ),
+                                    ))
+                                .toList()),
                         TableRow(
                             children: ['Likes', 'Pub Points', 'Popularity']
                                 .map((label) => Padding(

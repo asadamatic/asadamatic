@@ -27,7 +27,7 @@ class ValueHeading extends StatelessWidget {
     //         : valueType == ValueType.github
     //             ? 150
     //             : 160;
-    final double width = 190;
+    const double width = 190;
 
     return TweenAnimationBuilder(
         duration: const Duration(milliseconds: 800),

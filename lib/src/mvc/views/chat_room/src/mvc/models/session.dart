@@ -19,4 +19,13 @@ class Session {
         deviceName: json['device_name'],
         isActive: json['is_active']);
   }
+  toMap() {
+    return {
+      'session_id': sessionId,
+      'start_time': startTime.toString(),
+      'email': email,
+      'device_name': deviceName,
+      'is_active': isActive
+    };
+  }
 }

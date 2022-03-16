@@ -100,7 +100,7 @@ class ChatController extends GetxController {
   // Chat Screen Functions
 
   loadMessages() async {
-    final response = await _chatService.getMessages(session!.email!);
+    final response = await _chatService.getMessages(session!);
     if (response.statusCode == 200) {
       // final jsonList = json.decode(response.body)['messages'];
       // chatMessages = List<ChatMessage>.from(jsonList.map((message) => ChatMessage.fromJson(message)));

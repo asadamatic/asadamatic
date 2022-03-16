@@ -17,8 +17,8 @@ class Authentication extends GetConnect {
   final codeVerification = 'verify-code';
   final settingPin = 'set-pin';
   final verificationPin = 'verify-pin';
-  final session = 'session/';
-  final logout = 'logout/';
+  final session = 'session';
+  final logout = 'logout';
   final removeSession = 'remove-session';
 
   Future<Response> sendEmailForVerification(String? email) async {

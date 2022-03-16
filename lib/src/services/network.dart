@@ -10,7 +10,7 @@ class NetworkService extends GetConnect {
       : remoteHostUrl;
 
   final initializeServer = 'initialize';
-  final packagesData = 'packages/';
+  final packagesData = 'packages';
 
   Future<Response> initialize() async {
     final response = await get(url + initializeServer);

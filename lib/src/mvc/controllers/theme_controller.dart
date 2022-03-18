@@ -14,8 +14,8 @@ class ThemeController extends GetxController {
 
   bool get isThemeDark => themeMode == ThemeMode.dark;
 
-  toggleTheme(newValue) {
-    if (newValue) {
+  toggleTheme() {
+    if (themeMode == ThemeMode.light) {
       Get.changeThemeMode(ThemeMode.dark);
       themeMode = ThemeMode.dark;
     } else {

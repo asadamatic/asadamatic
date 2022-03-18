@@ -14,6 +14,7 @@ import 'package:asadamatic/src/widgets/my_description.dart';
 import 'package:asadamatic/src/widgets/score.dart';
 import 'package:asadamatic/src/widgets/social_icons_bar.dart';
 import 'package:asadamatic/src/widgets/switcher.dart';
+import 'package:asadamatic/src/widgets/theme_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -205,20 +206,27 @@ class Home extends StatelessWidget {
           ),
           Align(alignment: Alignment.centerLeft, child: SocialIconsBar()),
           LayoutBuilder(
-              builder: (context, constranints) =>
-                  constranints.maxWidth > AppStyles.breakPointSmallMedium
+              builder: (context, constraints) =>
+                  constraints.maxWidth > AppStyles.breakPointSmallMedium
                       ? const Align(
                           alignment: Alignment.centerRight,
                           child: HomePageIndicator())
                       : const SizedBox()),
-          Align(
-            alignment: Alignment.topRight,
-            child: GetBuilder<ThemeController>(builder: (_themeController) {
-              return Switch(
-                  value: _themeController.themeMode == ThemeMode.dark,
-                  onChanged: _themeController.toggleTheme);
-            }),
-          ),
+          LayoutBuilder(
+              builder: (context, constraints) => Align(
+                  alignment:
+                      constraints.maxWidth > AppStyles.breakPointSmallMedium
+                          ? Alignment.topRight
+                          : Alignment.topCenter,
+                  child: ThemeSwitch())),
+          // Align(alignment: Alignment.topRight, child: ThemeSwitch()
+          //     // GetBuilder<ThemeController>(builder: (_themeController) {
+          //     //   return
+          //     //     Switch(
+          //     //       value: _themeController.themeMode == ThemeMode.dark,
+          //     //       onChanged: _themeController.toggleTheme);
+          //     // }),
+          //     ),
           // const Positioned(right: 55.0, bottom: 35.0, child: ChatRoomContainer())
         ],
       ),

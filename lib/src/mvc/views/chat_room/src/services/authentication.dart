@@ -66,9 +66,9 @@ class Authentication extends GetConnect {
     return response;
   }
 
-  Future<Response> logoutFromSession(String? sessionId) async {
+  Future<Response> logoutFromSession(String? sessionId, String? email) async {
     final response = await get(
-      url + logout + '?session_id=$sessionId',
+      url + logout + '?session_id=$sessionId&email=$email',
     );
     return response;
   }

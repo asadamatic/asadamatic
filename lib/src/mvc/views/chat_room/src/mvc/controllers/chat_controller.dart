@@ -100,7 +100,8 @@ class ChatController extends GetxController {
   // Chat Screen Functions
 
   loadMessages() async {
-    final response = await _chatService.getMessages(session!);
+    final response =
+        await _chatService.getMessages(session!.email, session!.sessionId);
     if (response.statusCode == 200) {
       // final jsonList = json.decode(response.body)['messages'];
       // chatMessages = List<ChatMessage>.from(jsonList.map((message) => ChatMessage.fromJson(message)));
@@ -437,8 +438,8 @@ class ChatController extends GetxController {
   logout() async {
     isLoading = true;
     update(['updateLoadingWidget']);
-    final response =
-        await _authentication.logoutFromSession(session!.sessionId);
+    final response = await _authentication.logoutFromSession(
+        session!.sessionId, session!.email);
 
     if (response.statusCode == 200) {
       isLoggedIn = false;

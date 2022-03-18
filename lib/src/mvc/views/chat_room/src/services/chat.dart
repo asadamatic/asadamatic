@@ -15,8 +15,9 @@ class ChatService extends GetConnect {
   final messages = 'messages';
   final newMessage = 'new-message';
 
-  Future<Response> getMessages( Session? session) async {
-    final response = await post(url + messages, session!.toMap());
+  Future<Response> getMessages(String? email, String? sessionId) async {
+    final response =
+        await get(url + messages + '?email=$email&session_id$sessionId');
     return response;
   }
 

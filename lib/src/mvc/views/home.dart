@@ -3,8 +3,10 @@ import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:asadamatic/src/mvc/models/screen_type.dart';
 import 'package:asadamatic/src/mvc/views/chat_room_container.dart';
 import 'package:asadamatic/src/mvc/views/device_view.dart';
+import 'package:asadamatic/src/mvc/views/fragments/contribution_section.dart';
 import 'package:asadamatic/src/mvc/views/fragments/footer.dart';
 import 'package:asadamatic/src/mvc/views/fragments/packages_section.dart';
+import 'package:asadamatic/src/mvc/views/fragments/skills_section.dart';
 import 'package:asadamatic/src/style/values.dart';
 import 'package:asadamatic/src/widgets/apps_section.dart';
 import 'package:asadamatic/src/widgets/asad_hameed.dart';
@@ -175,6 +177,13 @@ class Home extends StatelessWidget {
                   onPageChanged: _homeController.onHomePageChanged,
                   scrollDirection: Axis.vertical,
                   children: [
+                    //Skill Box Test
+
+                    // SizedBox(
+                    //     height: screenHeight,
+                    //     child: SkillsSection(
+                    //       screenHeight: screenHeight,
+                    //     )),
                     // Box 1
                     BioContainer(
                       screenHeight: screenHeight,
@@ -218,45 +227,10 @@ class Home extends StatelessWidget {
                       constraints.maxWidth > AppStyles.breakPointSmallMedium
                           ? Alignment.topRight
                           : Alignment.topCenter,
-                  child: ThemeSwitch())),
-          // Align(alignment: Alignment.topRight, child: ThemeSwitch()
-          //     // GetBuilder<ThemeController>(builder: (_themeController) {
-          //     //   return
-          //     //     Switch(
-          //     //       value: _themeController.themeMode == ThemeMode.dark,
-          //     //       onChanged: _themeController.toggleTheme);
-          //     // }),
-          //     ),
-          // const Positioned(right: 55.0, bottom: 35.0, child: ChatRoomContainer())
+                  child: const ThemeSwitch())),
         ],
       ),
       floatingActionButton: const ChatRoomContainer(),
-    );
-  }
-}
-
-class ContributionsSection extends StatelessWidget {
-  const ContributionsSection({
-    Key? key,
-    required this.screenHeight,
-  }) : super(key: key);
-
-  final double screenHeight;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: screenHeight,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
-          Flexible(child: PackagesSection()),
-          SizedBox(
-            height: 80.0,
-          ),
-          Footer(),
-        ],
-      ),
     );
   }
 }

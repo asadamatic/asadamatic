@@ -22,15 +22,13 @@ class _HomeWrapperState extends State<HomeWrapper> {
     return FutureBuilder<bool>(
       future: getVisitingValue(),
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        if (snapshot.hasData) {
-          if (snapshot.data == true) {
-            return const HomeScreen();
-          } else {
-            return LocationSelector(selectScreen: selectScreen);
-          }
-        } else {
+        if (!snapshot.hasData) {
           return const Scaffold();
         }
+        if (!(snapshot.data == true)) {
+          return LocationSelector(selectScreen: selectScreen);
+        }
+        return const HomeScreen();
       },
     );
   }

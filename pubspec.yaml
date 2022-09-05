@@ -41,6 +41,9 @@ dependencies:
   matrix4_transform: ^2.0.1
   percent_indicator: ^3.4.0
   intl:
+  firebase_core: ^1.20.0
+  firebase_auth: ^3.6.2
+  flutter_svg: ^1.1.4
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -74,6 +77,8 @@ flutter:
    - assets/boltgrocery/
    - assets/dailytodo/
    - assets/legacyweather/
+   - assets/social/
+   - assets/skills/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

@@ -19,13 +19,13 @@ class AppConstants {
     ["Commercial Projects", ValueType.commercialProjects]
   ];
 
-  static const int stackoverflowScore = 1363;
+  static const int stackoverflowScore = 2416;
   static int get oneBySixtyOfScore => (stackoverflowScore / 60).round();
 
-  static const int githubRepoCount = 56;
+  static const int githubRepoCount = 78;
   static int get oneBySixOfCount => (stackoverflowScore / 600).round();
 
-  static const int commercialProjects = 2;
+  static const int commercialProjects = 6;
 
   static const List<List<String>> descriptions = [
     [

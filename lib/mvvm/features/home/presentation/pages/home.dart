@@ -9,6 +9,7 @@ import 'package:asadamatic/mvvm/features/home/presentation/pages/packages_sectio
 import 'package:asadamatic/mvvm/core/styles/app_styles.dart';
 import 'package:asadamatic/mvvm/features/home/presentation/widgets/asad_hameed.dart';
 import 'package:asadamatic/mvvm/features/home/presentation/widgets/bio_contianer.dart';
+import 'package:asadamatic/mvvm/features/home/presentation/widgets/custom_button.dart';
 import 'package:asadamatic/mvvm/features/home/presentation/widgets/home_page_indicator.dart';
 import 'package:asadamatic/mvvm/features/home/presentation/widgets/my_description.dart';
 import 'package:asadamatic/mvvm/features/home/presentation/widgets/score.dart';
@@ -71,6 +72,7 @@ class Home extends StatelessWidget {
                         const SizedBox(
                           height: AppStyles.containerSpacing,
                         ),
+                        CustomButton(onPressed: (){}),
                         SkillSection(screenType: Screen.small,),
                         const SizedBox(
                           height: AppStyles.containerContentSpacing,

@@ -9,7 +9,7 @@ class Score extends StatelessWidget {
       : super(key: key);
 
   final TextTheme textTheme;
-  final Screen? screen;
+  final Screen screen;
   @override
   Widget build(BuildContext context) {
     return screen == Screen.small

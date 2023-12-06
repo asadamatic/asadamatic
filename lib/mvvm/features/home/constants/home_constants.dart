@@ -71,17 +71,24 @@ class HomeConstants {
       image: AppAssets.flutter,
       skillLevel: 'Intermediate',
     ),
-    Skill(
-        name: 'FastAPI',
-        description:
-            'FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.6+ based on standard Python type hints.',
-        image: AppAssets.fastApi,
-        skillLevel: 'Intermediate'),
+
     Skill(
         name: 'Python',
         description:
             'Python is a programming language that lets you work more quickly and integrate your systems more effectively.',
         image: AppAssets.python,
+        skillLevel: 'Intermediate'),
+    Skill(
+        name: 'Firebase',
+        description:
+        'Firebase is an app development platform that helps you build and grow apps and games users love. Backed by Google and trusted by millions of businesses around the world.',
+        image: AppAssets.firebase,
+        skillLevel: 'Intermediate'),
+    Skill(
+        name: 'FastAPI',
+        description:
+        'FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.6+ based on standard Python type hints.',
+        image: AppAssets.fastApi,
         skillLevel: 'Intermediate'),
     Skill(
         name: 'Java',
@@ -113,15 +120,7 @@ class HomeConstants {
             'C++ is a cross-platform language that can be used to create high-performance applications. C++ gives programmers a high level of control over system resources and memory.',
         image: AppAssets.cPluPlus,
         skillLevel: 'Intermediate'),
-  ];
-  static final List<Skill> tools = [
 
-    Skill(
-        name: 'Firebase',
-        description:
-            'Firebase is an app development platform that helps you build and grow apps and games users love. Backed by Google and trusted by millions of businesses around the world.',
-        image: AppAssets.firebase,
-        skillLevel: 'Intermediate'),
     Skill(
         name: 'Android Studio',
         description:

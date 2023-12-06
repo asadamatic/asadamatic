@@ -1,6 +1,7 @@
 import 'package:asadamatic/mvvm/features/home/presentation/get/home_controller.dart';
 import 'package:asadamatic/mvvm/enums.dart';
 import 'package:asadamatic/mvvm/features/home/presentation/widgets/asad_hameed.dart';
+import 'package:asadamatic/mvvm/features/home/presentation/widgets/custom_button.dart';
 import 'package:asadamatic/mvvm/features/home/presentation/widgets/my_description.dart';
 import 'package:asadamatic/mvvm/features/home/presentation/widgets/score.dart';
 import 'package:flutter/material.dart';
@@ -108,7 +109,8 @@ class BioContainer extends StatelessWidget {
             height: 120.0,
           ),
           // Done
-          Score(textTheme: textTheme, screen: screen)
+          CustomButton(onPressed: (){}),
+          // Score(textTheme: textTheme, screen: screen)
         ],
       ),
     );

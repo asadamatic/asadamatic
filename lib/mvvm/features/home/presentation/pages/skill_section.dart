@@ -7,24 +7,21 @@ import 'package:asadamatic/mvvm/features/home/styles/home_styles.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:asadamatic/mvvm/features/home/presentation/widgets/score.dart';
 class SkillSection extends StatelessWidget {
   const SkillSection({Key? key, required this.screenType}) : super(key: key);
   final Screen screenType;
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
+        Score(textTheme: textTheme, screen: screenType),
         SkillSlider(
           screenType: screenType,
           skills: HomeConstants.programmingLanguages,
           skillType: SkillType.programmingLanguages,
-        ),
-        SkillSlider(
-          screenType: screenType,
-          skills: HomeConstants.tools,
-          skillType: SkillType.tools,
         ),
       ],
     );
@@ -51,7 +48,6 @@ class SkillSlider extends StatelessWidget {
             ? HomeStyles.skillSectionWidthMedium
             : HomeStyles.skillSectionWidthSmall;
     final _homeController = Get.find<HomeController>();
-    final pageController = _homeController.getControllerFromSkillType(skillType);
 
     return Column(mainAxisSize: MainAxisSize.min, children: [
       SizedBox(
@@ -82,7 +78,7 @@ class SkillSlider extends StatelessWidget {
                   pageSnapping: false,
                   padEnds: false,
                   physics: NeverScrollableScrollPhysics(),
-                  controller: pageController,
+                  controller: _homeController.skillsSliderController,
                   itemCount: skills.length,
                   dragStartBehavior: DragStartBehavior.down,
                   itemBuilder: (context, index) {

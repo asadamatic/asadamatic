@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class AppStyles {
-
-  static const double buttonBorderRadius = 12.0;
+  static BorderRadius buttonBorderRadius = BorderRadius.circular(8.0);
+  static const double customButtonHeight = 50.0;
+  static const double customButtonWidth = 220;
   static BoxDecoration buttonDecoration = BoxDecoration(
       color: Colors.white,
-      borderRadius: BorderRadius.circular(buttonBorderRadius),
+      borderRadius: buttonBorderRadius,
       boxShadow: [
         BoxShadow(
           color: Colors.grey.withOpacity(0.5),
@@ -15,6 +16,10 @@ class AppStyles {
           offset: const Offset(0, 3), // changes position of shadow
         )
       ]);
+
+  static MaterialStateProperty<OutlinedBorder> customButtonShape =
+      MaterialStateProperty.all(
+          RoundedRectangleBorder(borderRadius: buttonBorderRadius));
 
   static const breakPointSmallMedium = 780;
   static const breakPointMediumLarge = 1060;

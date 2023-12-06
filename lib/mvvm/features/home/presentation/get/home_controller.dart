@@ -14,9 +14,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   AnimationController? titleAnimationController;
   Animation<double>? titleAnimation;
 
-  PageController programmingLanguagesController =
+  PageController skillsSliderController =
       PageController(viewportFraction: 1 / 5);
-  PageController toolsController = PageController(viewportFraction: 1 / 5);
 
   final RxInt osIndex = 0.obs;
   final RxBool osHover = false.obs;
@@ -103,14 +102,12 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   changeNumberOfSkillsOnFront(int numberOfSkillsOnFront) {
-    toolsController =
-        PageController(viewportFraction: 1 / numberOfSkillsOnFront);
-    programmingLanguagesController =
+    skillsSliderController =
         PageController(viewportFraction: 1 / numberOfSkillsOnFront);
   }
 
   forwardScrollThroughSkills(SkillType skillType, List<Skill> skills, Screen screenType) {
-    final pageController = getControllerFromSkillType(skillType);
+    final pageController = skillsSliderController;
     final pages = screenType == Screen.large ? 5 : screenType == Screen.medium ? 3 : 1;
     if (skills.length - pageController.page! > pages) {
       pageController.nextPage(
@@ -119,19 +116,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   reverseScrollThroughSkills(SkillType skillType) {
-    final pageController = getControllerFromSkillType(skillType);
-
-    if (pageController.page != 0) {
-      pageController.previousPage(
+    if (skillsSliderController.page != 0) {
+      skillsSliderController.previousPage(
           duration: Duration(milliseconds: 600), curve: Curves.easeIn);
     }
   }
 
-  getControllerFromSkillType(SkillType skillType) {
-    return skillType == SkillType.programmingLanguages
-        ? programmingLanguagesController
-        : toolsController;
-  }
+
   // copyPackageVersion(String package) {
   //   FlutterClipboard.copy(package.replaceFirst(" ", ": ^"));
   // }

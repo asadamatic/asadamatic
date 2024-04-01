@@ -44,14 +44,14 @@ class ChatRoomContainer extends StatelessWidget {
                         }),
                       ),
                     ),
-              FloatingActionButton(
-                onPressed: AppConstants.isWebMobile
-                    ? _chatController.pushPopChatRoom
-                    : _controller.toggleChatRoom,
-                child: Icon(_controller.chatRoomOpen
-                    ? Icons.keyboard_arrow_down
-                    : Icons.chat),
-              )
+              // FloatingActionButton(
+              //   onPressed: AppConstants.isWebMobile
+              //       ? _chatController.pushPopChatRoom
+              //       : _controller.toggleChatRoom,
+              //   child: Icon(_controller.chatRoomOpen
+              //       ? Icons.keyboard_arrow_down
+              //       : Icons.chat),
+              // )
             ],
           );
         });

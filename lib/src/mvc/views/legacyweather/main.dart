@@ -42,11 +42,10 @@ class LegacyWeatherApp extends StatelessWidget {
       ),
       darkTheme: ThemeData(
           scaffoldBackgroundColor: primaryColor,
-          backgroundColor: primaryColor,
           textTheme: const TextTheme(
-              headline5:
+              headlineSmall:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              headline6: TextStyle(color: Colors.white)),
+              titleLarge: TextStyle(color: Colors.white)),
           textButtonTheme: TextButtonThemeData(
               style: ButtonStyle(
                   backgroundColor:
@@ -59,7 +58,7 @@ class LegacyWeatherApp extends StatelessWidget {
                   backgroundColor: MaterialStateProperty.all(Colors.amber),
                   foregroundColor: MaterialStateProperty.all(primaryColor),
                   textStyle: MaterialStateProperty.all(
-                      const TextStyle(fontSize: 22.0))))),
+                      const TextStyle(fontSize: 22.0)))), colorScheme: ColorScheme.dark(background: primaryColor,)),
       themeMode: _themeController.themeMode,
       home: const Wrapper(),
     );

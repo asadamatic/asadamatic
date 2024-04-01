@@ -106,7 +106,7 @@ class PinCodeField extends StatelessWidget {
                                         .length));
                           },
                           focusNode: _focusNode[index],
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.titleLarge,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(1),
                             FilteringTextInputFormatter.digitsOnly,

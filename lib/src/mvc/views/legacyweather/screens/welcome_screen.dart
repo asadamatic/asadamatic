@@ -102,7 +102,7 @@ class ThirdPage extends StatelessWidget {
             Text(
               'MULTIPLE LOCATIONS',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
             Container(
               width: MediaQuery.of(context).size.width * 0.6,
@@ -155,13 +155,13 @@ class Page extends StatelessWidget {
             children: <Widget>[
               Text(title!,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline5),
+                  style: Theme.of(context).textTheme.headlineSmall),
               const SizedBox(
                 height: 8.0,
               ),
               Text(message!,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline6),
+                  style: Theme.of(context).textTheme.titleLarge),
             ],
           ),
         )

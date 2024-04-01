@@ -21,11 +21,11 @@ class ConfirmationScreen extends StatelessWidget {
             children: [
               Text(
                 "Continue as",
-                style: textTheme.subtitle1,
+                style: textTheme.titleMedium,
               ),
               Text(
                 _chatController.session!.email!,
-                style: textTheme.headline6,
+                style: textTheme.titleLarge,
               ),
             ],
           ),
@@ -42,7 +42,7 @@ class ConfirmationScreen extends StatelessWidget {
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(100.0))),
                         textStyle:
-                            MaterialStateProperty.all(textTheme.subtitle1)),
+                            MaterialStateProperty.all(textTheme.titleMedium)),
                     onPressed: _chatController.switchToNextPageOnAnyScreen,
                     child: const Text('Proceed')),
               ),

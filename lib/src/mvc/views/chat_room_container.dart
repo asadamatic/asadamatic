@@ -10,7 +10,6 @@ class ChatRoomContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _chatController = Get.put(ChatController());
     // final size = MediaQuery.of(context).size;
     // final mobileScreen = size.height < AppStyles.mobileHeight &&
     //     size.width < AppStyles.mobileWidth;

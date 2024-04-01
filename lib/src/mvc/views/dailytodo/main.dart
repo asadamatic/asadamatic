@@ -22,7 +22,6 @@ class DailyTodoApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           color: Theme.of(context).primaryColor,
         ),
-        bottomAppBarColor: Theme.of(context).primaryColor,
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
               elevation: MaterialStateProperty.all(4.0),
@@ -37,7 +36,7 @@ class DailyTodoApp extends StatelessWidget {
         textSelectionTheme: TextSelectionThemeData(
           selectionColor: Colors.blue[400],
           selectionHandleColor: Colors.blue[400],
-        ),
+        ), bottomAppBarTheme: BottomAppBarTheme(color: Theme.of(context).primaryColor),
       ),
       darkTheme: ThemeData(
           scaffoldBackgroundColor: Colors.grey[900],
@@ -58,7 +57,6 @@ class DailyTodoApp extends StatelessWidget {
           bottomAppBarTheme: BottomAppBarTheme(
             color: Colors.grey[900],
           ),
-          bottomAppBarColor: Colors.grey[900],
           colorScheme: ColorScheme.fromSwatch().copyWith(
               secondary: Colors.blue[400], brightness: Brightness.dark),
           textSelectionTheme: TextSelectionThemeData(

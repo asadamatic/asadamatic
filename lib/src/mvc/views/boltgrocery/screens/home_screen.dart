@@ -36,9 +36,9 @@ class BoltGroceryHomeScreen extends StatelessWidget {
                   alignment: Alignment.topCenter,
                   child: Container(
                     margin: const EdgeInsets.only(top: 70.0),
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const <Widget>[
+                      children: <Widget>[
                         Text(
                           'Grocery List',
                           style: TextStyle(

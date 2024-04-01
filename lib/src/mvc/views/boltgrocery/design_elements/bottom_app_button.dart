@@ -30,7 +30,7 @@ class BottomAppButton extends StatelessWidget {
                           topRight: Radius.circular(10.0),
                           topLeft: Radius.circular(10.0)))),
                   backgroundColor: MaterialStateProperty.all(
-                      Theme.of(context).bottomAppBarColor),
+                      Theme.of(context).bottomAppBarTheme.color),
                   foregroundColor: MaterialStateProperty.all(Colors.white)),
               label: Text(
                 _label ?? 'Button Label',

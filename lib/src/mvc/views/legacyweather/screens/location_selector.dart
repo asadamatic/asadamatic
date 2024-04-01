@@ -79,9 +79,9 @@ class _LocationSelectorState extends State<LocationSelector> {
               ),
               padding: const EdgeInsets.only(bottom: 16.0),
               alignment: Alignment.bottomCenter,
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: const [
+                children: [
                   Text(
                     'Choose a Location',
                     style: TextStyle(
@@ -153,7 +153,7 @@ class _LocationSelectorState extends State<LocationSelector> {
                                 child: Text(
                                     '${filteredList![index].name!}, ${filteredList![index].country!}',
                                     style:
-                                        Theme.of(context).textTheme.headline6),
+                                        Theme.of(context).textTheme.titleLarge),
                                 padding: const EdgeInsets.all(15.0),
                               ),
                             );

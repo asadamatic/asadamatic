@@ -67,9 +67,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           alignment: Alignment.bottomCenter,
           child: Container(
             margin: const EdgeInsets.only(bottom: 10.0),
-            child: Column(
+            child: const Column(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: const <Widget>[
+              children: <Widget>[
                 Text(
                   'from',
                   textAlign: TextAlign.center,

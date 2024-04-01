@@ -27,10 +27,10 @@ class MyDescription extends StatelessWidget {
 
     final double descriptionHeight = screen == Screen.small ? 200.0 : 300.0;
     final descriptionFontSize = screen == Screen.large
-        ? textTheme.headline2!.fontSize
+        ? textTheme.displayMedium!.fontSize
         : screen == Screen.medium
-            ? textTheme.headline3!.fontSize
-            : textTheme.headline4!.fontSize;
+            ? textTheme.displaySmall!.fontSize
+            : textTheme.headlineMedium!.fontSize;
     final smallScreen = screen == Screen.small;
     return SizedBox(
         width: descriptionWidth,
@@ -47,7 +47,7 @@ class MyDescription extends StatelessWidget {
                       textAlign:
                           smallScreen ? TextAlign.center : TextAlign.start,
                       text: TextSpan(
-                        style: textTheme.headline2,
+                        style: textTheme.displayMedium,
                         children: _homeController.bioWords
                             .take(wordCount.toInt())
                             .map<InlineSpan>((word) {

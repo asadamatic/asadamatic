@@ -13,7 +13,7 @@ class ValueTicker extends StatelessWidget {
   final Screen? screen;
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme.headline3;
+    final textTheme = Theme.of(context).textTheme.displaySmall;
     return GetBuilder<HomeController>(
         id: 'updateValueTicker',
         builder: (_homeController) => Padding(

@@ -50,7 +50,7 @@ class GroceryItemCardState extends State<GroceryItemCard> {
                     child: Text(
                       '${widget.groceryItem!.name}',
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.headline6,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
                   Padding(
@@ -61,7 +61,7 @@ class GroceryItemCardState extends State<GroceryItemCard> {
                         Flexible(
                           child: Text('${widget.groceryItem!.quantity} ',
                               overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.subtitle2),
+                              style: Theme.of(context).textTheme.titleSmall),
                         ),
                         Flexible(
                             child: Text(
@@ -70,7 +70,7 @@ class GroceryItemCardState extends State<GroceryItemCard> {
                                     ? ''
                                     : '${widget.groceryItem!.unit}',
                                 overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context).textTheme.subtitle2)),
+                                style: Theme.of(context).textTheme.titleSmall)),
                       ],
                     ),
                   ),

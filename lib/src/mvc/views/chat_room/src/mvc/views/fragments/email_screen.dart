@@ -26,7 +26,7 @@ class EmailScreen extends StatelessWidget {
               //height: 24.0
               Text(
                 "What's Your Email ?",
-                style: textTheme.headline5,
+                style: textTheme.headlineSmall,
               ),
               const SizedBox(
                 height: 15.0,
@@ -34,7 +34,7 @@ class EmailScreen extends StatelessWidget {
               //height: 16.0
               Text(
                 'We need to verify your identity.',
-                style: Theme.of(context).textTheme.subtitle1,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(
                 height: 15.0,
@@ -76,7 +76,7 @@ class EmailScreen extends StatelessWidget {
                 style: ButtonStyle(
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(100.0))),
-                    textStyle: MaterialStateProperty.all(textTheme.subtitle1)),
+                    textStyle: MaterialStateProperty.all(textTheme.titleMedium)),
                 onPressed: () => _chatController.isLoading!
                     ? null
                     : _chatController.verifyEmail(),

@@ -9,10 +9,10 @@ class AsadHameed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fontSize = screen == Screen.large
-        ? textTheme!.headline1!.fontSize
+        ? textTheme!.displayLarge!.fontSize
         : screen == Screen.medium
-            ? textTheme!.headline2!.fontSize
-            : textTheme!.headline2!.fontSize;
+            ? textTheme!.displayMedium!.fontSize
+            : textTheme!.displayMedium!.fontSize;
     final double imageSize = screen == Screen.large
         ? 300.0
         : screen == Screen.medium

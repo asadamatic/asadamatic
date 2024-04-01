@@ -24,7 +24,7 @@ class PackagesSection extends StatelessWidget {
                 Text(
                   'Contributions to Flutter',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline4,
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(
                   height: 30.0,
@@ -112,7 +112,7 @@ class PackageCard extends StatelessWidget {
               Text(
                 package!.name!,
                 style: TextStyle(
-                    fontSize: Theme.of(context).textTheme.headline6!.fontSize),
+                    fontSize: Theme.of(context).textTheme.titleLarge!.fontSize),
               ),
               const SizedBox(
                 height: 5.0,
@@ -127,7 +127,7 @@ class PackageCard extends StatelessWidget {
                   style: TextStyle(
                       height: 1.5,
                       fontSize:
-                          Theme.of(context).textTheme.bodyText1!.fontSize),
+                          Theme.of(context).textTheme.bodyLarge!.fontSize),
                 ),
               ),
               const Flexible(child: SizedBox(height: 30.0)),
@@ -158,7 +158,7 @@ class PackageCard extends StatelessWidget {
                                   child: Text(value,
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyText2),
+                                          .bodyMedium),
                                 ),
                               )
                               .toList()),
@@ -169,7 +169,7 @@ class PackageCard extends StatelessWidget {
                                     child: Text(label,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyText2),
+                                            .bodyMedium),
                                   ))
                               .toList())
                     ],
@@ -284,7 +284,7 @@ class PackageShimmer extends StatelessWidget {
                                       child: Text(label,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText2),
+                                              .bodyMedium),
                                     ))
                                 .toList())
                       ],

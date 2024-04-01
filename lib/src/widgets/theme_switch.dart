@@ -30,8 +30,8 @@ class ThemeSwitch extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16.0),
 
                   onTap: _themeController.toggleTheme,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                     child: Text('Dark'),
                   ),
                 ),
@@ -43,8 +43,8 @@ class ThemeSwitch extends StatelessWidget {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(16.0),
                   onTap: _themeController.toggleTheme,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                     child: Text('Light'),
                   ),
                 ),

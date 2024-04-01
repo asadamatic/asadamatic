@@ -28,7 +28,7 @@ class PinCodeScreen extends StatelessWidget {
               children: [
                 Text(
                   signingUp ? 'Choose a 4 digit pin!' : 'Enter your pin',
-                  style: textTheme.headline5,
+                  style: textTheme.headlineSmall,
                 ),
                 const SizedBox(
                   height: 15.0,
@@ -36,7 +36,7 @@ class PinCodeScreen extends StatelessWidget {
                 signingUp
                     ? Text(
                         'To avoid verification next time.',
-                        style: textTheme.subtitle1,
+                        style: textTheme.titleMedium,
                       )
                     : const SizedBox(),
                 const SizedBox(
@@ -72,7 +72,7 @@ class PinCodeScreen extends StatelessWidget {
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100.0))),
                       textStyle:
-                          MaterialStateProperty.all(textTheme.subtitle1)),
+                          MaterialStateProperty.all(textTheme.titleMedium)),
                   onPressed: () => _chatController.isLoading!
                       ? null
                       : signingUp

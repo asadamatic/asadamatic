@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 class ThemeController extends GetxController {
   ThemeMode? themeMode = ThemeMode.system;
-  Brightness brightness = SchedulerBinding.instance!.window.platformBrightness;
+  Brightness brightness = SchedulerBinding.instance.platformDispatcher.platformBrightness;
   @override
   void onInit() async {
     themeMode =

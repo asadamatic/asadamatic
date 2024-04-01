@@ -23,14 +23,14 @@ class UserNameScreen extends StatelessWidget {
             children: [
               Text(
                 "What's Your Name ?",
-                style: textTheme.headline5,
+                style: textTheme.headlineSmall,
               ),
               const SizedBox(
                 height: 15.0,
               ),
               Text(
                 'Helps improve chat experience.',
-                style: textTheme.subtitle1,
+                style: textTheme.titleMedium,
               ),
               const SizedBox(
                 height: 15.0,
@@ -66,7 +66,7 @@ class UserNameScreen extends StatelessWidget {
                 style: ButtonStyle(
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(100.0))),
-                    textStyle: MaterialStateProperty.all(textTheme.subtitle1)),
+                    textStyle: MaterialStateProperty.all(textTheme.titleMedium)),
                 onPressed: () => _chatController.isLoading!
                     ? null
                     : _chatController.setUserData(),

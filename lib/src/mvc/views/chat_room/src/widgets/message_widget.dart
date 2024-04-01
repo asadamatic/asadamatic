@@ -36,7 +36,7 @@ class MessageWidget extends StatelessWidget {
                     chatMessage!.message!,
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                        fontSize: textTheme.subtitle1!.fontSize,
+                        fontSize: textTheme.titleMedium!.fontSize,
                         color:
                             received! ? null : ChatRoomStyles.sentMessageColor),
                   ),

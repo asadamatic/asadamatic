@@ -24,7 +24,7 @@ class VerificationCodeScreen extends StatelessWidget {
                 //height: 24.0
                 Text(
                   "Enter 6-Digit Code",
-                  style: textTheme.headline5,
+                  style: textTheme.headlineSmall,
                 ),
                 const SizedBox(
                   height: 15.0,
@@ -32,7 +32,7 @@ class VerificationCodeScreen extends StatelessWidget {
                 //height: 16.0
                 Text(
                   'Check your email for code.',
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(
                   height: 15.0,
@@ -55,7 +55,7 @@ class VerificationCodeScreen extends StatelessWidget {
                             )),
                     Obx(() => Text(
                           _chatController.timeDisplay!.value,
-                          style: textTheme.headline6,
+                          style: textTheme.titleLarge,
                         )),
                   ],
                 ),
@@ -77,7 +77,7 @@ class VerificationCodeScreen extends StatelessWidget {
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100.0))),
                       textStyle:
-                          MaterialStateProperty.all(textTheme.subtitle1)),
+                          MaterialStateProperty.all(textTheme.titleMedium)),
                   onPressed: () => _chatController.isLoading!
                       ? null
                       : _chatController.verifyCode(),

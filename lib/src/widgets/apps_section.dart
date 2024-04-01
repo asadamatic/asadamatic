@@ -94,13 +94,13 @@ class AppDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final descriptionFontStyle = screen == Screen.large
-        ? textTheme.headline4!
+        ? textTheme.headlineMedium!
         : screen == Screen.medium
-            ? textTheme.headline5!
-            : textTheme.headline6!;
+            ? textTheme.headlineSmall!
+            : textTheme.titleLarge!;
     final titleFontStyle = screen == Screen.small
-        ? textTheme.headline5!
-        : textTheme.headline4!; // T
+        ? textTheme.headlineSmall!
+        : textTheme.headlineMedium!; // T
     final smallScreen = screen == Screen.small;
     return Obx(() => Column(
           mainAxisAlignment: MainAxisAlignment.center,

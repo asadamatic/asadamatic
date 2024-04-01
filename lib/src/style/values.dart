@@ -37,14 +37,14 @@ class AppStyles {
     colorScheme:
         ColorScheme.fromSwatch(primarySwatch: ChatRoomStyles.primarySwatch!),
     textTheme: const TextTheme(
-        headline2: TextStyle(
+        displayMedium: TextStyle(
           fontSize: 65.0,
           color: Colors.black,
         ),
-        headline4: TextStyle(
+        headlineMedium: TextStyle(
           color: Colors.black,
         ),
-        headline3: TextStyle(
+        displaySmall: TextStyle(
           color: Colors.black,
         )),
   );
@@ -67,14 +67,14 @@ class AppStyles {
         selectionHandleColor: ChatRoomStyles.accentColor,
       ),
       textTheme: const TextTheme(
-          headline2: TextStyle(
+          displayMedium: TextStyle(
             fontSize: 65.0,
             color: Colors.white,
           ),
-          headline4: TextStyle(
+          headlineMedium: TextStyle(
             color: Colors.white,
           ),
-          headline3: TextStyle(
+          displaySmall: TextStyle(
             color: Colors.white,
           )),
       elevatedButtonTheme: ElevatedButtonThemeData(

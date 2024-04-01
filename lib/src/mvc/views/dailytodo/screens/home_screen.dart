@@ -25,9 +25,9 @@ class HomeScreen extends StatelessWidget {
               ),
               padding: const EdgeInsets.only(bottom: 16.0),
               alignment: Alignment.bottomCenter,
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: const [
+                children: [
                   Text(
                     'Daily Todo',
                     style: TextStyle(
@@ -90,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                         foregroundColor:
                             MaterialStateProperty.all(Colors.white),
                         backgroundColor: MaterialStateProperty.all(
-                            Theme.of(context).bottomAppBarColor)),
+                            Theme.of(context).bottomAppBarTheme.color)),
                     child: const Text(
                       'ADD NEW TASK',
                       style: TextStyle(

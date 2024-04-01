@@ -20,7 +20,7 @@ class HireMeSection extends StatelessWidget {
           style: ButtonStyle(
               shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0))),
-              textStyle: MaterialStateProperty.all(textTheme.subtitle1)),
+              textStyle: MaterialStateProperty.all(textTheme.titleMedium)),
           onPressed: _homeController.hireMe,
           child: const Text('Available for work!')),
     );

@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/models/user.dart';
 import 'package:asadamatic/src/mvc/views/chat_room/src/mvc/models/verification_code.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class Authentication extends GetConnect {

@@ -31,24 +31,23 @@ class BoltGroceryApp extends StatelessWidget {
           ),
           scaffoldBackgroundColor: Colors.white,
           textTheme: const TextTheme(
-              headline6: TextStyle(
+              titleLarge: TextStyle(
                 color: Colors.black,
                 letterSpacing: 0.8,
                 fontSize: 20.0,
                 fontWeight: FontWeight.w500,
               ),
-              subtitle2: TextStyle(
+              titleSmall: TextStyle(
                 color: Colors.black,
                 letterSpacing: 0.8,
                 fontSize: 18.0,
                 fontWeight: FontWeight.w400,
               )),
-          bottomAppBarColor: Colors.green[400],
           iconTheme: const IconThemeData(
             color: Colors.white,
           ),
           colorScheme:
-              ColorScheme.fromSwatch().copyWith(secondary: Colors.greenAccent)),
+              ColorScheme.fromSwatch().copyWith(secondary: Colors.greenAccent), bottomAppBarTheme: BottomAppBarTheme(color: Colors.green[400])),
       darkTheme: ThemeData(
         textSelectionTheme: TextSelectionThemeData(
           selectionColor: Colors.green[400],
@@ -63,19 +62,18 @@ class BoltGroceryApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: Colors.grey[900],
         textTheme: const TextTheme(
-            headline6: TextStyle(
+            titleLarge: TextStyle(
               color: Colors.white,
               letterSpacing: 0.8,
               fontSize: 20.0,
               fontWeight: FontWeight.w500,
             ),
-            subtitle2: TextStyle(
+            titleSmall: TextStyle(
               color: Colors.white,
               letterSpacing: 0.8,
               fontSize: 18.0,
               fontWeight: FontWeight.w400,
-            )),
-        bottomAppBarColor: Colors.grey[900],
+            )), bottomAppBarTheme: BottomAppBarTheme(color: Colors.grey[900]),
       ),
       home: const Wrapper(),
     );

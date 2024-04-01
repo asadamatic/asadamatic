@@ -143,9 +143,9 @@ class Home extends StatelessWidget {
                     ),
                     SizedBox(
                       height: screenHeight,
-                      child: Column(
+                      child: const Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Flexible(child: PackagesSection()),
                           Footer(),
                         ],
@@ -218,7 +218,7 @@ class Home extends StatelessWidget {
                       constraints.maxWidth > AppStyles.breakPointSmallMedium
                           ? Alignment.topRight
                           : Alignment.topCenter,
-                  child: ThemeSwitch())),
+                  child: const ThemeSwitch())),
           // Align(alignment: Alignment.topRight, child: ThemeSwitch()
           //     // GetBuilder<ThemeController>(builder: (_themeController) {
           //     //   return
@@ -247,9 +247,9 @@ class ContributionsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: screenHeight,
-      child: Column(
+      child: const Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
+        children: [
           Flexible(child: PackagesSection()),
           SizedBox(
             height: 80.0,

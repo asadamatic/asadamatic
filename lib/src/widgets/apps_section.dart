@@ -150,8 +150,7 @@ class StoreBadge extends StatelessWidget {
       child: SvgPicture.asset(
         imageAsset,
         clipBehavior: Clip.hardEdge,
-        height: 70,
-        width: 120,
+        height: 60.0,
       ),
     );
   }

@@ -1,15 +1,15 @@
-import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
+import 'package:asadamatic/src/mvc/models/social_link.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SocialLogoIcon extends StatefulWidget {
-  const SocialLogoIcon({this.asset, this.index, this.url, Key? key})
+  const SocialLogoIcon(
+      {Key? key, required this.socialLink})
       : super(key: key);
-  final int? index;
-  final String? asset;
-  final String? url;
+  final SocialLink socialLink;
+
   @override
   State<SocialLogoIcon> createState() => _SocialLogoIconState();
 }
@@ -37,29 +37,25 @@ class _SocialLogoIconState extends State<SocialLogoIcon> {
       padding: EdgeInsets.all(8.0 - increasedHeight),
       child: InkWell(
         customBorder: const CircleBorder(),
-        onTap: () async {
-          await launch(widget.url!);
-        },
+        onTap: () async =>
+            await launchUrl(Uri.parse(widget.socialLink.profileUrl)),
         onHover: (value) {
-          if (widget.index ==
-              AppConstants.socialIcons
-                  .indexWhere((socialIcon) => socialIcon[0] == widget.asset!)) {
-            if (value) {
-              onHover();
-            } else {
-              onHoverRemoved();
-            }
+          if (value) {
+            onHover();
+          } else {
+            onHoverRemoved();
           }
         },
         child: GetBuilder<ThemeController>(builder: (_themeController) {
           return Image(
             height: height,
-            color: widget.asset == 'assets/github.png'
+            color: widget.socialLink.imageAsset == 'assets/github.png'
                 ? _themeController.themeMode == ThemeMode.dark
                     ? Colors.white
                     : null
                 : null,
-            image: AssetImage(widget.asset ?? 'assets/stack-overflow.png'),
+            image: AssetImage(
+                widget.socialLink.imageAsset ?? 'assets/stack-overflow.png'),
           );
         }),
       ),

@@ -1,27 +1,24 @@
 import 'dart:async';
 
 import 'package:asadamatic/src/constant/values.dart';
+import 'package:asadamatic/src/enums.dart';
+import 'package:asadamatic/src/mvc/models/app_data.dart';
 import 'package:asadamatic/src/mvc/models/package.dart';
-import 'package:asadamatic/src/mvc/views/boltgrocery/main.dart';
-import 'package:asadamatic/src/mvc/views/dailytodo/main.dart';
-import 'package:asadamatic/src/mvc/views/legacyweather/main.dart';
-import 'package:asadamatic/src/services/network.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HomeController extends GetxController with GetTickerProviderStateMixin {
   // App title animation
   AnimationController? titleAnimationController;
   Animation<double>? titleAnimation;
 
-  final RxInt osIndex = 0.obs;
+  final Rx<Os> selectedOs = Os.ios.obs;
   final RxBool osHover = false.obs;
   final RxInt osHoverIndex = 0.obs;
-  final sliderIndex = 0.obs;
+  final Rx<App> selectedApp = apps.first.obs;
   int homePageIndex = 0;
-  PageController homePageController = PageController();
+  PageController appsPageController = PageController(initialPage: 0);
   double iconHeight = 30.0;
   double iconIncreasedHeight = 2.5;
   List<Package> packagesData = [];
@@ -34,16 +31,14 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     'for ',
     'android ',
   ];
-  int stackoverflowScore = AppConstants.oneBySixtyOfScore;
-  int githubRepoCount = AppConstants.oneBySixOfCount;
+  int stackoverflowScore = oneBySixtyOfScore;
+  int githubRepoCount = oneBySixOfCount;
 
   bool packagesDataLoaded = false;
-  final NetworkService _networkService = NetworkService();
 
   @override
   void onInit() async {
     super.onInit();
-    _networkService.initialize();
 
     titleAnimationController = AnimationController(
       duration: const Duration(seconds: 2),
@@ -56,11 +51,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
     // Timer for stackvoerflow score
     Timer.periodic(const Duration(milliseconds: 1), (timer) {
-      if (stackoverflowScore < AppConstants.stackoverflowScore) {
-        stackoverflowScore =
-            stackoverflowScore + AppConstants.oneBySixtyOfScore;
-        if (stackoverflowScore > AppConstants.stackoverflowScore) {
-          stackoverflowScore = AppConstants.stackoverflowScore;
+      if (stackoverflowScore < stackoverflowScore) {
+        stackoverflowScore = stackoverflowScore + oneBySixtyOfScore;
+        if (stackoverflowScore > stackoverflowScore) {
+          stackoverflowScore = stackoverflowScore;
         }
 
         update(['updateValueTicker']);
@@ -71,10 +65,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
     // Timer for github score
     Timer.periodic(const Duration(milliseconds: 10), (timer) {
-      if (githubRepoCount < AppConstants.githubRepoCount) {
-        githubRepoCount = githubRepoCount + AppConstants.oneBySixOfCount;
-        if (githubRepoCount > AppConstants.githubRepoCount) {
-          githubRepoCount = AppConstants.githubRepoCount;
+      if (githubRepoCount < githubRepoCount) {
+        githubRepoCount = githubRepoCount + oneBySixOfCount;
+        if (githubRepoCount > githubRepoCount) {
+          githubRepoCount = githubRepoCount;
         }
         update(['updateValueTicker']);
       } else {
@@ -96,16 +90,9 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
       update(['updateBio']);
     });
-    final result = await _networkService.getPackagesData();
-    if (result.statusCode == 200) {
-      packagesData = [
-        Package.fromJson(result.body[0]),
-        Package.fromJson(result.body[1]),
-        Package.fromJson(result.body[2])
-      ];
-    } else {
-      packagesData = AppConstants.packagesDescription;
-    }
+
+    packagesData = AppConstants.packagesDescription;
+
     packagesDataLoaded = true;
     update(['updatePackagesData']);
   }
@@ -120,7 +107,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   osOnHover(bool value, int newIndex) {
     if (value) {
-      if (newIndex != osIndex.value) {
+      if (newIndex != selectedOs.value) {
         osHover.value = true;
         osHoverIndex.value = newIndex;
       } else {
@@ -133,22 +120,14 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     update(['osHoverUpdate', 'osIndexUpdate']);
   }
 
-  onOsChanged(newIndex) {
-    osIndex.value = newIndex;
+  onOsChanged(Os os) {
+    selectedOs.value = os;
     update(['osIndexUpdate']);
   }
 
-  onPageChanged(newIndex) {
-    sliderIndex.value = newIndex;
-    update(['boltgrocery', 'dailytodo', 'legacyweather', 'sliderIndexUpdate']);
-  }
-
-  getSliderApp() {
-    return sliderIndex.value == 0
-        ? BoltGroceryApp()
-        : sliderIndex.value == 1
-            ? DailyTodoApp()
-            : LegacyWeatherApp();
+  onChangedApp(index) {
+    selectedApp.value = apps.elementAt(index);
+    update(['apps', 'sliderIndexUpdate']);
   }
 
   onHover(package) {
@@ -167,18 +146,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   //   FlutterClipboard.copy(package.replaceFirst(" ", ": ^"));
   // }
 
-  hireMe() async {
-    await launch(AppConstants.linkedInUrl);
-  }
-
   onHomePageChanged(int newIndex) {
     homePageIndex = newIndex;
     update(['updateHomePageView']);
   }
 
-  changeHomePage(int newIndex) {
-    homePageIndex = newIndex;
-    homePageController.jumpToPage(newIndex);
-    update(['updateHomePageView']);
-  }
+  moveAppsForwards() => appsPageController.nextPage(
+      duration: const Duration(milliseconds: 600), curve: Curves.easeIn);
+  moveAppsBackwards() => appsPageController.previousPage(
+      duration: const Duration(milliseconds: 600), curve: Curves.easeIn);
 }

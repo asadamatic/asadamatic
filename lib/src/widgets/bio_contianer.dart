@@ -1,114 +1,52 @@
-import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
-import 'package:asadamatic/src/mvc/models/screen_type.dart';
+import 'package:asadamatic/src/style/styles.dart';
 import 'package:asadamatic/src/widgets/asad_hameed.dart';
 import 'package:asadamatic/src/widgets/my_description.dart';
 import 'package:asadamatic/src/widgets/score.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class BioContainer extends StatelessWidget {
   const BioContainer({
     Key? key,
-    required this.screenHeight,
-    required this.positiveConstraintsBio,
-    required this.largerWidthBio,
-    required HomeController homeController,
-    required this.textTheme,
-    required this.theme,
-    required this.smallerWidthBio,
-    required this.screen,
-  })  : _homeController = homeController,
-        super(key: key);
-
-  final double screenHeight;
-  final bool positiveConstraintsBio;
-  final double largerWidthBio;
-  final HomeController _homeController;
-  final TextTheme textTheme;
-  final ThemeData theme;
-  final double smallerWidthBio;
-  final Screen screen;
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final double asadhameedWidth = screen == Screen.large
-        ? 550
-        : screen == Screen.medium
-            ? 360.0
-            : 370.0; // TODo
-    final double asadhameedHeight = screen == Screen.large
-        ? 400
-        : screen == Screen.medium
-            ? 350
-            : 350;
-
-    final double contentSpacingNormal = screen == Screen.large
-        ? 230.0
-        : screen == Screen.medium
-            ? 100.0
-            : 100.0; // TODO
-    final double contentSpacingSmall = screen == Screen.large
-        ? 50.0
-        : screen == Screen.medium
-            ? 50.0
-            : 50.0; // TODO
-    final mediumScreen = screen == Screen.medium;
-    return SizedBox(
-      height: screenHeight,
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final colorScheme = theme.colorScheme;
+    final isMobile = ResponsiveBreakpoints.of(context).smallerOrEqualTo(MOBILE);
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+          horizontal: massiveSpacing, vertical: massiveSpacing),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Flexible(
-              child: SizedBox(
-            height: 150.0,
-          )),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          Flex(
+            direction: isMobile ? Axis.vertical : Axis.horizontal,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                width: positiveConstraintsBio ? largerWidthBio : 0.0,
-              ),
-              const SizedBox(
-                width: 60.0,
-              ),
-              // Same
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SizedBox(height: mediumScreen ? 100.0 : 50.0),
-                  MyDescription(
-                      screen: screen,
-                      homeController: _homeController,
-                      textTheme: textTheme,
-                      theme: theme),
-                ],
-              ),
-              Flexible(
-                child: SizedBox(
-                  width: positiveConstraintsBio
-                      ? contentSpacingNormal
-                      : contentSpacingSmall,
-                ),
-              ),
-              SizedBox(
-                  width: asadhameedWidth,
-                  height: asadhameedHeight,
-                  child: AsadHameed(
-                    screen: screen,
-                    textTheme: textTheme,
-                  )),
-              const SizedBox(
-                height: 60.0,
-              ),
-              SizedBox(
-                width: positiveConstraintsBio ? smallerWidthBio : 0.0,
-              ),
+              // Avoid Spacer/Flexible/Expanded for Mobile View, Becuase it Use Column ( Flex -> Vertical), and its
+              // parent is Scrollable. This will give unbounded height error.
+              if (!isMobile)
+                Flexible(flex: 3, child: const AsadHameed())
+              else
+                const AsadHameed(),
+              if (!isMobile) const Spacer(),
+              if (isMobile)
+                const MyDescription()
+              else
+                const Flexible(flex: 4, child: MyDescription())
             ],
+          
           ),
-          const SizedBox(
-            height: 120.0,
-          ),
+
+          const SizedBox(height: massiveSpacing),
           // Done
-          Score(textTheme: textTheme, screen: screen)
+          const Reputation()
         ],
       ),
     );

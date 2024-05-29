@@ -8,84 +8,27 @@ class AsadHameed extends StatelessWidget {
   final TextTheme? textTheme;
   @override
   Widget build(BuildContext context) {
-    final fontSize = screen == Screen.large
-        ? textTheme!.displayLarge!.fontSize
-        : screen == Screen.medium
-            ? textTheme!.displayMedium!.fontSize
-            : textTheme!.displayMedium!.fontSize;
-    final double imageSize = screen == Screen.large
-        ? 300.0
-        : screen == Screen.medium
-            ? 260
-            : 220;
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final colorScheme = theme.colorScheme;
 
     return TweenAnimationBuilder(
-        duration: const Duration(milliseconds: 2000),
-        tween: Tween<double>(begin: 50.0, end: 1.0),
-        child: Align(
-          alignment: Alignment.center,
-          child: Image(
-            image: const AssetImage('assets/me.png'),
-            height: imageSize,
-            width: imageSize,
-          ),
-        ),
-        builder: (context, double value, parentsChild) {
+        duration: const Duration(milliseconds: 1200),
+        tween: Tween<double>(begin: 0.1, end: 1.0),
+        builder: (context, double opacity, child) {
           return TweenAnimationBuilder(
               duration: const Duration(milliseconds: 1200),
-              tween: Tween<double>(begin: 0.1, end: 1.0),
+              tween: Tween<double>(begin: 0.4, end: 1.0),
               builder: (context, double opacity, child) {
-                return Stack(
-                  fit: StackFit.passthrough,
-                  children: [
-                    Container(
-                      height: 210.0,
-                    ),
-                    Positioned(
-                        left: 0.0,
-                        top: 30.0,
-                        child: AnimatedOpacity(
-                          opacity: opacity,
-                          duration: const Duration(milliseconds: 1200),
-                          child: Text(
-                            'Asad',
-                            style: TextStyle(
-                              letterSpacing: value,
-                              fontSize: fontSize,
-                            ),
-                          ),
-                        )),
-                    TweenAnimationBuilder(
-                        duration: const Duration(milliseconds: 1200),
-                        tween: Tween<double>(begin: 0.4, end: 1.0),
-                        builder: (context, double opacity, child) {
-                          return AnimatedOpacity(
-                              opacity: opacity,
-                              duration: const Duration(milliseconds: 600),
-                              child: parentsChild!);
-                        }),
-                    Positioned(
-                        right: 30.0,
-                        bottom: 30.0,
-                        child: TweenAnimationBuilder(
-                            duration: const Duration(milliseconds: 1200),
-                            tween: Tween<double>(begin: 0.1, end: 1.0),
-                            builder: (context, double opacity, child) {
-                              return AnimatedOpacity(
-                                opacity: opacity,
-                                duration: const Duration(milliseconds: 1200),
-                                child: Text(
-                                  'Hameed',
-                                  style: TextStyle(
-                                    textBaseline: TextBaseline.alphabetic,
-                                    letterSpacing: value,
-                                    fontSize: fontSize,
-                                  ),
-                                ),
-                              );
-                            })),
-                  ],
-                );
+                return AnimatedOpacity(
+                    opacity: opacity,
+                    duration: const Duration(milliseconds: 600),
+                    child: const Align(
+                      alignment: Alignment.center,
+                      child: Image(
+                        image: AssetImage('assets/me.png'),
+                      ),
+                    ));
               });
         });
   }

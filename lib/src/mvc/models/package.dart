@@ -1,3 +1,4 @@
+const String pubUrl = "https://pub.dev/packages/";
 class Package {
   final String? name;
   final String? description;
@@ -21,4 +22,5 @@ class Package {
       popularity: json['popularity'].toString(),
     );
   }
+  String get url => '$pubUrl$name';
 }

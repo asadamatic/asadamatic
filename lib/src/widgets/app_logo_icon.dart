@@ -1,67 +1,49 @@
-import 'package:asadamatic/src/constant/values.dart';
-import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
-import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
+import 'package:asadamatic/src/mvc/models/app_data.dart';
+import 'package:asadamatic/src/style/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class AppLogoIcon extends StatelessWidget {
-  const AppLogoIcon({this.asset, this.index, this.app, Key? key})
-      : super(key: key);
-  final int? index;
-  final String? asset;
-  final String? app;
+  const AppLogoIcon({
+    Key? key,
+    required this.app,
+    required this.isSelected,
+  }) : super(key: key);
+  final App app;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(
-        id: app,
-        builder: (_homeController) {
-          final isCurrentSelected = index == _homeController.sliderIndex.value;
-          return Container(
-            padding: EdgeInsets.all(8.0 - _homeController.iconIncreasedHeight),
-            child: InkWell(
-                customBorder: const CircleBorder(),
-                onTap: () {
-                  _homeController.onPageChanged(index);
-                },
-                onHover: (value) {
-                  if (!isCurrentSelected &&
-                      index ==
-                          AppConstants.appLogoIcons.indexWhere(
-                              (appLogoIcon) => appLogoIcon[1] == app!)) {
-                    if (value) {
-                      _homeController.onHover(app);
-                    } else {
-                      _homeController.onHoverRemoved(app);
-                    }
-                  }
-                },
-                child: Column(
-                  children: [
-                    Image(
-                      height: _homeController.iconHeight,
-                      image: AssetImage(asset!),
-                    ),
-                    GetBuilder<ThemeController>(builder: (_themeController) {
-                      final darkTheme =
-                          _themeController.themeMode == ThemeMode.dark;
-                      return AnimatedContainer(
-                          duration: const Duration(milliseconds: 600),
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 2.0, vertical: 6.0),
-                          width: 20.0,
-                          height: 8.0,
-                          decoration: BoxDecoration(
-                              color: isCurrentSelected
-                                  ? darkTheme
-                                      ? Colors.white
-                                      : Colors.black
-                                  : null,
-                              borderRadius: BorderRadius.circular(10.0)));
-                    })
-                  ],
-                )),
-          );
-        });
+    return Container(
+      padding: const EdgeInsets.all(mediumSpacing),
+      child: Column(
+        children: [
+          Container(
+            decoration:
+                BoxDecoration(borderRadius: borderRadius, color: Colors.amber),
+            clipBehavior: Clip.hardEdge,
+            child: Image(
+              image: AssetImage(app.logoAsset),
+              fit: BoxFit.contain,
+            ),
+          ),
+          // GetBuilder<ThemeController>(builder: (_themeController) {
+          //   final darkTheme = _themeController.themeMode == ThemeMode.dark;
+          //   return AnimatedContainer(
+          //       duration: const Duration(milliseconds: 600),
+          //       margin: const EdgeInsets.symmetric(
+          //           horizontal: 2.0, vertical: 6.0),
+          //       width: hugeSpacing,
+          //       height: mediumSpacing,
+          //       decoration: BoxDecoration(
+          //           color: isSelected
+          //               ? darkTheme
+          //                   ? Colors.white
+          //                   : Colors.black
+          //               : null,
+          //           borderRadius: BorderRadius.circular(10.0)));
+          // })
+        ],
+      ),
+    );
   }
 }

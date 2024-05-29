@@ -1,5 +1,6 @@
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
+import 'package:asadamatic/src/style/styles.dart';
 import 'package:asadamatic/src/widgets/icon_palettes.dart';
 import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
@@ -12,28 +13,43 @@ class DeviceView extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder:
         (BuildContext layoutBuilderContext, BoxConstraints constraints) {
+      final size = MediaQuery.sizeOf(context);
+
       return Container(
-        padding: const EdgeInsets.all(8.0),
+        clipBehavior: Clip.hardEdge,
+        decoration: const BoxDecoration(),
+        padding: const EdgeInsets.all(smallSpacing),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (constraints.maxWidth > 780) const Spacer(),
-            GetBuilder<HomeController>(
-              id: 'osIndexUpdate',
-              builder: (_homeController) => Flexible(
-                flex: 3,
-                child: GetBuilder<HomeController>(
+            SizedBox(
+              height: size.height * .6,
+              child: GetBuilder<HomeController>(
+                id: 'osIndexUpdate',
+                builder: (_homeController) => GetBuilder<HomeController>(
                     id: 'sliderIndexUpdate',
                     builder: (_homeController) {
                       return GetBuilder<ThemeController>(
                           builder: (_themeController) {
                         return DeviceFrame(
-                            device: _homeController.osIndex.value == 0
-                                ? Devices.ios.iPhone12
-                                : Devices.android.samsungGalaxyS20,
+                            device: _homeController.selectedOs.value.isIOS
+                                ? Devices.ios.iPhoneSE
+                                : Devices.android.smallPhone,
                             isFrameVisible: true,
-                            screen: _homeController.getSliderApp());
+                            screen: PageView.builder(
+                                itemCount: _homeController
+                                    .selectedApp.value.screenshotAssets.length,
+                                itemBuilder: (context, index) {
+                                  final screenshot = _homeController.selectedApp
+                                      .value.screenshotAssets[index];
+                                  return SingleChildScrollView(
+                                    child: Image.asset(
+                                      screenshot,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  );
+                                }));
                       });
                     }),
               ),
@@ -42,7 +58,6 @@ class DeviceView extends StatelessWidget {
               height: 20.0,
             ),
             const AppIconPalette(),
-            if (constraints.maxWidth > 780) const Spacer(),
           ],
         ),
       );

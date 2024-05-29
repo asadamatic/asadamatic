@@ -1,3 +1,4 @@
+import 'package:asadamatic/src/style/styles.dart';
 import 'package:flutter/material.dart';
 
 class Footer extends StatelessWidget {
@@ -5,10 +6,17 @@ class Footer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Text('Made with Flutter'),
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Made with Flutter'),
+          SizedBox(
+            width: mediumSpacing,
+          ),
+          FlutterLogo()
+        ],
       ),
     );
   }

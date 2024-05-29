@@ -1,77 +1,46 @@
 import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
-import 'package:asadamatic/src/mvc/models/screen_type.dart';
 import 'package:asadamatic/src/mvc/views/device_view.dart';
-import 'package:asadamatic/src/style/values.dart';
+import 'package:asadamatic/src/style/styles.dart';
 import 'package:asadamatic/src/widgets/switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:responsive_framework/responsive_framework.dart'
+    as responsive_framework;
+import 'package:url_launcher/url_launcher.dart';
 
 class AppsSection extends StatelessWidget {
-  const AppsSection(
-      {Key? key,
-      required this.screenHeight,
-      required this.positiveConstraintsApps,
-      required this.smallerWidthApps,
-      required HomeController homeController,
-      required this.textTheme,
-      required this.largerWidthApps,
-      required this.screen})
-      : _homeController = homeController,
-        super(key: key);
+  const AppsSection({
+    Key? key,
+  }) : super(key: key);
 
-  final double screenHeight;
-  final bool positiveConstraintsApps;
-  final double smallerWidthApps;
-  final HomeController _homeController;
-  final TextTheme textTheme;
-  final double largerWidthApps;
-  final Screen screen;
   @override
   Widget build(BuildContext context) {
-    final double contentSpacingNormal = screen == Screen.large
-        ? 230.0
-        : screen == Screen.medium
-            ? 100.0
-            : 100.0; // TODO
-    final double contentSpacingSmall =
-        screen == Screen.small ? 50.0 : 50.0; // TODO
-
-    return SizedBox(
-      height: screenHeight,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly, // TODO different
+    final isMobile =
+        responsive_framework.ResponsiveBreakpoints.of(context).isMobile;
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+          horizontal: massiveSpacing, vertical: massiveSpacing),
+      child: Flex(
+        direction: isMobile ? Axis.vertical : Axis.horizontal,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment:
+            isMobile ? CrossAxisAlignment.start : CrossAxisAlignment.center,
         children: [
-          SizedBox(
-            width: positiveConstraintsApps ? smallerWidthApps : 0.0,
+          Flex(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            direction: isMobile ? Axis.vertical : Axis.horizontal,
+            children: const [
+              OSSwitcher(),
+              DeviceView(),
+            ],
           ),
-          const SizedBox(
-            width: 60.0,
-          ),
-          Switcher(),
-          const SizedBox(
-            width: 20.0,
-          ),
-          const SizedBox(
-              width: AppStyles.deviceViewWidthLarge, // TODO different
-              child: DeviceView()),
-          SizedBox(
-            width: positiveConstraintsApps
-                ? contentSpacingNormal
-                : contentSpacingSmall,
-          ),
-          Flexible(
-              flex: 3,
-              child: AppDescription(
-                  screen: screen,
-                  homeController: _homeController,
-                  textTheme: textTheme)),
-          const SizedBox(
-            width: 60.0,
-          ),
-          SizedBox(
-            width: positiveConstraintsApps ? largerWidthApps : 0.0,
-          ),
+          if (isMobile)
+            const AppDescription()
+          else
+            const Flexible(child: AppDescription()),
         ],
       ),
     );
@@ -79,53 +48,111 @@ class AppsSection extends StatelessWidget {
 }
 
 class AppDescription extends StatelessWidget {
-  const AppDescription(
-      {Key? key,
-      required this.screen,
-      required HomeController homeController,
-      required this.textTheme})
-      : _homeController = homeController,
-        super(key: key);
-
-  final Screen screen;
-  final HomeController _homeController;
-  final TextTheme textTheme;
+  const AppDescription({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final descriptionFontStyle = screen == Screen.large
-        ? textTheme.headlineMedium!
-        : screen == Screen.medium
-            ? textTheme.headlineSmall!
-            : textTheme.titleLarge!;
-    final titleFontStyle = screen == Screen.small
-        ? textTheme.headlineSmall!
-        : textTheme.headlineMedium!; // T
-    final smallScreen = screen == Screen.small;
-    return Obx(() => Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: smallScreen
-              ? CrossAxisAlignment.center
-              : CrossAxisAlignment.start,
-          children: [
-            Text(
-              AppConstants.descriptions[_homeController.sliderIndex.value][0],
-              style: titleFontStyle,
-            ),
-            const SizedBox(
-              height: 15.0,
-            ),
-            SizedBox(
-              width: 500.0,
-              height: 300.0,
-              child: Obx(() => Text(
-                    AppConstants.descriptions[_homeController.sliderIndex.value]
-                        [1],
-                    textAlign: smallScreen ? TextAlign.center : TextAlign.start,
-                    style: descriptionFontStyle,
-                  )),
-            )
-          ],
-        ));
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final colorScheme = theme.colorScheme;
+
+    final HomeController _homeController = Get.find();
+
+    final responsiveTextStyleHeading =
+        responsive_framework.ResponsiveValue<TextStyle>(context,
+            defaultValue: textTheme.headlineMedium,
+            conditionalValues: [
+          responsive_framework.Condition.equals(
+              name: responsive_framework.MOBILE,
+              value: textTheme.headlineSmall),
+          responsive_framework.Condition.equals(
+              name: responsive_framework.TABLET,
+              value: textTheme.headlineMedium),
+          responsive_framework.Condition.largerThan(
+              name: responsive_framework.TABLET, value: textTheme.displaySmall),
+          responsive_framework.Condition.equals(
+              name: responsive_framework.DESKTOP,
+              value: textTheme.displaySmall),
+        ]).value;
+    final responsiveTextStyleDescription =
+        responsive_framework.ResponsiveValue<TextStyle>(context,
+            defaultValue: textTheme.bodyLarge,
+            conditionalValues: [
+          responsive_framework.Condition.equals(
+              name: responsive_framework.MOBILE, value: textTheme.titleMedium),
+          responsive_framework.Condition.equals(
+              name: responsive_framework.TABLET, value: textTheme.titleLarge),
+          responsive_framework.Condition.largerThan(
+              name: responsive_framework.TABLET,
+              value: textTheme.headlineMedium),
+          responsive_framework.Condition.equals(
+              name: responsive_framework.DESKTOP,
+              value: textTheme.headlineMedium),
+        ]).value;
+    return Padding(
+      padding: const EdgeInsets.all(largeSpacing),
+      child: Obx(() {
+        final app = _homeController.selectedApp.value;
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 600),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                app.name,
+                style: responsiveTextStyleHeading,
+              ),
+              const SizedBox(height: largeSpacing),
+              Text(
+                app.description,
+                style: responsiveTextStyleDescription,
+              ),
+              SizedBox(
+                height: hugeSpacing,
+              ),
+              Wrap(
+                spacing: mediumSpacing,
+                runSpacing: mediumSpacing,
+                children: [
+                  StoreBadge(
+                    onTap: () => launchUrl(Uri.parse(app.playStoreLink)),
+                    imageAsset: playStoreBadge,
+                  ),
+                  StoreBadge(
+                    onTap: () => launchUrl(Uri.parse(app.playStoreLink)),
+                    imageAsset: appStoreBadge,
+                  ),
+                ],
+              )
+            ],
+          ),
+        );
+      }),
+    );
+  }
+}
+
+class StoreBadge extends StatelessWidget {
+  const StoreBadge({
+    super.key,
+    required this.onTap,
+    required this.imageAsset,
+  });
+  final Function() onTap;
+  final String imageAsset;
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: SvgPicture.asset(
+        imageAsset,
+        clipBehavior: Clip.hardEdge,
+        height: 70,
+        width: 120,
+      ),
+    );
   }
 }

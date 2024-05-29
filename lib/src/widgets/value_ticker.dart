@@ -1,36 +1,36 @@
-import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
-import 'package:asadamatic/src/mvc/models/screen_type.dart';
-import 'package:asadamatic/src/mvc/models/value_type.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:responsive_framework/responsive_framework.dart'
+    as responsive_framework;
 
-class ValueTicker extends StatelessWidget {
-  const ValueTicker({Key? key, required this.valueType, required this.screen})
-      : super(key: key);
+class AnimatedValueTicker extends StatelessWidget {
+  const AnimatedValueTicker({Key? key, required this.score}) : super(key: key);
 
-  final ValueType? valueType;
-  final Screen? screen;
+  final int score;
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme.displaySmall;
+    final textTheme = Theme.of(context).textTheme;
+    final responsiveTextStyle = responsive_framework.ResponsiveValue<TextStyle>(
+        context,
+        defaultValue: textTheme.titleLarge,
+        conditionalValues: [
+          responsive_framework.Condition.equals(
+              name: responsive_framework.MOBILE, value: textTheme.titleLarge),
+          responsive_framework.Condition.equals(
+              name: responsive_framework.TABLET,
+              value: textTheme.headlineMedium),
+          responsive_framework.Condition.largerThan(
+              name: responsive_framework.TABLET,
+              value: textTheme.headlineLarge),
+        ]).value;
     return GetBuilder<HomeController>(
         id: 'updateValueTicker',
         builder: (_homeController) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Text(
-                valueType == ValueType.stackoverflow
-                    ? _homeController.stackoverflowScore
-                        .toString()
-                        .padLeft(4, '0')
-                    : valueType == ValueType.github
-                        ? _homeController.githubRepoCount
-                            .toString()
-                            .padLeft(2, '0')
-                        : AppConstants.commercialProjects.toString(),
-                style: textTheme,
-                textAlign:
-                    screen == Screen.small ? TextAlign.center : TextAlign.start,
+                score.toString().padLeft(2, "0"),
+                style: responsiveTextStyle,
               ),
             ));
   }

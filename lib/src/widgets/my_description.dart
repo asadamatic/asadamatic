@@ -1,51 +1,49 @@
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
-import 'package:asadamatic/src/mvc/models/screen_type.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:responsive_framework/responsive_framework.dart'
+    as responsive_framework;
 
 class MyDescription extends StatelessWidget {
   const MyDescription({
     Key? key,
-    this.screen,
-    required HomeController homeController,
-    required this.textTheme,
-    required this.theme,
-  })  : _homeController = homeController,
-        super(key: key);
-  final Screen? screen;
-  final HomeController _homeController;
-  final TextTheme textTheme;
-  final ThemeData theme;
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final double descriptionWidth = screen == Screen.large
-        ? 450
-        : screen == Screen.medium
-            ? 350.0
-            : 270.0;
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final colorScheme = theme.colorScheme;
 
-    final double descriptionHeight = screen == Screen.small ? 200.0 : 300.0;
-    final descriptionFontSize = screen == Screen.large
-        ? textTheme.displayMedium!.fontSize
-        : screen == Screen.medium
-            ? textTheme.displaySmall!.fontSize
-            : textTheme.headlineMedium!.fontSize;
-    final smallScreen = screen == Screen.small;
-    return SizedBox(
-        width: descriptionWidth,
-        height: descriptionHeight,
-        child: TweenAnimationBuilder(
+    final HomeController _homeController = Get.find();
+    return Column(
+      children: [
+        TweenAnimationBuilder(
             duration: const Duration(milliseconds: 1800),
             tween: Tween<double>(
                 begin: 0, end: _homeController.bioWords.length.toDouble()),
             builder: (context, double wordCount, child) {
+              final responsiveTextStyle =
+                  responsive_framework.ResponsiveValue<TextStyle>(context,
+                      defaultValue: textTheme.headlineLarge,
+                      conditionalValues: [
+                    responsive_framework.Condition.equals(
+                        name: responsive_framework.MOBILE,
+                        value: textTheme.headlineLarge),
+                    responsive_framework.Condition.equals(
+                        name: responsive_framework.TABLET,
+                        value: textTheme.displayMedium),
+                    responsive_framework.Condition.smallerThan(
+                        name: responsive_framework.DESKTOP,
+                        value: textTheme.displayMedium),
+                    responsive_framework.Condition.equals(
+                        name: responsive_framework.DESKTOP,
+                        value: textTheme.displayLarge),
+                  ]).value;
               return GetBuilder<HomeController>(
                   id: 'updateBio',
                   builder: (_homeController) {
                     return RichText(
-                      textAlign:
-                          smallScreen ? TextAlign.center : TextAlign.start,
                       text: TextSpan(
                         style: textTheme.displayMedium,
                         children: _homeController.bioWords
@@ -53,18 +51,18 @@ class MyDescription extends StatelessWidget {
                             .map<InlineSpan>((word) {
                           if (word == _homeController.bioWords[6]) {
                             return TextSpan(
-                                text: '\n$word',
-                                style: TextStyle(
-                                    fontSize: descriptionFontSize,
+                                text: word,
+                                style: responsiveTextStyle.copyWith(
                                     color: theme.colorScheme.secondary));
                           }
-                          return TextSpan(
-                              text: word,
-                              style: TextStyle(fontSize: descriptionFontSize));
+                          return TextSpan(text: word, style: responsiveTextStyle);
                         }).toList(),
                       ),
                     );
                   });
-            }));
+            }),
+            
+      ],
+    );
   }
 }

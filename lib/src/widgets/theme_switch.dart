@@ -1,4 +1,5 @@
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
+import 'package:asadamatic/src/style/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,52 +8,59 @@ class ThemeSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final colorScheme = theme.colorScheme;
+
     return GetBuilder<ThemeController>(builder: (_themeController) {
       return Container(
-        height: 55.0,
-        width: 160.0,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(80.0)
-        ),
-        padding: const EdgeInsets.all(2.0),
+        decoration: BoxDecoration(borderRadius: borderRadius),
         child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(80.0)
-          ),
+          color: colorScheme.onInverseSurface,
+          shape: RoundedRectangleBorder(borderRadius: borderRadius),
           child: Row(
             mainAxisSize: MainAxisSize.min,
-            children: [
-              Card(
-                elevation: _themeController.isThemeDark ? 3.0 : 0.0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.0)),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(16.0),
-
-                  onTap: _themeController.toggleTheme,
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                    child: Text('Dark'),
-                  ),
-                ),
-              ),
-              Card(
-                elevation: _themeController.isThemeDark ? 0.0 : 3.0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.0)),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(16.0),
-                  onTap: _themeController.toggleTheme,
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                    child: Text('Light'),
-                  ),
-                ),
-              )
-            ],
+            children: ThemeMode.values
+                .map((mode) => ThemeModeButton(
+                    isSelected: _themeController.themeMode == mode,
+                    mode: mode,
+                    toggleTheme: _themeController.toggleTheme))
+                .toList(),
           ),
         ),
       );
     });
+  }
+}
+
+class ThemeModeButton extends StatelessWidget {
+  const ThemeModeButton(
+      {super.key,
+      required this.isSelected,
+      required this.mode,
+      required this.toggleTheme});
+
+  final bool isSelected;
+  final ThemeMode mode;
+  final Function(ThemeMode) toggleTheme;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final colorScheme = theme.colorScheme;
+
+    return Card(
+      elevation: isSelected ? 10.0 : 0.0,
+      color: isSelected ? colorScheme.surface : colorScheme.onInverseSurface,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16.0),
+        onTap: () => toggleTheme(mode),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: largeSpacing, vertical: mediumSpacing),
+          child: Text(mode.name),
+        ),
+      ),
+    );
   }
 }

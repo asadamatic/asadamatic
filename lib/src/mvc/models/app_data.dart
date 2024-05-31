@@ -69,7 +69,7 @@ const List<App> apps = [
   ),
   App(
     name: 'Try Modest',
-    description: '',
+    description: 'Try Modest: Your One-Stop Shop for Modest Fashion',
     logoAsset: 'assets/apps/try_modest/logo.webp',
     screenshotAssets: tryModestScreenshots,
     appStoreLink: 'https://apps.apple.com/ae/app/try-modest/id6471106909',

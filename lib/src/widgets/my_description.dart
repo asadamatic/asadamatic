@@ -1,5 +1,8 @@
+import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
+import 'package:asadamatic/src/style/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_framework/responsive_framework.dart'
     as responsive_framework;
@@ -17,9 +20,10 @@ class MyDescription extends StatelessWidget {
 
     final HomeController _homeController = Get.find();
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TweenAnimationBuilder(
-            duration: const Duration(milliseconds: 1800),
+            duration: const Duration(milliseconds: 600),
             tween: Tween<double>(
                 begin: 0, end: _homeController.bioWords.length.toDouble()),
             builder: (context, double wordCount, child) {
@@ -55,13 +59,28 @@ class MyDescription extends StatelessWidget {
                                 style: responsiveTextStyle.copyWith(
                                     color: theme.colorScheme.secondary));
                           }
-                          return TextSpan(text: word, style: responsiveTextStyle);
+                          return TextSpan(
+                              text: word, style: responsiveTextStyle);
                         }).toList(),
                       ),
                     );
                   });
             }),
-            
+        SizedBox(
+          height: largeSpacing,
+        ),
+        Wrap(
+          runSpacing: mediumSpacing,
+          spacing: largeSpacing,
+          children: tools.map((tool) {
+            final bool isThemeDark = colorScheme.brightness == Brightness.dark;
+            return SvgPicture.asset(
+              isThemeDark ? tool.darkModeLogoPath : tool.logoPath,
+              fit: BoxFit.cover,
+              height: 40,
+            );
+          }).toList(),
+        )
       ],
     );
   }

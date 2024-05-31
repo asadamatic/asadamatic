@@ -28,19 +28,33 @@ class AppsSection extends StatelessWidget {
         crossAxisAlignment:
             isMobile ? CrossAxisAlignment.start : CrossAxisAlignment.center,
         children: [
-          Flex(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            direction: isMobile ? Axis.vertical : Axis.horizontal,
-            children: const [
-              OSSwitcher(),
-              DeviceView(),
-            ],
-          ),
+          if (isMobile)
+            Flex(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              direction: isMobile ? Axis.vertical : Axis.horizontal,
+              children: const [
+                OSSwitcher(),
+                DeviceView(),
+              ],
+            )
+          else
+            Flexible(
+              flex: 2,
+              child: Flex(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                direction: isMobile ? Axis.vertical : Axis.horizontal,
+                children: const [
+                  OSSwitcher(),
+                  DeviceView(),
+                ],
+              ),
+            ),
           if (isMobile)
             const AppDescription()
           else
-            const Flexible(child: AppDescription()),
+            const Expanded(flex: 3, child: AppDescription()),
         ],
       ),
     );
@@ -96,7 +110,10 @@ class AppDescription extends StatelessWidget {
       child: Obx(() {
         final app = _homeController.selectedApp.value;
         return AnimatedSwitcher(
-          duration: const Duration(milliseconds: 600),
+          duration: const Duration(milliseconds: 500),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return FadeTransition(child: child, opacity: animation);
+          },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -150,7 +167,7 @@ class StoreBadge extends StatelessWidget {
       child: SvgPicture.asset(
         imageAsset,
         clipBehavior: Clip.hardEdge,
-        height: 60.0,
+        height: 50.0,
       ),
     );
   }

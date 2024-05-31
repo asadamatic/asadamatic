@@ -15,11 +15,11 @@ import 'package:responsive_framework/responsive_framework.dart'
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
-  List<Widget> get _parallaxEffectSections => [
-        ParalaxBioSection(),
-        ParalaxAppsSection(),
-        ParalaxContributionsSection()
-      ];
+  // List<Widget> get _parallaxEffectSections => [
+  //       ParalaxBioSection(),
+  //       ParalaxAppsSection(),
+  //       ParalaxContributionsSection()
+  //     ];
   List<Widget> _sections(BuildContext context) {
     final double sectionSpacing = responsive_framework.ResponsiveValue<double>(
         context,

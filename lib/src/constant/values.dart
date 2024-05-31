@@ -37,28 +37,45 @@ const String stackOverflowUrl =
     'https://stackoverflow.com/users/10285344/asad-hameed';
 
 const List<Tool> tools = [
-  Tool(name: 'Flutter', logoPath: 'assets/logos/flutter.png', slug: 'flutter'),
-  Tool(name: 'Dart', logoPath: 'assets/logos/dart.png', slug: 'dart'),
-  Tool(name: 'FastAPI', logoPath: 'assets/logos/fastapi.png', slug: 'fastapi'),
-  Tool(name: 'Python', logoPath: 'assets/logos/python.png', slug: 'python'),
-  Tool(name: 'Git', logoPath: 'assets/logos/git.png', slug: 'git'),
-  Tool(name: 'Github', logoPath: 'assets/logos/github.png', slug: 'github'),
-  Tool(name: 'GraphQL', logoPath: 'assets/logos/graphql.png', slug: 'graphql'),
-  Tool(name: 'SQLite', logoPath: 'assets/logos/sqlite.png', slug: 'sqlite'),
-  Tool(name: 'MySQL', logoPath: 'assets/logos/mysql.png', slug: 'mysql'),
+  Tool(name: 'Flutter', logoPath: 'assets/tools/flutter.svg', slug: 'flutter'),
+  Tool(name: 'Dart', logoPath: 'assets/tools/dart.svg', slug: 'dart'),
+  // Tool(name: 'FastAPI', logoPath: 'assets/logos/fastapi.svg', slug: 'fastapi'),
+  Tool(name: 'Python', logoPath: 'assets/tools/python.svg', slug: 'python'),
+  Tool(name: 'Git', logoPath: 'assets/tools/git.svg', slug: 'git'),
+  Tool(
+      name: 'Github',
+      logoPath: 'assets/tools/github-black.svg',
+      darkModeLogoPath: 'assets/tools/github-white.svg',
+      slug: 'github'),
+  Tool(name: 'GraphQL', logoPath: 'assets/tools/graphql.svg', slug: 'graphql'),
   Tool(
       name: 'Firebase',
-      logoPath: 'assets/logos/firebase.png',
+      logoPath: 'assets/tools/firebase.svg',
       slug: 'firebase'),
   Tool(
-      name: 'Android Studio',
-      logoPath: 'assets/logos/android_studio.png',
-      slug: 'android-studio'),
-  Tool(name: 'VS Code', logoPath: 'assets/logos/vscode.png', slug: 'vs-code'),
+      name: 'Jira',
+      logoPath: 'assets/tools/jira.svg',
+      darkModeLogoPath: 'assets/tools/jira.svg',
+      slug: 'jira'),
   Tool(
-      name: 'Selenium',
-      logoPath: 'assets/logos/selenium.png',
-      slug: 'selenium'),
+      name: 'BitBucket',
+      logoPath: 'assets/tools/bitbucket.svg',
+      darkModeLogoPath: 'assets/tools/bitbucket.svg',
+      slug: 'bitbucket'),
+  Tool(
+      name: 'Bash',
+      logoPath: 'assets/tools/bash-white.svg',
+      darkModeLogoPath: 'assets/tools/bash-black.svg',
+      slug: 'bash'),
+  // Tool(
+  //     name: 'Android Studio',
+  //     logoPath: 'assets/logos/android_studio.png',
+  //     slug: 'android-studio'),
+  Tool(name: 'VS Code', logoPath: 'assets/logos/vscode.png', slug: 'vscode'),
+  // Tool(
+  //     name: 'Selenium',
+  //     logoPath: 'assets/logos/selenium.png',
+  //     slug: 'selenium'),
 ];
 
 class AppConstants {

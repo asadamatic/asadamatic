@@ -37,19 +37,29 @@ class DeviceView extends StatelessWidget {
                                 ? Devices.ios.iPhoneSE
                                 : Devices.android.smallPhone,
                             isFrameVisible: true,
-                            screen: PageView.builder(
-                                itemCount: _homeController
-                                    .selectedApp.value.screenshotAssets.length,
-                                itemBuilder: (context, index) {
-                                  final screenshot = _homeController.selectedApp
-                                      .value.screenshotAssets[index];
-                                  return SingleChildScrollView(
-                                    child: Image.asset(
-                                      screenshot,
-                                      fit: BoxFit.contain,
-                                    ),
-                                  );
-                                }));
+                            screen: AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 500),
+                              transitionBuilder:
+                                  (Widget child, Animation<double> animation) {
+                                return FadeTransition(
+                                    child: child, opacity: animation);
+                              },
+                              child: PageView.builder(
+                                  itemCount: _homeController.selectedApp.value
+                                      .screenshotAssets.length,
+                                  itemBuilder: (context, index) {
+                                    final screenshot = _homeController
+                                        .selectedApp
+                                        .value
+                                        .screenshotAssets[index];
+                                    return SingleChildScrollView(
+                                      child: Image.asset(
+                                        screenshot,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    );
+                                  }),
+                            ));
                       });
                     }),
               ),

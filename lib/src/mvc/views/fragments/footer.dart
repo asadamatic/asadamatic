@@ -1,5 +1,9 @@
+import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
+import 'package:asadamatic/src/mvc/views/home.dart';
 import 'package:asadamatic/src/style/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class Footer extends StatelessWidget {
   const Footer({Key? key}) : super(key: key);
@@ -7,15 +11,19 @@ class Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      padding: EdgeInsets.all(mediumSpacing),
+      child: Column(
         children: [
-          Text('Made with Flutter'),
-          SizedBox(
-            width: mediumSpacing,
+          Divider(
+            height: massiveSpacing,
           ),
-          FlutterLogo()
+          GetBuilder<HomeController>(
+              id: 'packageInfo',
+              builder: (controller) {
+                return Text(
+                  'Made with Flutter - Version ${controller.packageInfo!.version}',
+                );
+              }),
         ],
       ),
     );

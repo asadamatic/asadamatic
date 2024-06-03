@@ -72,7 +72,7 @@ class OsIcon extends StatelessWidget {
           onTap: () => _homeController.onOsChanged(os),
           child: Padding(
             padding: const EdgeInsets.all(minSpacing),
-            child: OsLogoIcon(asset: os.imageAsset),
+            child: OsLogoIcon(os: os),
           ),
         ),
       ),

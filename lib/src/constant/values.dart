@@ -7,16 +7,8 @@ import 'package:get/get.dart';
 
 import 'package:flutter/foundation.dart';
 
-enum Platforms {
-  android(Icons.phone_android_outlined),
-  ios(Icons.phone_iphone_outlined),
-  web(Icons.web_asset_outlined),
-  desktop(Icons.desktop_windows_outlined);
+const String upworkProfileUrl = "https://www.upwork.com/freelancers/~01f31a38c4320ffd7a";
 
-  const Platforms(this.icon);
-  final IconData icon;
-  String get displayName => name.capitalizeFirst;
-}
 
 const String bio = "I develop high performance apps for";
 
@@ -24,6 +16,7 @@ String stackOverReputationText = "Stackoverflow Reputation";
 String githubRepositoriesText = "Github Repositories";
 String commercialProjectsText = "Commercial Projects";
 
+const String upworkLogo = "assets/upwork.svg";
 const String playStoreBadge = "assets/stores/play-store.svg";
 const String appStoreBadge = "assets/stores/app-store.svg";
 
@@ -49,47 +42,83 @@ List<Score> scores = [
 const String githubUrl = 'https://github.com/asadamatic';
 const String stackOverflowUrl =
     'https://stackoverflow.com/users/10285344/asad-hameed';
-
 const List<Tool> tools = [
-  Tool(name: 'Flutter', logoPath: 'assets/tools/flutter.svg', slug: 'flutter'),
-  Tool(name: 'Dart', logoPath: 'assets/tools/dart.svg', slug: 'dart'),
-  // Tool(name: 'FastAPI', logoPath: 'assets/logos/fastapi.svg', slug: 'fastapi'),
-  Tool(name: 'Python', logoPath: 'assets/tools/python.svg', slug: 'python'),
-  Tool(name: 'Git', logoPath: 'assets/tools/git.svg', slug: 'git'),
   Tool(
-      name: 'Github',
-      logoPath: 'assets/tools/github-black.svg',
-      darkModeLogoPath: 'assets/tools/github-white.svg',
-      slug: 'github'),
-  Tool(name: 'GraphQL', logoPath: 'assets/tools/graphql.svg', slug: 'graphql'),
+    name: 'Flutter',
+    logoPath: 'assets/tools/flutter.svg',
+    slug: 'flutter',
+    websiteUrl: 'https://flutter.dev',
+    githubRepoUrl:
+        'https://github.com/asadamatic?tab=repositories&language=flutter',
+  ),
   Tool(
-      name: 'Firebase',
-      logoPath: 'assets/tools/firebase.svg',
-      slug: 'firebase'),
+    name: 'Dart',
+    logoPath: 'assets/tools/dart.svg',
+    slug: 'dart',
+    websiteUrl: 'https://dart.dev',
+    githubRepoUrl:
+        'https://github.com/asadamatic?tab=repositories&language=dart',
+  ),
   Tool(
-      name: 'Jira',
-      logoPath: 'assets/tools/jira.svg',
-      darkModeLogoPath: 'assets/tools/jira.svg',
-      slug: 'jira'),
+    name: 'Python',
+    logoPath: 'assets/tools/python.svg',
+    slug: 'python',
+    websiteUrl: 'https://www.python.org',
+    githubRepoUrl:
+        'https://github.com/asadamatic?tab=repositories&language=python',
+  ),
   Tool(
-      name: 'BitBucket',
-      logoPath: 'assets/tools/bitbucket.svg',
-      darkModeLogoPath: 'assets/tools/bitbucket.svg',
-      slug: 'bitbucket'),
+    name: 'Git',
+    logoPath: 'assets/tools/git.svg',
+    slug: 'git',
+    websiteUrl: 'https://git-scm.com',
+  ),
   Tool(
-      name: 'Bash',
-      logoPath: 'assets/tools/bash-white.svg',
-      darkModeLogoPath: 'assets/tools/bash-black.svg',
-      slug: 'bash'),
-  // Tool(
-  //     name: 'Android Studio',
-  //     logoPath: 'assets/logos/android_studio.png',
-  //     slug: 'android-studio'),
-  Tool(name: 'VS Code', logoPath: 'assets/tools/vscode.svg', slug: 'vscode'),
-  // Tool(
-  //     name: 'Selenium',
-  //     logoPath: 'assets/logos/selenium.png',
-  //     slug: 'selenium'),
+    name: 'Github',
+    logoPath: 'assets/tools/github-black.svg',
+    darkModeLogoPath: 'assets/tools/github-white.svg',
+    slug: 'github',
+    websiteUrl: 'https://github.com',
+  ),
+  Tool(
+    name: 'GraphQL',
+    logoPath: 'assets/tools/graphql.svg',
+    slug: 'graphql',
+    websiteUrl: 'https://graphql.org',
+  ),
+  Tool(
+    name: 'Firebase',
+    logoPath: 'assets/tools/firebase.svg',
+    slug: 'firebase',
+    websiteUrl: 'https://firebase.google.com',
+  ),
+  Tool(
+    name: 'Jira',
+    logoPath: 'assets/tools/jira.svg',
+    darkModeLogoPath: 'assets/tools/jira.svg',
+    slug: 'jira',
+    websiteUrl: 'https://www.atlassian.com/software/jira',
+  ),
+  Tool(
+    name: 'BitBucket',
+    logoPath: 'assets/tools/bitbucket.svg',
+    darkModeLogoPath: 'assets/tools/bitbucket.svg',
+    slug: 'bitbucket',
+    websiteUrl: 'https://bitbucket.org',
+  ),
+  Tool(
+    name: 'Bash',
+    logoPath: 'assets/tools/bash-white.svg',
+    darkModeLogoPath: 'assets/tools/bash-black.svg',
+    slug: 'bash',
+    websiteUrl: 'https://www.gnu.org/software/bash/',
+  ),
+  Tool(
+    name: 'VS Code',
+    logoPath: 'assets/tools/vscode.svg',
+    slug: 'vscode',
+    websiteUrl: 'https://code.visualstudio.com',
+  ),
 ];
 
 class AppConstants {

@@ -1,3 +1,4 @@
+import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/models/package.dart';
 import 'package:asadamatic/src/style/styles.dart';
@@ -34,9 +35,9 @@ class PackagesSection extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) => PackageCard(
-                          package: _controller.packagesData[index],
+                          package: AppConstants.packagesDescription[index],
                         ),
-                    itemCount: _controller.packagesData.length)
+                    itemCount: AppConstants.packagesDescription.length)
               ],
             );
           });

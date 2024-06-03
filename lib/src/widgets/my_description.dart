@@ -1,12 +1,16 @@
 import 'package:asadamatic/src/constant/extensions.dart';
 import 'package:asadamatic/src/constant/values.dart';
+import 'package:asadamatic/src/enums.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
+import 'package:asadamatic/src/mvc/models/tool.dart';
 import 'package:asadamatic/src/style/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:responsive_framework/responsive_framework.dart'
     as responsive_framework;
+import 'package:super_context_menu/super_context_menu.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyDescription extends StatelessWidget {
   const MyDescription({
@@ -114,15 +118,50 @@ class MyDescription extends StatelessWidget {
           runSpacing: mediumSpacing,
           spacing: largeSpacing,
           children: tools.map((tool) {
-            final bool isThemeDark = colorScheme.brightness == Brightness.dark;
-            return SvgPicture.asset(
-              isThemeDark ? tool.darkModeLogoPath : tool.logoPath,
-              fit: BoxFit.cover,
-              height: 40,
+            return ToolIcon(
+              tool: tool,
             );
           }).toList(),
         )
       ],
+    );
+  }
+}
+
+class ToolIcon extends StatelessWidget {
+  const ToolIcon({
+    super.key,
+    required this.tool,
+  });
+
+  final Tool tool;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final colorScheme = theme.colorScheme;
+
+    final bool isThemeDark = colorScheme.brightness == Brightness.dark;
+
+    return ContextMenuWidget(
+      child: SvgPicture.asset(
+        isThemeDark ? tool.darkModeLogoPath : tool.logoPath,
+        fit: BoxFit.cover,
+        height: 40,
+      ),
+      menuProvider: (_) {
+        return Menu(
+          children: [
+            if (tool.githubRepoUrl != null)
+              MenuAction(
+                  title: 'See Projects',
+                  callback: () => launchUrl(Uri.parse(tool.githubRepoUrl!))),
+            MenuAction(
+                title: "What's it?",
+                callback: () => launchUrl(Uri.parse(tool.websiteUrl))),
+          ],
+        );
+      },
     );
   }
 }

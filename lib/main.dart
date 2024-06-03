@@ -27,18 +27,18 @@ class PortfolioApp extends StatelessWidget {
                 useMaterial3: true,
                 colorScheme: flexSchemeLight,
                 textTheme:
-                    const TextTheme(displayLarge: TextStyle(fontSize: 80.0))),
+                    const TextTheme(displayLarge: TextStyle(fontSize: 72.0))),
             darkTheme: ThemeData.from(
                 useMaterial3: true,
                 colorScheme: flexSchemeDark,
                 textTheme:
-                    const TextTheme(displayLarge: TextStyle(fontSize: 80.0))),
+                    const TextTheme(displayLarge: TextStyle(fontSize: 72.0))),
             builder: (context, child) => ResponsiveBreakpoints.builder(
               child: child!,
               breakpoints: [
-                const Breakpoint(start: 0, end: 600, name: MOBILE),
-                const Breakpoint(start: 601, end: 900, name: TABLET),
-                const Breakpoint(start: 801, end: 1920, name: DESKTOP),
+                const Breakpoint(start: 0, end: 650, name: MOBILE),
+                const Breakpoint(start: 651, end: 950, name: TABLET),
+                const Breakpoint(start: 951, end: 1920, name: DESKTOP),
                 const Breakpoint(start: 1921, end: double.infinity, name: '4K'),
               ],
             ),

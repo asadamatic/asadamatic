@@ -5,6 +5,8 @@ import 'package:asadamatic/src/widgets/icon_palettes.dart';
 import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:responsive_framework/responsive_framework.dart'
+    as responsive_framework;
 
 class DeviceView extends StatelessWidget {
   const DeviceView({Key? key}) : super(key: key);
@@ -24,7 +26,18 @@ class DeviceView extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
-              height: size.height * .6,
+              height: responsive_framework.ResponsiveValue<double>(context,
+                  defaultValue: 500,
+                  conditionalValues: [
+                    responsive_framework.Condition.equals(
+                        name: responsive_framework.MOBILE, value: 500),
+                    responsive_framework.Condition.equals(
+                        name: responsive_framework.TABLET, value: 400),
+                    responsive_framework.Condition.largerThan(
+                        name: responsive_framework.TABLET, value: 600),
+                    responsive_framework.Condition.equals(
+                        name: responsive_framework.DESKTOP, value: 500),
+                  ]).value,
               child: GetBuilder<HomeController>(
                 id: 'osIndexUpdate',
                 builder: (_homeController) => GetBuilder<HomeController>(
@@ -65,7 +78,7 @@ class DeviceView extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 20.0,
+              height: largeSpacing,
             ),
             const AppIconPalette(),
           ],

@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html>
 
+<style>
+  .loading_animation_container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    /* Default Axis is X*/
+    justify-content: center;
+    /* Main Axis */
+    align-items: center;
+    /* Cross Axis */
+  }
+
+  .indicator {
+    width: 10vw;
+  }
+</style>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -40,7 +57,21 @@
   <link rel="manifest" href="manifest.json">
 </head>
 
-<body>
+<script>
+  window.onload = function () {
+    setTimeout(function () {
+      var loadingIndicator = document.getElementById("loading_animation");
+      if (loadingIndicator) {
+        loadingIndicator.remove();
+      }
+    }, 10000);
+  };
+</script>
+
+<body style="overflow: hidden">
+  <div id="loading_animation" class="loading_animation_container">
+    <img class="indicator" src="./assets/loading_animation.gif" />
+  </div>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 

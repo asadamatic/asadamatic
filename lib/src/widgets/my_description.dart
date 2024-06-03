@@ -39,7 +39,7 @@ class MyDescription extends StatelessWidget {
                         value: textTheme.displayMedium),
                     responsive_framework.Condition.smallerThan(
                         name: responsive_framework.DESKTOP,
-                        value: textTheme.displayMedium),
+                        value: textTheme.displaySmall),
                     responsive_framework.Condition.equals(
                         name: responsive_framework.DESKTOP,
                         value: textTheme.displayLarge),

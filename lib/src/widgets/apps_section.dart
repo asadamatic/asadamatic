@@ -54,7 +54,7 @@ class AppsSection extends StatelessWidget {
           if (isMobile)
             const AppDescription()
           else
-            const Expanded(flex: 3, child: AppDescription()),
+            const Expanded(flex: 2, child: AppDescription()),
         ],
       ),
     );

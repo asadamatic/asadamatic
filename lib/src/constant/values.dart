@@ -1,4 +1,3 @@
-
 import 'package:asadamatic/src/mvc/models/package.dart';
 import 'package:asadamatic/src/mvc/models/tool.dart';
 import 'package:asadamatic/src/mvc/models/value_type.dart';
@@ -86,7 +85,7 @@ const List<Tool> tools = [
   //     name: 'Android Studio',
   //     logoPath: 'assets/logos/android_studio.png',
   //     slug: 'android-studio'),
-  Tool(name: 'VS Code', logoPath: 'assets/logos/vscode.svg', slug: 'vscode'),
+  Tool(name: 'VS Code', logoPath: 'assets/tools/vscode.svg', slug: 'vscode'),
   // Tool(
   //     name: 'Selenium',
   //     logoPath: 'assets/logos/selenium.png',

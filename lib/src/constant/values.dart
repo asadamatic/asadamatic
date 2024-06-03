@@ -1,10 +1,26 @@
+import 'dart:io';
+
 import 'package:asadamatic/src/mvc/models/package.dart';
 import 'package:asadamatic/src/mvc/models/tool.dart';
 import 'package:asadamatic/src/mvc/models/value_type.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter/foundation.dart';
+
+enum Platforms {
+  android(Icons.phone_android_outlined),
+  ios(Icons.phone_iphone_outlined),
+  web(Icons.web_asset_outlined),
+  desktop(Icons.desktop_windows_outlined);
+
+  const Platforms(this.icon);
+  final IconData icon;
+  String get displayName => name.capitalizeFirst;
+}
+
+const String bio = "I develop high performance apps for";
 
 String stackOverReputationText = "Stackoverflow Reputation";
 String githubRepositoriesText = "Github Repositories";

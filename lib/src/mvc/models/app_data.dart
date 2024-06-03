@@ -50,7 +50,7 @@ const List<App> apps = [
   ),
   App(
     name: 'Evolve FMS',
-    description: 'Fleet management simplified with Evolve FMS.',
+    description: 'Field management simplified with Evolve FMS.',
     logoAsset: 'assets/apps/fms/logo.webp',
     screenshotAssets: fmsScreenshots,
     appStoreLink: 'https://apps.apple.com/us/app/evolve-fms/id6470257389',

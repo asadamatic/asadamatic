@@ -22,15 +22,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   double iconHeight = 30.0;
   double iconIncreasedHeight = 2.5;
   List<Package> packagesData = [];
-  List<String> bioWords = [
-    'I ',
-    'develop ',
-    'high ',
-    'performance ',
-    'apps ',
-    'for ',
-    'android ',
-  ];
+
   int stackoverflowScore = oneBySixtyOfScore;
   int githubRepoCount = oneBySixOfCount;
 
@@ -78,16 +70,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     // Timer for value ticker update
 
     Timer.periodic(const Duration(seconds: 2), (timer) {
-      if (bioWords[6] == 'android ') {
-        bioWords[6] = 'ios ';
-      } else if (bioWords[6] == 'ios ') {
-        bioWords[6] = 'web ';
-      } else if (bioWords[6] == 'web ') {
-        bioWords[6] = 'desktop ';
-      } else if (bioWords[6] == 'desktop ') {
-        bioWords[6] = 'android ';
-      }
-
+     
+      bioPlatformIndex = (bioPlatformIndex + 1) % Platforms.values.length;
       update(['updateBio']);
     });
 
@@ -97,6 +81,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     update(['updatePackagesData']);
   }
 
+  int bioPlatformIndex = 0;
   showDrawer() {
     update(['drawerUpdate']);
   }

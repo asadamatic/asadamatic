@@ -17,14 +17,18 @@ class AppLogoIcon extends StatelessWidget {
       padding: const EdgeInsets.all(mediumSpacing),
       child: Column(
         children: [
-          Container(
-            decoration:
-                BoxDecoration(borderRadius: borderRadius, color: Colors.amber),
-            clipBehavior: Clip.hardEdge,
-            child: Image(
-              image: AssetImage(app.logoAsset),
-              fit: BoxFit.contain,
-            ),
+          Builder(
+            builder: (context) {
+              return Container(
+                decoration:
+                    BoxDecoration(borderRadius: borderRadius, color: Colors.amber),
+                clipBehavior: Clip.hardEdge,
+                child: Image(
+                  image: AssetImage(app.logoAsset),
+                  fit: BoxFit.contain,
+                ),
+              );
+            }
           ),
           // GetBuilder<ThemeController>(builder: (_themeController) {
           //   final darkTheme = _themeController.themeMode == ThemeMode.dark;

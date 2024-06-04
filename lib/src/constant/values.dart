@@ -2,7 +2,6 @@ import 'package:asadamatic/src/mvc/models/package.dart';
 import 'package:asadamatic/src/mvc/models/tool.dart';
 import 'package:asadamatic/src/mvc/models/value_type.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter/foundation.dart';

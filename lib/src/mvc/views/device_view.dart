@@ -29,19 +29,19 @@ class DeviceView extends StatelessWidget {
               height: responsive_framework.ResponsiveValue<double>(context,
                   defaultValue: 500,
                   conditionalValues: [
-                    responsive_framework.Condition.equals(
+                    const responsive_framework.Condition.equals(
                         name: responsive_framework.MOBILE, value: 500),
-                    responsive_framework.Condition.equals(
+                    const responsive_framework.Condition.equals(
                         name: responsive_framework.TABLET, value: 400),
-                    responsive_framework.Condition.largerThan(
+                    const responsive_framework.Condition.largerThan(
                         name: responsive_framework.TABLET, value: 600),
-                    responsive_framework.Condition.equals(
+                    const responsive_framework.Condition.equals(
                         name: responsive_framework.DESKTOP, value: 500),
                   ]).value,
               child: GetBuilder<HomeController>(
-                id: 'osIndexUpdate',
+                id: osBuilder,
                 builder: (_homeController) => GetBuilder<HomeController>(
-                    id: 'sliderIndexUpdate',
+                    id: appScreenshotsBuilder,
                     builder: (_homeController) {
                       return GetBuilder<ThemeController>(
                           builder: (_themeController) {

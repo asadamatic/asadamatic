@@ -3,7 +3,6 @@ import 'package:asadamatic/src/widgets/asad_hameed.dart';
 import 'package:asadamatic/src/widgets/my_description.dart';
 import 'package:asadamatic/src/widgets/score.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class BioContainer extends StatelessWidget {
@@ -32,7 +31,7 @@ class BioContainer extends StatelessWidget {
               // Avoid Spacer/Flexible/Expanded for Mobile View, Becuase it Use Column ( Flex -> Vertical), and its
               // parent is Scrollable. This will give unbounded height error.
               if (!isMobile)
-                Flexible(flex: 3, child: const AsadHameed())
+                const Flexible(flex: 3, child: AsadHameed())
               else
                 const AsadHameed(),
               if (!isMobile) const Spacer(),

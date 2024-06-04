@@ -24,14 +24,12 @@ class AnimatedValueTicker extends StatelessWidget {
               name: responsive_framework.TABLET,
               value: textTheme.headlineLarge),
         ]).value;
-    return GetBuilder<HomeController>(
-        id: 'updateValueTicker',
-        builder: (_homeController) => Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(
-                score.toString().padLeft(2, "0"),
-                style: responsiveTextStyle,
-              ),
-            ));
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Text(
+        score.toString().padLeft(2, "0"),
+        style: responsiveTextStyle,
+      ),
+    );
   }
 }

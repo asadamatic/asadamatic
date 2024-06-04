@@ -3,7 +3,7 @@
     "short_name": "Asad",
     "start_url": ".",
     "display": "standalone",
-    "image": "./assets/me.png",
+    "image": "/assets/assets/header_image.png",
     "background_color": "#ffffff",
     "theme_color": "#1565c0",
     "description": "Flutter developer with over 3 years of proven expertise in developing both open-source and enterprise solutions",

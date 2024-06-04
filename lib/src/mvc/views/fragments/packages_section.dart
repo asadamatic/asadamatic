@@ -6,6 +6,8 @@ import 'package:asadamatic/src/widgets/responsive_grid_view_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:responsive_framework/responsive_framework.dart'
+    as responsive_framework;
 
 class PackagesSection extends StatelessWidget {
   const PackagesSection({Key? key}) : super(key: key);
@@ -15,33 +17,42 @@ class PackagesSection extends StatelessWidget {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
-
-    return GetBuilder<HomeController>(
-        id: 'updatePackagesData',
-        builder: (_controller) {
-          return LayoutBuilder(builder:
-              (BuildContext layoutBuilderContext, BoxConstraints constraints) {
-            return Column(
-              children: [
-                Text(
-                  'Contributions to Flutter',
-                  textAlign: TextAlign.center,
-                  style: textTheme.headlineMedium,
+    final responsiveTextStyleHeading =
+        responsive_framework.ResponsiveValue<TextStyle>(context,
+            defaultValue: textTheme.headlineMedium,
+            conditionalValues: [
+          responsive_framework.Condition.equals(
+              name: responsive_framework.MOBILE,
+              value: textTheme.headlineSmall),
+          responsive_framework.Condition.equals(
+              name: responsive_framework.TABLET,
+              value: textTheme.headlineMedium),
+          responsive_framework.Condition.largerThan(
+              name: responsive_framework.TABLET, value: textTheme.displaySmall),
+          responsive_framework.Condition.equals(
+              name: responsive_framework.DESKTOP,
+              value: textTheme.displaySmall),
+        ]).value;
+    return Column(
+      children: [
+        Text(
+          'Contributions to Flutter',
+          textAlign: TextAlign.center,
+          style: responsiveTextStyleHeading,
+        ),
+        CustomResponsiveGridView(
+            phoneCrossAxisCount: 1,
+            tabletCrossAxisCount: 2,
+            padding:
+                const EdgeInsets.symmetric(horizontal: massiveSpacing),
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemBuilder: (context, index) => PackageCard(
+                  package: AppConstants.packagesDescription[index],
                 ),
-                CustomResponsiveGridView(
-                    phoneCrossAxisCount: 1,
-                    tabletCrossAxisCount: 2,
-                    padding: EdgeInsets.symmetric(horizontal: massiveSpacing),
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) => PackageCard(
-                          package: AppConstants.packagesDescription[index],
-                        ),
-                    itemCount: AppConstants.packagesDescription.length)
-              ],
-            );
-          });
-        });
+            itemCount: AppConstants.packagesDescription.length)
+      ],
+    );
   }
 }
 
@@ -57,7 +68,7 @@ class PackageCard extends StatelessWidget {
     return Card(
       elevation: smallElevation,
       shape: RoundedRectangleBorder(borderRadius: borderRadius),
-      margin: const EdgeInsets.all(15.0),
+      margin: const EdgeInsets.all(largeSpacing),
       child: Padding(
           padding: const EdgeInsets.all(hugeSpacing),
           child: Column(

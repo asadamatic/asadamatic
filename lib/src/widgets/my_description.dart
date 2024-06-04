@@ -49,13 +49,13 @@ class MyDescription extends StatelessWidget {
                         value: textTheme.displayLarge),
                   ]).value;
               return GetBuilder<HomeController>(
-                  id: 'updateBio',
+                  id: bioBuilder,
                   builder: (_homeController) {
                     return AnimatedOpacity(
-                      duration: Duration(milliseconds: 600),
+                      duration: const Duration(milliseconds: 600),
                       opacity: opacity,
                       child: RichText(
-                        textHeightBehavior: TextHeightBehavior(),
+                        textHeightBehavior: const TextHeightBehavior(),
                         text: TextSpan(
                           style: textTheme.displayMedium,
                           children: [
@@ -69,7 +69,7 @@ class MyDescription extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   AnimatedSize(
-                                    duration: Duration(milliseconds: 600),
+                                    duration: const Duration(milliseconds: 600),
                                     child: AnimatedSwitcher(
                                       duration:
                                           const Duration(milliseconds: 600),
@@ -93,7 +93,7 @@ class MyDescription extends StatelessWidget {
                                     ),
                                   ),
 
-                                  SizedBox(width: mediumSpacing), //
+                                  const SizedBox(width: mediumSpacing), //
                                   Icon(
                                     Platforms
                                         .values[
@@ -111,7 +111,7 @@ class MyDescription extends StatelessWidget {
                     );
                   });
             }),
-        SizedBox(
+        const SizedBox(
           height: largeSpacing,
         ),
         Wrap(

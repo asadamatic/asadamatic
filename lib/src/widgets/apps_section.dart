@@ -127,7 +127,7 @@ class AppDescription extends StatelessWidget {
                 app.description,
                 style: responsiveTextStyleDescription,
               ),
-              SizedBox(
+              const SizedBox(
                 height: hugeSpacing,
               ),
               Wrap(

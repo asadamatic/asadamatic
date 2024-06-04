@@ -2,7 +2,6 @@ import 'package:asadamatic/src/enums.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/controllers/theme_controller.dart';
 import 'package:asadamatic/src/style/styles.dart';
-import 'package:asadamatic/src/widgets/os_logo_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -22,7 +21,7 @@ class OSSwitcher extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(smallSpacing),
         child: GetBuilder<HomeController>(
-            id: 'osIndexUpdate',
+            id: osBuilder,
             builder: (_homeController) {
               return Flex(
                 direction: ResponsiveBreakpoints.of(context).isMobile
@@ -66,13 +65,19 @@ class OsIcon extends StatelessWidget {
       child: Card(
         color: isSelected ? colorScheme.surface : colorScheme.onInverseSurface,
         clipBehavior: Clip.hardEdge,
-        elevation: isSelected ? 10.0 : 0.0,
+        elevation: isSelected ? buttonElevation : zero,
         margin: const EdgeInsets.all(minSpacing),
         child: InkWell(
+          borderRadius: borderRadius,
           onTap: () => _homeController.onOsChanged(os),
           child: Padding(
-            padding: const EdgeInsets.all(minSpacing),
-            child: OsLogoIcon(os: os),
+            padding: const EdgeInsets.symmetric(horizontal: mediumSpacing),
+            child: Center(
+              child: Icon(
+                os.icon,
+                size: 30,
+              ),
+            ),
           ),
         ),
       ),

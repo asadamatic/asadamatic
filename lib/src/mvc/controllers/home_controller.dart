@@ -7,6 +7,11 @@ import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+const String packageInfoBuilder = 'packageInfo';
+const String osBuilder = 'osIndexUpdate';
+const String bioBuilder = 'updateBio';
+const String appsBuilder = 'apps';
+const String appScreenshotsBuilder = 'sliderIndexUpdate';
 class HomeController extends GetxController with GetTickerProviderStateMixin {
   final Rx<Os> selectedOs = Os.ios.obs;
   final RxBool osHover = false.obs;
@@ -15,42 +20,29 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   int homePageIndex = 0;
   PageController appsPageController = PageController(initialPage: 0);
 
-  late final PackageInfo packageInfo;
+    PackageInfo? packageInfo;
   @override
   void onInit() async {
     super.onInit();
-
     packageInfo = await PackageInfo.fromPlatform();
-    update(['packageInfo']);
+
+    update([packageInfoBuilder]);
 
     Timer.periodic(const Duration(seconds: 2), (timer) {
       bioPlatformIndex = (bioPlatformIndex + 1) % Platforms.values.length;
-      update(['updateBio']);
+      update([bioBuilder]);
     });
   }
 
   int bioPlatformIndex = 0;
-  showDrawer() {
-    update(['drawerUpdate']);
-  }
-
-  hideDrawer() {
-    update(['drawerUpdate']);
-  }
-
-  onOsChanged(Os os) {
+   onOsChanged(Os os) {
     selectedOs.value = os;
-    update(['osIndexUpdate']);
+    update([osBuilder]);
   }
 
   onChangedApp(index) {
     selectedApp.value = apps.elementAt(index);
-    update(['apps', 'sliderIndexUpdate']);
-  }
-
-  onHomePageChanged(int newIndex) {
-    homePageIndex = newIndex;
-    update(['updateHomePageView']);
+    update([appsBuilder, appScreenshotsBuilder]);
   }
 
   moveAppsForwards() => appsPageController.nextPage(

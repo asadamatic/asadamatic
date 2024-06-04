@@ -50,10 +50,10 @@ class ThemeModeButton extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Card(
-      elevation: isSelected ? 10.0 : 0.0,
+      elevation: isSelected ? buttonElevation : zero,
       color: isSelected ? colorScheme.surface : colorScheme.onInverseSurface,
       child: InkWell(
-        borderRadius: BorderRadius.circular(16.0),
+        borderRadius: borderRadius,
         onTap: () => toggleTheme(mode),
         child: Padding(
           padding: const EdgeInsets.symmetric(

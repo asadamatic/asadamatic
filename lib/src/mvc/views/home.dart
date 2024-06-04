@@ -2,7 +2,6 @@ import 'package:asadamatic/src/constant/values.dart';
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
 import 'package:asadamatic/src/mvc/views/fragments/footer.dart';
 import 'package:asadamatic/src/mvc/views/fragments/packages_section.dart';
-import 'package:asadamatic/src/mvc/views/paralax_flow_delegate.dart';
 import 'package:asadamatic/src/style/styles.dart';
 import 'package:asadamatic/src/widgets/apps_section.dart';
 import 'package:asadamatic/src/widgets/bio_contianer.dart';
@@ -71,7 +70,7 @@ class Home extends StatelessWidget {
                             name: responsive_framework.MOBILE,
                             value: WrapAlignment.spaceBetween),
                       ]).value,
-                  children: [UpworkWidget(), ThemeSwitch()],
+                  children: const [UpworkWidget(), ThemeSwitch()],
                 ),
                 const Gap(massiveSpacing),
                 Column(
@@ -114,9 +113,10 @@ class UpworkWidget extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return InkWell(
+      borderRadius: borderRadius,
       onTap: () => launchUrl(Uri.parse(upworkProfileUrl)),
       child: Padding(
-        padding: const EdgeInsets.all(smallSpacing),
+        padding: const EdgeInsets.all(mediumSpacing),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

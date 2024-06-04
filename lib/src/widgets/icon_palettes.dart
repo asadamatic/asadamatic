@@ -28,7 +28,7 @@ class AppIconPalette extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-        id: 'apps',
+        id: appsBuilder,
         builder: (controller) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,

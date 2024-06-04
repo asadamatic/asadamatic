@@ -1,8 +1,6 @@
 import 'package:asadamatic/src/mvc/controllers/home_controller.dart';
-import 'package:asadamatic/src/mvc/views/home.dart';
 import 'package:asadamatic/src/style/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 class Footer extends StatelessWidget {
@@ -11,18 +9,21 @@ class Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(mediumSpacing),
+      padding: const EdgeInsets.all(mediumSpacing),
       child: Column(
         children: [
-          Divider(
+          const Divider(
             height: massiveSpacing,
           ),
           GetBuilder<HomeController>(
-              id: 'packageInfo',
+              id: packageInfoBuilder,
               builder: (controller) {
-                return Text(
-                  'Made with Flutter - Version ${controller.packageInfo!.version}',
-                );
+                if (controller.packageInfo != null) {
+                  return Text(
+                    'Made with Flutter - Version ${controller.packageInfo!.version}',
+                  );
+                }
+                return SizedBox();
               }),
         ],
       ),

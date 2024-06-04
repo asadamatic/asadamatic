@@ -71,6 +71,7 @@ const smallImageWidth = 150.0;
 
 const minElevation = 2.0;
 const smallElevation = 4.0;
+const buttonElevation = 10.0;
 
 const widgetWidth = 330.0;
 const maxWidgetWidth = 410.0;

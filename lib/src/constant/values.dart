@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 
 import 'package:flutter/foundation.dart';
 
-const String upworkProfileUrl = "https://www.upwork.com/freelancers/~01f31a38c4320ffd7a";
-
+const String upworkProfileUrl =
+    "https://www.upwork.com/freelancers/~01f31a38c4320ffd7a";
 
 const String bio = "I develop high performance apps for";
 
@@ -111,6 +111,13 @@ const List<Tool> tools = [
     darkModeLogoPath: 'assets/tools/bash-black.svg',
     slug: 'bash',
     websiteUrl: 'https://www.gnu.org/software/bash/',
+  ),
+  Tool(
+    name: 'Markdown',
+    logoPath: 'assets/tools/markdown-white.svg',
+    darkModeLogoPath: 'assets/tools/markdown-black.svg',
+    slug: 'markdown',
+    websiteUrl: 'https://www.markdownguide.org',
   ),
   Tool(
     name: 'VS Code',

@@ -148,6 +148,8 @@ class ToolIcon extends StatelessWidget {
         isThemeDark ? tool.darkModeLogoPath : tool.logoPath,
         fit: BoxFit.cover,
         height: 40,
+        width: 6.0,
+        clipBehavior: Clip.hardEdge,
       ),
       menuProvider: (_) {
         return Menu(
